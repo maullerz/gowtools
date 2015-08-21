@@ -1,9 +1,11 @@
 /** @jsx React.DOM */
 var React = require('react');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var BoostsTable = require('./boosts_table');
 var Tooltip = require('./tooltip');
 
 module.exports = React.createClass({
+  mixins: [PureRenderMixin],
   loadPiecesFromServer: function() {
     $.ajax({
       url: this.props.url,
@@ -35,6 +37,7 @@ module.exports = React.createClass({
 
 
 var QualityImg = React.createClass({
+  mixins: [PureRenderMixin],
   select: function() {
     this.props.onSelect(this);
   },
@@ -45,6 +48,7 @@ var QualityImg = React.createClass({
 
 
 var SelectedPieces = React.createClass({
+  mixins: [PureRenderMixin],
   checkForEmpty: function(list) {
     if (list.length > 0) {
       return list
@@ -60,7 +64,7 @@ var SelectedPieces = React.createClass({
       var imgUrl = piece.local_img_final;
       if (imgUrl.substring(0, 1) == '/') imgUrl = imgUrl.substring(1);
       return (
-        <img id='quality' className={piece.quality} key={"selected-" + index} src={piece.local_img_final} />
+        <img id='quality' className={piece.quality} key={"selected-" + index} src={imgUrl} />
       );
     }, this);
 
@@ -168,6 +172,7 @@ var PiecesList = React.createClass({
 
 
 var Contents = React.createClass({
+  mixins: [PureRenderMixin],
   render: function () {
     if (this.props.tooltipActive) {
       return (
@@ -188,11 +193,17 @@ var HoverTrigger = React.createClass({
         {this.props.children}
       </div>
     );
+    // return (
+    //   <div>
+    //     {this.props.children}
+    //   </div>
+    // );
   }
 });
 
 
 var Piece = React.createClass({
+  mixins: [PureRenderMixin],
   getInitialState: function() {
     this.quality = '';
     this.qualities = ['gray','white','green','blue','purple','gold'].reverse();

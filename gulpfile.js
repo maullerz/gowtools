@@ -48,14 +48,14 @@ gulp.task('default', function(){
 
 gulp.task('build-app', function(callback){
   runSequence(
-    'clean-build', 
-    'webpackify',
+    'clean-build',
     'compile-sass',
     'copy-index',
     'copy-resources',
     'copy-data',
     'copy-img',
     'concat-css',
+    'webpackify',
     'copy-config-xml',
     callback
   );

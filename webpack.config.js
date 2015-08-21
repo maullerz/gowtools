@@ -31,6 +31,10 @@ module.exports = {
         { test: /\.scss$/, loaders: ["style","css","sass?sourceMap"] },
         { test: /\.css$/, loaders: ["style","css"] },
         { test: /\.jsx$/, loaders: ['jsx'] },
+        // {
+        //     test: /\.(gif|png|jpg)$/,
+        //     loader: 'url-loader?limit=30000'
+        // },
         //{ test: /\.png/, loader: 'url-loader?limit=100000&mimetype=image/png' },
         //{ test: /\.gif/, loader: 'url-loader?limit=100000&mimetype=image/gif' },
         //{ test: /\.jpg/, loader: 'file-loader' }

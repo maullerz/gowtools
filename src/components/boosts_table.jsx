@@ -1,8 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var _ = require('lodash');
 
 module.exports = React.createClass({
+  mixins: [PureRenderMixin],
   getInitialState: function() {
     this.qualities = ['gray','white','green','blue','purple','gold'];//.reverse();
     return null;
