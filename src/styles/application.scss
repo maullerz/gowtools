@@ -1,0 +1,54 @@
+@import "colors";
+
+h1, h2, h3, h4 {
+  margin-top: 0px;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+h2 {font-size: 18px;}
+
+h3 {font-size: 16px;}
+
+h4 {
+  font-size: 14px;
+  margin: 5px;
+}
+
+h4.ttip {
+  font-weight: normal;
+  font-size: 10px;
+}
+
+body {
+  @include main_styles;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0px;
+  padding-top: 20px;
+}
+
+.container {
+  width: 100%;
+  margin-right: 0; 
+  margin-left: 0; 
+  padding-left: 0; 
+  padding-right: 0; 
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.custom-modal {
+  width: 90%;
+}
+
+.modal-content {
+  @include main_styles;
+}

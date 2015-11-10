@@ -1,0 +1,115 @@
+@import "colors";
+
+.well {
+  @include main_styles;
+  background-image: none;
+}
+
+
+.cores-list-box {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  border-left: 1px solid #ddd;
+}
+
+.qualities-body {
+  padding: 20px;
+  width: auto;
+}
+
+#quality-select .modal-dialog {
+  width: 417px;
+  @include main_styles;
+}
+
+
+thead tr th {
+  text-align: center;
+  font-size: 10px;
+}
+
+table {
+  /*margin: 0 auto;*/
+  @include main_styles;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 13px;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  border-bottom: 2px solid #6678b1;
+
+  &.summarize {
+    width: 100%;
+  }
+}
+
+tr {
+  @include main_styles;
+  &.first-row td {
+    border-top: 2px solid #6678b1;
+    border-bottom: none;
+  }
+  &.selected {
+    background-color: #c0f0f9;
+    color: black;
+  }
+  &.mini {
+    font-size: 10px;
+  }
+}
+
+td {
+  cursor: pointer;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  width: 11%;
+  opacity: 1;
+
+  &.icon {
+    width: 0.1%;
+  }
+
+  &.sel-boost-name {
+    text-align: left;
+    padding-left: 5px;
+    width: 50%;
+  }
+  &.sel-icon {
+    width: 5%;
+    background: #ccc;
+    text-align: center;
+  }
+  &.sel-lvl {
+    width: 15%;
+    &.lvl6 {
+      font-weight: bold;
+    }
+  }
+
+  &.type-name {
+    width: 4%;
+  }
+  &.slot-name {
+    width: 5%;
+  }
+  &.boost-name {
+    text-align: left;
+    padding-left: 9px;
+    width: 28%;
+  }
+  &.item-name, &.piece-name, &.core-name {
+    text-align: left;
+    padding-left: 9px;
+    width: 20%;
+  }
+  &.core-slot {
+    font-weight: bold;
+    text-align: left;
+    padding-left: 9px;
+    width: 7%;
+  }
+  &.lvl6 {
+    font-weight: bold;
+  }
+}

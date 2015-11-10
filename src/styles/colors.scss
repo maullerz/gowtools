@@ -1,0 +1,83 @@
+@mixin main_styles {
+  /*background-color: #f9f9f9;*/
+  /*color: #000;*/
+  background-color: #3c3c3c;
+  color: #fff;
+}
+
+.attack-color {
+  /*background-color: rgba(250, 133, 133, 0.8);*/
+  /*background-color: red;*/
+  /*background: -webkit-linear-gradient(red, white);*/
+  background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 52%);
+}
+.health-color {
+  /*background-color: rgba(137, 229, 133, 0.8);*/
+  background: -webkit-linear-gradient(top, #9dd53a 0%,#92d32a 20%,#80c217 76%,#7cbc0a 100%);
+  /*background: -webkit-linear-gradient(top, #ebf7d7 0%,#e7f9cb 76%,#e7fcc4 100%);*/
+  /*color: black;*/
+}
+.defense-color {
+  /*background-color: rgba(151, 190, 250, 0.8);*/
+  background: -webkit-linear-gradient(top, #499bea 27%,#207ce5 77%,#207ce5 77%,#207ce5 77%);
+}
+
+
+
+
+.troop-color {
+  background-color: rgba(229, 133, 133, 0.8);
+  /*background-color: #e58585;*/
+}
+.cavalry-color {
+  background-color: rgba(137, 229, 133, 0.8);
+  /*background-color: #e5e285;*/
+}
+.infantry-color {
+  background-color: rgba(151, 190, 229, 0.8);
+  /*background-color: #97bee5;*/
+}
+.ranged-color {
+  background-color: rgba(229, 226, 133, 0.8);
+  /*background-color: #e585df;*/
+}
+.etc-color {
+  /*background-color: rgba(170, 170, 170, 0.8);*/
+  /*background-color: #e58585;*/
+}
+
+@mixin qualities {
+/*  &.gray { background: #C0C0C0; }
+  &.white { background: #FFF; }
+  &.green { background: green; }
+  &.blue { background: blue; }
+  &.purple { background: purple; }
+  &.gold { background: gold; }*/
+  
+  background-size: cover;
+  background-position: center;
+  &.gray {
+    /*background-color: #a19f95;*/
+    background-image: url(../background/cm_bg_0.png);
+  }
+  &.white {
+    /*background-color: #e0d9cc;*/
+    background-image: url(../background/cm_bg_1.png);
+  }
+  &.green {
+    /*background-color: #41ae2f;*/
+    background-image: url(../background/cm_bg_2.png);
+  }
+  &.blue {
+    /*background-color: #5b8ed9;*/
+    background-image: url(../background/cm_bg_3.png);
+  }
+  &.purple {
+    /*background-color: #c07fef;*/
+    background-image: url(../background/cm_bg_4.png);
+  }
+  &.gold {
+    /*background-color: #f7ad00;*/
+    background-image: url(../background/cm_bg_5.png);
+  }
+}

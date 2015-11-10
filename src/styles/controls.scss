@@ -1,0 +1,52 @@
+@import "colors";
+
+.tab-pane .tab-content {
+  @include main_styles;
+}
+
+tab nav tabs {
+  @include main_styles;
+}
+
+.panel-body {
+  @include main_styles;
+}
+
+button.button.btn.btn-default {
+  @include main_styles;
+  text-shadow: 0 1px 0 #000;
+  /*text-shadow: 0 1px 0 #fff;*/
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-image: none;
+  display: inline-block;
+}
+
+Button#quality {
+  width: 64px;
+  height: 64px;
+  /*border-radius: 95%;*/
+  border: 1px solid #a3aaaa;
+  padding: 0;
+
+  @include qualities;
+}
+
+.nav-tabs>li.active>a {
+  @include main_styles;
+}
+
+.nav-tabs>li>a {
+  color: #999;
+}
+
+.panel-default {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
