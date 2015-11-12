@@ -1,5 +1,9 @@
 import React from 'react'
+import i18n from 'i18n-js';
 import Root from './Root.jsx'
+
+i18n.translations = require('./locales/locales');
+i18n.locale = 'ru';
 
 window.log = function(){
   log.history = log.history || []; // store logs to an array for reference
@@ -9,6 +13,7 @@ window.log = function(){
   console.log(values);
 };
 
+// ----------
 if (!Array.prototype.findIndex) {
   Array.prototype.findIndex = function(predicate) {
     if (this == null) {
