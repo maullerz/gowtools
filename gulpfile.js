@@ -41,9 +41,9 @@ gulp.task('spritesheet', function() {
   gulp.src('./assets-src/images/**/*.png')
     .pipe(
       sprite({
-        outputCss: './' + PHONEGAP_APP_DIR + '/www/css/sprites.css',
+        outputCss: './src/styles/sprites.css',
         selector: '.sprite',
-        outputImage: 'spr.png'
+        outputImage: './spr.png'
       })
     )
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'));

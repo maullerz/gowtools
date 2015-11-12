@@ -1,0 +1,22 @@
+.sprite {
+  background: url( '../img/spr.png' ) no-repeat;
+  /*background-size: 2300px 2300px;*/
+}
+
+#img64.sprite {
+  zoom: 0.64;
+  vertical-align: middle;
+}
+
+#img32.sprite {
+  zoom: 0.32;
+  vertical-align: middle;
+}
+
+.sprite.img64 {
+  zoom: 0.64;
+}
+
+.sprite.img32 {
+  zoom: 0.32;
+}
