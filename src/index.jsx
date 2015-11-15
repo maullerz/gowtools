@@ -3,7 +3,7 @@ window.onerror = function(message, url, line) {
 };
 
 import React from 'react';
-import App from './App.jsx';
+import App from './Application.jsx';
 
 function startApp() {
 	React.render(<App/>, document.body);	
