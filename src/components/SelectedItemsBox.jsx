@@ -106,7 +106,6 @@ var SelectedItemsBox = React.createClass({
       currSetItem.coreQuality = quality;
     } else if (item.type === 'Piece') {
       var ix = currSetItem.pieces.findIndex(function(piece) { return item.href === piece.href });
-      log('ix', ix, 'quality', quality);
       currSetItem.piecesQualities[ix] = quality;
     }
     this.setState({ setItem: currSetItem });
@@ -117,13 +116,20 @@ var SelectedItemsBox = React.createClass({
 
     var currSetItem = this.state.setItem;
     var core = currSetItem.core;
+
     if (core) {
-      var openInfoFn = function() { this.refs.modal.open(core) }.bind(this);
       var quality = this.qualities[currSetItem.coreQuality];
       var spriteName = 'sprite ' + core.sprite;
+      var openInfoFn = function() { this.refs.modal.open(core) }.bind(this);
       var coreNode = (
         <div className={'sel-item-core '+quality} key={"sel-item-core"}>
           <div id='img64' className={spriteName} onClick={openInfoFn} />
+        </div>
+      );
+    } else {
+      var coreNode = (
+        <div className={'sel-item-core empty'} key={"sel-item-core"}>
+          <div id='img64' className='sprite empty'/>
         </div>
       );
     }
