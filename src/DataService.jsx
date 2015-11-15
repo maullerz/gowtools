@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import i18n from 'i18n-js';
 
 var singleton;
@@ -316,7 +315,10 @@ var DataService = function(Environment) {
 
       concatBoostsByQuality: function(dest, boostId, boostData, quality) {
         if (!dest[boostId]) {
-          dest[boostId] = _.cloneDeep(boostData[quality]);
+          dest[boostId] = [
+            boostData[quality][0],
+            boostData[quality][1]
+          ];
         } else {
           dest[boostId][0] += boostData[quality][0];
           dest[boostId][1] += boostData[quality][1];
