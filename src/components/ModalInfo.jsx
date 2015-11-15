@@ -51,20 +51,28 @@ var ModalInfo = React.createClass({
   },
 
   render: function() {
-    if (this.state.item !== null) {
-      // var name = this.state.item.main_info_ru["Equipment Types"]+': '+
-      var name = this.state.item.name_en; 
+    var item = this.state.item;
+    if (item) {
+      var name = this.DataService.getItemName(item);
+      var spriteName = 'sprite ' + item.sprite;
       var head = (
         <Modal.Title>
-          <img className="icon-img" width="32" src={'images/'+this.state.item.img_base} />
-          {' '+name}
+          {name}
         </Modal.Title>
       );
-      var url = 'http://gow.y96.ru/en/resources/corespieces/'+this.state.item.href;
+      var url = 'http://gow.y96.ru/en/resources/corespieces/'+item.href;
       var body = (
         <Modal.Body>
-          <a href={url} target='_blank'>{'Item page on gow.help'}</a>
-          <p>{'Event: '+this.state.item.main_info_ru["Event"]}</p>
+          <div className='modal-body-part'>
+            <div className='modal-image-background'>
+              <div id='img64' className={spriteName} />
+            </div>
+          </div>
+          <div className='modal-body-part'>
+            <a href={url} target='_blank'>{'gow.help'}</a>
+            <p>{'Event: '+item.gameEvent}</p>
+            <p>{'Slot: '+item.slot}</p>
+          </div>
           <Table bordered condensed><tbody>
             {this.getBoostsRows()}
           </tbody></Table>

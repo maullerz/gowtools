@@ -1,0 +1,38 @@
+.modal-header {
+  padding: 5px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 25px;
+}
+
+.modal-body {
+  /*font-size: 25px;*/
+}
+
+.modal-body-part {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
+.modal-body-part p {
+  margin: 0;
+}
+
+.close {
+  font-size: 30px;
+  margin-right: 20px;
+  opacity: 1;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.modal-image-background {
+  display: table;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+}
