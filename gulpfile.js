@@ -57,7 +57,7 @@ gulp.task('watch', function(){
   gulp.watch([
     './src/**/*.jsx',
     './src/**/*.js',
-    './src/**/*.scss'
+    './src/styles/*.scss'
     ], ['build-app']);
 });
 
@@ -73,9 +73,9 @@ gulp.task('build-app', function(callback){
     'copy-resources',
     'copy-data',
     // 'copy-img',
-    'concat-css',
     'webpackify',
     'copy-config-xml',
+    'concat-css',
     callback
   );
 });
@@ -95,7 +95,7 @@ gulp.task('install-plugins', shell.task(getPhonegapPluginCommands(), {
 
 gulp.task('clean-build', function() {
   return gulp.src('./build', {read: false})
-  .pipe(clean());
+    .pipe(clean());
 });
 
 gulp.task('compile-sass', function () {

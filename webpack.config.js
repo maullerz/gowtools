@@ -21,8 +21,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.scss$/, loaders: ["style","css","sass?sourceMap"] },
-            { test: /\.css$/, loaders: ["style","css"] },
+            // { test: /\.scss$/, loaders: ["style","css","sass?sourceMap"] },
+            // { test: /\.css$/, loaders: ["style","css"] },
             { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader"}
         ],
         noParse: /\.min\.js/
