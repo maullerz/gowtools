@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import i18n from 'i18n-js';
 
 var singleton;
 
 var DataService = function(Environment) {
-
   if (!singleton) {
 
 
@@ -20,6 +20,40 @@ var DataService = function(Environment) {
           null
         ]
       }
+
+      this.stratPairs = {
+        "13": "3",
+        "14": "4",
+        "15": "5",
+        "16": "6",
+        "17": "7",
+        "18": "8",
+        "19": "9",
+        "20": "10",
+        "21": "11",
+        "22": "25",
+        "23": "26",
+        "24": "27",
+        "40": "0",
+        "41": "1",
+        "42": "2",
+        "43": "30",
+        "44": "31",
+        "45": "32",
+        "46": "35",
+        "47": "36",
+        "48": "37",
+        "49": "55",
+        "50": "56",
+        "51": "57",
+        "52": "58",
+        "53": "59"
+      }
+
+      this.regularPairs = {};
+      Object.keys(this.stratPairs).forEach(function(stratKey) {
+        this.regularPairs[this.stratPairs[stratKey]] = stratKey;
+      }, this);
     };
 
 
@@ -30,23 +64,6 @@ var DataService = function(Environment) {
           if (this.coresPiecesData[i].href === id) return this.coresPiecesData[i];
         }
         return null;
-      },
-
-      selectCoreForEdit: function(setItem) {
-        // this.currSetItem = setItem;
-        this.selectSetItemForEdit(setItem);
-        // TODO: open first tab
-      },
-
-      removeCoreFromSet: function(itemForRemove) {
-        if (itemForRemove.core.slot !== 'Accessory') {
-          this.currSet[itemForRemove.core.slot] = null;
-        } else {
-          this.currSet.Accessory = this.currSet.Accessory.filter(function(item) {
-            return item !== itemForRemove;
-          });
-        }
-        // this.coreRemovedCallback();
       },
 
       flattenCurrSet: function() {
@@ -98,17 +115,21 @@ var DataService = function(Environment) {
         return '';
       },
 
+      getItemName: function(item) {
+        return i18n.currentLocale() === 'ru' ? item.name_ru : item.name_en;
+      },
+
       getBoostName: function(boostId) {
-        if (this.allBoostsRu && this.allBoostsRu[boostId]) {
-          return this.allBoostsRu[boostId];
-          // return this.allBoosts[boostId];
+        if (i18n.currentLocale() === 'ru') {
+          var ruName = this.allBoostsRu && this.allBoostsRu[boostId]
+          return ruName ? this.allBoostsRu[boostId] : this.allBoosts[boostId];
         } else {
           return this.allBoosts[boostId];
         }
       },
 
       getItemBoostRows: function(item) {
-        
+        // SHOW ALL BOOSTS of item in ItemsList and ModalInfo
       },
 
       getCurrSetItemSummaryTable: function(currSetItem) {
@@ -121,40 +142,81 @@ var DataService = function(Environment) {
         return this.getSummaryTable(calculatedBoosts);
       },
 
+      isEtcBoost: function(boostName) {
+        return (
+          boostName.indexOf('Trap') >= 0 ||
+          boostName.indexOf('Siege') >= 0 ||
+          boostName.indexOf('Monster') >= 0 ||
+          boostName.indexOf('Speed') >= 0 ||
+          boostName.indexOf('Hero') >= 0 ||
+          boostName.indexOf('Food') >= 0
+        )
+      },
+
       getSummaryTable: function(calculatedBoosts) {
+        var debuffs = [];
+        var boosts = [];
+        var debuffsStrat = [];
+        var boostsStrat = [];
+        var boostsStrat = [];
+        var etcBoosts = [];
+
         // FIXME: WTF with that?
+        // при старте бывает что мы попадаем сюда, а бустов внезапно нет
         if (!this.allBoosts) return null;
+
         if (!calculatedBoosts || calculatedBoosts.length === 0) {
           return null;
         } else {
           var allDebuffs = this.filterDebuffBoosts();
-          var debuffs = [];
-          var boosts = [];
-          var debuffsStrat = [];
-          var boostsStrat = [];
-          var boostsStrat = [];
-          var etcBoosts = [];
-          Object.keys(calculatedBoosts).forEach(function(boostId, index) {
+          Object.keys(calculatedBoosts).forEach(function(boostId) {
             var bName = this.allBoosts[boostId];
             if (!bName) {
-              log('Didnt find bName, boostId:', boostId);
-            } else if (bName.indexOf('Trap') >= 0 || bName.indexOf('Siege') >= 0 || bName.indexOf('Monster') >= 0
-              || bName.indexOf('March') >= 0 || bName.indexOf('Hero') >= 0) {
+              console.error('Didnt find bName, boostId:'+boostId);
+            } else if (this.isEtcBoost(bName)) {
               etcBoosts.push(boostId);
             } else {
               var isStrat = bName.indexOf('Strat') >= 0;
               if (allDebuffs.indexOf(bName) >= 0) {
                 isStrat ? debuffsStrat.push(boostId) : debuffs.push(boostId);
               } else {
-                isStrat ? boostsStrat.push(boostId) : boosts.push(boostId);
+                isStrat ?  boostsStrat.push(boostId) : boosts.push(boostId);
               }
             }
           }, this);
 
+
+          // если есть бусты только на регулярные войска
+          if (boosts.length > boostsStrat.length) {
+            console.error('TODO - !!!!!!! Regular.length > Strategic.length');
+            boosts.forEach(function(boostId) {
+              var stratBoostId = this.regularPairs[boostId];
+              if (boostsStrat.indexOf(stratBoostId) === -1) {
+                boostsStrat.push(stratBoostId);
+                console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
+              }
+            }, this);
+          };
+          // если есть дебаффы только на регулярные войска
+          if (debuffs.length > debuffsStrat.length) {
+            console.error('TODO - !!!!!!! Debuffs Regular.length > Strategic.length');
+            debuffs.forEach(function(boostId) {
+              var stratBoostId = this.regularPairs[boostId];
+              if (debuffsStrat.indexOf(stratBoostId) === -1) {
+                debuffsStrat.push(stratBoostId);
+                console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
+              }
+            }, this);
+          };
+
           var mapFunc = function(boostId, index) {
-            var data = calculatedBoosts[boostId];
+            var strategicData = calculatedBoosts[boostId];
             var regBoostId = this.stratPairs[boostId];
             var regData = calculatedBoosts[regBoostId];
+
+            var valueRegular = this.calculateLuck(regData);
+            var valueStrategic = this.calculateLuck(strategicData);
+
             var rowColor = this.getColorForBoost(boostId);
             var iconName = this.getIconNameForBoost(boostId);
             return (
@@ -162,16 +224,20 @@ var DataService = function(Environment) {
                 <td className={'sel-icon'}>
                   {iconName ? <img width="24" src={'icons/'+iconName} /> : null}
                 </td>
-                <td className='sel-boost-name'>{this.getBoostName(boostId)}</td>
-                <td className={'sel-lvl lvl6 '}>{this.calculateLuck(regData)}</td>
-                <td className={'sel-lvl lvl6 '+rowColor}>{this.calculateLuck(data)}</td>
-                {true?null:<td className='sel-lvl'>{this.calculateLuck(data[1])}</td>}
-                {true?null:<td className='sel-lvl'>{this.calculateLuck(data[2])}</td>}
+                <td className='sel-boost-name'>
+                  {this.getBoostName(regBoostId)}
+                </td>
+                <td className={'sel-lvl lvl6 '}>
+                  {valueRegular}
+                </td>
+                <td className={'sel-lvl lvl6 '+rowColor}>
+                  {valueStrategic}
+                </td>
               </tr>
             )
           }
 
-          var mapFuncReg = function(boostId, index) {
+          var mapFuncEtc = function(boostId, index) {
             var data = calculatedBoosts[boostId];
             var rowColor = this.getColorForBoost(boostId);
             var iconName = this.getIconNameForBoost(boostId);
@@ -181,6 +247,7 @@ var DataService = function(Environment) {
                   {iconName ? <img width="100%" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>{this.getBoostName(boostId)}</td>
+                <td className={'sel-lvl lvl6 '} />
                 <td className={'sel-lvl lvl6 '+rowColor}>{this.calculateLuck(data)}</td>
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[1])}</td>}
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[2])}</td>}
@@ -190,15 +257,7 @@ var DataService = function(Environment) {
 
           var rowsSelfStrat = boostsStrat.map(mapFunc, this);
           var rowsDebuffStrat = debuffsStrat.map(mapFunc, this);
-          var rowsEtc = etcBoosts.map(mapFuncReg, this);
-
-          var rowsSelf = boosts.map(mapFuncReg, this);
-          var rowsDebuff = debuffs.map(mapFuncReg, this);
-
-          // TODO - !!!!!!! rowsSelf.length > rowsSelfStrat.length
-          if (rowsSelf.length > rowsSelfStrat.length) {
-            console.error('TODO - !!!!!!! rowsSelf.length > rowsSelfStrat.length');
-          };
+          var rowsEtc = etcBoosts.map(mapFuncEtc, this);
 
           return (
             <div>
@@ -207,9 +266,9 @@ var DataService = function(Environment) {
                   <table className='summarize'>
                     <thead><tr>
                       <th></th>
-                      <th>Troop Boosts</th>
-                      <th>Regular</th>
-                      <th>Strategic</th>
+                      <th>{i18n.t('summary.boosts')}</th>
+                      <th>{i18n.t('summary.regular')}</th>
+                      <th>{i18n.t('summary.strategic')}</th>
                     </tr></thead>
                     <tbody>
                       {rowsSelfStrat}
@@ -217,17 +276,34 @@ var DataService = function(Environment) {
                   </table>
                 );
               })()}
+
               {(() => {
                 if (rowsDebuffStrat.length > 0) return (
                   <table className='summarize'>
                     <thead><tr>
                       <th></th>
-                      <th>Enemy Debuffs</th>
-                      <th>Regular</th>
-                      <th>Strategic</th>
+                      <th>{i18n.t('summary.debuffs')}</th>
+                      <th>{i18n.t('summary.regular')}</th>
+                      <th>{i18n.t('summary.strategic')}</th>
                     </tr></thead>
                     <tbody>
                       {rowsDebuffStrat}
+                    </tbody>
+                  </table>
+                );
+              })()}
+
+              {(() => {
+                if (rowsEtc.length > 0) return (
+                  <table className='summarize'>
+                    <thead><tr>
+                      <th></th>
+                      <th>{i18n.t('summary.etc')}</th>
+                      <th>{i18n.t('summary.regular')}</th>
+                      <th>{i18n.t('summary.strategic')}</th>
+                    </tr></thead>
+                    <tbody>
+                      {rowsEtc}
                     </tbody>
                   </table>
                 );
@@ -250,20 +326,16 @@ var DataService = function(Environment) {
       calculateCurrSetByQuality: function(setItems) {
         var keys, allBoosts = {};
 
-        // TODO: move this to setItem.flatten()
+        // TODO: move this to Models/SetItem.flatten()
         var flattenItems = {
           items: [],
           qualities: []
         };
+
         setItems.forEach(function(setItem) {
           flattenItems.items = flattenItems.items.concat([setItem.core].concat(setItem.pieces));
           flattenItems.qualities = flattenItems.qualities.concat([setItem.coreQuality].concat(setItem.piecesQualities));
         });
-
-        // log('setItems:' + setItems.length);
-        // console.log(setItems);
-        // log('flattenItems:' + flattenItems.items.length);
-        // console.log(flattenItems);
 
         flattenItems.items.forEach(function(item, index) {
           if (item) {
@@ -278,13 +350,13 @@ var DataService = function(Environment) {
                 } else {
                   this.concatBoostsByQuality(allBoosts, boostId, item.stats_info[boostId], 5-flattenItems.qualities[index]);
                 }
-              }.bind(this));
+              }, this);
             } else {
               console.error('item without [stats_info]:');
               console.error(item);
             }
           }
-        }.bind(this));
+        }, this);
 
         return allBoosts;
       },
@@ -312,7 +384,7 @@ var DataService = function(Environment) {
             keys = Object.keys(item.stats_info);
             keys.forEach(function(boostId) {
               this.concatBoosts(allBoosts, boostId, item.stats_info[boostId]);
-            }.bind(this));
+            }, this);
           } else {
             console.error('item without [stats_info]:', item);
           }
@@ -402,11 +474,10 @@ var DataService = function(Environment) {
       },
 
       calculateLuck: function(arr, highRangeBoost) {
-        if (!arr) return null;
-        if (arr[0] === null || arr[0] === undefined) return null;
-        if (arr[1] === null || arr[1] === undefined) return null;
+        if (!arr || !arr[0] || !arr[1]) return null;
 
         if (!highRangeBoost) highRangeBoost = 1;
+        // TODO move CRAFT_CORES_LUCK & highRangeBoost to SETTINGS
         var CRAFT_CORES_LUCK = 0.8;
         var min = arr[0],
             max = arr[1]*highRangeBoost;
@@ -435,34 +506,6 @@ var DataService = function(Environment) {
       },
 
       loadBoosts: function(data) {
-        this.stratPairs = {
-          "13": "3",
-          "14": "4",
-          "15": "5",
-          "16": "6",
-          "17": "7",
-          "18": "8",
-          "19": "9",
-          "20": "10",
-          "21": "11",
-          "22": "25",
-          "23": "26",
-          "24": "27",
-          "40": "0",
-          "41": "1",
-          "42": "2",
-          "43": "30",
-          "44": "31",
-          "45": "32",
-          "46": "35",
-          "47": "36",
-          "48": "37",
-          "49": "55",
-          "50": "56",
-          "51": "57",
-          "52": "58",
-          "53": "59"
-        }
         this.allBoosts = $.map(data, function(el) { return el.replace('Strategic', 'Strat') });
       },
 

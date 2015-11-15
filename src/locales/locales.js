@@ -7,6 +7,13 @@ module.exports = {
       "Feet": "Feet",
       "Weapon": "Weapon",
       "Accessory": "Accessory",
+    },
+    "summary": {
+      "boosts": "Troop Boosts",
+      "debuffs": "Enemy Debuffs",
+      "etc": "Other",
+      "regular": "Regular",
+      "strategic": "Strategic"
     }
   },
   "ru": {
@@ -17,6 +24,13 @@ module.exports = {
       "Feet": "Обувь",
       "Weapon": "Оружие",
       "Accessory": "Принадлежности",
+    },
+    "summary": {
+      "boosts": "Бусты",
+      "debuffs": "Дебаффы",
+      "etc": "Разное",
+      "regular": "Регулярные",
+      "strategic": "Стратегические"
     }
   },
 };
