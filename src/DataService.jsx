@@ -241,7 +241,7 @@ var DataService = function(Environment) {
             var rowColor = this.getColorForBoost(boostId);
             var iconName = this.getIconNameForBoost(boostId);
             return (
-              <tr className='first-row' key={'b-'+index}>
+              <tr className='first-row' key={'etc-'+index}>
                 <td className={'sel-icon'}>
                   {iconName ? <img width="100%" src={'icons/'+iconName} /> : null}
                 </td>

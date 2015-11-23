@@ -40,10 +40,6 @@ if (!Array.prototype.findIndex) {
 
 ////////////////
 
-React.initializeTouchEvents(true);
-
-////////////////
-
 module.exports = React.createClass({
   
   componentDidMount: function(){

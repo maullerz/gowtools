@@ -2,11 +2,12 @@ window.onerror = function(message, url, line) {
 	console.error(message + "\n" + url + ":" + line);
 };
 
-import React from 'react';
-import App from './Application.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './Application.jsx'
 
 function startApp() {
-	React.render(<App/>, document.body);	
+	ReactDOM.render(<App/>, document.getElementById('content'))
 }
 
 window.onload = function() {
