@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 import Well from 'react-bootstrap/lib/Well';
 import LocalStorageMixin from 'react-localstorage';
+import i18n from 'i18n-js';
 
 import DataService from '../DataService.jsx';
 import CoresSetModel from '../models/CoresSet';
@@ -85,7 +86,7 @@ var SummaryInfoBox = React.createClass({
       var quality = this.qualities[item.coreQuality];
       var spriteName = 'sprite ' + item.core.sprite;
       var coreNode = (
-        <div className={'sel-item-core '+quality} key={"core-coreset"}>
+        <div className={'sel-item-core '+quality}>
           <div id='img64' className={spriteName} />
         </div>
       );
@@ -108,16 +109,16 @@ var SummaryInfoBox = React.createClass({
       var removeFunc = function() { this.removeSetItemFromSet(item); this.forceUpdate(); }.bind(this);
 
       return (
-        <div>
-          <Well className="coreset" key={"set-"+index}>
+        <div key={"set-item-"+index}>
+          <Well className="coreset">
             {coreNode}
             <div>
               {pieceNodes}
             </div>
           </Well>
           <div className='sel-group'>
-            <Button className='button' onClick={removeFunc}>Remove</Button>
-            <Button className='button' onClick={selectFunc}>Select</Button>
+            <Button className='button' onClick={removeFunc}>{i18n.t('button.remove')}</Button>
+            <Button className='button' onClick={selectFunc}>{i18n.t('button.select')}</Button>
           </div>
         </div>
       )
@@ -130,6 +131,10 @@ var SummaryInfoBox = React.createClass({
     this.setState({ itemsExpanded: !this.state.itemsExpanded });
   },
 
+  clearSet: function() {
+    
+  },
+
   render: function() {
     if (!this.DataService) return null;
     var flattenItems = this.flattenCoresSet();
@@ -137,7 +142,10 @@ var SummaryInfoBox = React.createClass({
     return (
       <div className="summary-info-box">
         <Button className='button' onClick={this.toggleExpand}>
-          {this.state.itemsExpanded ? 'Collapse' : 'Expand'}
+          {this.state.itemsExpanded ? i18n.t('button.collapse') : i18n.t('button.expand')}
+        </Button>
+        <Button className='button' onClick={this.clearSet}>
+          {i18n.t('button.clear-set')}
         </Button>
         <Panel collapsible expanded={this.state.itemsExpanded}>
           {this.renderCurrSet(flattenItems)}

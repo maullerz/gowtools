@@ -1,5 +1,19 @@
 module.exports = {
   "en": {
+    "tabs": {
+      "crafting": "Craft Set Item",
+      "summary": "Set Summary",
+      "settings": "Settings",
+    },
+    "button": {
+      "collapse": "Collapse",
+      "expand": "Expand",
+      "select": "Select",
+      "remove": "Remove",
+      "add": "Add",
+      "clear": "Clear",
+      "clear-set": "Clear Set",
+    },
     "items-list": {
       "items": " items",
       "Helm": "Helm",
@@ -16,7 +30,22 @@ module.exports = {
       "strategic": "Strategic"
     }
   },
+
   "ru": {
+    "tabs": {
+      "crafting": "Крафт",
+      "summary": "Суммарная Статистика",
+      "settings": "Настройки",
+    },
+    "button": {
+      "collapse": "Свернуть",
+      "expand": "Развернуть",
+      "select": "Выбрать",
+      "remove": "Удалить",
+      "add": "Добавить",
+      "clear": "Очистить",
+      "clear-set": "Очистить Сет",
+    },
     "items-list": {
       "items": " предметов",
       "Helm": "Шлемы",

@@ -2,6 +2,7 @@ import React from 'react';
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
 import LocalStorageMixin from 'react-localstorage';
+import i18n from 'i18n-js';
 
 import DataService from './DataService.jsx';
 import SelectedItemsBox from './components/SelectedItemsBox.jsx';
@@ -111,7 +112,7 @@ var Root = React.createClass({
     return (
       <div className="root">
         <Tabs activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
-          <Tab eventKey={1} title="Craft Core">
+          <Tab eventKey={1} title={i18n.t('tabs.crafting')}>
             <div>
               <div className='vertical-line'/>
               <SelectedItemsBox activeTab={this.state.activeTab}
@@ -126,12 +127,23 @@ var Root = React.createClass({
               />
             </div>
           </Tab>
-          <Tab eventKey={2} title="Set Summary">
+          <Tab eventKey={2} title={i18n.t('tabs.summary')}>
             <div>
               <SummaryInfoBox activeTab={this.state.activeTab}
                 ref='summaryInfoBox'
                 selectSetItemForEdit={this.selectSetItemForEdit}
               />
+            </div>
+          </Tab>
+          <Tab eventKey={3} title={i18n.t('tabs.settings')}>
+            <div>
+              {"TODO:"}
+            </div>
+            <div>
+              {"-- CORES CRAFT LUCK"}
+            </div>
+            <div>
+              {"-- HIGH RANGE BOOST"}
             </div>
           </Tab>
         </Tabs>

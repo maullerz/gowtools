@@ -2,6 +2,7 @@ import React from 'react';
 import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
 import LocalStorageMixin from 'react-localstorage';
+import i18n from 'i18n-js';
 
 import DataService from '../DataService.jsx';
 import ModalQualitySelect from './ModalQualitySelect.jsx';
@@ -156,8 +157,12 @@ var SelectedItemsBox = React.createClass({
             {pieceNodes}
           </div>
         </Well>
-        <Button className='button' onClick={this.addSetItemToSet}>{true ? 'Add' : 'Remove'}</Button>
-        <Button className='button' onClick={this.resetItems}>Clear</Button>
+        <Button className='button' onClick={this.addSetItemToSet}>
+          {true ? i18n.t('button.add') : i18n.t('button.remove')}
+        </Button>
+        <Button className='button' onClick={this.resetItems}>
+          {i18n.t('button.clear')}
+        </Button>
         <div className="summarize-info">
           {summarizeInfoNodes}
         </div>
