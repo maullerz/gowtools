@@ -1,5 +1,11 @@
 @import "colors";
 
+.scrollable-items-list {
+  max-height: 900px;
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+}
+
 .well {
   @include main_styles;
   background-image: none;
