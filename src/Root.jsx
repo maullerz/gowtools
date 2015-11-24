@@ -1,6 +1,7 @@
 import React from 'react';
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
+import Input from 'react-bootstrap/lib/Input';
 import LocalStorageMixin from 'react-localstorage';
 import i18n from 'i18n-js';
 
@@ -19,7 +20,10 @@ var Root = React.createClass({
   },
 
   getInitialState: function() {
-    return { activeTab: 1 };
+    return {
+      activeTab: 1,
+      language: i18n.currentLocale() || i18n.defaultLocale
+    }
   },
 
   componentDidMount: function() {
@@ -108,9 +112,20 @@ var Root = React.createClass({
     this.refs.selectedItems.selectSetItemForEdit(setItem);
   },
 
+  handleLanguageSelect: function() {
+    var language = this.refs.languageSelect.getValue();
+    if (i18n.currentLocale() !== language) {
+      i18n.locale = language;
+      this.setState({
+        language: i18n.currentLocale()
+      });
+    }
+  },
+
   render: function() {
+    if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
     return (
-      <div className="root">
+      <div className='root'>
         <Tabs activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
           <Tab eventKey={1} title={i18n.t('tabs.crafting')}>
             <div>
@@ -136,14 +151,23 @@ var Root = React.createClass({
             </div>
           </Tab>
           <Tab eventKey={3} title={i18n.t('tabs.settings')}>
+            <Input groupClassName='select-language'
+                   type="select"
+                   ref='languageSelect'
+                   value={this.state.language}
+                   onChange={this.handleLanguageSelect}
+                   label={i18n.t('language')} >
+              <option value='ru'>{i18n.t('russian')}</option>
+              <option value='en'>{i18n.t('english')}</option>
+            </Input>
             <div>
-              {"TODO:"}
+              {'TODO:'}
             </div>
             <div>
-              {"-- CORES CRAFT LUCK"}
+              {'-- CORES CRAFT LUCK'}
             </div>
             <div>
-              {"-- HIGH RANGE BOOST"}
+              {'-- HIGH RANGE BOOST'}
             </div>
           </Tab>
         </Tabs>

@@ -3,8 +3,7 @@ import i18n from 'i18n-js';
 import Root from './Root.jsx'
 
 i18n.translations = require('./locales/locales');
-i18n.locale = 'ru';
-// i18n.locale = 'en';
+i18n.defaultLocale = 'en';
 
 window.log = function(){
   log.history = log.history || []; // store logs to an array for reference

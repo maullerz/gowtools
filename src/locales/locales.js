@@ -1,5 +1,8 @@
 module.exports = {
   "en": {
+    "language": "Language",
+    "russian": "Russian",
+    "english": "English",
     "tabs": {
       "crafting": "Craft Set Item",
       "summary": "Set Summary",
@@ -32,6 +35,9 @@ module.exports = {
   },
 
   "ru": {
+    "language": "Язык",
+    "russian": "Русский",
+    "english": "Английский",
     "tabs": {
       "crafting": "Крафт",
       "summary": "Суммарная Статистика",
