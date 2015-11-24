@@ -16,6 +16,15 @@ var SummaryInfoBox = React.createClass({
     return 'currentSet';
   },
 
+  getInitialState: function() {
+    this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
+    var coresSet = new CoresSetModel();
+    return {
+      itemsExpanded: true,
+      coresSet: coresSet
+    };
+  },
+
   flattenCoresSet: function() {
     var items = [
       this.state.coresSet.Helm,
@@ -57,15 +66,6 @@ var SummaryInfoBox = React.createClass({
       }
     }
     this.setState({ coresSet: this.state.coresSet });
-  },
-
-  getInitialState: function() {
-    this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
-    var coresSet = new CoresSetModel();
-    return {
-      itemsExpanded: true,
-      coresSet: coresSet
-    };
   },
 
   componentDidMount: function() {
@@ -132,7 +132,8 @@ var SummaryInfoBox = React.createClass({
   },
 
   clearSet: function() {
-    
+    // TODO: PROMT DIALOG!
+    this.setState({ coresSet: new CoresSetModel() });
   },
 
   render: function() {
@@ -150,10 +151,7 @@ var SummaryInfoBox = React.createClass({
         <Panel collapsible expanded={this.state.itemsExpanded}>
           {this.renderCurrSet(flattenItems)}
         </Panel>
-        <h4>Summary Stats</h4>
-        <hr />
-          {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
-        <hr />
+        {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
       </div>
     );
   }
