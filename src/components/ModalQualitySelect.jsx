@@ -34,8 +34,9 @@ var ModalQualitySelect = React.createClass({
     if (this.state.item) {
       qualitiesNode = this.qualities.map(function(color, index) {
         selectQuality = function() { this.props.qualitySelected(this.state.item, index); this.close(); }.bind(this);
+        var spriteName = 'sprite ' + this.state.item.sprite;
         return (
-          <QualityImg key={'quality'+index} color={color} url={'images/'+this.state.item.img_base} selectQuality={selectQuality} />
+          <QualityImg key={'quality'+index} color={color} spriteName={spriteName} selectQuality={selectQuality} />
         );
       }.bind(this));
     }
