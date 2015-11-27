@@ -17,6 +17,8 @@
   {AUTHOR_NAME}
 </author>
 
+<allow-navigation href="http://*/*" />
+
 <gap:platform name="ios" />
 <gap:platform name="android" />
 

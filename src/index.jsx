@@ -11,12 +11,7 @@ function startApp() {
 }
 
 window.onload = function() {
-	var url = document.URL;
-	var isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-	if (isSmart) {
-		document.addEventListener('deviceready', startApp, false);
-	}
-	else {
-		startApp();
-	}
+	var url = document.URL
+	var isDevice = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1)
+	isDevice ? document.addEventListener('deviceready', startApp, false) : startApp()
 }

@@ -10,6 +10,21 @@ import SelectedItemsBox from './components/SelectedItemsBox.jsx';
 import ItemsListBox from './components/ItemsListBox.jsx';
 import SummaryInfoBox from './components/SummaryInfoBox.jsx';
 
+function ajax(opts){
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    var completed = 4;
+    if (xhr.readyState === completed) {
+      if (xhr.status === 200){
+        opts.success(JSON.parse(xhr.responseText), xhr);
+      } else {
+        opts.error(xhr, xhr.responseText);
+      }
+    }
+  };
+  xhr.open('GET', opts.url, true);
+  xhr.send(opts.data);
+}
 
 var Root = React.createClass({
 
@@ -34,7 +49,7 @@ var Root = React.createClass({
   },
 
   loadBoosts: function() {
-    $.ajax({
+    ajax({
       url: this.props.boostsUrl,
       dataType: 'json',
       cache: true,
@@ -49,7 +64,7 @@ var Root = React.createClass({
   },
 
   loadBoostsRu: function() {
-    $.ajax({
+    ajax({
       url: this.props.boostsUrlRu,
       dataType: 'json',
       cache: true,
@@ -64,7 +79,7 @@ var Root = React.createClass({
   },
 
   loadCoresPiecesData: function() {
-    $.ajax({
+    ajax({
       url: this.props.corespiecesUrl,
       dataType: 'json',
       cache: true,

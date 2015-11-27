@@ -55,16 +55,19 @@ module.exports = React.createClass({
   },
 
   initAndroid: function(){
-    $(document.body).addClass('android');
+    // $(document.body).addClass('android');
+    document.body.className += ' android';
   },
 
   initIOS: function(){
-    $(document.body).addClass('ios');
+    // $(document.body).addClass('ios');
+    document.body.className += ' ios';
     if (this.isIOS7()) this.initIOS7();
   },
 
   initIOS7: function(){
-    $(document.body).addClass('ios7');
+    // $(document.body).addClass('ios7');
+    document.body.className += ' ios7';
   },
 
   isBrowser: function() {

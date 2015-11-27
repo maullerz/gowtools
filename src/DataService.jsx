@@ -508,11 +508,11 @@ var DataService = function(Environment) {
       },
 
       loadBoosts: function(data) {
-        this.allBoosts = $.map(data, function(el) { return el.replace('Strategic', 'Strat') });
+        this.allBoosts = Object.keys(data).map(function(el) { return data[el].replace('Strategic', 'Strat') }, this);
       },
 
       loadBoostsRu: function(data) {
-        this.allBoostsRu = $.map(data, function(el) { return el });
+        this.allBoostsRu = Object.keys(data).map(function(el) { return data[el] }, this);
       },
 
       loadData: function(data) {

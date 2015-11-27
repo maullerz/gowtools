@@ -2,17 +2,17 @@ module.exports = {
   targetDirectory: 'phonegap-app',
   phonegapServePort: 3000,
   app: {
-    namespace: 'com.maullerz.reactjs.phonegap',
-    version: '0.0.1',
-    name: 'ReactJs-Phonegap App',
-    description: 'A boilerplate ReactJs-Phonegap App!',
+    namespace: 'com.maullerz.gowtoolz',
+    version: '0.9.1',
+    name: 'GoW Craft Tool',
+    description: 'Crafting tool for Game of War',
     author: {
       name: 'Roman Loginov',
       website: 'https://github.com/maullerz/',
-      email: ''
+      email: 'maullerz@gmail.com'
     },
     accessOrigin: '*',
-    orientation: 'landscape', //all: default means both landscape and portrait are enabled
+    orientation: 'default', //all: default means both landscape and portrait are enabled
     targetDevice: 'universal', //handset, tablet, or universal
     exitOnSuspend: 'true', //ios: if set to true, app will terminate when home button is pressed
     phonegapPlugins: [
@@ -41,6 +41,11 @@ module.exports = {
         installFrom: 'https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git',
         version: null
       },
+      // { FIXME
+      //   name: 'cordova-plugin-whitelist',
+      //   installFrom: '',
+      //   version: null
+      // },
       {
         name: 'cordova-plugin-statusbar',
         installFrom: 'cordova-plugin-statusbar',
