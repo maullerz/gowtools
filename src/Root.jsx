@@ -15,10 +15,10 @@ function ajax(opts){
   xhr.onreadystatechange = function() {
     var completed = 4;
     if (xhr.readyState === completed) {
-      if (xhr.status === 200){
+      if (xhr.status === 200 || xhr.status === 0) {
         opts.success(JSON.parse(xhr.responseText), xhr);
       } else {
-        opts.error(xhr, xhr.responseText);
+        opts.error(xhr, xhr.status, xhr.statusText);
       }
     }
   };
@@ -58,7 +58,7 @@ var Root = React.createClass({
         if (this.DataService.isReady) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.boostsUrl, status, err.toString());
+        log(this.props.boostsUrl, status, err.toString());
       }.bind(this)
     });
   },
@@ -73,7 +73,7 @@ var Root = React.createClass({
         if (this.DataService.isReady) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.boostsUrl, status, err.toString());
+        log(this.props.boostsUrl, status, err.toString());
       }.bind(this)
     });
   },
@@ -88,7 +88,7 @@ var Root = React.createClass({
         if (this.DataService.isReady) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.corespiecesUrl, status, err.toString());
+        log(this.props.corespiecesUrl, status, err.toString());
       }.bind(this)
     });
   },
