@@ -40,6 +40,7 @@ gulp.task('build-app', function(callback){
     'copy-index',
     'copy-backgrounds',
     'copy-icons',
+    // 'copy-spritesheet',
     'copy-data',
     'webpackify',
     'copy-config-xml',
@@ -65,7 +66,7 @@ gulp.task('spritesheet', function() {
       sprite({
         outputCss: './src/styles/sprites.css',
         selector: '.sprite',
-        outputImage: './spr.png'
+        outputImage: './assets-src/spritesheet/spr.png'
       })
     )
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'));
@@ -121,6 +122,11 @@ gulp.task('copy-backgrounds', function() {
 gulp.task('copy-icons', function() {
   return gulp.src('./assets-src/icons/**/*.png')
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'))
+});
+
+gulp.task('copy-spritesheet', function() {
+  return gulp.src('./assets-src/spritesheet/**/*.png')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'))
 });
 
 gulp.task('copy-data', function() {
