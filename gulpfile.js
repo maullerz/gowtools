@@ -19,35 +19,7 @@ var webpackConfig = require('./webpack.config.js');
 var PHONEGAP_APP_DIR = configs.targetDirectory;
 var PHONEGAP_DEVELOPER_APP_PORT = configs.phonegapServePort;
 
-gulp.task('serve',
-  shell.task(
-    ['phonegap serve --port=' + PHONEGAP_DEVELOPER_APP_PORT],
-    { cwd: PHONEGAP_APP_DIR }
-  )
-);
 
-
-
-gulp.task('default', function () {
-});
-
-gulp.task('concat-css', function(){
-  return gulp.src('./build/css/**/*.css')
-    .pipe(concatCss('bundle.css'))
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/css/'));
-});
-
-gulp.task('spritesheet', function() {
-  gulp.src('./assets-src/images/**/*.png')
-    .pipe(
-      sprite({
-        outputCss: './src/styles/sprites.css',
-        selector: '.sprite',
-        outputImage: './spr.png'
-      })
-    )
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'));
-});
 
 gulp.task('default', function(callback) {
   runSequence('build-app', 'watch', callback);
@@ -61,23 +33,48 @@ gulp.task('watch', function(){
     ], ['build-app']);
 });
 
-gulp.task('create', function(callback) {
-  runSequence('clean-app', 'create-app', 'install-plugins', callback);
-});
-
 gulp.task('build-app', function(callback){
   runSequence(
     // 'clean-build',
     'compile-sass',
     'copy-index',
-    'copy-resources',
+    'copy-backgrounds',
+    'copy-icons',
     'copy-data',
-    // 'copy-img',
     'webpackify',
     'copy-config-xml',
     'concat-css',
     callback
   );
+});
+
+// SERVE
+
+gulp.task('serve',
+  shell.task(
+    ['phonegap serve --port=' + PHONEGAP_DEVELOPER_APP_PORT],
+    { cwd: PHONEGAP_APP_DIR }
+  )
+);
+
+// PREPARE SPRITESHEET
+
+gulp.task('spritesheet', function() {
+  gulp.src('./assets-src/images/**/*.png')
+    .pipe(
+      sprite({
+        outputCss: './src/styles/sprites.css',
+        selector: '.sprite',
+        outputImage: './spr.png'
+      })
+    )
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'));
+});
+
+// CREATE PHONEGAP APP
+
+gulp.task('create', function(callback) {
+  runSequence('clean-app', 'create-app', 'install-plugins', callback);
 });
 
 gulp.task('clean-app', function() {
@@ -93,10 +90,14 @@ gulp.task('install-plugins', shell.task(getPhonegapPluginCommands(), {
   cwd: PHONEGAP_APP_DIR
 }));
 
+// CLEANING
+
 gulp.task('clean-build', function() {
   return gulp.src('./build', {read: false})
     .pipe(clean());
 });
+
+// STYLES
 
 gulp.task('compile-sass', function () {
   gulp.src('./src/styles/**/*.scss')
@@ -104,25 +105,35 @@ gulp.task('compile-sass', function () {
     .pipe(gulp.dest('./build/css/'));
 });
 
-gulp.task('copy-index', function() {
-  return gulp.src('./src/index.html')
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
+gulp.task('concat-css', function(){
+  return gulp.src('./build/css/**/*.css')
+    .pipe(concatCss('bundle.css'))
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/css/'));
 });
 
-gulp.task('copy-resources', function() {
-  return gulp.src('./assets-src/res/**/*.png')
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/res/'))
+// ASSETS
+
+gulp.task('copy-backgrounds', function() {
+  return gulp.src('./assets-src/background/**/*.png')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/background/'))
 });
-  
-gulp.task('copy-img',
-  shell.task(['ruby copy_images.rb'])
-);
+
+gulp.task('copy-icons', function() {
+  return gulp.src('./assets-src/icons/**/*.png')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'))
+});
 
 gulp.task('copy-data', function() {
   return gulp.src('./assets-src/data/**/*.json')
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/data/'))
 });
 
+gulp.task('copy-index', function() {
+  return gulp.src('./src/index.html')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/'))
+});
+
+// CONFIGS
 
 gulp.task('copy-config-xml', function() {
   return gulp.src('./src/config.xml')

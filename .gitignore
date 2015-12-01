@@ -1,7 +1,6 @@
 build
 node_modules
 phonegap-app
-assets-src/bower
 assets-src/images
-npm-debug.log
+assets-src/etc
 **/*.tmp
