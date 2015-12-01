@@ -107,10 +107,10 @@ var DataService = function(Environment) {
 
       getIconNameForBoost: function(boostId) {
         var bName = this.allBoosts[boostId];
-        if (bName.indexOf('Cavalry') >= 0) return 'cataphracts.png';
-        if (bName.indexOf('Infantry') >= 0) return 'peltasts.png';
-        if (bName.indexOf('Ranged') >= 0) return 'rangers.png';
-        if (bName.indexOf('Troop') >= 0) return 'troopdefensedebuffresistance.png';
+        if (bName.indexOf('Cavalry') >= 0) return 'warelephant.png';
+        if (bName.indexOf('Infantry') >= 0) return 'immortals.png';
+        if (bName.indexOf('Ranged') >= 0) return 'marksmen.png';
+        if (bName.indexOf('Troop') >= 0) return 'gear_icon.png';
         return '';
       },
 
@@ -187,23 +187,23 @@ var DataService = function(Environment) {
 
           // если есть бусты только на регулярные войска
           if (boosts.length > boostsStrat.length) {
-            console.error('TODO - !!!!!!! Regular.length > Strategic.length');
+            // console.error('TODO - !!!!!!! Regular.length > Strategic.length');
             boosts.forEach(function(boostId) {
               var stratBoostId = this.regularPairs[boostId];
               if (boostsStrat.indexOf(stratBoostId) === -1) {
                 boostsStrat.push(stratBoostId);
-                console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
+                // console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
               }
             }, this);
           };
           // если есть дебаффы только на регулярные войска
           if (debuffs.length > debuffsStrat.length) {
-            console.error('TODO - !!!!!!! Debuffs Regular.length > Strategic.length');
+            // console.error('TODO - !!!!!!! Debuffs Regular.length > Strategic.length');
             debuffs.forEach(function(boostId) {
               var stratBoostId = this.regularPairs[boostId];
               if (debuffsStrat.indexOf(stratBoostId) === -1) {
                 debuffsStrat.push(stratBoostId);
-                console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
+                // console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
               }
             }, this);
           };
@@ -221,7 +221,7 @@ var DataService = function(Environment) {
             return (
               <tr className='first-row' key={'b-'+index}>
                 <td className={'sel-icon'}>
-                  {iconName ? <img width="24" src={'icons/'+iconName} /> : null}
+                  {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>
                   {this.getBoostName(regBoostId)}

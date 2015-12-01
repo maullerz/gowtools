@@ -36,13 +36,13 @@ var ItemRow = React.createClass({
     clsName.push(this.props.clsName ? this.props.clsName : 'mini');
 
     var spriteName = "icon-img sprite " + item.sprite;
-    var icon = <div id='img32' className={spriteName}/>;
-    var openInfoFn = function() { this.props.modalInfo.open(item.href) }.bind(this);
+    var icon = <div id='img44' className={spriteName}/>;
+    var openInfoFn = function() { this.props.openItemInfo(item.href) }.bind(this);
 
     return (
       <tr className={clsName.join(' ')} onClick={this.itemSelected}>
-        {this.props.clsName ? <td className="icon" onClick={openInfoFn}>{icon}</td> : <td className="icon"/>}
-        {this.props.clsName ? <td className="item-name">{this.itemName()}</td> : <td className="item-name"/>}
+        {this.props.clsName ? <td className="icon" rowSpan={this.props.rowSpan} onClick={openInfoFn}>{icon}</td> : null}
+        {this.props.clsName ? <td className="item-name" rowSpan={this.props.rowSpan}>{this.itemName()}</td> : null}
         {this.props.boostId ? <td className="boost-name">{this.boostName()}</td> : null}
         {this.props.boostId ? <td className="lvl6">{this.calculateBoostByLvl(5)}</td> : null}
         {this.props.boostId ? <td className="lvl5">{this.calculateBoostByLvl(4)}</td> : null}
