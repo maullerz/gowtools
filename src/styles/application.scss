@@ -25,11 +25,12 @@ body {
   /*background: transparent;*/
   @include main_styles;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 16px;
+  /*line-height: 1.7;*/
   margin: 0;
   padding: 0px;
-  padding-top: 20px;
+  /* only for ios */
+  /*padding-top: 20px;*/
 }
 
 #content {

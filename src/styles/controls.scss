@@ -18,16 +18,20 @@ tab nav tabs {
   @include main_styles;
 }
 
-button.button.btn.btn-default {
+  /*text-shadow: 0 1px 0 #fff;*/
+/*button.button.btn.btn-default {
   @include main_styles;
   text-shadow: 0 1px 0 #000;
-  /*text-shadow: 0 1px 0 #fff;*/
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   background-image: none;
   display: inline-block;
 }
+
+button.active {
+  background-color: red;
+}*/
 
 Button#quality {
   width: 64px;

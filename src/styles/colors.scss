@@ -3,47 +3,8 @@
   /*color: #000;*/
   background-color: #3c3c3c;
   color: #fff;
-}
-
-.attack-color {
-  /*background-color: rgba(250, 133, 133, 0.8);*/
-  /*background-color: red;*/
-  /*background: -webkit-linear-gradient(red, white);*/
-  background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 52%);
-}
-.health-color {
-  /*background-color: rgba(137, 229, 133, 0.8);*/
-  background: -webkit-linear-gradient(top, #9dd53a 0%,#92d32a 20%,#80c217 76%,#7cbc0a 100%);
-  /*background: -webkit-linear-gradient(top, #ebf7d7 0%,#e7f9cb 76%,#e7fcc4 100%);*/
-  /*color: black;*/
-}
-.defense-color {
-  /*background-color: rgba(151, 190, 250, 0.8);*/
-  background: -webkit-linear-gradient(top, #499bea 27%,#207ce5 77%,#207ce5 77%,#207ce5 77%);
-}
-
-
-
-
-.troop-color {
-  background-color: rgba(229, 133, 133, 0.8);
-  /*background-color: #e58585;*/
-}
-.cavalry-color {
-  background-color: rgba(137, 229, 133, 0.8);
-  /*background-color: #e5e285;*/
-}
-.infantry-color {
-  background-color: rgba(151, 190, 229, 0.8);
-  /*background-color: #97bee5;*/
-}
-.ranged-color {
-  background-color: rgba(229, 226, 133, 0.8);
-  /*background-color: #e585df;*/
-}
-.etc-color {
-  /*background-color: rgba(170, 170, 170, 0.8);*/
-  /*background-color: #e58585;*/
+  background-color: #eee;
+  color: #333;
 }
 
 @mixin qualities {

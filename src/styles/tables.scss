@@ -4,16 +4,13 @@
   max-height: 100px;
   border: 1px solid #ddd;
   overflow-y: scroll;
-  background: red;
 
   @media screen and (orientation: portrait) {
     max-height: 925px;
-    background: green;
   }
 
   @media screen and (orientation: landscape) {
     max-height: 672px;
-    background: blue;
   }
 }
 
@@ -40,19 +37,26 @@
 }
 
 
+thead {
+  border-bottom: 2px solid #aaa;
+}
+
 thead tr th {
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
+  padding-top: 10px;
 }
 
 table {
   @include main_styles;
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-  font-size: 13px;
+  font-size: 16px;
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  border-bottom: 2px solid #6678b1;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  /*border-bottom: 2px solid #6678b1;*/
 
   &.summarize {
     width: 100%;
@@ -62,7 +66,8 @@ table {
 tr {
   @include main_styles;
   &.first-row td {
-    border-top: 2px solid #6678b1;
+    border-top: 1px solid #ccc;
+    /*border-top: 2px solid #6678b1;*/
     border-bottom: none;
   }
   &.selected {
@@ -70,14 +75,14 @@ tr {
     color: black;
   }
   &.mini {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
 td {
   cursor: pointer;
   text-align: center;
-  border-right: 1px solid #ccc;
+  /*border-right: 1px solid #ccc;*/
   width: 11%;
   opacity: 1;
 
@@ -92,8 +97,10 @@ td {
   }
   &.sel-icon {
     width: 5%;
-    background: #ccc;
-    text-align: center;
+    text-align: left;
+    padding-left: 3px;
+    border-right: none;
+    border-left: 2px solid #ccc;
   }
   &.sel-lvl {
     width: 15%;

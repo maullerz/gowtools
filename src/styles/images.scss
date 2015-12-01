@@ -1,4 +1,7 @@
 /*.sprite { background: url( '../img/spr.png' ) no-repeat;}*/
+.sprite {
+  vertical-align: middle;
+}
 
 .sprite.empty {
   width: 100px;
@@ -9,18 +12,12 @@
 
 #img64.sprite {
   zoom: 0.64;
-  vertical-align: middle;
+}
+
+#img44.sprite {
+  zoom: 0.44;
 }
 
 #img32.sprite {
-  zoom: 0.32;
-  vertical-align: middle;
-}
-
-.sprite.img64 {
-  zoom: 0.64;
-}
-
-.sprite.img32 {
   zoom: 0.32;
 }

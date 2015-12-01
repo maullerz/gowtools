@@ -1,3 +1,13 @@
 .filter-panel .form-group {
   display: inline;
 }
+
+Button#filter {
+  width: 44px;
+  padding: 0;
+  opacity: 0.3;
+
+  &.active {
+    opacity: 1;
+  }
+}
