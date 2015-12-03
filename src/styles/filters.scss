@@ -1,13 +1,76 @@
-.filter-panel .form-group {
-  display: inline;
+/* SETTINGS */
+.select-language {
+  max-width: 200px;
+  padding: 15px;
 }
 
-Button#filter {
+/* FILTERS */
+.filter-panel {
+  display: flex;
+  justify-content: space-around;
+}
+
+#btn-navbar {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  margin-top: 1px;
+  width: 40px;
+  padding: 0;
+  opacity: 0.2;
+  opacity: 1;
+  background: none;
+  border: none;
+
+  &.active {
+    opacity: 1;
+    border: 1px solid #aaa;
+  }
+
+  &.left {
+    left: 0;
+    margin-left: 6px;
+  }
+
+  &.right {
+    right: 0;
+    margin-right: 6px;
+  }
+}
+
+#filter {
+  overflow: hidden;
   width: 44px;
   padding: 0;
-  opacity: 0.3;
+  opacity: 0.2;
 
   &.active {
     opacity: 1;
   }
+}
+
+#toggler {
+  width: 44px;
+  opacity: 0.3;
+  font-size: 12px;
+  /*padding: 6px 6px;*/
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.snap-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+#snap-filter-btn {
+  &.active {
+    background-color: #c0f0f9;
+  }
+}
+
+.hidden-group {
+  visibility: hidden;
 }

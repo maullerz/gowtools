@@ -1,14 +1,23 @@
-import React from 'react';
-import Tabs from 'react-bootstrap/lib/Tabs';
-import Tab from 'react-bootstrap/lib/Tab';
-import Input from 'react-bootstrap/lib/Input';
-import LocalStorageMixin from 'react-localstorage';
-import i18n from 'i18n-js';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import SnapJS from 'snapjs'
+import Tabs from 'react-bootstrap/lib/Tabs'
+import Tab from 'react-bootstrap/lib/Tab'
+import Navbar from 'react-bootstrap/lib/Navbar'
+import Nav from 'react-bootstrap/lib/Nav'
+import NavItem from 'react-bootstrap/lib/NavItem'
+import Input from 'react-bootstrap/lib/Input'
+import Button from 'react-bootstrap/lib/Button'
+import LocalStorageMixin from 'react-localstorage'
+import i18n from 'i18n-js'
 
-import DataService from './DataService.jsx';
-import SelectedItemsBox from './components/SelectedItemsBox.jsx';
-import ItemsListBox from './components/ItemsListBox.jsx';
-import SummaryInfoBox from './components/SummaryInfoBox.jsx';
+import DataService from './DataService.jsx'
+import SelectedItemsBox from './components/SelectedItemsBox.jsx'
+import ItemsListBox from './components/ItemsListBox.jsx'
+import SummaryInfoBox from './components/SummaryInfoBox.jsx'
+import FilterEvents from './components/FilterEvents.jsx'
+import FilterBoosts from './components/FilterBoosts.jsx'
+
 
 function ajax(opts){
   var xhr = new XMLHttpRequest();
@@ -31,13 +40,15 @@ var Root = React.createClass({
   mixins: [LocalStorageMixin],
 
   getLocalStorageKey: function() {
-    return 'tabs';
+    return 'root';
   },
 
   getInitialState: function() {
     return {
       activeTab: 1,
-      language: i18n.currentLocale() || i18n.defaultLocale
+      language: i18n.currentLocale() || i18n.defaultLocale,
+      filterEvents: [],
+      filterBoosts: []
     }
   },
 
@@ -46,6 +57,20 @@ var Root = React.createClass({
     this.loadBoosts();
     this.loadBoostsRu();
     this.loadCoresPiecesData();
+
+    var content = ReactDOM.findDOMNode(this.refs.content);
+    if (content) this.snapper = new SnapJS({
+      element: content,
+      easing: 'cubic-bezier(0.19, 1, 0.22, 1)' // easeOutExpo
+    });
+
+    this.snapper.on('animated', function() {
+      this.forceUpdate();
+    }.bind(this));
+  },
+
+  componentWillUnmount: function() {
+    this.snapper.off('animated');
   },
 
   loadBoosts: function() {
@@ -55,7 +80,7 @@ var Root = React.createClass({
       cache: true,
       success: function(data) {
         this.DataService.loadBoosts(data);
-        if (this.DataService.isReady) this.forceUpdate();
+        if (this.DataService.isReady()) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
         log(this.props.boostsUrl, status, err.toString());
@@ -70,7 +95,7 @@ var Root = React.createClass({
       cache: true,
       success: function(data) {
         this.DataService.loadBoostsRu(data);
-        if (this.DataService.isReady) this.forceUpdate();
+        if (this.DataService.isReady()) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
         log(this.props.boostsUrl, status, err.toString());
@@ -85,7 +110,7 @@ var Root = React.createClass({
       cache: true,
       success: function(data) {
         this.DataService.loadData(data);
-        if (this.DataService.isReady) this.forceUpdate();
+        if (this.DataService.isReady()) this.forceUpdate();
       }.bind(this),
       error: function(xhr, status, err) {
         log(this.props.corespiecesUrl, status, err.toString());
@@ -137,11 +162,82 @@ var Root = React.createClass({
     }
   },
 
+  eventSelected: function(events) {
+    this.setState({ filterEvents: events });
+  },
+
+  boostSelected: function(boosts) {
+    this.setState({ filterBoosts: boosts });
+  },
+
+  getEventsState: function() {
+    if (!this.snapper) return '';
+    console.log(this.snapper);
+    var snapState = this.snapper.state();
+
+    console.log(snapState);
+    return (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
+  },
+
+  eventsClicked: function() {
+    var snapState = this.snapper.state();
+    if (snapState.state === 'left') {
+      this.snapper.close();
+    } else {
+      this.snapper.open('left');
+    }
+    this.forceUpdate();
+  },
+
+  getBoostsState: function() {
+    if (!this.snapper) return '';
+    var snapState = this.snapper.state();
+    return (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
+  },
+
+  boostsClicked: function() {
+    var snapState = this.snapper.state();
+    if (snapState.state === 'right') {
+      this.snapper.close();
+    } else {
+      this.snapper.open('right');
+    }
+    this.forceUpdate();
+  },
+
   render: function() {
     if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
+
+    if (this.snapper) {
+      this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
+    };
+
+    console.log(this.getEventsState());
+
     return (
       <div className='root'>
-        <Tabs activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
+
+        <div className="snap-drawers">
+          <div className="snap-drawer snap-drawer-left">
+            <h4>{i18n.t('filter.events')}</h4>
+            <FilterEvents onEventSelected={this.eventSelected} />
+          </div>
+          <div className="snap-drawer snap-drawer-right">
+            <h4>{i18n.t('filter.boosts')}</h4>
+            <FilterBoosts onBoostSelected={this.boostSelected} />
+          </div>
+        </div>
+
+        <Tabs bsStyle="pills" ref='content' className='snap-content' activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
+
+          <Button id='btn-navbar' className={"left"+this.getEventsState()} onClick={this.eventsClicked} >
+            <img width='100%' src={'icons/events.png'} />
+          </Button>
+
+          <Button id='btn-navbar' className={"right"+this.getBoostsState()} onClick={this.boostsClicked} >
+            <img width='100%' src={'icons/boosts.png'} />
+          </Button>
+
           <Tab eventKey={1} title={i18n.t('tabs.crafting')}>
             <div>
               <div className='vertical-line'/>
@@ -152,11 +248,14 @@ var Root = React.createClass({
               />
               <ItemsListBox activeTab={this.state.activeTab}
                 ref='itemsList'
+                onlyEvents={this.state.filterEvents}
+                onlyBoosts={this.state.filterBoosts}
                 onItemSelected={this.itemSelected}
                 isItemSelected={this.isItemSelected}
               />
             </div>
           </Tab>
+
           <Tab eventKey={2} title={i18n.t('tabs.summary')}>
             <div>
               <SummaryInfoBox activeTab={this.state.activeTab}
@@ -165,6 +264,7 @@ var Root = React.createClass({
               />
             </div>
           </Tab>
+
           <Tab eventKey={3} title={i18n.t('tabs.settings')}>
             <Input groupClassName='select-language'
                    type="select"

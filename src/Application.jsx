@@ -1,5 +1,6 @@
 import React from 'react'
-import i18n from 'i18n-js';
+import i18n from 'i18n-js'
+import FastClick from 'fastclick'
 import Root from './Root.jsx'
 
 i18n.translations = require('./locales/locales');
@@ -46,12 +47,9 @@ module.exports = React.createClass({
   },
 
   initApp: function(){
-    if (this.isAndroid()) {
-      this.initAndroid();
-    }
-    if (this.isIOS()) {
-      this.initIOS();
-    }
+    if (this.isAndroid()) this.initAndroid();
+    if (this.isIOS()) this.initIOS();
+    FastClick.attach(document.body, {});
   },
 
   initAndroid: function(){

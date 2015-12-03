@@ -1,6 +1,7 @@
 import React from 'react';
 import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import LocalStorageMixin from 'react-localstorage';
 import i18n from 'i18n-js';
 
@@ -73,9 +74,8 @@ var SelectedItemsBox = React.createClass({
       // remove piece from setItem
       if (ix >= 0) {
         currSetItem.pieces.splice(ix, 1);
-
-      // add piece to setItem
-      } else if (currSetItem.pieces.length < 6) {
+      } else // add piece to setItem
+      if (currSetItem.pieces.length < 6) {
         currSetItem.pieces = currSetItem.pieces.concat(item);
         currSetItem.piecesQualities = currSetItem.piecesQualities.concat(item.quality);
         result = true;
@@ -113,7 +113,7 @@ var SelectedItemsBox = React.createClass({
   },
 
   render: function() {
-    if (!this.DataService || !this.DataService.isReady) return null;
+    if (!this.DataService || !this.DataService.isReady()) return null;
 
     var currSetItem = this.state.setItem;
     var core = currSetItem.core;
@@ -124,13 +124,13 @@ var SelectedItemsBox = React.createClass({
       var openInfoFn = function() { this.refs.modal.open(core) }.bind(this);
       var coreNode = (
         <div className={'sel-item-core '+quality} key={"sel-item-core"}>
-          <div id='img64' className={spriteName} onClick={openInfoFn} />
+          <div id='img71' className={spriteName} onClick={openInfoFn} />
         </div>
       );
     } else {
       var coreNode = (
         <div className={'sel-item-core empty'} key={"sel-item-core"}>
-          <div id='img64' className='sprite empty'/>
+          <div id='img71' className='sprite empty'/>
         </div>
       );
     }
@@ -151,18 +151,22 @@ var SelectedItemsBox = React.createClass({
     return (
       <div className='selected-items-box' ref='target'>
         <ModalQualitySelect ref="modal" qualitySelected={this.qualitySelected}/>
-        <Well className="selected-items">
-          {coreNode}
-          <div>
-            {pieceNodes}
+        <div className='selected-items-box-head'>
+          <div className='selected-items-btn-group'>
+            <Button className='button' onClick={this.addSetItemToSet}>
+              <Glyphicon glyph="plus"/>
+            </Button>
+            <Button className='button' onClick={this.resetItems}>
+              <Glyphicon glyph="trash"/>
+            </Button>
           </div>
-        </Well>
-        <Button className='button' onClick={this.addSetItemToSet}>
-          {true ? i18n.t('button.add') : i18n.t('button.remove')}
-        </Button>
-        <Button className='button' onClick={this.resetItems}>
-          {i18n.t('button.clear')}
-        </Button>
+          <Well className="selected-items">
+            {coreNode}
+            <div>
+              {pieceNodes}
+            </div>
+          </Well>
+        </div>
         <div className="summarize-info">
           {summarizeInfoNodes}
         </div>

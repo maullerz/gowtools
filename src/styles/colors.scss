@@ -1,20 +1,9 @@
 @mixin main_styles {
-  /*background-color: #f9f9f9;*/
-  /*color: #000;*/
-  background-color: #3c3c3c;
-  color: #fff;
   background-color: #eee;
   color: #333;
 }
 
 @mixin qualities {
-/*  &.gray { background: #C0C0C0; }
-  &.white { background: #FFF; }
-  &.green { background: green; }
-  &.blue { background: blue; }
-  &.purple { background: purple; }
-  &.gold { background: gold; }*/
-  
   background-size: cover;
   background-position: center;
   &.gray {

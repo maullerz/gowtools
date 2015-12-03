@@ -1,16 +1,29 @@
 @import "colors";
 
-.select-language {
-  max-width: 200px;
-  padding: 15px;
+.btn-default {
+  background-color: #eee;
+  border: 1px solid #aaa;
 }
 
+Button#quality {
+  width: 64px;
+  height: 64px;
+  /*border-radius: 95%;*/
+  border: 1px solid #aaa;
+  padding: 0;
 
+  @include qualities;
+}
+
+.tab-content {
+/*  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;*/
+  background: #ddd;
+}
+
+/*
 .tab-pane .tab-content {
-  @include main_styles;
-}
-
-tab nav tabs {
   @include main_styles;
 }
 
@@ -18,46 +31,33 @@ tab nav tabs {
   @include main_styles;
 }
 
-  /*text-shadow: 0 1px 0 #fff;*/
-/*button.button.btn.btn-default {
-  @include main_styles;
-  text-shadow: 0 1px 0 #000;
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-image: none;
-  display: inline-block;
-}
-
-button.active {
-  background-color: red;
-}*/
-
-Button#quality {
-  width: 64px;
-  height: 64px;
-  /*border-radius: 95%;*/
-  border: 1px solid #a3aaaa;
-  padding: 0;
-
-  @include qualities;
-}
-
-.nav-tabs>li.active>a {
-  @include main_styles;
-}
-
-.nav-tabs>li>a {
-  color: #999;
-}
-
 .panel-default {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.tab-content {
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+tab nav tabs {
+  @include main_styles;
+}
+*/
+
+.nav {
+  background-color: #222;
+  border-color: #080808;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav>li>a {
+  /*padding: 5px 15px;*/
+  color: #9d9d9d;
+  border-radius: 0;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color: #222;
+}
+
+.nav-tabs>li>a {
+  color: #999;
 }

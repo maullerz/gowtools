@@ -1,6 +1,6 @@
 {
   "name": "gowtoolz",
-  "version": "0.8.1",
+  "version": "0.9.1",
   "description": "Craft tool for GoW",
   "scripts": {
     "setup": "npm install"
@@ -8,6 +8,7 @@
   "author": "Roman Loginov",
   "license": "MIT",
   "dependencies": {
+    "fastclick": "^1.0.6",
     "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
@@ -25,7 +26,7 @@
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
     "react-localstorage": "^0.2.8",
-    "url-loader": "^0.5.6"
+    "snapjs": "^1.2.1"
   },
   "devDependencies": {
     "lodash": "^3.10.1",

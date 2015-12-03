@@ -4,9 +4,13 @@ module.exports = {
     "russian": "Russian",
     "english": "English",
     "tabs": {
-      "crafting": "Craft Set Item",
-      "summary": "Set Summary",
+      "crafting": "Crafting",
+      "summary": "Statistics",
       "settings": "Settings",
+    },
+    "filter": {
+      "events": "EVENTS",
+      "boosts": "BOOSTS",
     },
     "button": {
       "collapse": "Collapse",
@@ -40,8 +44,12 @@ module.exports = {
     "english": "Английский",
     "tabs": {
       "crafting": "Крафт",
-      "summary": "Суммарная Статистика",
+      "summary": "Статистика",
       "settings": "Настройки",
+    },
+    "filter": {
+      "events": "СОБЫТИЯ",
+      "boosts": "БУСТЫ",
     },
     "button": {
       "collapse": "Свернуть",
@@ -53,7 +61,7 @@ module.exports = {
       "clear-set": "Очистить Сет",
     },
     "items-list": {
-      "items": " предметов",
+      "items": "",
       "Helm": "Шлемы",
       "Armor": "Доспехи",
       "Feet": "Обувь",
@@ -65,7 +73,7 @@ module.exports = {
       "debuffs": "Дебаффы",
       "etc": "Разное",
       "regular": "Регулярные",
-      "strategic": "Стратегические"
+      "strategic": "Стратеги"
     }
   },
 };

@@ -120,8 +120,7 @@ var DataService = function(Environment) {
 
       getBoostName: function(boostId) {
         if (i18n.currentLocale() === 'ru') {
-          var ruName = this.allBoostsRu && this.allBoostsRu[boostId]
-          return ruName ? this.allBoostsRu[boostId] : this.allBoosts[boostId];
+          return this.allBoostsRu[boostId];
         } else {
           return this.allBoosts[boostId];
         }
@@ -187,23 +186,19 @@ var DataService = function(Environment) {
 
           // если есть бусты только на регулярные войска
           if (boosts.length > boostsStrat.length) {
-            // console.error('TODO - !!!!!!! Regular.length > Strategic.length');
             boosts.forEach(function(boostId) {
               var stratBoostId = this.regularPairs[boostId];
               if (boostsStrat.indexOf(stratBoostId) === -1) {
                 boostsStrat.push(stratBoostId);
-                // console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
               }
             }, this);
           };
           // если есть дебаффы только на регулярные войска
           if (debuffs.length > debuffsStrat.length) {
-            // console.error('TODO - !!!!!!! Debuffs Regular.length > Strategic.length');
             debuffs.forEach(function(boostId) {
               var stratBoostId = this.regularPairs[boostId];
               if (debuffsStrat.indexOf(stratBoostId) === -1) {
                 debuffsStrat.push(stratBoostId);
-                // console.error('  added '+stratBoostId+': '+this.getBoostName(stratBoostId));
               }
             }, this);
           };
@@ -238,7 +233,6 @@ var DataService = function(Environment) {
 
           var mapFuncEtc = function(boostId, index) {
             var data = calculatedBoosts[boostId];
-            var rowColor = this.getColorForBoost(boostId);
             var iconName = this.getIconNameForBoost(boostId);
             return (
               <tr className='first-row' key={'etc-'+index}>
@@ -246,8 +240,8 @@ var DataService = function(Environment) {
                   {iconName ? <img width="100%" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>{this.getBoostName(boostId)}</td>
-                <td className={'sel-lvl lvl6 '} />
-                <td className={'sel-lvl lvl6 '+rowColor}>{this.calculateLuck(data)}</td>
+                <td className={'sel-lvl lvl6'} />
+                <td className={'sel-lvl lvl6'}>{this.calculateLuck(data)}</td>
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[1])}</td>}
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[2])}</td>}
               </tr>
@@ -397,7 +391,7 @@ var DataService = function(Environment) {
 
       isAnyBoostExist: function(onlyBoosts, statsInfo) {
         for (var i = 0, len = onlyBoosts.length; i < len; ++i) {
-          if (undefined !== statsInfo && undefined !== statsInfo[onlyBoosts[i].toString()]) {
+          if (statsInfo && statsInfo[onlyBoosts[i].toString()]) {
             return true;
           }
         }
@@ -406,13 +400,9 @@ var DataService = function(Environment) {
 
       getFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
         var data = this.coresPiecesData.filter(function(item) {
-          var type = item.main_info_ru["Equipment Types"];
-          var gameEvent = item.main_info_ru["Event"];
-          var slot = item.main_info_ru["Slot"];
-
-          var typeFilter = onlyTypes.length === 0 || onlyTypes.indexOf(type) >= 0;
-          var eventFilter = onlyEvents.length === 0 || onlyEvents.indexOf(gameEvent) >= 0;
-          var slotFilter = onlySlots.length === 0 || onlySlots.indexOf(slot) >= 0;
+          var typeFilter = onlyTypes.length === 0 || onlyTypes.indexOf(item.type) >= 0;
+          var slotFilter = onlySlots.length === 0 || onlySlots.indexOf(item.slot) >= 0;
+          var eventFilter = onlyEvents.length === 0 || onlyEvents.indexOf(item.gameEventId) >= 0;
 
           return typeFilter && eventFilter && slotFilter;
         }.bind(this));
@@ -517,14 +507,20 @@ var DataService = function(Environment) {
 
       loadData: function(data) {
         for (var i = data.length - 1; i >= 0; i--) {
-          // TODO need models:
           data[i].type = data[i].main_info_ru["Equipment Types"];
           data[i].gameEvent = data[i].main_info_ru["Event"];
           data[i].slot = data[i].main_info_ru["Slot"];
           data[i].sprite = data[i].img_base.replace('.png', '');
         };
+
         this.coresPiecesData = data;
+
+        // отсортированный массив Событий с айдишниками для фильтра
         this.events = this.getUniqEvents(data);
+        // проставляем айдишники каждому итему чтобы не возиться со строками
+        for (var i = data.length - 1; i >= 0; i--) {
+          data[i].gameEventId = this.events.indexOf(data[i].gameEvent);
+        };
       },
 
       isReady: function() {

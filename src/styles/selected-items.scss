@@ -3,20 +3,29 @@
 
 div.selected-items.well {
   min-height: 88px;
-  min-width: 204px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-top: 10px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
+  min-width: 210px;
+  padding: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  border: 1px solid #aaa;
+  border-radius: 4px;
 }
 
+.selected-items-box-head {
+  display: flex;
+}
 
+.selected-items-btn-group {
+  height: 95px;
+  display: flex;
+  margin-right: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .selected-items-box {
   display: inline-block;
-  width: 50%;
+  width: 44%;
   padding: 5px;
   min-width: 214px;
 }
@@ -31,9 +40,7 @@ div.selected-items.well {
   display: inline-block;
   height: 100%;
   margin-left: 5px;
-  /*margin-top: 10px;*/
-  /*margin-bottom: 10px;*/
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   text-align: left;
@@ -46,9 +53,7 @@ div.selected-items.well {
   float: left;
   height: 100%;
   text-align: center;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 

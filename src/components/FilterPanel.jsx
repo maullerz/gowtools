@@ -1,10 +1,7 @@
 import React from 'react';
-// import i18n from 'i18n-js';
-// {i18n.t('button.clear')}
 
 import Button from 'react-bootstrap/lib/Button';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import FilterBoosts from './FilterBoosts.jsx';
 
 var FilterPanel = React.createClass({
 
@@ -38,10 +35,13 @@ var FilterPanel = React.createClass({
     return this.state.slot === slot ? 'active' : '';
   },
 
+  getSlotsGroupState: function() {
+    return this.state.type === 'Pieces' ? 'hidden-group' : '';
+  },
+
   render: function() {
     return (
-      <div>
-        <FilterBoosts/>
+      <div className='filter-panel'>
         <ButtonGroup>
           <Button id='filter' className={this.getTypesState('Cores')} value='Cores' onClick={this.typeClicked}>
             <img width='100%' src={'icons/cores.png'} />
@@ -50,25 +50,23 @@ var FilterPanel = React.createClass({
             <img width='100%' src={'icons/pieces.png'} />
           </Button>
         </ButtonGroup>
-        {this.state.type === 'Cores' ? (
-          <ButtonGroup>
-            <Button id='filter' className={this.getSlotsState('Helm')} value='Helm' onClick={this.slotClicked}>
-              <img width='100%' src={'icons/helmet.png'} />
-            </Button>
-            <Button id='filter' className={this.getSlotsState('Armor')} value='Armor' onClick={this.slotClicked}>
-              <img width='100%' src={'icons/armor.png'} />
-            </Button>
-            <Button id='filter' className={this.getSlotsState('Feet')} value='Feet' onClick={this.slotClicked}>
-              <img width='100%' src={'icons/feet.png'} />
-            </Button>
-            <Button id='filter' className={this.getSlotsState('Weapon')} value='Weapon' onClick={this.slotClicked}>
-              <img width='100%' src={'icons/weapon.png'} />
-            </Button>
-            <Button id='filter' className={this.getSlotsState('Accessory')} value='Accessory' onClick={this.slotClicked}>
-              <img width='100%' src={'icons/accessory.png'} />
-            </Button>
-          </ButtonGroup>
-        ) : null}
+        <ButtonGroup className={this.getSlotsGroupState()}>
+          <Button id='filter' className={this.getSlotsState('Helm')} value='Helm' onClick={this.slotClicked}>
+            <img width='100%' src={'icons/helmet.png'} />
+          </Button>
+          <Button id='filter' className={this.getSlotsState('Armor')} value='Armor' onClick={this.slotClicked}>
+            <img width='100%' src={'icons/armor.png'} />
+          </Button>
+          <Button id='filter' className={this.getSlotsState('Feet')} value='Feet' onClick={this.slotClicked}>
+            <img width='100%' src={'icons/feet.png'} />
+          </Button>
+          <Button id='filter' className={this.getSlotsState('Weapon')} value='Weapon' onClick={this.slotClicked}>
+            <img width='100%' src={'icons/weapon.png'} />
+          </Button>
+          <Button id='filter' className={this.getSlotsState('Accessory')} value='Accessory' onClick={this.slotClicked}>
+            <img width='100%' src={'icons/accessory.png'} />
+          </Button>
+        </ButtonGroup>
       </div>
     )
   }
