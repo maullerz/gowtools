@@ -52,19 +52,17 @@ module.exports = React.createClass({
     FastClick.attach(document.body, {});
   },
 
+  // TODO add classes to .snap-drawers & .snap-content
   initAndroid: function(){
-    // $(document.body).addClass('android');
     document.body.className += ' android';
   },
 
   initIOS: function(){
-    // $(document.body).addClass('ios');
     document.body.className += ' ios';
     if (this.isIOS7()) this.initIOS7();
   },
 
   initIOS7: function(){
-    // $(document.body).addClass('ios7');
     document.body.className += ' ios7';
   },
 

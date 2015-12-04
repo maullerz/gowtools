@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom'
 import SnapJS from 'snapjs'
 import Tabs from 'react-bootstrap/lib/Tabs'
 import Tab from 'react-bootstrap/lib/Tab'
-import Navbar from 'react-bootstrap/lib/Navbar'
-import Nav from 'react-bootstrap/lib/Nav'
-import NavItem from 'react-bootstrap/lib/NavItem'
 import Input from 'react-bootstrap/lib/Input'
 import Button from 'react-bootstrap/lib/Button'
 import LocalStorageMixin from 'react-localstorage'
@@ -172,11 +169,10 @@ var Root = React.createClass({
 
   getEventsState: function() {
     if (!this.snapper) return '';
-    console.log(this.snapper);
     var snapState = this.snapper.state();
-
-    console.log(snapState);
-    return (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
+    var className = (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
+    className += this.state.activeTab === 1 ? '' : ' hidden';
+    return className;
   },
 
   eventsClicked: function() {
@@ -192,7 +188,9 @@ var Root = React.createClass({
   getBoostsState: function() {
     if (!this.snapper) return '';
     var snapState = this.snapper.state();
-    return (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
+    var className = (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
+    className += this.state.activeTab === 1 ? '' : ' hidden';
+    return className;
   },
 
   boostsClicked: function() {
@@ -219,11 +217,9 @@ var Root = React.createClass({
 
         <div className="snap-drawers">
           <div className="snap-drawer snap-drawer-left">
-            <h4>{i18n.t('filter.events')}</h4>
             <FilterEvents onEventSelected={this.eventSelected} />
           </div>
           <div className="snap-drawer snap-drawer-right">
-            <h4>{i18n.t('filter.boosts')}</h4>
             <FilterBoosts onBoostSelected={this.boostSelected} />
           </div>
         </div>

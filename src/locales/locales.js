@@ -4,9 +4,9 @@ module.exports = {
     "russian": "Russian",
     "english": "English",
     "tabs": {
-      "crafting": "Crafting",
-      "summary": "Statistics",
-      "settings": "Settings",
+      "crafting": "CRAFTING",
+      "summary": "STATISTICS",
+      "settings": "SETTINGS",
     },
     "filter": {
       "events": "EVENTS",
@@ -43,9 +43,9 @@ module.exports = {
     "russian": "Русский",
     "english": "Английский",
     "tabs": {
-      "crafting": "Крафт",
-      "summary": "Статистика",
-      "settings": "Настройки",
+      "crafting": "КРАФТ",
+      "summary": "СТАТИСТИКА",
+      "settings": "НАСТРОЙКИ",
     },
     "filter": {
       "events": "СОБЫТИЯ",

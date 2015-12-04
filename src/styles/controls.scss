@@ -3,6 +3,7 @@
 .btn-default {
   background-color: #eee;
   border: 1px solid #aaa;
+  outline: none!important;
 }
 
 Button#quality {
@@ -49,7 +50,7 @@ tab nav tabs {
 }
 
 .nav>li>a {
-  /*padding: 5px 15px;*/
+  outline: none!important;
   color: #9d9d9d;
   border-radius: 0;
 }

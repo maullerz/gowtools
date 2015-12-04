@@ -1,5 +1,5 @@
-import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import React from 'react'
+import Button from 'react-bootstrap/lib/Button'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 
@@ -34,6 +34,11 @@ var FilterEvents = React.createClass({
     return this.state.events.indexOf(eventId) >= 0 ? 'active' : '';
   },
 
+  clearFilter: function() {
+    this.setState({ events: [] });
+    this.props.onEventSelected([]);
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
     
@@ -49,8 +54,16 @@ var FilterEvents = React.createClass({
     }, this);
 
     return (
-      <div className='snap-filter'>
-        {eventNodes}
+      <div>
+        <div className='snap-filter-header'>
+          <button type="button" className="snap-filter-clear-btn" onClick={this.clearFilter}>
+            <span>×</span>
+          </button>
+          <span className='snap-filter-headtext'>{i18n.t('filter.events')}</span>
+        </div>
+        <div className='snap-filter-container'>
+          {eventNodes}
+        </div>
       </div>
     );
   }

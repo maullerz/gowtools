@@ -50,6 +50,11 @@ var FilterBoosts = React.createClass({
     );
   },
 
+  clearFilter: function() {
+    this.setState({ boosts: [] });
+    this.props.onBoostSelected([]);
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
 
@@ -65,8 +70,16 @@ var FilterBoosts = React.createClass({
     }, this);
 
     return (
-      <div className='snap-filter'>
-        {boostNodes}
+      <div>
+        <div className='snap-filter-header'>
+          <button type="button" className="snap-filter-clear-btn" onClick={this.clearFilter}>
+            <span>×</span>
+          </button>
+          <span className='snap-filter-headtext'>{i18n.t('filter.boosts')}</span>
+        </div>
+        <div className='snap-filter-container'>
+          {boostNodes}
+        </div>
       </div>
     );
   }

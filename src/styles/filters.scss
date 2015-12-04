@@ -60,7 +60,33 @@
   }
 }
 
-.snap-filter {
+.snap-filter-clear-btn {
+  float: right;
+  padding: 0;
+  line-height: 0.5;
+  margin-right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  color: #ddd;
+  text-shadow: 0 1px 0 #555;
+}
+
+.snap-filter-headtext {
+  margin-left: 25px
+}
+
+.snap-filter-header {
+  background-color: #222;
+  border-color: #080808;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.snap-filter-container {
   display: flex;
   flex-direction: column;
 }
