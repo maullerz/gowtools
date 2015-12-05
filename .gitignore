@@ -4,3 +4,4 @@ phonegap-app
 assets-src/images
 assets-src/etc
 **/*.tmp
+_DISTR

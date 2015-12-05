@@ -4,12 +4,11 @@ var webpack = require('webpack');
 
 var gutil = require('gulp-util');
 var shell = require('gulp-shell');
-var runSequence = require('gulp-run-sequence');
+var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var replace = require('gulp-replace');
 var sass = require('gulp-sass');
 var sprite = require('gulp-node-spritesheet');
-var concat = require('gulp-concat');
 var concatCss = require('gulp-concat-css');
 
 
@@ -30,17 +29,33 @@ gulp.task('watch', function(){
     './src/**/*.jsx',
     './src/**/*.js',
     './src/styles/*.scss'
-    ], ['build-app']);
+    ], ['build-app-on-watch']);
 });
+
+// BUILD ONLY SRC WITHOUT ASSETS
+
+gulp.task('build-app-on-watch', function(callback){
+  runSequence(
+    'compile-sass',
+    'webpackify',
+    'concat-css',
+    'copy-index',
+    'copy-config-xml',
+    callback
+  );
+});
+
+// COMPLETE BUILD
 
 gulp.task('build-app', function(callback){
   runSequence(
-    // 'clean-build',
+    'clean-build',
     'compile-sass',
     'copy-index',
     'copy-backgrounds',
+    'copy-bootstrap',
     'copy-icons',
-    // 'copy-spritesheet',
+    'copy-spritesheet',
     'copy-data',
     'webpackify',
     'copy-config-xml',
@@ -48,6 +63,7 @@ gulp.task('build-app', function(callback){
     callback
   );
 });
+
 
 // SERVE
 
@@ -114,14 +130,19 @@ gulp.task('concat-css', function(){
 
 // ASSETS
 
+gulp.task('copy-bootstrap', function() {
+  return gulp.src('./assets-src/bootstrap/bootstrap.min.css')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/css/'));
+});
+
 gulp.task('copy-backgrounds', function() {
   return gulp.src('./assets-src/background/**/*.png')
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/background/'))
 });
 
-gulp.task('copy-icons', function() {
+gulp.task('copy-icons', function(callback) {
   return gulp.src('./assets-src/icons/**/*.png')
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'))
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'));
 });
 
 gulp.task('copy-spritesheet', function() {
@@ -143,20 +164,20 @@ gulp.task('copy-index', function() {
 
 gulp.task('copy-config-xml', function() {
   return gulp.src('./src/config.xml')
-    .pipe(replace(/{NAMESPACE}/g, configs.app.namespace))
-    .pipe(replace(/{VERSION}/g, configs.app.version))
-    .pipe(replace(/{APP_NAME}/g, configs.app.name))
-    .pipe(replace(/{APP_DESCRIPTION}/g, configs.app.description))
-    .pipe(replace(/{AUTHOR_WEBISTE}/g, configs.app.author.website))
-    .pipe(replace(/{AUTHOR_EMAIL}/g, configs.app.author.email))
-    .pipe(replace(/{AUTHOR_NAME}/g, configs.app.author.name))
-    .pipe(replace(/{PLUGINS}/g, getPluginsXML()))
-    .pipe(replace(/{ICONS}/g, getIconsXML()))
-    .pipe(replace(/{SPLASHSCREENS}/g, getSplashscreenXML()))
-    .pipe(replace(/{ACCESS_ORIGIN}/g, configs.app.accessOrigin))
-    .pipe(replace(/{ORIENTATION}/g, configs.app.orientation))
-    .pipe(replace(/{TARGET_DEVICE}/g, configs.app.targetDevice))
-    .pipe(replace(/{EXIT_ON_SUSPEND}/g, configs.app.exitOnSuspend))
+    // .pipe(replace(/{NAMESPACE}/g, configs.app.namespace))
+    // .pipe(replace(/{VERSION}/g, configs.app.version))
+    // .pipe(replace(/{APP_NAME}/g, configs.app.name))
+    // .pipe(replace(/{APP_DESCRIPTION}/g, configs.app.description))
+    // .pipe(replace(/{AUTHOR_WEBISTE}/g, configs.app.author.website))
+    // .pipe(replace(/{AUTHOR_EMAIL}/g, configs.app.author.email))
+    // .pipe(replace(/{AUTHOR_NAME}/g, configs.app.author.name))
+    // .pipe(replace(/{PLUGINS}/g, getPluginsXML()))
+    // .pipe(replace(/{ICONS}/g, getIconsXML()))
+    // .pipe(replace(/{SPLASHSCREENS}/g, getSplashscreenXML()))
+    // .pipe(replace(/{ACCESS_ORIGIN}/g, configs.app.accessOrigin))
+    // .pipe(replace(/{ORIENTATION}/g, configs.app.orientation))
+    // .pipe(replace(/{TARGET_DEVICE}/g, configs.app.targetDevice))
+    // .pipe(replace(/{EXIT_ON_SUSPEND}/g, configs.app.exitOnSuspend))
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/'))
 });
 
@@ -173,67 +194,82 @@ gulp.task('webpackify', function(callback){
 
 
 function getPhonegapPluginCommands() {
+  var plugins = [
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-globalization",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-screen-orientation"
+  ];
   var commands = [];
-  for (var i = 0; i < configs.app.phonegapPlugins.length; i++){
-    var p = configs.app.phonegapPlugins[i];
-    commands.push('phonegap plugin add ' + p.installFrom);
+  for (var i = 0; i < plugins.length; i++){
+    var name = plugins[i];
+    commands.push('phonegap plugin add ' + name);
   }
   return commands;
+
+  // var commands = [];
+  // for (var i = 0; i < configs.app.phonegapPlugins.length; i++){
+  //   var p = configs.app.phonegapPlugins[i];
+  //   commands.push('phonegap plugin add ' + p.installFrom);
+  // }
+  // return commands;
 }
 
-function getPluginsXML() {
-  var xml = '';
-  for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
-    var p = configs.app.phonegapPlugins[i];
-    var pluginXml = '<gap:plugin name="' + p.name + '"';
-    if( !!p.version ){
-      pluginXml += ' version="' + p.version + '"';
-    }
-    pluginXml += '/>' + "\n";
-    xml += pluginXml;   
-  }
-  return xml;
-}
+// function getPluginsXML() {
+//   var xml = '';
+//   for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
+//     var p = configs.app.phonegapPlugins[i];
+//     var pluginXml = '<gap:plugin name="' + p.name + '"';
+//     if( !!p.version ){
+//       pluginXml += ' version="' + p.version + '"';
+//     }
+//     pluginXml += '/>' + "\n";
+//     xml += pluginXml;   
+//   }
+//   return xml;
+// }
 
-function getIconsXML() {
-  var xml = '';
-  for(var i = 0; i < configs.app.icons.length; i++){
-    var e = configs.app.icons[i];
-    var eXml = '<icon src="' + e.src + '"';
-    if( !!e.platform ){
-      eXml += ' platform="' + e.platform + '"';
-    }
-    if( !!e.width ){
-      eXml += ' width="' + e.width + '"';
-    }
-    if( !!e.height ){
-      eXml += ' height="' + e.height + '"';
-    }
-    if( !!e.density ){
-      eXml += ' density="' + e.density + '"';
-    }
-    eXml += '/>' + "\n";
-    xml += eXml;
-  }
-  return xml;
-}
+// function getIconsXML() {
+//   var xml = '';
+//   for(var i = 0; i < configs.app.icons.length; i++){
+//     var e = configs.app.icons[i];
+//     var eXml = '<icon src="' + e.src + '"';
+//     if( !!e.platform ){
+//       eXml += ' platform="' + e.platform + '"';
+//     }
+//     if( !!e.width ){
+//       eXml += ' width="' + e.width + '"';
+//     }
+//     if( !!e.height ){
+//       eXml += ' height="' + e.height + '"';
+//     }
+//     if( !!e.density ){
+//       eXml += ' density="' + e.density + '"';
+//     }
+//     eXml += '/>' + "\n";
+//     xml += eXml;
+//   }
+//   return xml;
+// }
 
-function getSplashscreenXML() {
-  var xml = '';
-  for(var i = 0; i < configs.app.splashscreens.length; i++){
-    var e = configs.app.splashscreens[i];
-    var eXml = '<gap:splash src="' + e.src + '"';
-    if( !!e.platform ){
-      eXml += ' gap:platform="' + e.platform + '"';
-    }
-    if( !!e.width ){
-      eXml += ' width="' + e.width + '"';
-    }
-    if( !!e.height ){
-      eXml += ' height="' + e.height + '"';
-    }
-    eXml += '/>' + "\n";
-    xml += eXml;
-  }
-  return xml;
-}
+// function getSplashscreenXML() {
+//   var xml = '';
+//   for(var i = 0; i < configs.app.splashscreens.length; i++){
+//     var e = configs.app.splashscreens[i];
+//     var eXml = '<gap:splash src="' + e.src + '"';
+//     if( !!e.platform ){
+//       eXml += ' gap:platform="' + e.platform + '"';
+//     }
+//     if( !!e.width ){
+//       eXml += ' width="' + e.width + '"';
+//     }
+//     if( !!e.height ){
+//       eXml += ' height="' + e.height + '"';
+//     }
+//     eXml += '/>' + "\n";
+//     xml += eXml;
+//   }
+//   return xml;
+// }
