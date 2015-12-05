@@ -8,6 +8,9 @@
 .filter-panel {
   display: flex;
   justify-content: space-around;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #aaa;
 }
 
 #btn-navbar {
@@ -80,18 +83,13 @@
 .snap-filter-header {
   background-color: #222;
   border-color: #080808;
-  display: inline-block;
   text-align: center;
   width: 100%;
   padding: 10px;
 }
 
-.snap-filter-container {
-  display: flex;
-  flex-direction: column;
-}
-
 #snap-filter-btn {
+  width: 100%;
   &.active {
     background-color: #c0f0f9;
   }

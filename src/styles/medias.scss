@@ -1,0 +1,37 @@
+/*statusbar height = 25*/
+/*header height = 42*/
+/*filterpanel height = 55*/
+/* iPhone   6s 667x375 (1334x750) */
+/* iPhone   5x 568x320 (1136x640) */
+/* iPhone 3-4x 480x320 */
+
+.snap-filter-container {
+  overflow-y: scroll;
+
+  @media only screen and (max-device-width: 1024px) and (orientation: portrait) {
+    height: 1024px - 42px - 25px;
+  }
+
+  @media only screen and (max-device-width: 1024px) and (orientation: landscape) {
+    height: 768px - 42px - 25px;
+  }
+}
+
+.scrollable-items-list {
+  overflow-y: scroll;
+
+  @media only screen and (max-device-width: 1024px) and (orientation: portrait) {
+    height: 1024px - 42px - 55px - 25px;
+  }
+
+  @media only screen and (max-device-width: 1024px) and (orientation: landscape) {
+    height: 768px - 42px - 55px - 25px;
+  }
+}
+
+.tab-crafting {
+  display: flex;
+  justify-content: center;
+}
+
+

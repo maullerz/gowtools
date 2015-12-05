@@ -7,6 +7,7 @@ import i18n from 'i18n-js';
 
 import DataService from '../DataService.jsx';
 import CoresSetModel from '../models/CoresSet';
+import SetItemBox from './SetItemBox.jsx';
 
 var SummaryInfoBox = React.createClass({
 
@@ -59,7 +60,14 @@ var SummaryInfoBox = React.createClass({
     } else {
       var accessoryExists = this.state.coresSet.Accessory.filter(function(item) { return item });
       if (accessoryExists.length > 2) {
-        alert('All Accessory slots already exist!');
+        // alert('All Accessory slots already exist!');
+        // TODO i18n
+        navigator.notification.alert(
+            'All Accessory slots already exist!',  // message
+            null,         // callback
+            'Craft',            // title
+            'Ok'                  // buttonName
+        );
         return null;
       } else {
         this.state.coresSet.Accessory.push(setItem);
@@ -81,17 +89,17 @@ var SummaryInfoBox = React.createClass({
   },
 
   renderCurrSet: function(flattenItems) {
-    var nodes = flattenItems.map(function(item, index) {
+    var nodes = flattenItems.map(function(setItem, index) {
 
-      var quality = this.qualities[item.coreQuality];
-      var spriteName = 'sprite ' + item.core.sprite;
+      var quality = this.qualities[setItem.coreQuality];
+      var spriteName = 'sprite ' + setItem.core.sprite;
       var coreNode = (
         <div className={'sel-item-core '+quality}>
           <div id='img64' className={spriteName} />
         </div>
       );
-      var pieceNodes = item.pieces.map(function(piece, index) {
-        var quality = this.qualities[item.piecesQualities[index]];
+      var pieceNodes = setItem.pieces.map(function(piece, index) {
+        var quality = this.qualities[setItem.piecesQualities[index]];
         var spriteName = 'sprite ' + piece.sprite;
         return (
           <div className={'sel-item '+quality} key={"piece-coreset-" + index}>
@@ -105,22 +113,17 @@ var SummaryInfoBox = React.createClass({
         // );
       }.bind(this));
 
-      var selectFunc = function() { this.props.selectSetItemForEdit(item); this.forceUpdate(); }.bind(this);
-      var removeFunc = function() { this.removeSetItemFromSet(item); this.forceUpdate(); }.bind(this);
+      var selectFunc = function() { this.props.selectSetItemForEdit(setItem); this.forceUpdate(); }.bind(this);
+      var removeFunc = function() { this.removeSetItemFromSet(setItem); this.forceUpdate(); }.bind(this);
 
-      return (
-        <div key={"set-item-"+index}>
-          <Well className="coreset">
-            {coreNode}
-            <div>
-              {pieceNodes}
-            </div>
-          </Well>
+/*
           <div className='sel-group'>
             <Button className='button' onClick={removeFunc}>{i18n.t('button.remove')}</Button>
             <Button className='button' onClick={selectFunc}>{i18n.t('button.select')}</Button>
           </div>
-        </div>
+*/
+      return (
+        <SetItemBox key={"set-item-"+index} setItem={setItem} openInfo={true ? null : this.openQualitySelect} />
       )
     }.bind(this));
 
@@ -141,19 +144,28 @@ var SummaryInfoBox = React.createClass({
     var flattenItems = this.flattenCoresSet();
 
     return (
-      <div className="summary-info-box">
-        <Button className='button' onClick={this.toggleExpand}>
-          {this.state.itemsExpanded ? i18n.t('button.collapse') : i18n.t('button.expand')}
-        </Button>
-        <Button className='button' onClick={this.clearSet}>
-          {i18n.t('button.clear-set')}
-        </Button>
-        <Panel collapsible expanded={this.state.itemsExpanded}>
+      <div className="tab-statistics">
+        <div className='statistics-set-items'>
           {this.renderCurrSet(flattenItems)}
-        </Panel>
+        </div>
         {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
       </div>
     );
+
+    // return (
+    //   <div className="statistics-info-box">
+    //     <Button className='button' onClick={this.toggleExpand}>
+    //       {this.state.itemsExpanded ? i18n.t('button.collapse') : i18n.t('button.expand')}
+    //     </Button>
+    //     <Button className='button' onClick={this.clearSet}>
+    //       {i18n.t('button.clear-set')}
+    //     </Button>
+    //     <Panel collapsible expanded={this.state.itemsExpanded}>
+    //       {this.renderCurrSet(flattenItems)}
+    //     </Panel>
+    //     {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
+    //   </div>
+    // );
   }
 });
 

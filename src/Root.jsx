@@ -9,6 +9,7 @@ import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 
 import DataService from './DataService.jsx'
+import ModalQualitySelect from './components/ModalQualitySelect.jsx';
 import SelectedItemsBox from './components/SelectedItemsBox.jsx'
 import ItemsListBox from './components/ItemsListBox.jsx'
 import SummaryInfoBox from './components/SummaryInfoBox.jsx'
@@ -203,6 +204,15 @@ var Root = React.createClass({
     this.forceUpdate();
   },
 
+  qualitySelected: function(item, quality) {
+    this.refs.selectedItems.qualitySelected(item, quality);
+  },
+
+  isIOS: function() {
+    console.log('document.body.className: '+document.body.className);
+    return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
+  },
+
   render: function() {
     if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
 
@@ -210,35 +220,37 @@ var Root = React.createClass({
       this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
     };
 
-    console.log(this.getEventsState());
-
     return (
       <div className='root'>
 
-        <div className="snap-drawers">
-          <div className="snap-drawer snap-drawer-left">
+        <div className={'snap-drawers '+this.props.platform}>
+          <div className='snap-drawer snap-drawer-left'>
             <FilterEvents onEventSelected={this.eventSelected} />
           </div>
-          <div className="snap-drawer snap-drawer-right">
+          <div className='snap-drawer snap-drawer-right'>
             <FilterBoosts onBoostSelected={this.boostSelected} />
           </div>
         </div>
 
-        <Tabs bsStyle="pills" ref='content' className='snap-content' activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
+        <Tabs bsStyle='pills' ref='content' className={'snap-content '+this.props.platform} activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
 
-          <Button id='btn-navbar' className={"left"+this.getEventsState()} onClick={this.eventsClicked} >
+          <Button id='btn-navbar' className={'left'+this.getEventsState()} onClick={this.eventsClicked} >
             <img width='100%' src={'icons/events.png'} />
           </Button>
 
-          <Button id='btn-navbar' className={"right"+this.getBoostsState()} onClick={this.boostsClicked} >
+          <Button id='btn-navbar' className={'right'+this.getBoostsState()} onClick={this.boostsClicked} >
             <img width='100%' src={'icons/boosts.png'} />
           </Button>
 
+
+          <ModalQualitySelect ref='modalQualitySelect' qualitySelected={this.qualitySelected}/>
+
+
           <Tab eventKey={1} title={i18n.t('tabs.crafting')}>
-            <div>
-              <div className='vertical-line'/>
+            <div className='tab-crafting'>
               <SelectedItemsBox activeTab={this.state.activeTab}
                 ref='selectedItems'
+                modalQualitySelect={this.refs.modalQualitySelect}
                 invalidateItemsListBox={this.invalidateItemsListBox}
                 addSetItemToSet={this.addSetItemToSet}
               />
@@ -252,36 +264,41 @@ var Root = React.createClass({
             </div>
           </Tab>
 
+
           <Tab eventKey={2} title={i18n.t('tabs.summary')}>
-            <div>
-              <SummaryInfoBox activeTab={this.state.activeTab}
-                ref='summaryInfoBox'
-                selectSetItemForEdit={this.selectSetItemForEdit}
-              />
+            <SummaryInfoBox activeTab={this.state.activeTab}
+              ref='summaryInfoBox'
+              modalQualitySelect={this.refs.modalQualitySelect}
+              selectSetItemForEdit={this.selectSetItemForEdit}
+            />
+          </Tab>
+
+
+          <Tab eventKey={3} title={i18n.t('tabs.settings')}>
+            <div className='tab-settings'>
+              <Input groupClassName='select-language'
+                     type='select'
+                     ref='languageSelect'
+                     value={this.state.language}
+                     onChange={this.handleLanguageSelect}
+                     label={i18n.t('language')} >
+                <option value='ru'>{i18n.t('russian')}</option>
+                <option value='en'>{i18n.t('english')}</option>
+              </Input>
+              <div>
+                {'TODO:'}
+              </div>
+              <div>
+                {'-- CORES CRAFT LUCK'}
+              </div>
+              <div>
+                {'-- HIGH RANGE BOOST'}
+              </div>
             </div>
           </Tab>
 
-          <Tab eventKey={3} title={i18n.t('tabs.settings')}>
-            <Input groupClassName='select-language'
-                   type="select"
-                   ref='languageSelect'
-                   value={this.state.language}
-                   onChange={this.handleLanguageSelect}
-                   label={i18n.t('language')} >
-              <option value='ru'>{i18n.t('russian')}</option>
-              <option value='en'>{i18n.t('english')}</option>
-            </Input>
-            <div>
-              {'TODO:'}
-            </div>
-            <div>
-              {'-- CORES CRAFT LUCK'}
-            </div>
-            <div>
-              {'-- HIGH RANGE BOOST'}
-            </div>
-          </Tab>
         </Tabs>
+
       </div>
     );
   }

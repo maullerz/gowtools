@@ -132,12 +132,12 @@ var DataService = function(Environment) {
 
       getCurrSetItemSummaryTable: function(currSetItem) {
         var calculatedBoosts = this.calculateCurrSetByQuality([currSetItem]);
-        return this.getSummaryTable(calculatedBoosts);
+        return this.getSummaryTable(calculatedBoosts, 'set-item-statistics');
       },
 
       getCurrSetSummaryTable: function(flattenCurrSet) {
         var calculatedBoosts = this.calculateCurrSetByQuality(flattenCurrSet);
-        return this.getSummaryTable(calculatedBoosts);
+        return this.getSummaryTable(calculatedBoosts, 'curr-set-statistics');
       },
 
       isEtcBoost: function(boostName) {
@@ -151,7 +151,7 @@ var DataService = function(Environment) {
         )
       },
 
-      getSummaryTable: function(calculatedBoosts) {
+      getSummaryTable: function(calculatedBoosts, summaryTableClass) {
         var debuffs = [];
         var boosts = [];
         var debuffsStrat = [];
@@ -233,14 +233,10 @@ var DataService = function(Environment) {
 
           var mapFuncEtc = function(boostId, index) {
             var data = calculatedBoosts[boostId];
-            var iconName = this.getIconNameForBoost(boostId);
+            // var iconName = this.getIconNameForBoost(boostId);
             return (
               <tr className='first-row' key={'etc-'+index}>
-                <td className={'sel-icon'}>
-                  {iconName ? <img width="100%" src={'icons/'+iconName} /> : null}
-                </td>
-                <td className='sel-boost-name'>{this.getBoostName(boostId)}</td>
-                <td className={'sel-lvl lvl6'} />
+                <td className='sel-boost-name etc'>{this.getBoostName(boostId)}</td>
                 <td className={'sel-lvl lvl6'}>{this.calculateLuck(data)}</td>
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[1])}</td>}
                 {true?null:<td className='sel-lvl'>{this.calculateLuck(data[2])}</td>}
@@ -253,7 +249,7 @@ var DataService = function(Environment) {
           var rowsEtc = etcBoosts.map(mapFuncEtc, this);
 
           return (
-            <div>
+            <div className={summaryTableClass}>
               {(() => {
                 if (rowsSelfStrat.length > 0) return (
                   <table className='summarize'>
@@ -290,10 +286,8 @@ var DataService = function(Environment) {
                 if (rowsEtc.length > 0) return (
                   <table className='summarize'>
                     <thead><tr>
-                      <th></th>
                       <th>{i18n.t('summary.etc')}</th>
-                      <th>{i18n.t('summary.regular')}</th>
-                      <th>{i18n.t('summary.strategic')}</th>
+                      <th></th>
                     </tr></thead>
                     <tbody>
                       {rowsEtc}

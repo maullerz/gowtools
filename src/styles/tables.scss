@@ -1,33 +1,5 @@
 @import "colors";
 
-.scrollable-items-list {
-  max-height: 100px;
-  border: 1px solid #ddd;
-  overflow-y: scroll;
-
-  @media screen and (orientation: portrait) {
-    max-height: 925px;
-  }
-
-  @media screen and (orientation: landscape) {
-    max-height: 672px;
-  }
-}
-
-.well {
-  @include main_styles;
-  background-image: none;
-}
-
-
-.cores-list-box {
-  display: inline-block;
-  width: 56%;
-  vertical-align: top;
-  padding-top: 5px;
-}
-
-
 thead {
   background-color: #ddd;
 }
@@ -35,7 +7,7 @@ thead {
 thead tr th {
   text-align: center;
   font-size: 11px;
-  padding-top: 10px;
+  /*padding-top: 10px;*/
 }
 
 table {
@@ -85,6 +57,11 @@ td {
     text-align: left;
     padding-left: 5px;
     width: 50%;
+
+    &.etc {
+      border-left: 1px solid #aaa;
+      padding-left: 10px;
+    }
   }
   &.sel-icon {
     width: 5%;

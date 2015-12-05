@@ -3,11 +3,10 @@ import Well from 'react-bootstrap/lib/Well';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import LocalStorageMixin from 'react-localstorage';
-import i18n from 'i18n-js';
 
 import DataService from '../DataService.jsx';
-import ModalQualitySelect from './ModalQualitySelect.jsx';
 import SetItemModel from '../models/SetItem';
+import SetItemBox from './SetItemBox.jsx';
 
 
 var SelectedItemsBox = React.createClass({
@@ -25,10 +24,10 @@ var SelectedItemsBox = React.createClass({
 
   componentWillMount: function() {
     this.DataService = DataService();
+    this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
   },
 
   componentDidMount: function() {
-    this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
   },
 
   addSetItemToSet: function() {
@@ -112,45 +111,24 @@ var SelectedItemsBox = React.createClass({
     this.setState({ setItem: currSetItem });
   },
 
+  openQualitySelect: function(item) {
+    // this.refs.modal.open(item);
+    this.props.modalQualitySelect.open(item);
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
 
     var currSetItem = this.state.setItem;
-    var core = currSetItem.core;
-
-    if (core) {
-      var quality = this.qualities[currSetItem.coreQuality];
-      var spriteName = 'sprite ' + core.sprite;
-      var openInfoFn = function() { this.refs.modal.open(core) }.bind(this);
-      var coreNode = (
-        <div className={'sel-item-core '+quality} key={"sel-item-core"}>
-          <div id='img71' className={spriteName} onClick={openInfoFn} />
-        </div>
-      );
-    } else {
-      var coreNode = (
-        <div className={'sel-item-core empty'} key={"sel-item-core"}>
-          <div id='img71' className='sprite empty'/>
-        </div>
-      );
-    }
-
-    var pieceNodes = currSetItem.pieces.map(function(item, index) {
-      openInfoFn = function() { this.refs.modal.open(item) }.bind(this);
-      quality = this.qualities[currSetItem.piecesQualities[index]];
-      var spriteName = 'sprite ' + item.sprite;
-      return (
-        <div className={'sel-item '+quality} key={"sel-item-" + index}>
-          <div id='img32' className={spriteName} onClick={openInfoFn} />
-        </div>
-      );
-    }.bind(this));
 
     var summarizeInfoNodes = this.DataService.getCurrSetItemSummaryTable(currSetItem);
+/*
 
+        <ModalQualitySelect ref="modal" qualitySelected={this.qualitySelected}/>
+*/
     return (
       <div className='selected-items-box' ref='target'>
-        <ModalQualitySelect ref="modal" qualitySelected={this.qualitySelected}/>
+
         <div className='selected-items-box-head'>
           <div className='selected-items-btn-group'>
             <Button className='button' onClick={this.addSetItemToSet}>
@@ -160,13 +138,10 @@ var SelectedItemsBox = React.createClass({
               <Glyphicon glyph="trash"/>
             </Button>
           </div>
-          <Well className="selected-items">
-            {coreNode}
-            <div>
-              {pieceNodes}
-            </div>
-          </Well>
+
+          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
         </div>
+
         <div className="summarize-info">
           {summarizeInfoNodes}
         </div>

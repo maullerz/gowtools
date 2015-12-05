@@ -47,23 +47,16 @@ module.exports = React.createClass({
   },
 
   initApp: function(){
-    if (this.isAndroid()) this.initAndroid();
-    if (this.isIOS()) this.initIOS();
+    var width = window.screen && window.screen.width;
+    var height = window.screen && window.screen.height;
+    console.log('==================');
+    console.log(width+'x'+height);
+    console.log('==================');
+    console.log(window.screen);
+    console.log('==================');
+    console.log(window.device);
+    console.log('==================');
     FastClick.attach(document.body, {});
-  },
-
-  // TODO add classes to .snap-drawers & .snap-content
-  initAndroid: function(){
-    document.body.className += ' android';
-  },
-
-  initIOS: function(){
-    document.body.className += ' ios';
-    if (this.isIOS7()) this.initIOS7();
-  },
-
-  initIOS7: function(){
-    document.body.className += ' ios7';
   },
 
   isBrowser: function() {
@@ -77,18 +70,6 @@ module.exports = React.createClass({
       platform = window.device.platform.toLowerCase();
     }
     return platform;
-  },
-
-  isAndroid: function() {
-    return (this.getPlatform() == "android");
-  },
-
-  isIOS: function() {
-    return (this.getPlatform() == "ios")
-  },
-
-  isIOS7: function(){
-    return this.getIOSVersion() >= 7;
   },
 
   getIOSVersion: function() {
@@ -108,6 +89,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <Root
+        platform={this.getPlatform()}
         corespiecesUrl = 'data/y96_corespieces.json'
         boostsUrlRu = 'data/y96_boosts_ru.json'
         boostsUrl = 'data/y96_boosts.json'

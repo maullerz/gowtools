@@ -1,9 +1,45 @@
 @import "colors";
 
+.tab-statistics {
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.statistics-set-items {
+  display: flex;
+  margin-top: 15px;
+  margin-right: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.set-item-statistics {
+  /*background: red;*/
+}
+
+.curr-set-statistics {
+  /*background: blue;*/
+}
+
+.selected-items-box {
+  padding: 5px;
+  width: 300px;
+  width: 44%;
+  /*min-width: 270px;*/
+  /*max-width: 270px;*/
+}
+
+.cores-list-box {
+  width: 56%;
+  /*display: inline-block;*/
+  /*vertical-align: top;*/
+}
 
 div.selected-items.well {
   min-height: 88px;
-  min-width: 210px;
+  /*min-width: 212px;*/
+  width: 212px;
   padding: 10px;
   padding-bottom: 5px;
   margin-bottom: 0;
@@ -23,18 +59,10 @@ div.selected-items.well {
   justify-content: space-between;
 }
 
-.selected-items-box {
-  display: inline-block;
-  width: 44%;
-  padding: 5px;
-  min-width: 214px;
-}
-
 .selected-items {
   display: inline-block;
   width: 100%;
 }
-
 
 .sel-item {
   display: inline-block;
