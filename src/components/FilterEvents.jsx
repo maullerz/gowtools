@@ -39,6 +39,10 @@ var FilterEvents = React.createClass({
     this.props.onEventSelected([]);
   },
 
+  clearBtnState: function() {
+    return this.state.events.length > 0 ? '' : ' hidden';
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
     
@@ -54,9 +58,9 @@ var FilterEvents = React.createClass({
     }, this);
 
     return (
-      <div>
+      <div className='snap-filter'>
         <div className='snap-filter-header'>
-          <button type="button" className="snap-filter-clear-btn" onClick={this.clearFilter}>
+          <button type="button" className={"snap-filter-clear-btn"+this.clearBtnState()} onClick={this.clearFilter}>
             <span>×</span>
           </button>
           <span className='snap-filter-headtext'>{i18n.t('filter.events')}</span>

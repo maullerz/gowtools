@@ -34,25 +34,13 @@ var FilterBoosts = React.createClass({
     return this.state.boosts.indexOf(boostId) >= 0 ? 'active' : '';
   },
 
-  render: function() {
-    if (!this.DataService || !this.DataService.isReady()) return null;
-    
-    var boosts = this.DataService.allBoosts.map(function(item, boostId) {
-      var boostName = this.DataService.getBoostName(boostId);
-
-      return <option value={boostId} data-subtext={subtext} key={'boost-'+boostId}>{item}</option>
-    }, this);
-
-    return (
-      <select id="filtersList" width='50px' multiple name='Boosts[]'>
-        {boosts}
-      </select>
-    );
-  },
-
   clearFilter: function() {
     this.setState({ boosts: [] });
     this.props.onBoostSelected([]);
+  },
+
+  clearBtnState: function() {
+    return this.state.boosts.length > 0 ? '' : ' hidden';
   },
 
   render: function() {
@@ -70,9 +58,9 @@ var FilterBoosts = React.createClass({
     }, this);
 
     return (
-      <div>
+      <div className='snap-filter'>
         <div className='snap-filter-header'>
-          <button type="button" className="snap-filter-clear-btn" onClick={this.clearFilter}>
+          <button type="button" className={"snap-filter-clear-btn"+this.clearBtnState()} onClick={this.clearFilter}>
             <span>×</span>
           </button>
           <span className='snap-filter-headtext'>{i18n.t('filter.boosts')}</span>
