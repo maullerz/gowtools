@@ -55,6 +55,7 @@ gulp.task('build-app', function(callback){
     'copy-backgrounds',
     'copy-bootstrap',
     'copy-icons',
+    'copy-fonts',
     'copy-spritesheet',
     'copy-data',
     'webpackify',
@@ -145,6 +146,11 @@ gulp.task('copy-icons', function(callback) {
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'));
 });
 
+gulp.task('copy-fonts', function(callback) {
+  return gulp.src('./assets-src/fonts/**/*')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/fonts/'));
+});
+
 gulp.task('copy-spritesheet', function() {
   return gulp.src('./assets-src/spritesheet/**/*.png')
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'))
@@ -199,8 +205,7 @@ function getPhonegapPluginCommands() {
     "cordova-plugin-console",
     "cordova-plugin-globalization",
     "cordova-plugin-splashscreen",
-    "cordova-plugin-dialogs",
-    "cordova-plugin-screen-orientation"
+    "cordova-plugin-dialogs"
   ];
   var commands = [];
   for (var i = 0; i < plugins.length; i++){
@@ -208,68 +213,4 @@ function getPhonegapPluginCommands() {
     commands.push('phonegap plugin add ' + name);
   }
   return commands;
-
-  // var commands = [];
-  // for (var i = 0; i < configs.app.phonegapPlugins.length; i++){
-  //   var p = configs.app.phonegapPlugins[i];
-  //   commands.push('phonegap plugin add ' + p.installFrom);
-  // }
-  // return commands;
 }
-
-// function getPluginsXML() {
-//   var xml = '';
-//   for(var i = 0; i < configs.app.phonegapPlugins.length; i++){
-//     var p = configs.app.phonegapPlugins[i];
-//     var pluginXml = '<gap:plugin name="' + p.name + '"';
-//     if( !!p.version ){
-//       pluginXml += ' version="' + p.version + '"';
-//     }
-//     pluginXml += '/>' + "\n";
-//     xml += pluginXml;   
-//   }
-//   return xml;
-// }
-
-// function getIconsXML() {
-//   var xml = '';
-//   for(var i = 0; i < configs.app.icons.length; i++){
-//     var e = configs.app.icons[i];
-//     var eXml = '<icon src="' + e.src + '"';
-//     if( !!e.platform ){
-//       eXml += ' platform="' + e.platform + '"';
-//     }
-//     if( !!e.width ){
-//       eXml += ' width="' + e.width + '"';
-//     }
-//     if( !!e.height ){
-//       eXml += ' height="' + e.height + '"';
-//     }
-//     if( !!e.density ){
-//       eXml += ' density="' + e.density + '"';
-//     }
-//     eXml += '/>' + "\n";
-//     xml += eXml;
-//   }
-//   return xml;
-// }
-
-// function getSplashscreenXML() {
-//   var xml = '';
-//   for(var i = 0; i < configs.app.splashscreens.length; i++){
-//     var e = configs.app.splashscreens[i];
-//     var eXml = '<gap:splash src="' + e.src + '"';
-//     if( !!e.platform ){
-//       eXml += ' gap:platform="' + e.platform + '"';
-//     }
-//     if( !!e.width ){
-//       eXml += ' width="' + e.width + '"';
-//     }
-//     if( !!e.height ){
-//       eXml += ' height="' + e.height + '"';
-//     }
-//     eXml += '/>' + "\n";
-//     xml += eXml;
-//   }
-//   return xml;
-// }
