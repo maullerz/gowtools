@@ -6,6 +6,8 @@ import Root from './Root.jsx'
 i18n.translations = require('./locales/locales');
 i18n.defaultLocale = 'en';
 
+// ----------
+
 window.log = function(){
   log.history = log.history || []; // store logs to an array for reference
   log.history.push(arguments);
@@ -15,6 +17,7 @@ window.log = function(){
 };
 
 // ----------
+
 if (!Array.prototype.findIndex) {
   Array.prototype.findIndex = function(predicate) {
     if (this == null) {
@@ -38,7 +41,7 @@ if (!Array.prototype.findIndex) {
   };
 }
 
-////////////////
+// ---------------------------------
 
 module.exports = React.createClass({
   
@@ -52,11 +55,11 @@ module.exports = React.createClass({
     console.log('==================');
     console.log(width+'x'+height);
     console.log('==================');
-    console.log(window.screen);
-    console.log('==================');
     console.log(window.device);
     console.log('==================');
-    FastClick.attach(document.body, {});
+
+    if (FastClick) FastClick.attach(document.body, {});
+    if (typeof StatusBar !== 'undefined') StatusBar.hide();
   },
 
   isBrowser: function() {

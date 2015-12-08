@@ -1,10 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id = "com.maullerz.gowcraft.coretool" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
-  version = "0.9.1" versionCode = "2">
+<widget id = "com.maullerz.gowcraft.cores" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
+  version = "0.9.2" versionCode = "3">
 
-    <name>GowCraft CoreTool</name>
-    <!-- com.maullerz.gowcraft.geartool -->
-    <!-- <name>Gow Craft GearTool</name> -->
+    <name>GowCraft Cores</name>
     <description>
         Awesome core-crafting tool for GoW.
 This tool helps you to find the best cores and pieces for your needs and to calculate overall statistics.
@@ -13,60 +11,34 @@ This tool helps you to find the best cores and pieces for your needs and to calc
         Roman Loginov
     </author>
 
-    <!-- <access/> -->
-    <access origin="*" />
+    <!-- <access origin="*" /> -->
+    <access />
     <content src="index.html" />
-
-
-    <preference name="Orientation" value="default" />
-    <platform name="ios">
-        <preference name="Orientation" value="all" />
-    </platform>
-    <preference name="Orientation" value="landscape" />
-
-
-    <preference name="StatusBarStyle" value="default" />
-    <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
     <preference name="Fullscreen" value="true" />
+    <preference name="WebViewBounce" value="false" />
+    <preference name="Orientation" value="landscape" />
+    <preference name="orientation" value="landscape" />
 
-    <!-- <plugin name="cordova-plugin-statusbar" spec="~1.0.0" /> -->
+    <!-- <preference name="ShowSplashScreenSpinner" value="false" /> -->
+    <!-- <preference name="AutoHideSplashScreen" value="false" /> -->
+    <!-- <preference name="DisallowOverscroll" value="true" /> -->
+    <preference name="StatusBarStyle" value="blackopaque" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+
+
     <plugin name="cordova-plugin-device" spec="~1.0.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.0" />
     <plugin name="cordova-plugin-globalization" spec="~1.0.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~2.1.0" />
     <plugin name="cordova-plugin-dialogs" spec="~1.1.1" />
-    <plugin name="cordova-plugin-screen-orientation" spec="~1.4.0" />
-    <!-- <plugin name="cordova-plugin-device-motion" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-device-orientation" spec="~1.0.0" /> -->
+    <plugin name="cordova-plugin-statusbar" spec="~1.0.0" />
 
-
-    <!-- <plugin name="cordova-plugin-battery-status" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-camera" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-contacts" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-file" spec="~2.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-file-transfer" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-geolocation" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-inappbrowser" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-media" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-media-capture" spec="~1.0.0" /> -->
-    <!-- <plugin name="cordova-plugin-vibration" spec="~1.0.0" /> -->
-    <!-- <plugin name="phonegap-plugin-contentsync" spec="~1.1.3" /> -->
-    <!-- <plugin name="cordova-plugin-whitelist" spec="~1.0.0" /> -->
-    <!-- <plugin name="adobe-mobile-services" spec="^4.7.0" /> -->
-    <!-- <plugin name="nl.x-services.plugins.insomnia" spec="https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git#:." /> -->
-    <!-- <plugin name="cordova-plugin-ble-central" spec="~1.0.1" /> -->
 
     <engine name="ios" spec="~3.9.1" />
     <platform name="ios">
-        <!-- TODO Test this issue  -->
-        <!-- <preference name="SuppressesLongPressGesture" value="true" /> -->
-        <!-- <preference name="Suppresses3DTouchGesture" value="true" /> -->
-
         <preference name="detect-data-types" value="false" />
         <preference name="deployment-target" value="8.0" />
-        <!-- <preference name="UIWebViewDecelerationSpeed" value="fast" /> -->
+        <preference name="UIWebViewDecelerationSpeed" value="fast" />
 
         <icon height="76" src="resources/icon/ios/icon-76.png" width="76" />
         <icon height="152" src="resources/icon/ios/icon-76@2x.png" width="152" />
@@ -99,14 +71,11 @@ This tool helps you to find the best cores and pieces for your needs and to calc
     <engine name="android" spec="4.1.1" />
     <platform name="android">
         <preference name="KeepRunning" value="false"/>
-        <!-- (string, defaults to splash): The name of the file minus its extension in the res/drawable directory. Various assets must share this common name in various subdirectories. -->
-        <!-- <preference name="SplashScreen" value="mySplash"/>  -->
-        <preference name="splash-screen-duration" value="0"/>
-        <preference name="SplashScreenDelay" value="0" />
-        <preference name="LoadingDialog" value="My Title,My Message"/>
-        <preference name="LoadingPageDialog" value="Page: My Title,Page: My Message"/>
+        <preference name="splash-screen-duration" value="5000"/>
+        <preference name="SplashScreenDelay" value="5000" />
+        <preference name="LoadingDialog" value="GowCraft,CoreTool loading..."/>
+        <preference name="LoadingPageDialog" value="GowCraft,CoreTool page loading..."/>
         <preference name="LogLevel" value="VERBOSE"/>
-
 
         <icon density="ldpi" src="resources/icon/android/icon-36.png" />
         <icon density="mdpi" src="resources/icon/android/icon-48.png" />
