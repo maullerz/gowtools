@@ -60,8 +60,8 @@ var SetItemBox = React.createClass({
 
   render: function() {
     return (
-      <div className='selected-items-box-head'>
-        <Well className="selected-items">
+      <div className='set-item-box-head'>
+        <Well className="set-item">
           {this.getCoreNode()}
           <div>
             {this.getPieceNodes()}

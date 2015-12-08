@@ -29,27 +29,32 @@ tbody {
 }
 
 tr {
-  &.first-row td {
-    border-top: 1px solid #aaa;
-    border-bottom: none;
-  }
+  font-size: 12px;
+
   &.selected {
     background-color: #c0f0f9;
     color: black;
   }
+
   &.mini {
     font-size: 12px;
   }
 }
 
+tr.first-raw {
+  border-top: 1px solid #aaa;
+  border-bottom: none;
+}
+
 td {
   cursor: pointer;
   text-align: center;
-  width: 11%;
+  /*width: 11%;*/
   opacity: 1;
 
   &.icon {
     width: 0.1%;
+    padding-left: 5px;
     border-left: 1px solid #aaa;
   }
 
@@ -63,43 +68,52 @@ td {
       padding-left: 10px;
     }
   }
+
   &.sel-icon {
-    width: 5%;
+    width: 0.1%;
     text-align: left;
-    padding-left: 3px;
+    padding-left: 5px;
     border-right: none;
     border-left: 1px solid #aaa;
   }
+
+  &.dummy-icon {
+    width: 0.1%;
+    padding: 0;
+    margin: 0;
+  }
+
   &.sel-lvl {
     width: 15%;
+    padding-right: 5px;
+    text-align: right;
+
     &.lvl6 {
+      font-weight: bold;
+      /*background: azure;*/
+      width: 50px;
+    }
+  }
+
+  &.boost-name {
+    text-align: left;
+    padding-left: 5px;
+    width: 55%;
+    border-left: 1px solid #aaa;
+
+    &.filter-match {
+      font-size: 13px;
       font-weight: bold;
     }
   }
 
-  &.type-name {
-    width: 4%;
-  }
-  &.slot-name {
-    width: 5%;
-  }
-  &.boost-name {
-    text-align: left;
-    padding-left: 9px;
-    width: 28%;
-  }
   &.item-name, &.piece-name, &.core-name {
-    text-align: left;
-    padding-left: 9px;
-    width: 20%;
-  }
-  &.core-slot {
-    font-weight: bold;
-    text-align: left;
-    padding-left: 9px;
-    width: 7%;
-  }
-  &.lvl6 {
+    font-size: 14px;
     font-weight: bold;
   }
+
+  &.game-event {
+    font-weight: bold;
+  }
+
 }

@@ -5,13 +5,6 @@
 }
 
 /* FILTERS */
-.filter-panel {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #aaa;
-}
 
 #btn-navbar {
   position: absolute;
@@ -50,6 +43,14 @@
   &.active {
     opacity: 1;
   }
+
+  @media only screen and (min-device-width: 320px) {
+    width: 32px;
+  }
+
+  @media only screen and (min-device-width: 375px) {
+    width: 32px;
+  }
 }
 
 #toggler {
@@ -78,14 +79,6 @@
 
 .snap-filter-headtext {
   margin-left: 25px
-}
-
-.snap-filter-header {
-  background-color: #222;
-  border-color: #080808;
-  text-align: center;
-  width: 100%;
-  padding: 10px;
 }
 
 #snap-filter-btn {

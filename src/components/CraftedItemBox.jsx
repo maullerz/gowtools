@@ -9,7 +9,7 @@ import SetItemModel from '../models/SetItem';
 import SetItemBox from './SetItemBox.jsx';
 
 
-var SelectedItemsBox = React.createClass({
+var CraftedItemBox = React.createClass({
 
   mixins: [LocalStorageMixin],
 
@@ -127,10 +127,10 @@ var SelectedItemsBox = React.createClass({
         <ModalQualitySelect ref="modal" qualitySelected={this.qualitySelected}/>
 */
     return (
-      <div className='selected-items-box' ref='target'>
+      <div className='crafted-item-box' ref='target'>
 
-        <div className='selected-items-box-head'>
-          <div className='selected-items-btn-group'>
+        <div className='crafted-item-box-head'>
+          <div className='crafted-item-btn-group'>
             <Button className='button' onClick={this.addSetItemToSet}>
               <Glyphicon glyph="plus"/>
             </Button>
@@ -150,4 +150,4 @@ var SelectedItemsBox = React.createClass({
   }
 });
 
-module.exports = SelectedItemsBox;
+module.exports = CraftedItemBox;

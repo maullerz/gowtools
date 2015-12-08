@@ -9,8 +9,9 @@ import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 
 import DataService from './DataService.jsx'
+import ModalInfo from './components/ModalInfo.jsx';
 import ModalQualitySelect from './components/ModalQualitySelect.jsx';
-import SelectedItemsBox from './components/SelectedItemsBox.jsx'
+import CraftedItemBox from './components/CraftedItemBox.jsx'
 import ItemsListBox from './components/ItemsListBox.jsx'
 import SummaryInfoBox from './components/SummaryInfoBox.jsx'
 import FilterEvents from './components/FilterEvents.jsx'
@@ -59,16 +60,50 @@ var Root = React.createClass({
     var content = ReactDOM.findDOMNode(this.refs.content);
     if (content) this.snapper = new SnapJS({
       element: content,
+      tapToClose: true,
+      touchToDrag: false,
+      // hyperextensible: false,
+      // flickThreshold: 50,
+      // minDragDistance: 50,
+
+      resistance: 0.7,
+      transitionSpeed: 0.5,
       easing: 'cubic-bezier(0.19, 1, 0.22, 1)' // easeOutExpo
     });
 
-    this.snapper.on('animated', function() {
+    this.snapper.on('close', function() {
       this.forceUpdate();
     }.bind(this));
+
+
+    // this.handleTabSelect(this.state.activeTab);
+
+    // this.snapper.on('animated', function() {
+    //   this.snapper.disable();
+    //   setTimeout(function() {
+    //     this.snapper.enable()
+    //   }.bind(this), 1000)
+    //   this.forceUpdate();
+    // }.bind(this));
+
+    // this.snapper.on('expandRight', function() {
+    //   this.snapper.settings({ disable: 'left' });
+    // }.bind(this));
+    // this.snapper.on('expandLeft', function() {
+    //   this.snapper.settings({ disable: 'right' });
+    // }.bind(this));
+    // this.snapper.on('animated', function() {
+    //   if (this.snapper.state() === 'closed') {
+    //     this.snapper.settings({ disable: 'none' });
+    //   };
+    // }.bind(this));
   },
 
   componentWillUnmount: function() {
-    this.snapper.off('animated');
+    this.snapper.off('close');
+    // this.snapper.off('animated');
+    // this.snapper.off('expandRight');
+    // this.snapper.off('expandLeft');
   },
 
   loadBoosts: function() {
@@ -125,10 +160,6 @@ var Root = React.createClass({
     this.refs.itemsList.unselectItem(item);
   },
 
-  handleTabSelect: function(tabKey) {
-    this.setState({ activeTab: tabKey });
-  },
-
   isItemSelected: function(id) {
     var currSetItem = this.refs.selectedItems.state.setItem;
     if (currSetItem.core && currSetItem.core.href === id) return true;
@@ -170,8 +201,10 @@ var Root = React.createClass({
 
   getEventsState: function() {
     if (!this.snapper) return '';
-    var snapState = this.snapper.state();
-    var className = (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
+    // var snapState = this.snapper.state();
+    // var className = (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
+    var className = document.body.className.indexOf('snapjs-left') >= 0 ? ' active' : '';
+
     className += this.state.activeTab === 1 ? '' : ' hidden';
     return className;
   },
@@ -188,8 +221,10 @@ var Root = React.createClass({
 
   getBoostsState: function() {
     if (!this.snapper) return '';
-    var snapState = this.snapper.state();
-    var className = (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
+    // var snapState = this.snapper.state();
+    // var className = (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
+    var className = document.body.className.indexOf('snapjs-right') >= 0 ? ' active' : '';
+
     className += this.state.activeTab === 1 ? '' : ' hidden';
     return className;
   },
@@ -208,9 +243,20 @@ var Root = React.createClass({
     this.refs.selectedItems.qualitySelected(item, quality);
   },
 
+  openItemInfo: function(id) {
+    this.refs.modal.open(id);
+  },
+
   isIOS: function() {
     console.log('document.body.className: '+document.body.className);
     return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
+  },
+
+  handleTabSelect: function(tabKey) {
+    // if (this.snapper) {
+    //   tabKey === 1 ? this.snapper.enable() : this.snapper.disable();
+    // };
+    this.setState({ activeTab: tabKey });
   },
 
   render: function() {
@@ -232,7 +278,11 @@ var Root = React.createClass({
           </div>
         </div>
 
-        <Tabs bsStyle='pills' ref='content' className={'snap-content '+this.props.platform} activeKey={this.state.activeTab} animation={false} onSelect={this.handleTabSelect}>
+        <Tabs bsStyle='pills' ref='content'
+          className={'snap-content '+this.props.platform}
+          activeKey={this.state.activeTab}
+          animation={false}
+          onSelect={this.handleTabSelect}>
 
           <Button id='btn-navbar' className={'left'+this.getEventsState()} onClick={this.eventsClicked} >
             <img width='100%' src={'icons/events.png'} />
@@ -243,12 +293,12 @@ var Root = React.createClass({
           </Button>
 
 
+          <ModalInfo ref="modal"/>
           <ModalQualitySelect ref='modalQualitySelect' qualitySelected={this.qualitySelected}/>
-
 
           <Tab eventKey={1} title={i18n.t('tabs.crafting')}>
             <div className='tab-crafting'>
-              <SelectedItemsBox activeTab={this.state.activeTab}
+              <CraftedItemBox activeTab={this.state.activeTab}
                 ref='selectedItems'
                 modalQualitySelect={this.refs.modalQualitySelect}
                 invalidateItemsListBox={this.invalidateItemsListBox}
@@ -258,6 +308,7 @@ var Root = React.createClass({
                 ref='itemsList'
                 onlyEvents={this.state.filterEvents}
                 onlyBoosts={this.state.filterBoosts}
+                openItemInfo={this.openItemInfo}
                 onItemSelected={this.itemSelected}
                 isItemSelected={this.isItemSelected}
               />

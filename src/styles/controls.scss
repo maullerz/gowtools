@@ -9,7 +9,6 @@
 Button#quality {
   width: 64px;
   height: 64px;
-  /*border-radius: 95%;*/
   border: 1px solid #aaa;
   padding: 0;
 
@@ -18,13 +17,18 @@ Button#quality {
 
 .tab-content {
   background: #ddd;
+  overflow-y: scroll;
 }
 
-.nav {
-  background-color: #222;
-  border-color: #080808;
+.tab-statistics {
+  padding: 0 5px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.tab-crafting {
+  display: flex;
+  justify-content: center;
 }
 
 .nav>li>a {
