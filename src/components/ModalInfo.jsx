@@ -60,7 +60,10 @@ var ModalInfo = React.createClass({
           {name}
         </Modal.Title>
       );
+
+      // FIXME - Hide this in PRODUCTION
       var url = 'http://gow.y96.ru/en/resources/corespieces/'+item.href;
+
       var body = (
         <Modal.Body>
           <div className='modal-body-part'>

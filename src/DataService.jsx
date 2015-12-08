@@ -447,7 +447,7 @@ var DataService = function(Environment) {
       },
 
       round: function(original) {
-        return Math.round(original*100)/100;
+        return (Math.round(original*100)/100).toFixed(2);
       },
 
       simpleShow: function(arr, highRangeBoost) {
@@ -492,21 +492,30 @@ var DataService = function(Environment) {
       },
 
       loadBoosts: function(data) {
-        this.allBoosts = Object.keys(data).map(function(el) { return data[el].replace('Strategic', 'Strat') }, this);
+        this.allBoosts = Object.keys(data).map(function(el) {
+          return data[el].replace('Strategic', 'Strat')
+        }, this);
       },
 
       loadBoostsRu: function(data) {
-        this.allBoostsRu = Object.keys(data).map(function(el) { return data[el] }, this);
+        this.allBoostsRu = Object.keys(data).map(function(el) {
+          return data[el] //.replace('Понижение', 'Дебафф')
+        }, this);
       },
 
       loadData: function(data) {
         for (var i = data.length - 1; i >= 0; i--) {
-          data[i].type = data[i].main_info_ru["Equipment Types"];
-          data[i].gameEvent = data[i].main_info_ru["Event"];
-          data[i].slot = data[i].main_info_ru["Slot"];
-          data[i].sprite = data[i].img_base.replace('.png', '');
+          if (data[i].main_info_ru["Equipment Types"] === "Crafting Recipes") {
+            data[i] = null;
+          } else {
+            data[i].type = data[i].main_info_ru["Equipment Types"];
+            data[i].gameEvent = data[i].main_info_ru["Event"];
+            data[i].slot = data[i].main_info_ru["Slot"];
+            data[i].sprite = data[i].img_base.replace('.png', '');
+          }
         };
 
+        data = data.filter(function(item){ return item });
         this.coresPiecesData = data;
 
         // отсортированный массив Событий с айдишниками для фильтра
@@ -524,11 +533,10 @@ var DataService = function(Environment) {
       getUniqEvents: function(data) {
         var uniqueEvents = data.map(function(item) {
           if (item.gameEvent === undefined) {
-            item.gameEvent = 'Unknown';
-            return 'Unknown';
-          } else {
-            return item.gameEvent;
+            // 'Эпические снежные сундуки'
+            item.gameEvent = 'Epic Snow Chests';
           }
+          return item.gameEvent;
         });
         uniqueEvents = uniqueEvents.filter(function(item, index) {
           return uniqueEvents.indexOf(item) === index;

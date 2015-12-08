@@ -13,7 +13,7 @@ body {
   user-select: none;
 
   background-attachment: fixed;
-  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-family: 'San Francisco', 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
 
   @include main_styles;
   font-size: 16px;
@@ -27,7 +27,7 @@ body {
 }
 
 .ios {
-  margin-top: 20px;
+
 }
 
 #content {
