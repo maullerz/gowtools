@@ -30,18 +30,29 @@ var CraftedItemBox = React.createClass({
   componentDidMount: function() {
   },
 
+  getItemState: function() {
+    if (!this.state.setItem.core) return 'plus';
+    var state = this.props.getItemState(this.state.setItem);
+    return state;
+  },
+
+  getAddBtnState: function() {
+    return (!this.state.setItem.core) ? ' hidden' : '';
+  },
+
+  getClearBtnState: function() {
+    return (!this.state.setItem.core && this.state.setItem.pieces.length === 0) ? ' hidden' : '';
+  },
+
   addSetItemToSet: function() {
     var currSetItem = this.state.setItem;
-    if (currSetItem.core) {
-      this.props.addSetItemToSet({
-        core: currSetItem.core,
-        coreQuality: currSetItem.coreQuality,
-        pieces: currSetItem.pieces.concat([]),
-        piecesQualities: currSetItem.piecesQualities.concat([])
-      });
-    } else {
-      alert('Необходимо выбрать сердцевину!');
-    }
+    this.props.addSetItemToSet({
+      core: currSetItem.core,
+      coreQuality: currSetItem.coreQuality,
+      pieces: currSetItem.pieces.concat([]),
+      piecesQualities: currSetItem.piecesQualities.concat([])
+    });
+    this.forceUpdate();
   },
 
   selectSetItemForEdit: function(setItemToSelect) {
@@ -130,16 +141,15 @@ var CraftedItemBox = React.createClass({
       <div className='crafted-item-box' ref='target'>
 
         <div className='crafted-item-box-head'>
+          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
           <div className='crafted-item-btn-group'>
-            <Button className='button' onClick={this.addSetItemToSet}>
-              <Glyphicon glyph="plus"/>
+            <Button className={'glyph-btn' + this.getAddBtnState()} onClick={this.addSetItemToSet}>
+              <Glyphicon glyph={this.getItemState()}/>
             </Button>
-            <Button className='button' onClick={this.resetItems}>
+            <Button className={'glyph-btn' + this.getClearBtnState()} onClick={this.resetItems}>
               <Glyphicon glyph="trash"/>
             </Button>
           </div>
-
-          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
         </div>
 
         <div className="summarize-info">

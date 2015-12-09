@@ -43,6 +43,7 @@ var Root = React.createClass({
   },
 
   getInitialState: function() {
+    // TODO save filter values in storage
     return {
       activeTab: 1,
       language: i18n.currentLocale() || i18n.defaultLocale,
@@ -171,6 +172,10 @@ var Root = React.createClass({
 
   invalidateItemsListBox: function() {
     this.refs.itemsList.forceUpdate();
+  },
+
+  getItemState: function(setItem) {
+    return this.refs.summaryInfoBox.getItemState(setItem);
   },
 
   addSetItemToSet: function(setItem) {
@@ -310,6 +315,7 @@ var Root = React.createClass({
               modalQualitySelect={this.refs.modalQualitySelect}
               invalidateItemsListBox={this.invalidateItemsListBox}
               addSetItemToSet={this.addSetItemToSet}
+              getItemState={this.getItemState}
             />
             <ItemsListBox
               ref='itemsList'
