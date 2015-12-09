@@ -43,7 +43,6 @@ var Root = React.createClass({
   },
 
   getInitialState: function() {
-    // TODO save filter values in storage
     return {
       activeTab: 1,
       language: i18n.currentLocale() || i18n.defaultLocale,
@@ -75,7 +74,6 @@ var Root = React.createClass({
     this.snapper.on('close', function() {
       this.forceUpdate();
     }.bind(this));
-
 
     // this.handleTabSelect(this.state.activeTab);
 
@@ -178,8 +176,8 @@ var Root = React.createClass({
     return this.refs.summaryInfoBox.getItemState(setItem);
   },
 
-  addSetItemToSet: function(setItem) {
-    this.refs.summaryInfoBox.addSetItemToSet(setItem);
+  addSetItemToSet: function(setItem, isAll) {
+    this.refs.summaryInfoBox.addSetItemToSet(setItem, isAll);
   },
 
   selectSetItemForEdit: function(setItem) {

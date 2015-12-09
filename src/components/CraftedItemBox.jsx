@@ -1,12 +1,12 @@
-import React from 'react';
-import Well from 'react-bootstrap/lib/Well';
-import Button from 'react-bootstrap/lib/Button';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import LocalStorageMixin from 'react-localstorage';
+import React from 'react'
+import Well from 'react-bootstrap/lib/Well'
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import LocalStorageMixin from 'react-localstorage'
 
-import DataService from '../DataService.jsx';
-import SetItemModel from '../models/SetItem';
-import SetItemBox from './SetItemBox.jsx';
+import DataService from '../DataService.jsx'
+import SetItemModel from '../models/SetItem'
+import SetItemBox from './SetItemBox.jsx'
 
 
 var CraftedItemBox = React.createClass({
@@ -44,14 +44,29 @@ var CraftedItemBox = React.createClass({
     return (!this.state.setItem.core && this.state.setItem.pieces.length === 0) ? ' hidden' : '';
   },
 
-  addSetItemToSet: function() {
+  addButtonClicked: function() {
     var currSetItem = this.state.setItem;
+
+    if (currSetItem.core.slot === 'Accessory') {
+      // TODO window.confirm
+      var callback = function(buttonIndex) {
+        console.log('buttonIndex: '+buttonIndex);
+        var isAll = buttonIndex === 1;
+        this.addSetItemToSet(currSetItem, isAll);
+      }.bind(this);
+      navigator.notification.confirm('All or one?', callback,'Choose', ['All', 'One']);
+    } else {
+      this.addSetItemToSet(currSetItem, false);
+    }
+  },
+
+  addSetItemToSet: function(currSetItem, isAll) {
     this.props.addSetItemToSet({
       core: currSetItem.core,
       coreQuality: currSetItem.coreQuality,
       pieces: currSetItem.pieces.concat([]),
       piecesQualities: currSetItem.piecesQualities.concat([])
-    });
+    }, isAll);
     this.forceUpdate();
   },
 
@@ -102,13 +117,15 @@ var CraftedItemBox = React.createClass({
   },
 
   resetItems: function() {
-    var emptySetItem = {
-      core: null,
-      coreQuality: null,
-      pieces: [],
-      piecesQualities: []
+    if (window.confirm("Do you really want to clear crafted item?")) {
+      var emptySetItem = {
+        core: null,
+        coreQuality: null,
+        pieces: [],
+        piecesQualities: []
+      }
+      this.updateSetItem(emptySetItem);
     }
-    this.updateSetItem(emptySetItem);
   },
 
   qualitySelected: function(item, quality) {
@@ -123,7 +140,6 @@ var CraftedItemBox = React.createClass({
   },
 
   openQualitySelect: function(item) {
-    // this.refs.modal.open(item);
     this.props.modalQualitySelect.open(item);
   },
 
@@ -133,17 +149,14 @@ var CraftedItemBox = React.createClass({
     var currSetItem = this.state.setItem;
 
     var summarizeInfoNodes = this.DataService.getCurrSetItemSummaryTable(currSetItem);
-/*
 
-        <ModalQualitySelect ref="modal" qualitySelected={this.qualitySelected}/>
-*/
     return (
       <div className='crafted-item-box' ref='target'>
 
         <div className='crafted-item-box-head'>
           <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
           <div className='crafted-item-btn-group'>
-            <Button className={'glyph-btn' + this.getAddBtnState()} onClick={this.addSetItemToSet}>
+            <Button className={'glyph-btn' + this.getAddBtnState()} onClick={this.addButtonClicked}>
               <Glyphicon glyph={this.getItemState()}/>
             </Button>
             <Button className={'glyph-btn' + this.getClearBtnState()} onClick={this.resetItems}>

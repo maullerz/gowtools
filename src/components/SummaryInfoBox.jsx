@@ -93,29 +93,40 @@ var SummaryInfoBox = React.createClass({
     }
   },
 
-  addSetItemToSet: function(setItem) {
+  addSetItemToSet: function(setItem, isAll) {
     var state = this.getItemState(setItem);
     console.log(state);
     if (setItem.core.slot !== 'Accessory') {
       if (state === 'plus' || state === 'transfer') {
         this.state.coresSet[setItem.core.slot] = setItem;
-      } else { // 'minus'
+      } else if (state === 'minus') {
         this.state.coresSet[setItem.core.slot] = null;
       }
     } else {
       if (state === 'plus') {
-        this.state.coresSet.Accessory.push(setItem);
+        if (isAll) {
+          this.state.coresSet.Accessory = [setItem, setItem, setItem];
+        } else {
+          this.state.coresSet.Accessory.push(setItem);
+        }
       } else if (state === 'transfer') {
-        this.state.coresSet.Accessory.shift();
-        this.state.coresSet.Accessory.push(setItem);
+        if (isAll) {
+          this.state.coresSet.Accessory = [setItem, setItem, setItem];
+        } else {
+          this.state.coresSet.Accessory.shift();
+          this.state.coresSet.Accessory.push(setItem);
+        }
       } else if (state === 'minus') {
-        var index = this.state.coresSet.Accessory.findIndex(function(accessory) {
-          return this.isEqualItems(setItem, accessory);
-        }, this);
-        this.state.coresSet.Accessory.splice(index, 1);
+        if (isAll) {
+          this.state.coresSet.Accessory = [];
+        } else {
+          var index = this.state.coresSet.Accessory.findIndex(function(accessory) {
+            return this.isEqualItems(setItem, accessory);
+          }, this);
+          this.state.coresSet.Accessory.splice(index, 1);
+        }
       }
     }
-
     this.setState({ coresSet: this.state.coresSet });
   },
 
@@ -124,8 +135,7 @@ var SummaryInfoBox = React.createClass({
   },
 
   renderCurrSet: function(flattenItems) {
-    var nodes = flattenItems.map(function(setItem, index) {
-
+    return flattenItems.map(function(setItem, index) {
       var quality = this.qualities[setItem.coreQuality];
       var spriteName = 'sprite ' + setItem.core.sprite;
       var coreNode = (
@@ -150,8 +160,6 @@ var SummaryInfoBox = React.createClass({
         <SetItemBox key={"set-item-"+index} setItem={setItem} openInfo={true ? null : this.openQualitySelect} />
       )
     }.bind(this));
-
-    return nodes;
   },
 
   toggleExpand: function() {
