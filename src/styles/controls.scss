@@ -15,20 +15,23 @@ Button#quality {
   @include qualities;
 }
 
-.tab-content {
-  background: #ddd;
-  overflow-y: scroll;
+.tab-settings {
+  
+}
+
+.tab-crafting {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  overflow: auto;
 }
 
 .tab-statistics {
   padding: 0 5px;
   display: flex;
   justify-content: center;
-}
-
-.tab-crafting {
-  display: flex;
-  justify-content: center;
+  height: 100%;
+  overflow: auto;
 }
 
 .nav>li>a {

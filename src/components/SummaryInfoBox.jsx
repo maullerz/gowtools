@@ -144,28 +144,13 @@ var SummaryInfoBox = React.createClass({
     var flattenItems = this.flattenCoresSet();
 
     return (
-      <div className="tab-statistics">
+      <div className={"tab-statistics"+this.props.className}>
         <div className='statistics-set-items'>
           {this.renderCurrSet(flattenItems)}
         </div>
         {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
       </div>
     );
-
-    // return (
-    //   <div className="statistics-info-box">
-    //     <Button className='button' onClick={this.toggleExpand}>
-    //       {this.state.itemsExpanded ? i18n.t('button.collapse') : i18n.t('button.expand')}
-    //     </Button>
-    //     <Button className='button' onClick={this.clearSet}>
-    //       {i18n.t('button.clear-set')}
-    //     </Button>
-    //     <Panel collapsible expanded={this.state.itemsExpanded}>
-    //       {this.renderCurrSet(flattenItems)}
-    //     </Panel>
-    //     {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
-    //   </div>
-    // );
   }
 });
 

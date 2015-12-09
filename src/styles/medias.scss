@@ -3,12 +3,6 @@
 /* filterpanel height = 55 */
 /* filterpanel height = 43 on iphones */
 
-/* TODO - tabs */
-.tttabs {
-  overflow-y: scroll;
-  height: 333px;
-}
-
 /*
   iPads 1024x768
   iPhone 3-4x 480x320
@@ -19,7 +13,6 @@
 
 $header-height: 42px;
 $filter-panel-height: 55px;
-$items-list-height: 
 
 @media screen and (min-device-width: 320px) {
   $filter-panel-height: 43px;
@@ -52,7 +45,7 @@ $items-list-height:
 .snap-filter-container {
   overflow-y: scroll;
   -webkit-flex: 1 1 auto;
-  overflow-y: auto;
+  overflow-y: scroll;
   min-height: 0px;
 }
 
@@ -60,14 +53,16 @@ $items-list-height:
   width: 56%;
   display: -webkit-flex;
   flex-direction: column;
-  height: 100%;
+}
+
+.btn-group, .btn-group-vertical {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .filter-panel {
   display: flex;
   justify-content: space-around;
-  padding-top: 5px;
-  padding-bottom: 5px;
   border-bottom: 1px solid #aaa;
   height: $filter-panel-height;
 }
@@ -88,31 +83,3 @@ $items-list-height:
   height: $header-height;
 }
 
-
-
-
-
-
-
-.foo {
-  /* iPads 1024x768 */
-  @media screen and (max-device-width: 1024px) {
-    height: 768px - 42px;
-  }
-
-  /* iPhone 3-4x 480x320 */
-  @media screen and (max-device-width: 480px) {
-    height: 320px - 42px;
-  }
-
-  /* iPhone   5x 568x320 (1136x640) */
-  @media screen and (max-device-width: 568px) {
-    height: 320px - 42px;
-  }
-
-  /* iPhone   6s 667x375 (1334x750) */
-  @media screen and (max-device-width: 667px) {
-    height: 375px - 42px;
-  }
-  /*height: 375px - 42px - 43px; - 55px;*/
-}

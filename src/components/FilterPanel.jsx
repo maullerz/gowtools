@@ -36,7 +36,7 @@ var FilterPanel = React.createClass({
   },
 
   getSlotsGroupState: function() {
-    return this.state.type === 'Pieces' ? 'hidden-group' : '';
+    return this.state.type === 'Pieces' ? 'hidden' : '';
   },
 
   render: function() {

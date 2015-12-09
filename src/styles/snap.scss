@@ -1,18 +1,17 @@
 .snap-content {
   background-color: #ddd;
   color: #333;
+  z-index: 2;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   width: auto;
-  /*height: auto;*/
-  height: 100%;
-  display: flex;
+  height: auto;
+  display: -webkit-flex;
   flex-direction: column;
-  z-index: 2;
-  overflow: auto;
+  height: 100%;
   -webkit-overflow-scrolling: touch;
   -webkit-transform: translate3d(0, 0, 0);
      -moz-transform: translate3d(0, 0, 0);
