@@ -65,20 +65,19 @@
 }
 
 .snap-filter-clear-btn {
-  float: right;
-  padding: 0;
-  line-height: 0.5;
-  margin-right: 10px;
-  font-size: 30px;
+  padding-top: 1px;
+  top: 7px;
+  font-size: 18px;
+  position: absolute;
+  right: 10px;
   cursor: pointer;
   background: 0 0;
   border: 0;
-  color: #ddd;
-  text-shadow: 0 1px 0 #555;
+  color: #eee;
 }
 
 .snap-filter-headtext {
-  margin-left: 25px
+  /*margin-left: 25px*/
 }
 
 #snap-filter-btn {

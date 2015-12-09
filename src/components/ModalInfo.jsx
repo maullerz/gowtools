@@ -87,7 +87,7 @@ var ModalInfo = React.createClass({
     }
 
     return (
-      <Modal dialogClassName="custom-modal" show={this.state.showModal} onHide={this.close}>
+      <Modal id='quality-select' show={this.state.showModal} onHide={this.close}>
         
         <Modal.Header closeButton>
           {head}

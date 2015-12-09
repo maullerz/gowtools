@@ -1,10 +1,9 @@
-.custom-modal {
-  width: 90%;
-}
 
 .modal-content {
   overflow: hidden;
   background-color: #ddd;
+
+
 }
 
 .modal-header {
@@ -52,5 +51,11 @@
 }
 
 #quality-select .modal-dialog {
-  width: 417px;
+  width: auto;
+}
+
+
+#quality-select .modal-body {
+  display: flex;
+  justify-content: space-around;
 }

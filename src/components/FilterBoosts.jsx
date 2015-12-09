@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 
@@ -61,7 +62,7 @@ var FilterBoosts = React.createClass({
       <div className='snap-filter'>
         <div className='snap-filter-header'>
           <button type="button" className={"snap-filter-clear-btn"+this.clearBtnState()} onClick={this.clearFilter}>
-            <span>×</span>
+            <Glyphicon glyph="remove"/>
           </button>
           <span className='snap-filter-headtext'>{i18n.t('filter.boosts')}</span>
         </div>

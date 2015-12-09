@@ -47,7 +47,7 @@ var ItemRow = React.createClass({
 
     if (this.props.firstRow) {
 
-      rowClass.push('first-raw');
+      rowClass.push('first-row');
       return (
         <tr className={rowClass.join(' ')} onClick={this.itemSelected}>
           <td className="icon" colSpan='3' onClick={openInfoFn}>

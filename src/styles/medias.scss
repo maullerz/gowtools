@@ -12,7 +12,7 @@
 
 
 $header-height: 42px;
-$filter-panel-height: 55px;
+$filter-panel-height: 43px; /*55px;*/
 
 @media screen and (min-device-width: 320px) {
   $filter-panel-height: 43px;
@@ -38,6 +38,7 @@ $filter-panel-height: 55px;
   border-color: #080808;
   text-align: center;
   width: 100%;
+  height: $header-height;
   min-height: $header-height;
   padding: 10px;
 }
@@ -65,6 +66,7 @@ $filter-panel-height: 55px;
   justify-content: space-around;
   border-bottom: 1px solid #aaa;
   height: $filter-panel-height;
+  min-height: $filter-panel-height;
 }
 
 .scrollable-items-list {
@@ -81,5 +83,6 @@ $filter-panel-height: 55px;
   display: flex;
   justify-content: space-around;
   height: $header-height;
+  min-height: $header-height;
 }
 

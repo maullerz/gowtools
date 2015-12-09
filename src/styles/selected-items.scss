@@ -13,37 +13,39 @@
 }
 
 .curr-set-statistics {
-  /*background: blue;*/
+  width: 60%;
 }
 
 .crafted-item-box {
   padding: 5px;
   width: 300px;
   width: 44%;
-  /*min-width: 270px;*/
-  /*max-width: 270px;*/
 }
 
+.pieces-box {
+
+}
 
 .set-item.well {
-  min-height: 88px;
-  /*min-width: 212px;*/
+  min-height: 95px;
+  min-width: 212px;
   width: 212px;
   padding: 10px;
-  padding-bottom: 5px;
-  margin-bottom: 0;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
 
 .crafted-item-box-head, .set-item-box-head {
   display: flex;
+  justify-content: center;
 }
 
 .crafted-item-btn-group {
   height: 95px;
   display: flex;
-  margin-right: 5px;
+  margin-left: 5px;
   flex-direction: column;
   justify-content: space-between;
 }

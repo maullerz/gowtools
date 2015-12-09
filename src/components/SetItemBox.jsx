@@ -60,16 +60,13 @@ var SetItemBox = React.createClass({
 
   render: function() {
     return (
-      <div className='set-item-box-head'>
-        <Well className="set-item">
-          {this.getCoreNode()}
-          <div>
-            {this.getPieceNodes()}
-          </div>
-        </Well>
-      </div>
+      <Well className="set-item">
+        {this.getCoreNode()}
+        {this.getPieceNodes()}
+      </Well>
     )
   }
+
 });
 
 module.exports = SetItemBox;
