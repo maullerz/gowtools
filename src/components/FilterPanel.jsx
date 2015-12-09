@@ -1,42 +1,37 @@
-import React from 'react';
+import React from 'react'
 
-import Button from 'react-bootstrap/lib/Button';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import Button from 'react-bootstrap/lib/Button'
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
 
 var FilterPanel = React.createClass({
 
   getInitialState: function() {
-    return {
-      type: 'Cores',
-      slot: null
-    }
+    return {}
   },
 
   typeClicked: function(event) {
     var type = event.currentTarget.value;
-    if (type !== this.state.type) {
-      this.setState({ type: type });
+    if (type !== this.props.type) {
       this.props.onTypeSelected([ type ]);
     }
   },
 
   slotClicked: function(event) {
     var slot = event.currentTarget.value;
-    if (this.state.slot === slot) slot = null;
-    this.setState({ slot: slot });
+    if (this.props.slot === slot) slot = null;
     this.props.onSlotSelected(slot ? [slot] : []);
   },
 
   getTypesState: function(type) {
-    return this.state.type === type ? 'active' : '';
+    return this.props.type === type ? 'active' : '';
   },
 
   getSlotsState: function(slot) {
-    return this.state.slot === slot ? 'active' : '';
+    return this.props.slot === slot ? 'active' : '';
   },
 
   getSlotsGroupState: function() {
-    return this.state.type === 'Pieces' ? 'hidden' : '';
+    return this.props.type === 'Pieces' ? 'hidden' : '';
   },
 
   render: function() {
