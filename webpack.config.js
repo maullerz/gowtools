@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 var config = require('./build.configs.js');
 
 module.exports = {
@@ -34,7 +33,19 @@ module.exports = {
   },
 
   plugins: [
-    // new UglifyJsPlugin()
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   minimize: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
+    // new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     'NODE_ENV': '"production"'
+    //   }
+    // })
   ]
 
 };
