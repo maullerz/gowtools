@@ -22,6 +22,14 @@ var FilterPanel = React.createClass({
     this.props.onSlotSelected(slot ? [slot] : []);
   },
 
+  showAllBoostsClicked: function() {
+    this.props.showAllBoostsClicked();
+  },
+
+  getShowAllBoostsState: function(type) {
+    return this.props.showAllBoosts ? 'active' : '';
+  },
+
   getTypesState: function(type) {
     return this.props.type === type ? 'active' : '';
   },
@@ -37,6 +45,9 @@ var FilterPanel = React.createClass({
   render: function() {
     return (
       <div className='filter-panel'>
+        <Button id='filter' className={this.getShowAllBoostsState()} value='Cores' onClick={this.showAllBoostsClicked}>
+          <img width='100%' src={'icons/all_boosts.png'} />
+        </Button>
         <ButtonGroup>
           <Button id='filter' className={this.getTypesState('Cores')} value='Cores' onClick={this.typeClicked}>
             <img width='100%' src={'icons/cores.png'} />

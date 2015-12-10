@@ -50,11 +50,6 @@ $crafted-item-box-height: 100px;
   min-height: 0px;
 }
 
-.btn-group, .btn-group-vertical {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 
 .crafted-item-box {
   padding: 5px;
@@ -90,7 +85,7 @@ $crafted-item-box-height: 100px;
 
   .filter-panel {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     border-bottom: 1px solid #aaa;
     height: $filter-panel-height;
     min-height: $filter-panel-height;
