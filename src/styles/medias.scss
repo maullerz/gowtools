@@ -13,6 +13,7 @@
 
 $header-height: 42px;
 $filter-panel-height: 43px; /*55px;*/
+$crafted-item-box-height: 100px;
 
 @media screen and (min-device-width: 320px) {
   $filter-panel-height: 43px;
@@ -44,16 +45,9 @@ $filter-panel-height: 43px; /*55px;*/
 }
 
 .snap-filter-container {
-  overflow-y: scroll;
   -webkit-flex: 1 1 auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   min-height: 0px;
-}
-
-.cores-list-box {
-  width: 56%;
-  display: -webkit-flex;
-  flex-direction: column;
 }
 
 .btn-group, .btn-group-vertical {
@@ -61,19 +55,52 @@ $filter-panel-height: 43px; /*55px;*/
   margin-bottom: 5px;
 }
 
-.filter-panel {
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid #aaa;
-  height: $filter-panel-height;
-  min-height: $filter-panel-height;
+
+.crafted-item-box {
+  padding: 5px;
+  /* TODO iphone
+  padding: 0;
+  padding-top: 5px;
+*/
+
+  width: 44%;
+  display: -webkit-flex;
+  flex-direction: column;
 }
 
-.scrollable-items-list {
-  -webkit-flex: 1 1 auto;
-  overflow-y: scroll;
-  min-height: 0px;
+  .crafted-item-box-head, .set-item-box-head {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #aaa;
+    height: $crafted-item-box-height;
+    min-height: $crafted-item-box-height;
+  }
+
+  .summarize-info {
+    overflow-y: auto;
+    min-height: 0px;
+  }
+
+
+.cores-list-box {
+  width: 56%;
+  display: -webkit-flex;
+  flex-direction: column;
 }
+
+  .filter-panel {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #aaa;
+    height: $filter-panel-height;
+    min-height: $filter-panel-height;
+  }
+
+  .scrollable-items-list {
+    -webkit-flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0px;
+  }
 
 
 

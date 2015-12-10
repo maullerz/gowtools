@@ -1,6 +1,11 @@
 .sprite {
   background: url( '../img/spr.png' ) no-repeat;
   background-size: 2300px 2300px;
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+       -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 
 .sprite.m1388 {

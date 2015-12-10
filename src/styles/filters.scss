@@ -13,7 +13,6 @@
   margin-top: 1px;
   width: 40px;
   padding: 0;
-  opacity: 0.2;
   opacity: 1;
   background: none;
   border: none;
@@ -21,6 +20,10 @@
   &.active {
     opacity: 1;
     border: 1px solid #aaa;
+  }
+  &:active {
+    border: 1px solid #aaa;
+    -webkit-transform: scale3d(0.9, 0.9, 1);
   }
 
   &.left {
@@ -57,7 +60,6 @@
   width: 44px;
   opacity: 0.3;
   font-size: 12px;
-  /*padding: 6px 6px;*/
 
   &.active {
     opacity: 1;
@@ -65,24 +67,43 @@
 }
 
 .snap-filter-clear-btn {
+  position: absolute;
+  font-size: 18px;
   padding-top: 1px;
   top: 7px;
-  font-size: 18px;
-  position: absolute;
   right: 10px;
-  cursor: pointer;
   background: 0 0;
   border: 0;
   color: #eee;
+
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  outline: none;
+
+  &:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+  }
 }
 
 .snap-filter-headtext {
-  /*margin-left: 25px*/
+  color: white;
 }
 
 #snap-filter-btn {
   width: 100%;
+  background-color: #eee;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  &:active {
+    background-color: #c0f0f9;
+    -webkit-transform: none;
+  }
+
   &.active {
     background-color: #c0f0f9;
+
+    &:active {
+      background-color: #eee;
+    }
   }
 }
