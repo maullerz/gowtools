@@ -16,11 +16,12 @@ var FilterBoosts = React.createClass({
 
   componentWillMount: function() {
     this.DataService = DataService();
+    // TODO: set this.sortedBoosts[i18n.locale]
   },
 
   boostClicked: function(event) {
     var boostId = parseInt(event.currentTarget.value);
-    var currBoosts = this.state.boosts;
+    var currBoosts = this.state.boosts.concat([]);
     var ix = currBoosts.indexOf(boostId);
     if (ix >= 0) {
       currBoosts.splice(ix, 1);
