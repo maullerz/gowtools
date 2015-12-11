@@ -1,6 +1,7 @@
 import React from 'react'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
+import ReactList from 'react-list'
 import shallowEqual from '../lib/shallowEqual'
 
 import DataService from '../DataService.jsx'
@@ -32,24 +33,19 @@ var ItemsListBox = React.createClass({
     this.DataService = DataService();
   },
 
-  isItemSelected: function(id) {
-    return this.props.isItemSelected(id);
-  },
-
-  getItemRow: function(item, index, selected, boostId, matched) {
+  getItemRow: function(item, index, boostId, matched) {
     return (
       <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
         boostId={boostId}
-        selected={selected}
         matched={matched}
         ref={'row-item-'+item.href}
+        isItemSelected={this.props.isItemSelected}
         onItemSelected={this.props.onItemSelected}
         openItemInfo={this.props.openItemInfo} />
     );
   },
 
   getItemNodes: function(item, onlyBoosts) {
-    var selected = this.isItemSelected(item.href);
     var boostsArr = Object.keys(item.stats_info);
     boostsArr.unshift(null); // header row
 
@@ -57,7 +53,7 @@ var ItemsListBox = React.createClass({
 
       if (index === 0) {
         // header row
-        return this.getItemRow(item, index, selected, null, null);
+        return this.getItemRow(item, index, null, null);
 
       } else {
         // boosts rows
@@ -65,19 +61,17 @@ var ItemsListBox = React.createClass({
 
         if (this.state.showAllBoosts) {
           var matched = matchedBoostId >= 0 ? true : false;
-          return this.getItemRow(item, index, selected, boostId, matched);
+          return this.getItemRow(item, index, boostId, matched);
         } else {
           if (matchedBoostId < 0) return null
-          else return this.getItemRow(item, index, selected, boostId, null);
+          else return this.getItemRow(item, index, boostId, null);
         }
-
       }
     }, this);
   },
 
   getFilteredData: function(onlyTypes, onlySlots, onlyEvents, onlyBoosts) {
     var filteredData = this.DataService.getSortedAndFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
-
     return filteredData.map(function(item) {
       return this.getItemNodes(item, onlyBoosts);
     }, this);
@@ -115,20 +109,55 @@ var ItemsListBox = React.createClass({
     } else return null;
   },
 
+  itemSizeGetter: function(index) {
+    var rows = this.pieces[index];
+    var size = 0;
+    rows.forEach(function(row, index) {
+      // TODO set this appropriate to different medias
+      if (index === 0) size += 45;
+      else if (row) size += 17;
+    });
+    return size;
+  },
+
+  itemRenderer: function(index, key) {
+    return this.pieces[index];
+  },
+
+  itemsRenderer: function(items, ref) {
+    return (
+      <table ref={ref} className="pieces-list"><tbody>
+        {items}
+      </tbody></table>
+    )
+  },
+
   getPieceNodes: function() {
     if (this.state.onlyTypes.indexOf('Pieces') >= 0) {
-      var pieces = this.getFilteredData(['Piece'], [], this.props.onlyEvents, this.props.onlyBoosts);
-      if (pieces.length > 0) {
+      this.pieces = this.getFilteredData(['Piece'], [], this.props.onlyEvents, this.props.onlyBoosts);
+      if (this.pieces.length > 0) {
         return (
           <div>
-            <h4>Pieces: {pieces.length}</h4>
-            <table className="pieces-list"><tbody>
-              {pieces}
-            </tbody></table>
+            <h4>Pieces: {this.pieces.length}</h4>
+            <ReactList
+              ref='reactList'
+              initialIndex={0}
+              itemRenderer={this.itemRenderer}
+              itemsRenderer={this.itemsRenderer}
+              itemSizeGetter={this.itemSizeGetter}
+              length={this.pieces.length}
+              useTranslate3d={true}
+              pageSize={35}
+              threshold={800}
+              type='variable'
+            />
           </div>
         );
       } else return null;
-    } else return null;
+    } else {
+      this.pieces = null;
+      return null;
+    }
   },
 
   shouldComponentUpdate: function(nextProps, nextState) {
@@ -136,9 +165,11 @@ var ItemsListBox = React.createClass({
       this.firstRender = false;
       return true;
     } else {
-      return !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
-             !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
-             !shallowEqual(this.state, nextState);
+      var result = !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
+                   !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
+                   !shallowEqual(this.state, nextState);
+      if (this.refs.reactList) this.refs.reactList.scrollAround(0);
+      return result;
     }
   },
 

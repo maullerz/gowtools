@@ -26,18 +26,24 @@ var ItemRow = React.createClass({
     this.props.onItemSelected(this.props.item)
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    return this.props.item.href !== nextProps.item.href ||
-           this.props.selected !== nextProps.selected ||
-           this.props.matched !== nextProps.matched ||
-           this.props.boostId !== nextProps.boostId
+  isItemSelected: function(id) {
+    return this.props.isItemSelected(id);
   },
+
+  // <selected> didnt work with this:
+  // 
+  // shouldComponentUpdate: function(nextProps, nextState) {
+  //   return this.props.item.href !== nextProps.item.href ||
+  //          this.props.selected !== nextProps.selected ||
+  //          this.props.matched !== nextProps.matched ||
+  //          this.props.boostId !== nextProps.boostId
+  // },
 
   render: function() {
     var item = this.props.item;
     var rowClass = [];
 
-    if (this.props.selected) rowClass.push('selected');
+    if (this.isItemSelected(item.href)) rowClass.push('selected');
     if (this.props.matched) rowClass.push('filter-matched');
 
     var spriteName = "icon-img sprite " + item.sprite;

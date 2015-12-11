@@ -15,6 +15,7 @@
     "react-addons-shallow-compare": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
+    "react-list": "^0.7.8",
     "react-localstorage": "^0.2.8",
     "snapjs": "^1.2.1"
   },
