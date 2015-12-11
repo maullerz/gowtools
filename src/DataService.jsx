@@ -392,26 +392,32 @@ var DataService = function(Environment) {
         return false;
       },
 
-      getFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
-        var data = this.coresPiecesData.filter(function(item) {
-          var typeFilter = onlyTypes.length === 0 || onlyTypes.indexOf(item.type) >= 0;
-          var slotFilter = onlySlots.length === 0 || onlySlots.indexOf(item.slot) >= 0;
-          var eventFilter = onlyEvents.length === 0 || onlyEvents.indexOf(item.gameEventId) >= 0;
+      getSortedAndFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
+        var filteredData = this.getFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
 
-          return typeFilter && eventFilter && slotFilter;
-        }.bind(this));
+        if (onlyBoosts.length === 1) {
+          return this.sortByBoost(filteredData, onlyBoosts[0]);
+        } else if (onlyBoosts.length > 1) {
+          return this.sortByMultiBoost(filteredData, onlyBoosts);
+        }
 
-        return data;
+        return filteredData;
       },
 
-      getBoostFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
-        var data = this.coresPiecesData.filter(function(item) {
-          var typeFilter = onlyTypes.length === 0 || onlyTypes.indexOf(item.type) >= 0;
-          var eventFilter = onlyEvents.length === 0 || onlyEvents.indexOf(item.gameEvent) >= 0;
-          var slotFilter = onlySlots.length === 0 || onlySlots.indexOf(item.slot) >= 0;
-          var boostFilter = this.isAnyBoostExist(onlyBoosts, item.stats_info);
+      getFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
+        var typeMatch, eventMatch, slotMatch, boostMatch;
 
-          return typeFilter && eventFilter && slotFilter && boostFilter;
+        var data = this.coresPiecesData.filter(function(item) {
+          typeMatch = onlyTypes.length === 0 || onlyTypes.indexOf(item.type) >= 0;
+          eventMatch = onlyEvents.length === 0 || onlyEvents.indexOf(item.gameEventId) >= 0;
+          slotMatch = onlySlots.length === 0 || onlySlots.indexOf(item.slot) >= 0;
+          if (onlyBoosts.length > 0) {
+            boostMatch = this.isAnyBoostExist(onlyBoosts, item.stats_info);
+          } else {
+            boostMatch = true;
+          }
+
+          return typeMatch && eventMatch && slotMatch && boostMatch;
         }.bind(this));
 
         return data;
@@ -462,15 +468,18 @@ var DataService = function(Environment) {
       calculateLuck: function(arr, highRangeBoost) {
         if (!arr || !arr[0] || !arr[1]) return null;
 
-        if (!highRangeBoost) highRangeBoost = 1;
         // TODO move CRAFT_CORES_LUCK & highRangeBoost to SETTINGS
+        // TODO get approximate highRangeBoost value
+        if (!highRangeBoost) highRangeBoost = 1;
         var CRAFT_CORES_LUCK = 0.8;
+
         var min = arr[0],
             max = arr[1]*highRangeBoost;
 
         var delta = (max-min)*(CRAFT_CORES_LUCK);
         var new_min = min + delta;
-        var average = max - (max - new_min) / 2.0;
+        // var average = max - (max - new_min) / 2.0;
+        var average = new_min / 2.0;
 
         return this.round(average);
       },

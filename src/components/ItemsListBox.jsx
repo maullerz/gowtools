@@ -1,6 +1,7 @@
 import React from 'react'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
+import shallowEqual from '../lib/shallowEqual'
 
 import DataService from '../DataService.jsx'
 import ItemRow from './ItemRow.jsx'
@@ -14,14 +15,20 @@ var ItemsListBox = React.createClass({
 
   slotSelected: function(slots) { this.setState({ onlySlots: slots }) },
 
+  showAllBoostsClicked: function() {
+    this.setState({ showAllBoosts: !this.state.showAllBoosts });
+  },
+
   getInitialState: function() {
+    this.firstRender = true;
     return {
-      onlyTypes: [],
+      showAllBoosts: true,
+      onlyTypes: ['Cores'],
       onlySlots: []
     };
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.DataService = DataService();
   },
 
@@ -29,108 +36,64 @@ var ItemsListBox = React.createClass({
     return this.props.isItemSelected(id);
   },
 
-  getFilteredData: function(onlyTypes, onlySlots) {
-    var filteredData = this.DataService.getFilteredData(
-      onlyTypes,
-      this.props.onlyEvents,
-      [],
-      onlySlots
+  getItemRow: function(item, index, selected, boostId, matched) {
+    return (
+      <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
+        boostId={boostId}
+        selected={selected}
+        matched={matched}
+        ref={'row-item-'+item.href}
+        onItemSelected={this.props.onItemSelected}
+        openItemInfo={this.props.openItemInfo} />
     );
-
-    return filteredData.map(function(item, index) {
-      return (
-        <ItemRow firstRow={true} item={item} key={"item-"+index}
-          selected={this.isItemSelected(item.href)}
-          ref={'row-item-'+item.href}
-          onItemSelected={this.props.onItemSelected}
-          openItemInfo={this.props.openItemInfo} />
-      )
-    }, this);
   },
 
-  getBoostFilteredNodes: function(onlyTypes, onlySlots) {
-    var filteredData = this.DataService.getBoostFilteredData(
-      onlyTypes,
-      this.props.onlyEvents,
-      this.props.onlyBoosts,
-      onlySlots
-    );
+  getItemNodes: function(item, onlyBoosts) {
+    var selected = this.isItemSelected(item.href);
+    var boostsArr = Object.keys(item.stats_info);
+    boostsArr.unshift(null); // header row
 
-    if (this.props.onlyBoosts.length === 1) {
-      filteredData = this.DataService.sortByBoost(filteredData, this.props.onlyBoosts[0]);
-    } else if (this.props.onlyBoosts.length > 1) {
-      filteredData = this.DataService.sortByMultiBoost(filteredData, this.props.onlyBoosts);
-    }
+    return boostsArr.map(function(boostId, index) {
 
-    return filteredData.map(function(item, index) {
-      var currRowSpan = 0;
-      var onlyFilteredBoosts = false;
+      if (index === 0) {
+        // header row
+        return this.getItemRow(item, index, selected, null, null);
 
-      if (onlyFilteredBoosts) {
-        this.props.onlyBoosts.forEach(function(boost) {
-          var boostId = boost.toString();
-          var boost = item.stats_info[boostId];
-          if (boost) currRowSpan += 1;
-        }, this);
       } else {
-        currRowSpan = Object.keys(item.stats_info).length;
-      }
+        // boosts rows
+        var matchedBoostId = onlyBoosts.indexOf(parseInt(boostId));
 
-      // Show Only Filtered Boosts
-      // return this.props.onlyBoosts.map(function(boostId, index) {
-
-      // Show All Item Boosts
-      return Object.keys(item.stats_info).map(function(boostId, index) {
-        var boostRec = item.stats_info[boostId.toString()];
-        var matchedBoost = false;
-
-        if (boostRec !== undefined) {
-
-          // TODO !!!!!!! DAMN FIX THIS !!!!!!!!!!
-          if (!onlyFilteredBoosts && this.props.onlyBoosts.indexOf(parseInt(boostId)) >= 0) {
-            matchedBoost = true;
-          }
-
-          // console.log(boostId);
-
-          return (
-            <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
-              selected={this.isItemSelected(item.href)}
-              ref={'row-item-'+item.href}
-              boostId={boostId.toString()}
-              matchClass={matchedBoost ? ' filter-match' : ''}
-              onItemSelected={this.props.onItemSelected}
-              openItemInfo={this.props.openItemInfo} />
-          )
+        if (this.state.showAllBoosts) {
+          var matched = matchedBoostId >= 0 ? true : false;
+          return this.getItemRow(item, index, selected, boostId, matched);
         } else {
-          return null;
+          if (matchedBoostId < 0) return null
+          else return this.getItemRow(item, index, selected, boostId, null);
         }
 
-      }, this);
-
+      }
     }, this);
   },
 
-  filterFunc: function(onlyTypes, onlySlots) {
-    if (this.props.onlyBoosts.length === 0) {
-      return this.getFilteredData(onlyTypes, onlySlots);
-    } else {
-      return this.getBoostFilteredNodes(onlyTypes, onlySlots);
-    }
+  getFilteredData: function(onlyTypes, onlySlots, onlyEvents, onlyBoosts) {
+    var filteredData = this.DataService.getSortedAndFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
+
+    return filteredData.map(function(item) {
+      return this.getItemNodes(item, onlyBoosts);
+    }, this);
   },
 
-  getCoreNode: function(slot) {
+  getCoreSlotNode: function(slot) {
     if (this.state.onlySlots.length === 0 || this.state.onlySlots.indexOf(slot) >= 0) {
-      var nodes = this.filterFunc(['Core'], [slot]);
-      if (nodes.length === 0) return null
+      var cores = this.getFilteredData(['Core'], [slot], this.props.onlyEvents, this.props.onlyBoosts);
+      if (cores.length === 0) return null
       else {
-        var header = i18n.t('items-list.'+slot) + ': ' + nodes.length;
-        header += i18n.t('items-list.items');
+        var header = i18n.t('items-list.'+slot) + ': ' + cores.length;
         return (
           <div>
             <h4>{header}</h4>
             <table className={"cores-list-"+slot}><tbody>
-              {nodes}
+              {cores}
             </tbody></table>
           </div>
         )
@@ -138,66 +101,69 @@ var ItemsListBox = React.createClass({
     } else return null;
   },
 
+  getCoreNodes: function() {
+    if (this.state.onlyTypes.indexOf('Cores') >= 0) {
+      return (
+        <div>
+          {this.getCoreSlotNode('Helm')}
+          {this.getCoreSlotNode('Armor')}
+          {this.getCoreSlotNode('Feet')}
+          {this.getCoreSlotNode('Weapon')}
+          {this.getCoreSlotNode('Accessory')}
+        </div>
+      );
+    } else return null;
+  },
+
+  getPieceNodes: function() {
+    if (this.state.onlyTypes.indexOf('Pieces') >= 0) {
+      var pieces = this.getFilteredData(['Piece'], [], this.props.onlyEvents, this.props.onlyBoosts);
+      if (pieces.length > 0) {
+        return (
+          <div>
+            <h4>Pieces: {pieces.length}</h4>
+            <table className="pieces-list"><tbody>
+              {pieces}
+            </tbody></table>
+          </div>
+        );
+      } else return null;
+    } else return null;
+  },
+
+  shouldComponentUpdate: function(nextProps, nextState) {
+    if (this.firstRender && this.DataService && this.DataService.isReady()) {
+      this.firstRender = false;
+      return true;
+    } else {
+      return !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
+             !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
+             !shallowEqual(this.state, nextState);
+    }
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
 
-    var coreNode = null;
-    var pieceNode = null;
-    var recipeNode = null;
-
-    if (this.state.onlyTypes.indexOf('Cores') >= 0) {
-
-      coreNode = (
-        <div>
-          {this.getCoreNode('Helm')}
-          {this.getCoreNode('Armor')}
-          {this.getCoreNode('Feet')}
-          {this.getCoreNode('Weapon')}
-          {this.getCoreNode('Accessory')}
-        </div>
-      );
-    };
-
-    if (this.state.onlyTypes.indexOf('Pieces') >= 0) {
-      var pieces = this.filterFunc(['Piece'], []);
-      if (pieces.length > 0) pieceNode = (
-        <div>
-          <h4>Pieces: {pieces.length} items</h4>
-          <table className="pieces-list"><tbody>
-            {pieces}
-          </tbody></table>
-        </div>
-      );
-    };
-
-    if (this.state.onlyTypes.indexOf('Crafting Recipes') >= 0) {
-      var recipes = this.filterFunc(['Crafting Recipes'], []);
-      if (recipes.length > 0) recipeNode = (
-        <div>
-          <h4>Recipes: {recipes.length} items</h4>
-          <table className="recipes-list"><tbody>
-            {recipes}
-          </tbody></table>
-        </div>
-      );
-    };
+    console.log('ItemsListBox: render');
 
     return (
       <div className='cores-list-box'>
         <FilterPanel
+          showAllBoosts={this.state.showAllBoosts}
           type={this.state.onlyTypes[0]}
           slot={this.state.onlySlots[0]}
+          showAllBoostsClicked={this.showAllBoostsClicked}
           onTypeSelected={this.typeSelected}
           onSlotSelected={this.slotSelected}
         />
         <div className='scrollable-items-list'>
-          {coreNode}
-          {pieceNode}
-          {recipeNode}
+          {this.getCoreNodes()}
+          {this.getPieceNodes()}
         </div>
       </div>
     );
-  },
+  }
 });
 
 module.exports = ItemsListBox;

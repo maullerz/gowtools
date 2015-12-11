@@ -8,13 +8,14 @@
   "author": "Roman Loginov",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.14.3",
-    "react-bootstrap": "^0.28.1",
-    "react-dom": "^0.14.3",
-    "react-localstorage": "^0.2.8",
     "fastclick": "^1.0.6",
     "i18n-js": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc8.tar.gz",
     "jsx-loader": "^0.13.2",
+    "react": "^0.14.3",
+    "react-addons-shallow-compare": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
+    "react-dom": "^0.14.3",
+    "react-localstorage": "^0.2.8",
     "snapjs": "^1.2.1"
   },
   "devDependencies": {

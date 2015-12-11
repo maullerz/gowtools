@@ -85,7 +85,7 @@ $crafted-item-box-height: 100px;
 
   .filter-panel {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     border-bottom: 1px solid #aaa;
     height: $filter-panel-height;
     min-height: $filter-panel-height;
