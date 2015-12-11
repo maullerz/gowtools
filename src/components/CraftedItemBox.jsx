@@ -154,7 +154,6 @@ var CraftedItemBox = React.createClass({
       <div className='crafted-item-box' ref='target'>
 
         <div className='crafted-item-box-head'>
-          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
           <div className='crafted-item-btn-group'>
             <Button className={'glyph-btn' + this.getAddBtnState()} onClick={this.addButtonClicked}>
               <Glyphicon glyph={this.getItemState()}/>
@@ -163,6 +162,7 @@ var CraftedItemBox = React.createClass({
               <Glyphicon glyph="trash"/>
             </Button>
           </div>
+          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
         </div>
 
         <div className="summarize-info">
