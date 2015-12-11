@@ -145,8 +145,6 @@ var ItemsListBox = React.createClass({
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
 
-    console.log('ItemsListBox: render');
-
     return (
       <div className='cores-list-box'>
         <FilterPanel

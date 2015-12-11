@@ -81,12 +81,12 @@ gulp.task('spritesheet', function() {
   gulp.src('./assets-src/images/**/*.png')
     .pipe(
       sprite({
-        outputCss: './src/styles/sprites.css',
+        outputCss: './src/styles/sprites.scss',
         selector: '.sprite',
-        outputImage: './assets-src/spritesheet/spr.png'
+        outputImage: 'spr.png'
       })
     )
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/img/'));
+    .pipe(gulp.dest('./assets-src/spritesheet/'));
 });
 
 // CREATE PHONEGAP APP
