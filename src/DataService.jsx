@@ -99,6 +99,10 @@ var DataService = function(Environment) {
 
       getColorForBoost: function(boostId) {
         var bName = this.allBoosts[boostId];
+        if (!bName) {
+          console.log('cannot find boost: '+boostId);
+          return 'etc-color';
+        };
         if (bName.indexOf('Attack') >= 0) return 'attack-color';
         if (bName.indexOf('Defense') >= 0) return 'defense-color';
         if (bName.indexOf('Health') >= 0) return 'health-color';
@@ -107,6 +111,10 @@ var DataService = function(Environment) {
 
       getIconNameForBoost: function(boostId) {
         var bName = this.allBoosts[boostId];
+        if (!bName) {
+          console.log('cannot find boost: '+boostId);
+          return '';
+        };
         if (bName.indexOf('Cavalry') >= 0) return 'warelephant.png';
         if (bName.indexOf('Infantry') >= 0) return 'immortals.png';
         if (bName.indexOf('Ranged') >= 0) return 'marksmen.png';
@@ -147,6 +155,7 @@ var DataService = function(Environment) {
           boostName.indexOf('Monster') >= 0 ||
           boostName.indexOf('Speed') >= 0 ||
           boostName.indexOf('Hero') >= 0 ||
+          boostName.indexOf('No data') >= 0 ||
           boostName.indexOf('Food') >= 0
         )
       },
@@ -461,7 +470,7 @@ var DataService = function(Environment) {
         if (arr === null) {
           return null;
         } else {
-          return arr[0] + "-" + arr[1]*highRangeBoost;
+          return arr[0] + "-" + (arr[1] || 0)*highRangeBoost;
         }
       },
 
