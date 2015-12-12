@@ -8,6 +8,15 @@ import DataService from '../DataService.jsx'
 import ItemRow from './ItemRow.jsx'
 import FilterPanel from './FilterPanel.jsx'
 
+
+const isEqualSubset = (a, b) => {
+  for (let key in a) if (a[key] !== b[key]) return false;
+  return true;
+};
+
+const isEqual = (a, b) => isEqualSubset(a, b) && isEqualSubset(b, a);
+
+
 var ItemsListBox = React.createClass({
 
   mixins: [LocalStorageMixin],
@@ -17,12 +26,16 @@ var ItemsListBox = React.createClass({
   slotSelected: function(slots) { this.setState({ onlySlots: slots }) },
 
   showAllBoostsClicked: function() {
-    this.setState({ showAllBoosts: !this.state.showAllBoosts });
+    this.setState({
+      showAllBoosts: !this.state.showAllBoosts,
+      invalidateHack: !this.state.invalidateHack
+    });
   },
 
   getInitialState: function() {
     this.firstRender = true;
     return {
+      invalidateHack: false,
       showAllBoosts: true,
       onlyTypes: ['Cores'],
       onlySlots: []
@@ -31,6 +44,10 @@ var ItemsListBox = React.createClass({
 
   componentDidMount: function() {
     this.DataService = DataService();
+  },
+
+  invalidate: function() {
+    this.setState({ invalidateHack: !this.state.invalidateHack });
   },
 
   getItemRow: function(item, index, boostId, matched) {
@@ -47,9 +64,9 @@ var ItemsListBox = React.createClass({
 
   getItemNodes: function(item, onlyBoosts) {
     var boostsArr = Object.keys(item.stats_info);
-    boostsArr.unshift(null); // header row
+    boostsArr.unshift(null); // for header row
 
-    return boostsArr.map(function(boostId, index) {
+    var items = boostsArr.map(function(boostId, index) {
 
       if (index === 0) {
         // header row
@@ -68,6 +85,10 @@ var ItemsListBox = React.createClass({
         }
       }
     }, this);
+
+    items = items.filter(function(item){ return item });
+
+    return items;
   },
 
   getFilteredData: function(onlyTypes, onlySlots, onlyEvents, onlyBoosts) {
@@ -142,12 +163,13 @@ var ItemsListBox = React.createClass({
             <ReactList
               ref='reactList'
               initialIndex={0}
+              invalidateHack={this.state.invalidateHack} /*small hack to force ReactList update*/
               itemRenderer={this.itemRenderer}
               itemsRenderer={this.itemsRenderer}
               itemSizeGetter={this.itemSizeGetter}
               length={this.pieces.length}
               useTranslate3d={true}
-              pageSize={35}
+              pageSize={20}
               threshold={800}
               type='variable'
             />
@@ -160,21 +182,28 @@ var ItemsListBox = React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    if (this.firstRender && this.DataService && this.DataService.isReady()) {
-      this.firstRender = false;
-      return true;
-    } else {
-      var result = !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
-                   !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
-                   !shallowEqual(this.state, nextState);
-      if (this.refs.reactList) this.refs.reactList.scrollAround(0);
-      return result;
-    }
-  },
+  // TODO
+  // shouldComponentUpdate: function(nextProps, nextState) {
+  //   if (this.firstRender && this.DataService && this.DataService.isReady()) {
+  //     this.firstRender = false;
+  //     return true;
+  //   } else {
+  //     var result = !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
+  //                  !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
+  //                  !shallowEqual(this.state, nextState);
+  //     if (this.refs.reactList) this.refs.reactList.scrollAround(0);
+  //     // if (this.refs.reactList) this.refs.reactList.forceUpdate();
+  //     // if (this.refs.reactList) this.refs.reactList.refs.ref.forceUpdate();
+  //     return result;
+  //   }
+  // },
 
   render: function() {
-    if (!this.DataService || !this.DataService.isReady()) return null;
+    if (!this.DataService || !this.DataService.isReady()) return (
+      <div className='cores-list-box'>
+        <div className='loading'>LOADING...</div>
+      </div>
+    );
 
     return (
       <div className='cores-list-box'>
@@ -189,6 +218,7 @@ var ItemsListBox = React.createClass({
         <div className='scrollable-items-list'>
           {this.getCoreNodes()}
           {this.getPieceNodes()}
+          {/* TODO: по этим фильтрам ничего не найдено */}
         </div>
       </div>
     );
