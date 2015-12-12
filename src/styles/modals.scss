@@ -20,6 +20,16 @@
   /*font-size: 25px;*/
 }
 
+#quality-select .modal-dialog {
+  width: auto;
+}
+
+
+#quality-select .modal-body {
+  display: block;
+  /*justify-content: center;*/
+}
+
 .modal-body-part {
   display: inline-block;
   vertical-align: top;
@@ -37,25 +47,15 @@
 }
 
 .modal-image-background {
-  display: table;
+  /*display: table;
   background-color: #eee;
   border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);*/
   margin-bottom: 15px;
 }
 
 .qualities-body {
   padding: 20px;
   width: auto;
-}
-
-#quality-select .modal-dialog {
-  width: auto;
-}
-
-
-#quality-select .modal-body {
-  display: flex;
-  justify-content: center;
 }

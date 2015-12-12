@@ -50,26 +50,24 @@ module.exports = React.createClass({
   },
 
   initApp: function(){
-    var width = window.screen && window.screen.width;
-    var height = window.screen && window.screen.height;
-    console.log('==================');
-    console.log(width+'x'+height);
-    console.log('==================');
-    console.log(window.device);
-    console.log('==================');
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('NODE_ENV: '+process.env.NODE_ENV);
+      var width = window.screen && window.screen.width;
+      var height = window.screen && window.screen.height;
+      console.log('==================');
+      console.log(width+'x'+height);
+      console.log('==================');
+      console.log(window.device);
+      console.log('==================');
+    };
 
     if (FastClick) FastClick.attach(document.body, {});
     if (typeof StatusBar !== 'undefined') StatusBar.hide();
   },
 
-  isBrowser: function() {
-    var url = document.URL;
-    return !(url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-  },
-
   getPlatform: function(){
-    var platform = '';
-    if (!!window.device && !!window.device.platform) {
+    var platform = 'browser';
+    if (window.device && window.device.platform) {
       platform = window.device.platform.toLowerCase();
     }
     return platform;

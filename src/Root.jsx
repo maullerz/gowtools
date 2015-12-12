@@ -310,6 +310,7 @@ var Root = React.createClass({
           <div className={'tab-crafting'+this.getTabState(1)}>
             <CraftedItemBox
               ref='craftedItemBox'
+              platform={this.props.platform}
               modalQualitySelect={this.refs.modalQualitySelect}
               invalidateItemsListBox={this.invalidateItemsListBox}
               addSetItemToSet={this.addSetItemToSet}

@@ -12,6 +12,6 @@ function startApp() {
 
 window.onload = function() {
 	var url = document.URL
-	var isDevice = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1)
-	isDevice ? document.addEventListener('deviceready', startApp, false) : startApp()
+	var isBrowser = (url.indexOf("http://") >= 0 || url.indexOf("https://") >= 0)
+	isBrowser ? startApp() : document.addEventListener('deviceready', startApp, false)
 }

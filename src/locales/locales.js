@@ -6,11 +6,20 @@ module.exports = {
     "tabs": {
       "crafting": "CRAFTING",
       "summary": "STATISTICS",
-      "settings": "SETTINGS",
+      "settings": "SETTINGS"
     },
     "filter": {
       "events": "EVENTS",
-      "boosts": "BOOSTS",
+      "boosts": "BOOSTS"
+    },
+    "craftedbox": {
+      "choose-core": "Choose core from list",
+      "confirm-action": "Perform an action on one or all accessories?",
+      "title-plus": "Add accessory to set",
+      "title-minus": "Remove accessory from set",
+      "title-transfer": "Replace accessory in set",
+      "confirm-clear": "Do you really want to clear crafted item?",
+      "confirm-title": "Confirm"
     },
     "button": {
       "collapse": "Collapse",
@@ -20,6 +29,9 @@ module.exports = {
       "add": "Add",
       "clear": "Clear",
       "clear-set": "Clear Set",
+      "one": "One",
+      "all": "All",
+      "cancel": "Cancel"
     },
     "items-list": {
       "items": " items",
@@ -27,7 +39,7 @@ module.exports = {
       "Armor": "Armor",
       "Feet": "Feet",
       "Weapon": "Weapon",
-      "Accessory": "Accessory",
+      "Accessory": "Accessory"
     },
     "summary": {
       "boosts": "Troop Boosts",
@@ -45,11 +57,20 @@ module.exports = {
     "tabs": {
       "crafting": "КРАФТ",
       "summary": "СТАТИСТИКА",
-      "settings": "НАСТРОЙКИ",
+      "settings": "НАСТРОЙКИ"
     },
     "filter": {
       "events": "СОБЫТИЯ",
-      "boosts": "БУСТЫ",
+      "boosts": "БУСТЫ"
+    },
+    "craftedbox": {
+      "choose-core": "Выберите ядро из списка",
+      "confirm-action": "Произвести действие над одной или всеми принадлежностями?",
+      "title-plus": "Добавить принадлежность в сет",
+      "title-minus": "Убрать принадлежность из сета",
+      "title-transfer": "Заменить принадлежность в сете",
+      "confirm-clear": "Очистить ядро и фрагменты?",
+      "confirm-title": "Подтверждение"
     },
     "button": {
       "collapse": "Свернуть",
@@ -59,6 +80,9 @@ module.exports = {
       "add": "Добавить",
       "clear": "Очистить",
       "clear-set": "Очистить Сет",
+      "one": "Одна",
+      "all": "Все",
+      "cancel": "Отмена"
     },
     "items-list": {
       "items": "",
@@ -66,7 +90,7 @@ module.exports = {
       "Armor": "Доспехи",
       "Feet": "Обувь",
       "Weapon": "Оружие",
-      "Accessory": "Принадлежности",
+      "Accessory": "Принадлежности"
     },
     "summary": {
       "boosts": "Бусты",

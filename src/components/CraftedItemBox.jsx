@@ -3,6 +3,7 @@ import Well from 'react-bootstrap/lib/Well'
 import Button from 'react-bootstrap/lib/Button'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import LocalStorageMixin from 'react-localstorage'
+import i18n from 'i18n-js'
 
 import DataService from '../DataService.jsx'
 import SetItemModel from '../models/SetItem'
@@ -22,12 +23,9 @@ var CraftedItemBox = React.createClass({
     return { setItem: setItem };
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.DataService = DataService();
     this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
-  },
-
-  componentDidMount: function() {
   },
 
   getItemState: function() {
@@ -44,22 +42,6 @@ var CraftedItemBox = React.createClass({
     return (!this.state.setItem.core && this.state.setItem.pieces.length === 0) ? ' hidden' : '';
   },
 
-  addButtonClicked: function() {
-    var currSetItem = this.state.setItem;
-
-    if (currSetItem.core.slot === 'Accessory') {
-      // TODO window.confirm
-      var callback = function(buttonIndex) {
-        console.log('buttonIndex: '+buttonIndex);
-        var isAll = buttonIndex === 1;
-        this.addSetItemToSet(currSetItem, isAll);
-      }.bind(this);
-      navigator.notification.confirm('All or one?', callback, 'Choose', ['All', 'One']);
-    } else {
-      this.addSetItemToSet(currSetItem, false);
-    }
-  },
-
   addSetItemToSet: function(currSetItem, isAll) {
     this.props.addSetItemToSet({
       core: currSetItem.core,
@@ -68,6 +50,64 @@ var CraftedItemBox = React.createClass({
       piecesQualities: currSetItem.piecesQualities.concat([])
     }, isAll);
     this.forceUpdate();
+  },
+
+  addButtonClicked: function() {
+    var currSetItem = this.state.setItem;
+
+    if (currSetItem.core.slot === 'Accessory') {
+
+      var state = this.props.getItemState(this.state.setItem);
+
+      var performAction = function(buttonIndex) {
+        if (buttonIndex !== 3) this.addSetItemToSet(currSetItem, buttonIndex === 2);
+      }.bind(this);
+
+      if (this.props.platform === 'browser') {
+        if (window.confirm(i18n.t('craftedbox.confirm-action'))) {
+          performAction(2);
+        } else {
+          performAction(1);
+        }
+      } else {
+        navigator.notification.confirm(
+          i18n.t('craftedbox.confirm-action'),
+          performAction,
+          i18n.t('craftedbox.title-'+state),
+          [
+            i18n.t('button.one'),
+            i18n.t('button.all'),
+            i18n.t('button.cancel')
+          ]
+        );
+      }
+    } else {
+      this.addSetItemToSet(currSetItem, false);
+    }
+  },
+
+  resetItems: function() {
+    var clearItems = function(buttonIndex) {
+      if (buttonIndex === 1) {
+        var emptySetItem = {
+          core: null,
+          coreQuality: null,
+          pieces: [],
+          piecesQualities: []
+        }
+        this.updateSetItem(emptySetItem);
+      };
+    }.bind(this);
+
+    if (this.props.platform === 'browser') {
+      if (window.confirm(i18n.t('craftedbox.confirm-clear'))) clearItems(1);
+    } else {
+      navigator.notification.confirm(
+        i18n.t('craftedbox.confirm-clear'),
+        clearItems,
+        i18n.t('craftedbox.confirm-title')
+      );
+    }
   },
 
   selectSetItemForEdit: function(setItemToSelect) {
@@ -114,18 +154,6 @@ var CraftedItemBox = React.createClass({
   updateSetItem: function(newSetItem) {
     this.setState({ setItem: newSetItem });
     this.props.invalidateItemsListBox();
-  },
-
-  resetItems: function() {
-    if (window.confirm("Do you really want to clear crafted item?")) {
-      var emptySetItem = {
-        core: null,
-        coreQuality: null,
-        pieces: [],
-        piecesQualities: []
-      }
-      this.updateSetItem(emptySetItem);
-    }
   },
 
   qualitySelected: function(item, quality) {

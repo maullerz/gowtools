@@ -41,11 +41,12 @@ module.exports = {
     //   }
     // }),
     // new webpack.optimize.AggressiveMergingPlugin(),
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': '"production"'
-    //   }
-    // })
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"develop"',
+        // 'NODE_ENV': '"production"'
+      }
+    })
   ]
 
 };

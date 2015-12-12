@@ -1,7 +1,8 @@
-import React from 'react';
-import Well from 'react-bootstrap/lib/Well';
-import Button from 'react-bootstrap/lib/Button';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import React from 'react'
+import Well from 'react-bootstrap/lib/Well'
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import i18n from 'i18n-js'
 
 var SetItemBox = React.createClass({
 
@@ -33,7 +34,9 @@ var SetItemBox = React.createClass({
 
       return (
         <div className={'sel-item-core empty'} key={"sel-item-core"}>
-          <div id='img71' className='sprite empty'/>
+          <div id='img71' className='sprite empty'>
+            {i18n.t('craftedbox.choose-core')}
+          </div>
         </div>
       );
 
