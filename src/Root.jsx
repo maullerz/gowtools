@@ -152,7 +152,7 @@ var Root = React.createClass({
   
   itemSelected: function(item) {
     if (!item.quality) item.quality = 0;
-    return this.refs.selectedItems.itemSelected(item);
+    return this.refs.craftedItemBox.itemSelected(item);
   },
 
   unselectItem: function(item) {
@@ -160,7 +160,7 @@ var Root = React.createClass({
   },
 
   isItemSelected: function(id) {
-    var currSetItem = this.refs.selectedItems.state.setItem;
+    var currSetItem = this.refs.craftedItemBox.state.setItem;
     if (currSetItem.core && currSetItem.core.href === id) return true;
     for (var i = 0, len = currSetItem.pieces.length; i < len; i++) {
       if (currSetItem.pieces[i].href === id) return true;
@@ -169,7 +169,7 @@ var Root = React.createClass({
   },
 
   invalidateItemsListBox: function() {
-    this.refs.itemsList.forceUpdate();
+    this.refs.itemsList.invalidate();
   },
 
   getItemState: function(setItem) {
@@ -181,7 +181,7 @@ var Root = React.createClass({
   },
 
   selectSetItemForEdit: function(setItem) {
-    this.refs.selectedItems.selectSetItemForEdit(setItem);
+    this.refs.craftedItemBox.selectSetItemForEdit(setItem);
   },
 
   handleLanguageSelect: function() {
@@ -243,7 +243,7 @@ var Root = React.createClass({
   },
 
   qualitySelected: function(item, quality) {
-    this.refs.selectedItems.qualitySelected(item, quality);
+    this.refs.craftedItemBox.qualitySelected(item, quality);
   },
 
   openItemInfo: function(id) {
@@ -309,7 +309,7 @@ var Root = React.createClass({
 
           <div className={'tab-crafting'+this.getTabState(1)}>
             <CraftedItemBox
-              ref='selectedItems'
+              ref='craftedItemBox'
               modalQualitySelect={this.refs.modalQualitySelect}
               invalidateItemsListBox={this.invalidateItemsListBox}
               addSetItemToSet={this.addSetItemToSet}
@@ -327,6 +327,7 @@ var Root = React.createClass({
 
 
           <SummaryInfoBox className={this.getTabState(2)}
+            activeTab={this.state.activeTab}
             ref='summaryInfoBox'
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}

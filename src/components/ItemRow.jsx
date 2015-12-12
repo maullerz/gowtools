@@ -23,15 +23,14 @@ var ItemRow = React.createClass({
   itemSelected: function(event) {
     var name = event.target.className.split(' ')[0];
     if (name === 'icon' || name === 'icon-img') return;
-    this.props.onItemSelected(this.props.item)
+    this.props.onItemSelected(this.props.item);
   },
 
   isItemSelected: function(id) {
     return this.props.isItemSelected(id);
   },
 
-  // <selected> didnt work with this:
-  // 
+  // TODO <selected> didnt work with this now
   // shouldComponentUpdate: function(nextProps, nextState) {
   //   return this.props.item.href !== nextProps.item.href ||
   //          this.props.selected !== nextProps.selected ||

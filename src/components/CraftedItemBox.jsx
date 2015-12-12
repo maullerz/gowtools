@@ -54,7 +54,7 @@ var CraftedItemBox = React.createClass({
         var isAll = buttonIndex === 1;
         this.addSetItemToSet(currSetItem, isAll);
       }.bind(this);
-      navigator.notification.confirm('All or one?', callback,'Choose', ['All', 'One']);
+      navigator.notification.confirm('All or one?', callback, 'Choose', ['All', 'One']);
     } else {
       this.addSetItemToSet(currSetItem, false);
     }
@@ -144,7 +144,11 @@ var CraftedItemBox = React.createClass({
   },
 
   render: function() {
-    if (!this.DataService || !this.DataService.isReady()) return null;
+    if (!this.DataService || !this.DataService.isReady()) return (
+      <div className='crafted-item-box'>
+        <div className='loading'>LOADING...</div>
+      </div>
+    );
 
     var currSetItem = this.state.setItem;
 

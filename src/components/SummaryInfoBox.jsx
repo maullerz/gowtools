@@ -26,6 +26,11 @@ var SummaryInfoBox = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.DataService = DataService();
+    this.firstRender = true; // because of loading set from localStorage that need to be calculated
+  },
+
   flattenCoresSet: function() {
     var items = [
       this.state.coresSet.Helm,
@@ -130,10 +135,6 @@ var SummaryInfoBox = React.createClass({
     this.setState({ coresSet: this.state.coresSet });
   },
 
-  componentDidMount: function() {
-    this.DataService = DataService();
-  },
-
   renderCurrSet: function(flattenItems) {
     return flattenItems.map(function(setItem, index) {
       var quality = this.qualities[setItem.coreQuality];
@@ -170,6 +171,19 @@ var SummaryInfoBox = React.createClass({
     // TODO: PROMT DIALOG
     this.setState({ coresSet: new CoresSetModel() });
   },
+
+  // TODO
+  // shouldComponentUpdate: function(nextProps, nextState) {
+  //   if (this.firstRender && this.DataService && this.DataService.isReady()) {
+  //     this.firstRender = false;
+  //     return true;
+  //   } else {
+  //     if (nextProps.activeTab === 2) { return true };
+  //     return !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
+  //            !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
+  //            !shallowEqual(this.state, nextState);
+  //   }
+  // },
 
   render: function() {
     if (!this.DataService) return null;

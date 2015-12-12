@@ -51,6 +51,14 @@
 
   &.active {
     opacity: 1;
+
+    &:active {
+      opacity: 0.2;
+    }
+  }
+
+  &:active {
+    opacity: 1;
   }
 
   @media only screen and (min-device-width: 320px) {

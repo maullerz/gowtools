@@ -41,8 +41,6 @@ var ModalQualitySelect = React.createClass({
       }.bind(this));
     }
 
-    // TODO: 7ая кнопка - {убрать ядро-фраг из выбранных}
-
     // <Modal.Header closeButton>Выбрать качество:</Modal.Header>
     return (
       <Modal id='quality-select' show={this.state.showModal} onHide={this.close}>

@@ -59,6 +59,7 @@ var DataService = function(Environment) {
     Service.prototype = {
 
       getItemById: function(id) {
+        // TODO переход на {'href': item}
         for (var i = 0, len = this.coresPiecesData.length; i < len; i++) {
           if (this.coresPiecesData[i].href === id) return this.coresPiecesData[i];
         }
