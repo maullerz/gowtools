@@ -100,7 +100,6 @@ var SummaryInfoBox = React.createClass({
 
   addSetItemToSet: function(setItem, isAll) {
     var state = this.getItemState(setItem);
-    console.log(state);
     if (setItem.core.slot !== 'Accessory') {
       if (state === 'plus' || state === 'transfer') {
         this.state.coresSet[setItem.core.slot] = setItem;

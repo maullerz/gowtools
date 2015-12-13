@@ -135,7 +135,7 @@ var ItemsListBox = React.createClass({
     var size = 0;
     rows.forEach(function(row, index) {
       // TODO set this appropriate to different medias
-      if (index === 0) size += 45;
+      if (index === 0) size += 51;
       else if (row) size += 17;
     });
     return size;

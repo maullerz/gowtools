@@ -17,17 +17,21 @@
 }
 
 .modal-body {
-  /*font-size: 25px;*/
+  display: block;
 }
 
 #quality-select .modal-dialog {
-  width: auto;
+  margin: 60px auto;
+  width: 420px;
 }
 
+.modal-backdrop.in {
+  opacity: .8;
+}
 
 #quality-select .modal-body {
-  display: block;
-  /*justify-content: center;*/
+  display: flex;
+  justify-content: center;
 }
 
 .modal-body-part {
@@ -57,5 +61,4 @@
 
 .qualities-body {
   padding: 20px;
-  width: auto;
 }
