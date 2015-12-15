@@ -135,8 +135,8 @@ var DataService = function(Environment) {
         }
       },
 
-      getItemBoostRows: function(item) {
-        // SHOW ALL BOOSTS of item in ItemsList and ModalInfo
+      getEventName: function(eventId) {
+        return this.events[i18n.currentLocale()][eventId];
       },
 
       getCurrSetItemSummaryTable: function(currSetItem) {
@@ -488,8 +488,7 @@ var DataService = function(Environment) {
 
         var delta = (max-min)*(CRAFT_CORES_LUCK);
         var new_min = min + delta;
-        // var average = max - (max - new_min) / 2.0;
-        var average = new_min / 2.0;
+        var average = max - (max - new_min) / 2.0;
 
         return this.round(average);
       },
@@ -524,12 +523,12 @@ var DataService = function(Environment) {
 
       loadData: function(data) {
         for (var i = data.length - 1; i >= 0; i--) {
-          if (data[i].main_info_ru["Equipment Types"] === "Crafting Recipes") {
+          if (data[i].main_info_en["Equipment Types"] === "Crafting Recipes") {
             data[i] = null;
           } else {
-            data[i].type = data[i].main_info_ru["Equipment Types"];
-            data[i].gameEvent = data[i].main_info_ru["Event"];
-            data[i].slot = data[i].main_info_ru["Slot"];
+            data[i].type = data[i].main_info_en["Equipment Types"];
+            data[i].gameEvent = data[i].main_info_en["Event"];
+            data[i].slot = data[i].main_info_en["Slot"];
             data[i].sprite = data[i].img_base.replace('.png', '');
           }
         };
@@ -538,10 +537,12 @@ var DataService = function(Environment) {
         this.coresPiecesData = data;
 
         // отсортированный массив Событий с айдишниками для фильтра
-        this.events = this.getUniqEvents(data);
+        this.events = {};
+        this.events.en = this.getUniqEvents(data);
+        this.events.ru = this.getUniqEventsRu(this.events.en);
         // проставляем айдишники каждому итему чтобы не возиться со строками
         for (var i = data.length - 1; i >= 0; i--) {
-          data[i].gameEventId = this.events.indexOf(data[i].gameEvent);
+          data[i].gameEventId = this.events.en.indexOf(data[i].gameEvent);
         };
       },
 
@@ -550,17 +551,32 @@ var DataService = function(Environment) {
       },
 
       getUniqEvents: function(data) {
+        // fix undefined and incorrect data
         var uniqueEvents = data.map(function(item) {
           if (item.gameEvent === undefined) {
-            // 'Эпические снежные сундуки'
             item.gameEvent = 'Epic Snow Chests';
           }
           return item.gameEvent;
         });
+        // remove duplicates
         uniqueEvents = uniqueEvents.filter(function(item, index) {
           return uniqueEvents.indexOf(item) === index;
         });
         return uniqueEvents.sort();
+      },
+
+      getUniqEventsRu: function(events) {
+        var uniqueEvents = events.map(function(eventName, index) {
+          var eventRu, itemIndex;
+          if (eventName === 'Epic Snow Chests') {
+            eventRu = 'Эпические снежные сундуки';
+          } else {
+            itemIndex = this.coresPiecesData.findIndex(function(item) { return item.gameEvent === eventName });
+            eventRu = this.coresPiecesData[itemIndex].main_info_ru["Событие"];
+          }
+          return eventRu;
+        }, this);
+        return uniqueEvents;
       },
 
     };

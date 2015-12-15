@@ -14,9 +14,8 @@ var FilterEvents = React.createClass({
     return { events: [] }
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.DataService = DataService();
-    // TODO: set this.sortedBoosts[i18n.locale]
   },
 
   eventClicked: function(event) {
@@ -45,11 +44,26 @@ var FilterEvents = React.createClass({
     return this.state.events.length > 0 ? '' : ' hidden';
   },
 
+  checkLocale: function(locale) {
+    if (!this.sortedBoosts) this.sortedBoosts = {};
+    if (!this.sortedBoosts[locale]) {
+      var tmp = this.DataService.events[locale].concat([]);
+      tmp.sort();
+      this.sortedBoosts[locale] = {};
+      tmp.forEach(function(name) {
+        var ix = this.DataService.events[locale].indexOf(name);
+        this.sortedBoosts[locale][name] = ix;
+      }, this);
+    }
+  },
+
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
-    
-    // TODO FIXME Russian Event Names!
-    var eventNodes = this.DataService.events.map(function(eventName, eventId) {
+    var locale = i18n.currentLocale();
+    this.checkLocale(locale);
+
+    var eventNodes = Object.keys(this.sortedBoosts[locale]).map(function(eventName) {
+      var eventId = this.sortedBoosts[locale][eventName];
       return (
         <Button id='snap-filter-btn' value={eventId} key={'event-'+eventId}
                 onClick={this.eventClicked}
