@@ -12,6 +12,14 @@ module.exports = {
       "events": "EVENTS",
       "boosts": "BOOSTS"
     },
+    "info": {
+      "result":   "Craft Result",
+      "recipes":  "Recipes",
+      "event":    "Event",
+      "chests":   "Chests",
+      "monsters": "Monsters",
+      "set":      "Set"
+    },
     "craftedbox": {
       "choose-core": "Choose core from list",
       "confirm-action": "Perform an action on one or all accessories?",
@@ -44,7 +52,7 @@ module.exports = {
     "summary": {
       "boosts": "Troop Boosts",
       "debuffs": "Enemy Debuffs",
-      "etc": "Other",
+      "etc": "Other Boosts",
       "regular": "Regular",
       "strategic": "Strategic"
     }
@@ -63,26 +71,34 @@ module.exports = {
       "events": "СОБЫТИЯ",
       "boosts": "БУСТЫ"
     },
+    "info": {
+      "result":   "Результат крафта",
+      "recipes":  "Входит в рецепты",
+      "event":    "Событие",
+      "chests":   "Выпадает из сундуков",
+      "monsters": "Выпадает из монстров",
+      "set":      "Входит в набор"
+    },
     "craftedbox": {
-      "choose-core": "Выберите ядро из списка",
+      "choose-core":    "Выберите ядро из списка",
       "confirm-action": "Произвести действие над одной или всеми принадлежностями?",
-      "title-plus": "Добавить принадлежность в сет",
-      "title-minus": "Убрать принадлежность из сета",
-      "title-transfer": "Заменить принадлежность в сете",
-      "confirm-clear": "Очистить ядро и фрагменты?",
-      "confirm-title": "Подтверждение"
+      "title-plus":     "Добавить принадлежность в набор",
+      "title-minus":    "Убрать принадлежность из набора",
+      "title-transfer": "Заменить принадлежность в наборе",
+      "confirm-clear":  "Очистить ядро и фрагменты?",
+      "confirm-title":  "Подтверждение"
     },
     "button": {
       "collapse": "Свернуть",
-      "expand": "Развернуть",
-      "select": "Выбрать",
-      "remove": "Удалить",
-      "add": "Добавить",
-      "clear": "Очистить",
-      "clear-set": "Очистить Сет",
-      "one": "Одна",
-      "all": "Все",
-      "cancel": "Отмена"
+      "expand":   "Развернуть",
+      "select":   "Выбрать",
+      "remove":   "Удалить",
+      "add":      "Добавить",
+      "clear":    "Очистить",
+      "clear-set": "Очистить набор",
+      "one":      "Одна",
+      "all":      "Все",
+      "cancel":   "Отмена"
     },
     "items-list": {
       "items": "",

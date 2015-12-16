@@ -18,6 +18,11 @@
 
 .modal-body {
   display: block;
+  padding-top: 5px;
+}
+
+.modal-dialog {
+  width: auto;
 }
 
 #quality-select .modal-dialog {
@@ -34,14 +39,37 @@
   justify-content: center;
 }
 
-.modal-body-part {
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 20px;
+.modal-body-params {
+  margin-left: 60px;
 }
 
-.modal-body-part p {
-  margin: 0;
+table.modal-body-params {
+  background-color: #ddd;
+  border: none !important;
+  border-collapse: separate;
+  margin-left: 0px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+table.modal-body-params tbody {
+  border: none !important;
+}
+
+table.modal-body-params tr {
+  font-size: 14px;
+}
+
+table.modal-body-params td {
+  text-align: start;
+  padding-left: 15px;
+  &.param {
+    font-weight: bold;
+  }
+}
+
+.modal-body-image {
+  position: absolute;
 }
 
 .close {

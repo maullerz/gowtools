@@ -1,5 +1,41 @@
 @import "colors";
 
+.set-item-statistics {
+  /*background: red;*/
+}
+
+.curr-set-statistics {
+  width: 60%;
+}
+
+.item-statistics table.summarize tr td {
+  width: 12%;
+  font-size: 10px;
+
+  &.sel-boost-name {
+    width: 27%;
+    font-size: 12px;
+    padding-right: 3px;
+  }
+
+  &.sel-icon {
+    width: 0.1%;
+  }
+
+  &.lvl {
+    border-left: 1px solid #aaa;
+    padding: 0 3px;
+  }
+
+  &.lvl6 {
+    font-weight: bold;
+  }
+}
+
+.item-statistics {
+  margin-top: 10px;
+}
+
 thead {
   background-color: #ddd;
 }
@@ -7,7 +43,11 @@ thead {
 thead tr th {
   text-align: center;
   font-size: 11px;
-  /*padding-top: 10px;*/
+
+  &.lvl-head {
+    text-align: right;
+    padding-right: 3px;
+  }
 }
 
 table {
@@ -49,7 +89,6 @@ tr.first-row {
 td {
   cursor: pointer;
   text-align: center;
-  /*width: 11%;*/
   opacity: 1;
 
   &.icon {
@@ -91,7 +130,6 @@ td {
 
     &.lvl6 {
       font-weight: bold;
-      /*background: azure;*/
       width: 50px;
     }
   }

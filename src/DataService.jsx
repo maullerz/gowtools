@@ -160,6 +160,47 @@ var DataService = function(Environment) {
         )
       },
 
+      sortBoosts: function(boostsArr) {
+        // TODO
+      },
+
+      getSimpleSummaryTable: function(calculatedBoosts) {
+        var rows = Object.keys(calculatedBoosts).map(function(boostId, index) {
+          var boost = calculatedBoosts[boostId];
+          var rowColor = this.getColorForBoost(boostId);
+          var iconName = this.getIconNameForBoost(boostId);
+
+          return (
+            <tr className='first-row' key={'b-'+index}>
+              <td className='sel-icon'>
+                {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
+              </td>
+              <td className='sel-boost-name'>
+                {this.getBoostName(boostId)}
+              </td>
+              <td className={'lvl lvl6 '+rowColor}>
+                  {this.simpleShow(boost[5])}
+              </td>
+              <td className='lvl'>{this.simpleShow(boost[4])}</td>
+              <td className='lvl'>{this.simpleShow(boost[3])}</td>
+              <td className='lvl'>{this.simpleShow(boost[2])}</td>
+              <td className='lvl'>{this.simpleShow(boost[1])}</td>
+              <td className='lvl'>{this.simpleShow(boost[0])}</td>
+            </tr>
+          )
+        }, this);
+
+        return (
+          <div className='item-statistics'>
+            <table className='summarize'>
+              <tbody>
+                {rows}
+              </tbody>
+            </table>
+          </div>
+        );
+      },
+
       getSummaryTable: function(calculatedBoosts, summaryTableClass) {
         var debuffs = [];
         var boosts = [];
@@ -216,15 +257,15 @@ var DataService = function(Environment) {
             var strategicData = calculatedBoosts[boostId];
             var regBoostId = this.stratPairs[boostId];
             var regData = calculatedBoosts[regBoostId];
+            var rowColor = this.getColorForBoost(boostId);
+            var iconName = this.getIconNameForBoost(boostId);
 
             var valueRegular = this.calculateLuck(regData);
             var valueStrategic = this.calculateLuck(strategicData);
 
-            var rowColor = this.getColorForBoost(boostId);
-            var iconName = this.getIconNameForBoost(boostId);
             return (
               <tr className='first-row' key={'b-'+index}>
-                <td className={'sel-icon'}>
+                <td className='sel-icon'>
                   {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>
@@ -242,7 +283,6 @@ var DataService = function(Environment) {
 
           var mapFuncEtc = function(boostId, index) {
             var data = calculatedBoosts[boostId];
-            // var iconName = this.getIconNameForBoost(boostId);
             return (
               <tr className='first-row' key={'etc-'+index}>
                 <td className='sel-boost-name etc'>{this.getBoostName(boostId)}</td>
@@ -262,12 +302,14 @@ var DataService = function(Environment) {
               {(() => {
                 if (rowsSelfStrat.length > 0) return (
                   <table className='summarize'>
-                    <thead><tr>
-                      <th></th>
-                      <th>{i18n.t('summary.boosts')}</th>
-                      <th>{i18n.t('summary.regular')}</th>
-                      <th>{i18n.t('summary.strategic')}</th>
-                    </tr></thead>
+                    {summaryTableClass !== 'item-statistics' ? (
+                      <thead><tr>
+                        <th></th>
+                        <th>{i18n.t('summary.boosts')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.strategic')}</th>
+                      </tr></thead>
+                    ) : null}
                     <tbody>
                       {rowsSelfStrat}
                     </tbody>
@@ -278,12 +320,14 @@ var DataService = function(Environment) {
               {(() => {
                 if (rowsDebuffStrat.length > 0) return (
                   <table className='summarize'>
-                    <thead><tr>
-                      <th></th>
-                      <th>{i18n.t('summary.debuffs')}</th>
-                      <th>{i18n.t('summary.regular')}</th>
-                      <th>{i18n.t('summary.strategic')}</th>
-                    </tr></thead>
+                    {summaryTableClass !== 'item-statistics' ? (
+                      <thead><tr>
+                        <th></th>
+                        <th>{i18n.t('summary.debuffs')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.strategic')}</th>
+                      </tr></thead>
+                    ) : null}
                     <tbody>
                       {rowsDebuffStrat}
                     </tbody>
@@ -294,10 +338,12 @@ var DataService = function(Environment) {
               {(() => {
                 if (rowsEtc.length > 0) return (
                   <table className='summarize'>
-                    <thead><tr>
-                      <th>{i18n.t('summary.etc')}</th>
-                      <th></th>
-                    </tr></thead>
+                    {summaryTableClass !== 'item-statistics' ? (
+                      <thead><tr>
+                        <th>{i18n.t('summary.etc')}</th>
+                        <th></th>
+                      </tr></thead>
+                    ) : null}
                     <tbody>
                       {rowsEtc}
                     </tbody>
@@ -470,7 +516,7 @@ var DataService = function(Environment) {
         if (arr === null) {
           return null;
         } else {
-          return arr[0] + "-" + (arr[1] || 0)*highRangeBoost;
+          return arr[0] + " - " + (arr[1] || 0)*highRangeBoost;
         }
       },
 
