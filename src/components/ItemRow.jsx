@@ -16,7 +16,7 @@ var ItemRow = React.createClass({
   },
 
   calculateBoostByLvl: function(lvl) {
-    var boost = this.props.item.stats_info[this.props.boostId];
+    var boost = this.props.item.stats[this.props.boostId];
     return this.DataService.calculateLuck(boost[lvl]);
   },
 
@@ -32,7 +32,7 @@ var ItemRow = React.createClass({
 
   // TODO <selected> didnt work with this now
   // shouldComponentUpdate: function(nextProps, nextState) {
-  //   return this.props.item.href !== nextProps.item.href ||
+  //   return this.props.item.id !== nextProps.item.id ||
   //          this.props.selected !== nextProps.selected ||
   //          this.props.matched !== nextProps.matched ||
   //          this.props.boostId !== nextProps.boostId
@@ -42,11 +42,11 @@ var ItemRow = React.createClass({
     var item = this.props.item;
     var rowClass = [];
 
-    if (this.isItemSelected(item.href)) rowClass.push('selected');
+    if (this.isItemSelected(item.id)) rowClass.push('selected');
     if (this.props.matched) rowClass.push('filter-matched');
 
     var spriteName = "icon-img sprite " + item.sprite;
-    var openInfoFn = function() { this.props.openItemInfo(item.href) }.bind(this);
+    var openInfoFn = function() { this.props.openItemInfo(item.id) }.bind(this);
 
     if (this.props.firstRow) {
 
@@ -57,7 +57,7 @@ var ItemRow = React.createClass({
             <div id='img44' className={spriteName}/>
           </td>
           <td className="item-name" colSpan='13'>{this.itemName()}</td>
-          <td className="game-event" colSpan='4'>{item.gameEvent}</td>
+          <td className="game-event" colSpan='4'>{item.event}</td>
         </tr>
       );
 

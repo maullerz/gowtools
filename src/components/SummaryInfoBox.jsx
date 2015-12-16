@@ -60,13 +60,13 @@ var SummaryInfoBox = React.createClass({
         return this.isEqualItems(first, accessory);
       }, this);
     } else {
-      result = first.core.href === second.core.href;
+      result = first.core.id === second.core.id;
       // TODO: do we need to compare qualities?
       // result = result && (first.coreQuality === second.coreQuality);
       result = result && (first.pieces.length === second.pieces.length)
       result = result && first.pieces.every(function(piece, index) {
         // && first.piecesQualities[index] === second.piecesQualities[index]
-        return piece.href === second.pieces[index].href;
+        return piece.id === second.pieces[index].id;
       }, this);
     }
 

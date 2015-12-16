@@ -91,9 +91,9 @@ module.exports = React.createClass({
     return (
       <Root
         platform={this.getPlatform()}
-        corespiecesUrl = 'data/y96_corespieces.json'
-        boostsUrlRu = 'data/y96_boosts_ru.json'
-        boostsUrl = 'data/y96_boosts.json'
+        corespiecesUrl = 'data/items.json'
+        boostsUrlRu = 'data/boosts_ru.json'
+        boostsUrl = 'data/boosts.json'
       />
     )
   }

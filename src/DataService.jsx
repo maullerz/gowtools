@@ -59,9 +59,8 @@ var DataService = function(Environment) {
     Service.prototype = {
 
       getItemById: function(id) {
-        // TODO переход на {'href': item}
         for (var i = 0, len = this.coresPiecesData.length; i < len; i++) {
-          if (this.coresPiecesData[i].href === id) return this.coresPiecesData[i];
+          if (this.coresPiecesData[i].id === id) return this.coresPiecesData[i];
         }
         return null;
       },
@@ -124,7 +123,7 @@ var DataService = function(Environment) {
       },
 
       getItemName: function(item) {
-        return i18n.currentLocale() === 'ru' ? item.name_ru : item.name_en;
+        return item.name[i18n.currentLocale()];
       },
 
       getBoostName: function(boostId) {
@@ -340,19 +339,19 @@ var DataService = function(Environment) {
         flattenItems.items.forEach(function(item, index) {
           if (item) {
             // log('flatten item next:', item);
-            if (item.stats_info) {
-              keys = Object.keys(item.stats_info);
+            if (item.stats) {
+              keys = Object.keys(item.stats);
               keys.forEach(function(boostId) {
                 if (!boostId) {
                   // TODO: need to resolve such invalid stats!
                   // console.error('item with invalid boost:');
                   // console.error(item);
                 } else {
-                  this.concatBoostsByQuality(allBoosts, boostId, item.stats_info[boostId], 5-flattenItems.qualities[index]);
+                  this.concatBoostsByQuality(allBoosts, boostId, item.stats[boostId], 5-flattenItems.qualities[index]);
                 }
               }, this);
             } else {
-              console.error('item without [stats_info]:');
+              console.error('item without [stats]:');
               console.error(item);
             }
           }
@@ -380,13 +379,13 @@ var DataService = function(Environment) {
         var keys, allBoosts = {};
 
         items.forEach(function(item) {
-          if (item.stats_info){
-            keys = Object.keys(item.stats_info);
+          if (item.stats){
+            keys = Object.keys(item.stats);
             keys.forEach(function(boostId) {
-              this.concatBoosts(allBoosts, boostId, item.stats_info[boostId]);
+              this.concatBoosts(allBoosts, boostId, item.stats[boostId]);
             }, this);
           } else {
-            console.error('item without [stats_info]:', item);
+            console.error('item without [stats]:', item);
           }
         }.bind(this));
 
@@ -419,10 +418,10 @@ var DataService = function(Environment) {
 
         var data = this.coresPiecesData.filter(function(item) {
           typeMatch = onlyTypes.length === 0 || onlyTypes.indexOf(item.type) >= 0;
-          eventMatch = onlyEvents.length === 0 || onlyEvents.indexOf(item.gameEventId) >= 0;
+          eventMatch = onlyEvents.length === 0 || onlyEvents.indexOf(item.eventId) >= 0;
           slotMatch = onlySlots.length === 0 || onlySlots.indexOf(item.slot) >= 0;
           if (onlyBoosts.length > 0) {
-            boostMatch = this.isAnyBoostExist(onlyBoosts, item.stats_info);
+            boostMatch = this.isAnyBoostExist(onlyBoosts, item.stats);
           } else {
             boostMatch = true;
           }
@@ -435,8 +434,8 @@ var DataService = function(Environment) {
 
       sortByBoost: function(data, boost) {
         data.sort(function(a, b) {
-          var value1 = this.calculateLuck(a.stats_info[boost.toString()][5]);
-          var value2 = this.calculateLuck(b.stats_info[boost.toString()][5]);
+          var value1 = this.calculateLuck(a.stats[boost.toString()][5]);
+          var value2 = this.calculateLuck(b.stats[boost.toString()][5]);
           return value2 - value1;
         }.bind(this));
 
@@ -449,8 +448,8 @@ var DataService = function(Environment) {
           var value2 = 0;
           for (var i = 0, len = boosts.length; i < len; i++) {
             var boostId = boosts[i].toString();
-            var boostA = a.stats_info[boostId];
-            var boostB = b.stats_info[boostId];
+            var boostA = a.stats[boostId];
+            var boostB = b.stats[boostId];
             if (boostA !== undefined && boostA[5] !== undefined)
               value1 += this.calculateLuck(boostA[5]);
             if (boostB !== undefined && boostB[5] !== undefined)
@@ -523,12 +522,12 @@ var DataService = function(Environment) {
 
       loadData: function(data) {
         for (var i = data.length - 1; i >= 0; i--) {
-          if (data[i].main_info_en["Equipment Types"] === "Crafting Recipes") {
+          if (data[i].type === "Crafting Recipes") {
             data[i] = null;
           } else {
-            data[i].type = data[i].main_info_en["Equipment Types"];
-            data[i].gameEvent = data[i].main_info_en["Event"];
-            data[i].slot = data[i].main_info_en["Slot"];
+            // data[i].type = data[i].main_info_en["Equipment Types"];
+            // data[i].event = data[i].main_info_en["Event"];
+            // data[i].slot = data[i].main_info_en["Slot"];
             data[i].sprite = data[i].img_base.replace('.png', '');
           }
         };
@@ -542,7 +541,7 @@ var DataService = function(Environment) {
         this.events.ru = this.getUniqEventsRu(this.events.en);
         // проставляем айдишники каждому итему чтобы не возиться со строками
         for (var i = data.length - 1; i >= 0; i--) {
-          data[i].gameEventId = this.events.en.indexOf(data[i].gameEvent);
+          data[i].eventId = this.events.en.indexOf(data[i].event);
         };
       },
 
@@ -553,10 +552,10 @@ var DataService = function(Environment) {
       getUniqEvents: function(data) {
         // fix undefined and incorrect data
         var uniqueEvents = data.map(function(item) {
-          if (item.gameEvent === undefined) {
-            item.gameEvent = 'Epic Snow Chests';
+          if (item.event === undefined) {
+            item.event = 'Epic Snow Chests';
           }
-          return item.gameEvent;
+          return item.event;
         });
         // remove duplicates
         uniqueEvents = uniqueEvents.filter(function(item, index) {
@@ -571,7 +570,7 @@ var DataService = function(Environment) {
           if (eventName === 'Epic Snow Chests') {
             eventRu = 'Эпические снежные сундуки';
           } else {
-            itemIndex = this.coresPiecesData.findIndex(function(item) { return item.gameEvent === eventName });
+            itemIndex = this.coresPiecesData.findIndex(function(item) { return item.event === eventName });
             eventRu = this.coresPiecesData[itemIndex].main_info_ru["Событие"];
           }
           return eventRu;

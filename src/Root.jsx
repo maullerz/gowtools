@@ -161,9 +161,9 @@ var Root = React.createClass({
 
   isItemSelected: function(id) {
     var currSetItem = this.refs.craftedItemBox.state.setItem;
-    if (currSetItem.core && currSetItem.core.href === id) return true;
+    if (currSetItem.core && currSetItem.core.id === id) return true;
     for (var i = 0, len = currSetItem.pieces.length; i < len; i++) {
-      if (currSetItem.pieces[i].href === id) return true;
+      if (currSetItem.pieces[i].id === id) return true;
     }
     return false;
   },

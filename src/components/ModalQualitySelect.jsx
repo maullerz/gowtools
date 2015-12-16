@@ -23,7 +23,7 @@ var ModalQualitySelect = React.createClass({
 
   open: function(item) {
     this.setState({
-      item: this.DataService.getItemById(item.href),
+      item: this.DataService.getItemById(item.id),
       showModal: true
     });
   },

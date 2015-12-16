@@ -124,7 +124,7 @@ var CraftedItemBox = React.createClass({
         currSetItem.coreQuality = item.quality;
         result = true;
       } else {
-        if (item.href !== currSetItem.core.href) {
+        if (item.id !== currSetItem.core.id) {
           currSetItem.core = item;
           currSetItem.coreQuality = item.quality;
           result = true;
@@ -134,7 +134,7 @@ var CraftedItemBox = React.createClass({
         }
       }
     } else if (item.type === 'Piece') {
-      var ix = currSetItem.pieces.findIndex(function(piece) { return item.href === piece.href });
+      var ix = currSetItem.pieces.findIndex(function(piece) { return item.id === piece.id });
 
       // remove piece from setItem
       if (ix >= 0) {
@@ -161,7 +161,7 @@ var CraftedItemBox = React.createClass({
     if (item.type === 'Core') {
       currSetItem.coreQuality = quality;
     } else if (item.type === 'Piece') {
-      var ix = currSetItem.pieces.findIndex(function(piece) { return item.href === piece.href });
+      var ix = currSetItem.pieces.findIndex(function(piece) { return item.id === piece.id });
       currSetItem.piecesQualities[ix] = quality;
     }
     this.setState({ setItem: currSetItem });

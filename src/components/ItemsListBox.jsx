@@ -55,7 +55,7 @@ var ItemsListBox = React.createClass({
       <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
         boostId={boostId}
         matched={matched}
-        ref={'row-item-'+item.href}
+        ref={'row-item-'+item.id}
         isItemSelected={this.props.isItemSelected}
         onItemSelected={this.props.onItemSelected}
         openItemInfo={this.props.openItemInfo} />
@@ -63,7 +63,7 @@ var ItemsListBox = React.createClass({
   },
 
   getItemNodes: function(item, onlyBoosts) {
-    var boostsArr = Object.keys(item.stats_info);
+    var boostsArr = Object.keys(item.stats);
     boostsArr.unshift(null); // for header row
 
     var items = boostsArr.map(function(boostId, index) {
