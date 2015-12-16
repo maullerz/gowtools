@@ -521,14 +521,15 @@ var DataService = function(Environment) {
       },
 
       loadData: function(data) {
+        // various data preparing
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i].type === "Crafting Recipes") {
             data[i] = null;
           } else {
-            // data[i].type = data[i].main_info_en["Equipment Types"];
-            // data[i].event = data[i].main_info_en["Event"];
-            // data[i].slot = data[i].main_info_en["Slot"];
             data[i].sprite = data[i].img_base.replace('.png', '');
+            if (data[i].info.event) {
+              data[i].event = data[i].info.event.en;
+            }
           }
         };
 
@@ -571,7 +572,7 @@ var DataService = function(Environment) {
             eventRu = 'Эпические снежные сундуки';
           } else {
             itemIndex = this.coresPiecesData.findIndex(function(item) { return item.event === eventName });
-            eventRu = this.coresPiecesData[itemIndex].main_info_ru["Событие"];
+            eventRu = this.coresPiecesData[itemIndex].info.event.ru;
           }
           return eventRu;
         }, this);
