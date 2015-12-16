@@ -57,7 +57,7 @@ var ItemRow = React.createClass({
             <div id='img44' className={spriteName}/>
           </td>
           <td className="item-name" colSpan='13'>{this.itemName()}</td>
-          <td className="game-event" colSpan='4'>{item.event}</td>
+          <td className="game-event" colSpan='4'>{this.DataService.getEventName(item.eventId)}</td>
         </tr>
       );
 

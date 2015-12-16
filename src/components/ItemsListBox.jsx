@@ -157,9 +157,10 @@ var ItemsListBox = React.createClass({
     if (this.state.onlyTypes.indexOf('Pieces') >= 0) {
       this.pieces = this.getFilteredData(['Piece'], [], this.props.onlyEvents, this.props.onlyBoosts);
       if (this.pieces.length > 0) {
+        var header = i18n.t('items-list.pieces') + ': ' + this.pieces.length;
         return (
           <div>
-            <h4>Pieces: {this.pieces.length}</h4>
+            <h4>{header}</h4>
             <ReactList
               ref='reactList'
               initialIndex={0}

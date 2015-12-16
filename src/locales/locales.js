@@ -43,6 +43,7 @@ module.exports = {
     },
     "items-list": {
       "items": " items",
+      "pieces": "Pieces",
       "Helm": "Helm",
       "Armor": "Armor",
       "Feet": "Feet",
@@ -102,6 +103,7 @@ module.exports = {
     },
     "items-list": {
       "items": "",
+      "pieces": "Фрагменты",
       "Helm": "Шлемы",
       "Armor": "Доспехи",
       "Feet": "Обувь",

@@ -144,10 +144,12 @@ td {
   &.item-name, &.piece-name, &.core-name {
     font-size: 14px;
     font-weight: bold;
+    padding-right: 3px;
   }
 
   &.game-event {
     font-weight: bold;
+    padding: 0 3px;
   }
 
 }
