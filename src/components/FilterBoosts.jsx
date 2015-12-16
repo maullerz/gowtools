@@ -16,7 +16,6 @@ var FilterBoosts = React.createClass({
 
   componentWillMount: function() {
     this.DataService = DataService();
-    // TODO: set this.sortedBoosts[i18n.locale]
   },
 
   boostClicked: function(event) {
@@ -33,7 +32,7 @@ var FilterBoosts = React.createClass({
   },
 
   getBtnState: function(boostId) {
-    return this.state.boosts.indexOf(boostId) >= 0 ? 'active' : '';
+    return this.state.boosts.indexOf(parseInt(boostId)) >= 0 ? 'active' : '';
   },
 
   clearFilter: function() {
@@ -47,9 +46,41 @@ var FilterBoosts = React.createClass({
 
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return null;
+    var locale = i18n.currentLocale();
 
-    var boostNodes = this.DataService.allBoosts.map(function(boostItem, boostId) {
-      var boostName = this.DataService.getBoostName(boostId);
+    if (!this.sortedBoosts) this.sortedBoosts = {};
+    if (!this.sortedBoosts[locale]) {
+      if (locale === 'ru') {
+        var tmp = Object.keys(this.DataService.allBoostsRu);
+      } else {
+        var tmp = Object.keys(this.DataService.allBoosts);
+      }
+
+      // убираем из фильтров бусты не найденные ни в одном итеме
+      tmp = this.DataService.sortBoosts(tmp);
+      tmp.forEach(function(boostId, index) {
+        var exist = false;
+        for (var i = 0, len = this.coresPiecesData.length; i < len; ++i) {
+          var item = this.coresPiecesData[i];
+          if (this.isAnyBoostExist([boostId], item.stats)) {
+            exist = true;
+            break;
+          }
+        }
+        if (!exist) tmp[index] = null;
+      }, this.DataService);
+      tmp = tmp.filter(function(boostId) { return boostId });
+      //////////
+
+      this.sortedBoosts[locale] = {};
+      tmp.forEach(function(boostId) {
+        var name = this.DataService.getBoostName(boostId);
+        this.sortedBoosts[locale][name] = boostId;
+      }, this);
+    }
+
+    var boostNodes = Object.keys(this.sortedBoosts[locale]).map(function(boostName) {
+      var boostId = this.sortedBoosts[locale][boostName];
       return (
         <Button id='snap-filter-btn' value={boostId} key={'boost-'+boostId}
                 onClick={this.boostClicked}

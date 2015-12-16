@@ -45,14 +45,14 @@ var FilterEvents = React.createClass({
   },
 
   checkLocale: function(locale) {
-    if (!this.sortedBoosts) this.sortedBoosts = {};
-    if (!this.sortedBoosts[locale]) {
+    if (!this.sortedEvents) this.sortedEvents = {};
+    if (!this.sortedEvents[locale]) {
       var tmp = this.DataService.events[locale].concat([]);
       tmp.sort();
-      this.sortedBoosts[locale] = {};
+      this.sortedEvents[locale] = {};
       tmp.forEach(function(name) {
         var ix = this.DataService.events[locale].indexOf(name);
-        this.sortedBoosts[locale][name] = ix;
+        this.sortedEvents[locale][name] = ix;
       }, this);
     }
   },
@@ -62,8 +62,8 @@ var FilterEvents = React.createClass({
     var locale = i18n.currentLocale();
     this.checkLocale(locale);
 
-    var eventNodes = Object.keys(this.sortedBoosts[locale]).map(function(eventName) {
-      var eventId = this.sortedBoosts[locale][eventName];
+    var eventNodes = Object.keys(this.sortedEvents[locale]).map(function(eventName) {
+      var eventId = this.sortedEvents[locale][eventName];
       return (
         <Button id='snap-filter-btn' value={eventId} key={'event-'+eventId}
                 onClick={this.eventClicked}

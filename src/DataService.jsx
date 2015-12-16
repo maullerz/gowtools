@@ -161,12 +161,43 @@ var DataService = function(Environment) {
       },
 
       sortBoosts: function(boostsArr) {
-        // TODO
+        var debuffs = [];
+        var boosts = [];
+        var debuffsStrat = [];
+        var boostsStrat = [];
+        var etcBoosts = [];
+        var allDebuffs = this.filterDebuffBoosts();
+
+        boostsArr.forEach(function(boostId) {
+          var bName = this.allBoosts[boostId];
+          if (!bName) {
+            console.error('Didnt find bName, boostId:'+boostId);
+          } else if (this.isEtcBoost(bName)) {
+            etcBoosts.push(boostId);
+          } else {
+            // var isStrat = bName.indexOf('Strat') >= 0;
+            // if (allDebuffs.indexOf(bName) >= 0) {
+            //   isStrat ? debuffsStrat.push(boostId) : debuffs.push(boostId);
+            // } else {
+            //   isStrat ?  boostsStrat.push(boostId) : boosts.push(boostId);
+            // }
+            if (allDebuffs.indexOf(bName) >= 0) {
+              debuffs.push(boostId);
+            } else {
+              boosts.push(boostId);
+            }
+          }
+        }, this);
+
+        return boosts.concat(debuffs).concat(etcBoosts);
       },
 
-      getSimpleSummaryTable: function(calculatedBoosts) {
-        var rows = Object.keys(calculatedBoosts).map(function(boostId, index) {
-          var boost = calculatedBoosts[boostId];
+      getSimpleSummaryTable: function(itemBoosts) {
+        var boostsArr = Object.keys(itemBoosts);
+        boostsArr = this.sortBoosts(boostsArr);
+
+        var rows = boostsArr.map(function(boostId, index) {
+          var boost = itemBoosts[boostId];
           var rowColor = this.getColorForBoost(boostId);
           var iconName = this.getIconNameForBoost(boostId);
 
@@ -205,7 +236,6 @@ var DataService = function(Environment) {
         var debuffs = [];
         var boosts = [];
         var debuffsStrat = [];
-        var boostsStrat = [];
         var boostsStrat = [];
         var etcBoosts = [];
 
