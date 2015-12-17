@@ -301,11 +301,11 @@ var DataService = function(Environment) {
                 <td className='sel-boost-name'>
                   {this.getBoostName(regBoostId)}
                 </td>
-                <td className={'sel-lvl lvl6 '}>
-                  {valueRegular}
-                </td>
                 <td className={'sel-lvl lvl6 '+rowColor}>
                   {valueStrategic}
+                </td>
+                <td className={'sel-lvl lvl6 '}>
+                  {valueRegular}
                 </td>
               </tr>
             )
@@ -336,8 +336,8 @@ var DataService = function(Environment) {
                       <thead><tr>
                         <th></th>
                         <th>{i18n.t('summary.boosts')}</th>
-                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
                         <th className='lvl-head'>{i18n.t('summary.strategic')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
                       </tr></thead>
                     ) : null}
                     <tbody>
@@ -354,8 +354,8 @@ var DataService = function(Environment) {
                       <thead><tr>
                         <th></th>
                         <th>{i18n.t('summary.debuffs')}</th>
-                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
                         <th className='lvl-head'>{i18n.t('summary.strategic')}</th>
+                        <th className='lvl-head'>{i18n.t('summary.regular')}</th>
                       </tr></thead>
                     ) : null}
                     <tbody>
@@ -553,10 +553,10 @@ var DataService = function(Environment) {
       calculateLuck: function(arr, highRangeBoost) {
         if (!arr || !arr[0] || !arr[1]) return null;
 
-        // TODO move CRAFT_CORES_LUCK & highRangeBoost to SETTINGS
         // TODO get approximate highRangeBoost value
         if (!highRangeBoost) highRangeBoost = 1;
-        var CRAFT_CORES_LUCK = 0.8;
+
+        var CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
 
         var min = arr[0],
             max = arr[1]*highRangeBoost;

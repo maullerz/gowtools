@@ -46,6 +46,7 @@ var Root = React.createClass({
     return {
       activeTab: 1,
       language: i18n.currentLocale() || i18n.defaultLocale,
+      craftLuck: true,
       filterEvents: [],
       filterBoosts: []
     }
@@ -266,6 +267,20 @@ var Root = React.createClass({
     return this.state.activeTab === tabIndex ? '' : ' hidden';
   },
 
+  onCraftLuckClick: function() {
+    this.state.setState(craftLuck)
+    console.log('checkbox clicked');
+  },
+
+  onCraftLuckChange: function(event) {
+    this.setState({craftLuck: event.target.checked });
+  },
+
+  onHighRangeBoostChange: function() {
+    // TODO
+    console.log('checkbox clicked: '+event.target.checked);
+  },
+
   render: function() {
     if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
 
@@ -273,6 +288,7 @@ var Root = React.createClass({
       this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
     };
 
+    if (this.DataService) this.DataService.coreCraftLuck = this.state.craftLuck;
 
     return (
       <div className='root'>
@@ -345,14 +361,15 @@ var Root = React.createClass({
               <option value='ru'>{i18n.t('russian')}</option>
               <option value='en'>{i18n.t('english')}</option>
             </Input>
-            <div>
-              {'TODO:'}
-            </div>
-            <div>
-              {'-- CORES CRAFT LUCK'}
-            </div>
-            <div>
-              {'-- HIGH RANGE BOOST'}
+            <div className='settings-group'>
+              <Input type="checkbox"
+                  checked={this.state.craftLuck}
+                  label={i18n.t('settings.craft-luck')}
+                  onChange={this.onCraftLuckChange} />
+              {process.env.NODE_ENV !== 'production' ? <Input type="checkbox"
+                  disabled
+                  label={i18n.t('settings.highrange-boost')}
+                  onChange={this.onHighRangeBoostChange} /> : null}
             </div>
           </div>
 

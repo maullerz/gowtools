@@ -32,8 +32,17 @@ Button#quality {
 }
 
 .tab-settings {
-  
+  padding: 15px;
 }
+  .select-language {
+    max-width: 200px;
+    padding: 0 15px;
+  }
+
+  .settings-group {
+    padding: 0 15px;
+  }
+
 
 .tab-crafting {
   display: flex;

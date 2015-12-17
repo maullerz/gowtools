@@ -56,6 +56,10 @@ module.exports = {
       "etc": "Other Boosts",
       "regular": "Regular",
       "strategic": "Strategic"
+    },
+    "settings": {
+      "craft-luck": "Core Crafting Luck",
+      "highrange-boost": "Core High Range Boost"
     }
   },
 
@@ -116,6 +120,10 @@ module.exports = {
       "etc": "Разное",
       "regular": "Регулярные",
       "strategic": "Стратеги"
+    },
+    "settings": {
+      "craft-luck": "Везение при изготовлении сердцевин",
+      "highrange-boost": "Буст верхнего диапазона сердцевин"
     }
   },
 };
