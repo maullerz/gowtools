@@ -61,6 +61,7 @@ module.exports = {
       "confirm-remove": "Remove selected core from set?"
     },
     "settings": {
+      "colorize-stats": "Colorize Statistics",
       "craft-luck": "Core Crafting Luck",
       "highrange-boost": "Core High Range Boost"
     }
@@ -128,6 +129,7 @@ module.exports = {
       "confirm-remove": "Удалить выбранное ядро из набора?"
     },
     "settings": {
+      "colorize-stats": "Выделять цветом статистику",
       "craft-luck": "Везение при изготовлении сердцевин",
       "highrange-boost": "Буст верхнего диапазона сердцевин"
     }

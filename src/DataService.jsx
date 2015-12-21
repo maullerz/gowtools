@@ -100,13 +100,13 @@ var DataService = function(Environment) {
       getColorForBoost: function(boostId) {
         var bName = this.allBoosts[boostId];
         if (!bName) {
-          console.log('cannot find boost: '+boostId);
-          return 'etc-color';
+          console.error('cannot find boost: '+boostId);
+          return '';
         };
-        if (bName.indexOf('Attack') >= 0) return 'attack-color';
-        if (bName.indexOf('Defense') >= 0) return 'defense-color';
-        if (bName.indexOf('Health') >= 0) return 'health-color';
-        return 'etc-color';
+        if (bName.indexOf('Attack') >= 0) return ' attack-color';
+        if (bName.indexOf('Defense') >= 0) return ' defense-color';
+        if (bName.indexOf('Health') >= 0) return ' health-color';
+        return '';
       },
 
       getIconNameForBoost: function(boostId) {
@@ -198,18 +198,18 @@ var DataService = function(Environment) {
 
         var rows = boostsArr.map(function(boostId, index) {
           var boost = itemBoosts[boostId];
-          var rowColor = this.getColorForBoost(boostId);
+          var rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
           var iconName = this.getIconNameForBoost(boostId);
 
           return (
-            <tr className='first-row' key={'b-'+index}>
+            <tr className={'first-row'+rowColor} key={'b-'+index}>
               <td className='sel-icon'>
                 {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
               </td>
               <td className='sel-boost-name'>
                 {this.getBoostName(boostId)}
               </td>
-              <td className={'lvl lvl6 '+rowColor}>
+              <td className={'lvl lvl6'}>
                   {this.simpleShow(boost[5])}
               </td>
               <td className='lvl'>{this.simpleShow(boost[4])}</td>
@@ -287,24 +287,24 @@ var DataService = function(Environment) {
             var strategicData = calculatedBoosts[boostId];
             var regBoostId = this.stratPairs[boostId];
             var regData = calculatedBoosts[regBoostId];
-            var rowColor = this.getColorForBoost(boostId);
+            var rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
             var iconName = this.getIconNameForBoost(boostId);
 
             var valueRegular = this.calculateLuck(regData);
             var valueStrategic = this.calculateLuck(strategicData);
 
             return (
-              <tr className='first-row' key={'b-'+index}>
-                <td className='sel-icon'>
+              <tr className={'first-row'+rowColor} key={'b-'+index}>
+                <td className={'sel-icon'}>
                   {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>
                   {this.getBoostName(regBoostId)}
                 </td>
-                <td className={'sel-lvl lvl6 '+rowColor}>
+                <td className={'sel-lvl lvl6'}>
                   {valueStrategic}
                 </td>
-                <td className={'sel-lvl lvl6 '}>
+                <td className={'sel-lvl lvl6'}>
                   {valueRegular}
                 </td>
               </tr>

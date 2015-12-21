@@ -47,6 +47,7 @@ var Root = React.createClass({
       activeTab: 1,
       language: i18n.currentLocale() || i18n.defaultLocale,
       craftLuck: true,
+      colorizeStats: true,
       filterEvents: [],
       filterBoosts: []
     }
@@ -271,17 +272,16 @@ var Root = React.createClass({
     return this.state.activeTab === tabIndex ? '' : ' hidden';
   },
 
-  onCraftLuckClick: function() {
-    this.state.setState(craftLuck)
-    console.log('checkbox clicked');
+  onCraftLuckChange: function(event) {
+    this.setState({ craftLuck: event.target.checked });
   },
 
-  onCraftLuckChange: function(event) {
-    this.setState({craftLuck: event.target.checked });
+  onColorizeStatsChange: function(event) {
+    this.setState({ colorizeStats: event.target.checked });
   },
 
   onHighRangeBoostChange: function() {
-    // TODO
+    // TODO - HighRangeBoost
     console.log('checkbox clicked: '+event.target.checked);
   },
 
@@ -292,7 +292,10 @@ var Root = React.createClass({
       this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
     };
 
-    if (this.DataService) this.DataService.coreCraftLuck = this.state.craftLuck;
+    if (this.DataService) {
+      this.DataService.coreCraftLuck = this.state.craftLuck;
+      this.DataService.colorizeStats = this.state.colorizeStats;
+    }
 
     return (
       <div className='root'>
@@ -368,6 +371,10 @@ var Root = React.createClass({
               <option value='en'>{i18n.t('english')}</option>
             </Input>
             <div className='settings-group'>
+              <Input type="checkbox"
+                  checked={this.state.colorizeStats}
+                  label={i18n.t('settings.colorize-stats')}
+                  onChange={this.onColorizeStatsChange} />
               <Input type="checkbox"
                   checked={this.state.craftLuck}
                   label={i18n.t('settings.craft-luck')}
