@@ -113,11 +113,11 @@ module.exports = {
     "items-list": {
       "items": "",
       "pieces": "Фрагменты",
-      "Helm": "Шлемы",
+      "Helm": "Шлем",
       "Armor": "Доспехи",
       "Feet": "Обувь",
       "Weapon": "Оружие",
-      "Accessory": "Принадлежности"
+      "Accessory": "Принадлежность"
     },
     "summary": {
       "boosts": "Бусты",

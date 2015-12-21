@@ -26,7 +26,7 @@ var SummaryInfoBox = React.createClass({
     this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
     var coresSet = new CoresSetModel();
     return {
-      activeKey: null,
+      activeKey: 'set-item-0',
       coresSet: coresSet
     };
   },
@@ -97,6 +97,7 @@ var SummaryInfoBox = React.createClass({
         this.state.coresSet[setItem.core.slot] = setItem;
       } else if (state === 'minus') {
         this.state.coresSet[setItem.core.slot] = null;
+        this.state.activeKey = 'set-item-0';
       }
     } else {
       if (state === 'plus') {
@@ -113,6 +114,7 @@ var SummaryInfoBox = React.createClass({
           this.state.coresSet.Accessory.push(setItem);
         }
       } else if (state === 'minus') {
+        this.state.activeKey = 'set-item-0';
         if (isAll) {
           this.state.coresSet.Accessory = [];
         } else {
@@ -123,13 +125,22 @@ var SummaryInfoBox = React.createClass({
         }
       }
     }
-    this.setState({ coresSet: this.state.coresSet });
+    this.setState({
+      activeKey: this.state.activeKey,
+      coresSet: this.state.coresSet
+    });
+  },
+
+  getActiveSetItem: function() {
+    var setItem = this.flattenCoresSet().filter(function(setItem, index) {
+      return this.state.activeKey === 'set-item-'+index
+    }, this);
+
+    return setItem[0];
   },
 
   qualitySelected: function(item, quality) {
-    var setItem = this.flattenCoresSet().filter(function(setItem, index) {
-      return this.state.activeKey === 'set-item-'+index
-    }, this)[0];
+    var setItem = this.getActiveSetItem();
 
     if (item.type === 'Core') {
       setItem.coreQuality = quality;
@@ -195,20 +206,18 @@ var SummaryInfoBox = React.createClass({
       });
     }
     this.setState({
-      activeKey: null,
+      activeKey: 'set-item-0',
       coresSet: this.state.coresSet
     });
   },
 
   removeSetItem: function() {
     if (this.state.activeKey) {
-      var setItem = this.flattenCoresSet().filter(function(setItem, index) {
-        return this.state.activeKey === 'set-item-'+index
-      }, this);
+      var setItem = this.getActiveSetItem();
 
-      if (setItem[0]) {
+      if (setItem) {
         var remove = function(buttonIndex) {
-          if (buttonIndex === 1) this.removeSetItemFromSet(setItem[0]);
+          if (buttonIndex === 1) this.removeSetItemFromSet(setItem);
         }.bind(this);
 
         if (this.props.platform === 'browser') {
@@ -227,12 +236,9 @@ var SummaryInfoBox = React.createClass({
 
   editSetItem: function() {
     if (this.state.activeKey) {
-      var setItem = this.flattenCoresSet().filter(function(setItem, index) {
-        return this.state.activeKey === 'set-item-'+index
-      }, this);
-      if (setItem[0]) {
-        this.setState({ activeKey: null });
-        this.props.selectSetItemForEdit(setItem[0]);
+      var setItem = this.getActiveSetItem();
+      if (setItem) {
+        this.props.selectSetItemForEdit(setItem);
         this.props.tabSelect(1);
       }
     };
@@ -243,7 +249,7 @@ var SummaryInfoBox = React.createClass({
       if (buttonIndex === 1) {
         this.setState({
           coresSet: new CoresSetModel(),
-          activeKey: null
+          activeKey: 'set-item-0',
         });
       }
     }.bind(this);
@@ -282,9 +288,7 @@ var SummaryInfoBox = React.createClass({
 
   render: function() {
     if (!this.DataService) return null;
-    if (this.props.activeTab !== 2 && this.state.activeKey) {
-      this.setState({ activeKey: null });
-    }
+
     var flattenItems = this.flattenCoresSet();
 
     if (flattenItems.length === 0) return (
@@ -292,6 +296,9 @@ var SummaryInfoBox = React.createClass({
         <div className='loading'>NO CORES IN SET</div>
       </div>
     );
+
+    var activeSetItem = this.getActiveSetItem();
+    var slotName = activeSetItem ? this.DataService.getSlotName(activeSetItem.core) : '';
 
     return (
       <div className={"tab-statistics"+this.props.className}>
@@ -309,6 +316,10 @@ var SummaryInfoBox = React.createClass({
             <Button className={'glyph-btn'+this.getControlsState()} onClick={this.removeSetItem}>
               <Glyphicon glyph="minus"/>
             </Button>
+
+            <div className='gap'>
+              {slotName}
+            </div>
 
             <Button className={'glyph-btn clear-all'+this.getClearBtnState()} onClick={this.clearSet}>
               <Glyphicon glyph="trash"/>

@@ -126,6 +126,10 @@ var DataService = function(Environment) {
         return item.name[i18n.currentLocale()];
       },
 
+      getSlotName: function(item) {
+        return i18n.t('items-list.'+item.slot);
+      },
+
       getBoostName: function(boostId) {
         if (i18n.currentLocale() === 'ru') {
           return this.allBoostsRu[boostId];
