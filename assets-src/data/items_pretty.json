@@ -839,8 +839,8 @@
         "ru": "Изумрудная хватка"
       },
       "recipes": {
-        "en": "Viridian Embrace, Viridian Embrace",
-        "ru": "Изумрудные объятия, Изумрудные объятия"
+        "en": "Viridian Embrace",
+        "ru": "Изумрудные объятия"
       },
       "event": {
         "en": "Emerald Dragon 2015",
@@ -2452,8 +2452,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Gorgon",
-        "ru": "Вечный подарок, Горгона"
+        "en": "Timeless Gift, Gorgon, Winter Gift",
+        "ru": "Вечный подарок, Горгона, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -3531,8 +3531,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -4308,7 +4308,7 @@
       },
       "chests": {
         "en": "Generous Gift, Straggele",
-        "ru": "Generous Gift, Стрэггеле"
+        "ru": "Щедрый подарок, Стрэггеле"
       },
       "monsters": {
         "en": "Straggele",
@@ -8875,7 +8875,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -10004,8 +10004,8 @@
         "ru": "Изумрудный престиж"
       },
       "recipes": {
-        "en": "Viridian Dominance, Viridian Dominance",
-        "ru": "Изумрудное владычество, Изумрудное владычество"
+        "en": "Viridian Dominance",
+        "ru": "Изумрудное владычество"
       },
       "event": {
         "en": "Emerald Dragon 2015",
@@ -10440,8 +10440,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -12330,8 +12330,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -13348,7 +13348,7 @@
       },
       "chests": {
         "en": "Generous Gift, Straggele",
-        "ru": "Generous Gift, Стрэггеле"
+        "ru": "Щедрый подарок, Стрэггеле"
       },
       "monsters": {
         "en": "Straggele",
@@ -13693,7 +13693,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -14285,8 +14285,8 @@
         "ru": "Изумрудная стойкость"
       },
       "recipes": {
-        "en": "Viridian Vigilance, Viridian Vigilance",
-        "ru": "Изумрудная бдительность, Изумрудная бдительность"
+        "en": "Viridian Vigilance",
+        "ru": "Изумрудная бдительность"
       },
       "event": {
         "en": "Emerald Dragon 2015",
@@ -15022,7 +15022,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -15157,7 +15157,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -17354,8 +17354,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Gorgon",
-        "ru": "Вечный подарок, Горгона"
+        "en": "Timeless Gift, Gorgon, Winter Gift",
+        "ru": "Вечный подарок, Горгона, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -17490,7 +17490,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -17673,8 +17673,8 @@
         "ru": "Изумрудный завоеватель"
       },
       "recipes": {
-        "en": "Viridian Supremacy, Viridian Supremacy",
-        "ru": "Изумрудное превосходство, Изумрудное превосходство"
+        "en": "Viridian Supremacy",
+        "ru": "Изумрудное превосходство"
       },
       "event": {
         "en": "Emerald Dragon 2015",
@@ -18164,8 +18164,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -18968,8 +18968,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -19300,8 +19300,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -20602,7 +20602,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -21902,7 +21902,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -22085,8 +22085,8 @@
         "ru": "Изумрудный удар"
       },
       "recipes": {
-        "en": "Viridian Vengeance, Viridian Vengeance",
-        "ru": "Изумрудное отмщение, Изумрудное отмщение"
+        "en": "Viridian Vengeance",
+        "ru": "Изумрудное отмщение"
       },
       "event": {
         "en": "Emerald Dragon 2015",
@@ -24037,6 +24037,86 @@
     }
   },
   {
+    "id": 1060,
+    "img_base": "m1060",
+    "img_ext": "m1069",
+    "type": "Core",
+    "slot": "Weapon",
+    "duration": "0h 12m 0s;0h 14m 24s;0h 16m 48s;0h 19m 12s;0h 21m 36s;0h 36m 0s",
+    "name": {
+      "en": "Helix Sword Core",
+      "ru": "Сердцевина спирального меча"
+    },
+    "info": {
+      "result": {
+        "en": "Helix Sword",
+        "ru": "Спиральный меч"
+      },
+      "recipes": {
+        "en": "Spiral Sword",
+        "ru": "Меч в форме спирали"
+      },
+      "chests": {
+        "en": "Cores",
+        "ru": "Сердцевины"
+      }
+    },
+    "stats": {
+      "57": [
+        [
+          2.91,
+          3.8
+        ],
+        [
+          8.87,
+          14.02
+        ],
+        [
+          10.82,
+          18.97
+        ],
+        [
+          16.59,
+          26.63
+        ],
+        [
+          25.04,
+          38.51
+        ],
+        [
+          59.65,
+          96.91
+        ]
+      ],
+      "33": [
+        [
+          7.24,
+          10.82
+        ],
+        [
+          4.04,
+          5.04
+        ],
+        [
+          5.6,
+          6.67
+        ],
+        [
+          7.77,
+          8.84
+        ],
+        [
+          10.79,
+          11.72
+        ],
+        [
+          14.97,
+          15.53
+        ]
+      ]
+    }
+  },
+  {
     "id": 1864,
     "img_base": "m1864",
     "img_ext": "m1908",
@@ -24061,8 +24141,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -24332,8 +24412,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -26602,7 +26682,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -27619,7 +27699,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -29305,7 +29385,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -29435,7 +29515,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -29694,8 +29774,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -29824,8 +29904,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -30953,7 +31033,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -31083,7 +31163,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       }
     },
     "stats": {
@@ -31338,8 +31418,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -32111,7 +32191,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -32569,7 +32649,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -36011,7 +36091,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -40036,8 +40116,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Gorgon, Timeless Gift",
-        "ru": "Горгона, Вечный подарок"
+        "en": "Gorgon, Timeless Gift, Winter Gift",
+        "ru": "Горгона, Вечный подарок, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -40349,7 +40429,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -40479,7 +40559,7 @@
       },
       "chests": {
         "en": "Cockatrice, Triumphant Gift, Joyous Gift",
-        "ru": "Кокатриса, Торжествующий подарок, Joyous Gift"
+        "ru": "Кокатриса, Торжествующий подарок, Радостный подарок"
       },
       "monsters": {
         "en": "Cockatrice",
@@ -40972,8 +41052,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -41307,7 +41387,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -41607,7 +41687,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -41866,8 +41946,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -42304,8 +42384,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Gorgon, Timeless Gift",
-        "ru": "Горгона, Вечный подарок"
+        "en": "Gorgon, Timeless Gift, Winter Gift",
+        "ru": "Горгона, Вечный подарок, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -44468,8 +44548,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -44598,8 +44678,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -44858,8 +44938,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -45066,8 +45146,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -46367,7 +46447,7 @@
       },
       "chests": {
         "en": "Generous Gift, Straggele",
-        "ru": "Generous Gift, Стрэггеле"
+        "ru": "Щедрый подарок, Стрэггеле"
       },
       "monsters": {
         "en": "Straggele",
@@ -46496,8 +46576,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -47198,8 +47278,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Gorgon, Timeless Gift",
-        "ru": "Горгона, Вечный подарок"
+        "en": "Gorgon, Timeless Gift, Winter Gift",
+        "ru": "Горгона, Вечный подарок, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -47458,8 +47538,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -47667,7 +47747,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -48192,8 +48272,8 @@
         "ru": "Мантикора 2015"
       },
       "chests": {
-        "en": "Manticore",
-        "ru": "Мантикора"
+        "en": "Manticore, Winter Gift",
+        "ru": "Мантикора, Зимний подарок"
       },
       "monsters": {
         "en": "Manticore",
@@ -48478,8 +48558,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -49651,7 +49731,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -49781,7 +49861,7 @@
       },
       "chests": {
         "en": "Norse Troll, Party Gift",
-        "ru": "Скандинавского тролля, Party Gift"
+        "ru": "Скандинавского тролля, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Norse Troll",
@@ -49955,7 +50035,7 @@
       },
       "chests": {
         "en": "Straggele, Generous Gift",
-        "ru": "Стрэггеле, Generous Gift"
+        "ru": "Стрэггеле, Щедрый подарок"
       },
       "monsters": {
         "en": "Straggele",
@@ -51369,7 +51449,7 @@
       },
       "chests": {
         "en": "Guardian Sphinx, Generous Gift",
-        "ru": "Сфинкса-стража, Generous Gift"
+        "ru": "Сфинкса-стража, Щедрый подарок"
       },
       "monsters": {
         "en": "Guardian Sphinx",
@@ -52194,8 +52274,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       }
     },
     "stats": {
@@ -52758,8 +52838,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -52966,8 +53046,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -56660,8 +56740,8 @@
         "ru": "Морозный великан 2015"
       },
       "chests": {
-        "en": "Frost Giant",
-        "ru": "Морозного великана"
+        "en": "Frost Giant, Coal Gift",
+        "ru": "Морозного великана, Уголь в подарок"
       },
       "monsters": {
         "en": "Frost Giant",
@@ -56790,8 +56870,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -56920,8 +57000,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -58345,7 +58425,7 @@
       },
       "chests": {
         "en": "Generous Gift, Straggele",
-        "ru": "Generous Gift, Стрэггеле"
+        "ru": "Щедрый подарок, Стрэггеле"
       },
       "monsters": {
         "en": "Straggele",
@@ -59941,7 +60021,7 @@
       },
       "chests": {
         "en": "Ravenous Harpy, Joyous Gift",
-        "ru": "Ненасытной гарпии, Joyous Gift"
+        "ru": "Ненасытной гарпии, Радостный подарок"
       },
       "monsters": {
         "en": "Ravenous Harpy",
@@ -62484,8 +62564,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Gorgon, Timeless Gift",
-        "ru": "Горгона, Вечный подарок"
+        "en": "Gorgon, Timeless Gift, Winter Gift",
+        "ru": "Горгона, Вечный подарок, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -63330,8 +63410,8 @@
         "ru": "Горгона 2015"
       },
       "chests": {
-        "en": "Gorgon, Timeless Gift",
-        "ru": "Горгона, Вечный подарок"
+        "en": "Gorgon, Timeless Gift, Winter Gift",
+        "ru": "Горгона, Вечный подарок, Зимний подарок"
       },
       "monsters": {
         "en": "Gorgon",
@@ -63460,8 +63540,8 @@
         "ru": "Фенрир 2015"
       },
       "chests": {
-        "en": "Timeless Gift, Fenrir, Party Gift",
-        "ru": "Вечный подарок, Фенрира, Party Gift"
+        "en": "Timeless Gift, Fenrir, Party Gift, Coal Gift",
+        "ru": "Вечный подарок, Фенрира, Подарок на вечеринку, Уголь в подарок"
       },
       "monsters": {
         "en": "Fenrir",
@@ -63721,7 +63801,7 @@
       },
       "chests": {
         "en": "Generous Gift, Straggele",
-        "ru": "Generous Gift, Стрэггеле"
+        "ru": "Щедрый подарок, Стрэггеле"
       },
       "monsters": {
         "en": "Straggele",
@@ -63850,8 +63930,8 @@
         "ru": "Вендиго 2015"
       },
       "chests": {
-        "en": "Wendigo, Explorer's Gift",
-        "ru": "Вендиго, Исследователя"
+        "en": "Wendigo, Explorer's Gift, Party Gift",
+        "ru": "Вендиго, Исследователя, Подарок на вечеринку"
       },
       "monsters": {
         "en": "Wendigo",
@@ -64577,6 +64657,1366 @@
         [
           18.4,
           22.08
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2287,
+    "img_base": "m2287",
+    "type": "Core",
+    "slot": "Helm",
+    "duration": "",
+    "name": {
+      "en": "Helm of the Forest Core",
+      "ru": "Сердцевина шлема леса"
+    },
+    "info": {
+      "result": {
+        "en": "Helm of the Forest",
+        "ru": "Шлем леса"
+      },
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "60": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2243,
+    "img_base": "m2243",
+    "type": "Core",
+    "slot": "Weapon",
+    "duration": "",
+    "name": {
+      "en": "Hunting Spear Core",
+      "ru": "Сердцевина охотничьего копья"
+    },
+    "info": {
+      "result": {
+        "en": "Hunting Spear",
+        "ru": "Охотничье копье"
+      },
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "58": [
+        [
+          11.02,
+          13.22
+        ],
+        [
+          22.71,
+          27.25
+        ],
+        [
+          36.77,
+          44.12
+        ],
+        [
+          58.73,
+          70.48
+        ],
+        [
+          89.67,
+          107.6
+        ],
+        [
+          125.0,
+          150.0
+        ]
+      ],
+      "52": [
+        [
+          11.02,
+          13.22
+        ],
+        [
+          22.71,
+          27.25
+        ],
+        [
+          36.77,
+          44.12
+        ],
+        [
+          58.73,
+          70.48
+        ],
+        [
+          89.67,
+          107.6
+        ],
+        [
+          125.0,
+          150.0
+        ]
+      ],
+      "53": [
+        [
+          5.52,
+          6.62
+        ],
+        [
+          11.37,
+          13.64
+        ],
+        [
+          18.4,
+          22.08
+        ],
+        [
+          29.38,
+          35.26
+        ],
+        [
+          44.84,
+          53.81
+        ],
+        [
+          62.5,
+          75.0
+        ]
+      ],
+      "59": [
+        [
+          5.52,
+          6.62
+        ],
+        [
+          11.37,
+          13.64
+        ],
+        [
+          18.4,
+          22.08
+        ],
+        [
+          29.38,
+          35.26
+        ],
+        [
+          44.84,
+          53.81
+        ],
+        [
+          62.5,
+          75.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2244,
+    "img_base": "m2244",
+    "type": "Core",
+    "slot": "Helm",
+    "duration": "",
+    "name": {
+      "en": "Iron Crown Core",
+      "ru": "Сердцевина железной короны"
+    },
+    "info": {
+      "result": {
+        "en": "Iron Crown",
+        "ru": "Железная корона"
+      },
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "46": [
+        [
+          8.7,
+          10.44
+        ],
+        [
+          22.48,
+          26.98
+        ],
+        [
+          36.31,
+          43.57
+        ],
+        [
+          58.03,
+          69.64
+        ],
+        [
+          88.74,
+          106.49
+        ],
+        [
+          125.0,
+          150.0
+        ]
+      ],
+      "35": [
+        [
+          8.7,
+          10.44
+        ],
+        [
+          22.48,
+          26.98
+        ],
+        [
+          36.31,
+          43.57
+        ],
+        [
+          58.03,
+          69.64
+        ],
+        [
+          88.74,
+          106.49
+        ],
+        [
+          125.0,
+          150.0
+        ]
+      ],
+      "58": [
+        [
+          2.32,
+          2.78
+        ],
+        [
+          5.99,
+          7.19
+        ],
+        [
+          9.68,
+          11.62
+        ],
+        [
+          15.47,
+          18.56
+        ],
+        [
+          23.66,
+          28.39
+        ],
+        [
+          33.33,
+          40.0
+        ]
+      ],
+      "52": [
+        [
+          2.32,
+          2.78
+        ],
+        [
+          5.99,
+          7.19
+        ],
+        [
+          9.68,
+          11.62
+        ],
+        [
+          15.47,
+          18.56
+        ],
+        [
+          23.66,
+          28.39
+        ],
+        [
+          33.33,
+          40.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2288,
+    "img_base": "m2288",
+    "type": "Core",
+    "slot": "Accessory",
+    "duration": "",
+    "name": {
+      "en": "Jeweled Bangle Core",
+      "ru": "Сердцевина украшенной самоцветами браслетки"
+    },
+    "info": {
+      "result": {
+        "en": "Jeweled Bangle",
+        "ru": "Украшенная самоцветами браслетка"
+      },
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "60": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2289,
+    "img_base": "m2289",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Cursed Stone",
+      "ru": "Проклятый камень"
+    },
+    "info": {
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "0": [
+        [
+          2.0,
+          2.4
+        ],
+        [
+          4.52,
+          5.42
+        ],
+        [
+          7.31,
+          8.77
+        ],
+        [
+          11.68,
+          14.02
+        ],
+        [
+          17.85,
+          21.42
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "46": [
+        [
+          2.0,
+          2.4
+        ],
+        [
+          4.52,
+          5.42
+        ],
+        [
+          7.31,
+          8.77
+        ],
+        [
+          11.68,
+          14.02
+        ],
+        [
+          17.85,
+          21.42
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "40": [
+        [
+          2.0,
+          2.4
+        ],
+        [
+          4.52,
+          5.42
+        ],
+        [
+          7.31,
+          8.77
+        ],
+        [
+          11.68,
+          14.02
+        ],
+        [
+          17.85,
+          21.42
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "35": [
+        [
+          2.0,
+          2.4
+        ],
+        [
+          4.52,
+          5.42
+        ],
+        [
+          7.31,
+          8.77
+        ],
+        [
+          11.68,
+          14.02
+        ],
+        [
+          17.85,
+          21.42
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2290,
+    "img_base": "m2290",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Dire Bile",
+      "ru": "Ужасная желчь"
+    },
+    "info": {
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "46": [
+        [
+          2.45,
+          2.94
+        ],
+        [
+          6.0,
+          7.2
+        ],
+        [
+          9.7,
+          11.64
+        ],
+        [
+          15.51,
+          18.61
+        ],
+        [
+          23.71,
+          28.45
+        ],
+        [
+          33.33,
+          40.0
+        ]
+      ],
+      "35": [
+        [
+          2.45,
+          2.94
+        ],
+        [
+          6.0,
+          7.2
+        ],
+        [
+          9.7,
+          11.64
+        ],
+        [
+          15.51,
+          18.61
+        ],
+        [
+          23.71,
+          28.45
+        ],
+        [
+          33.33,
+          40.0
+        ]
+      ],
+      "26": [
+        [
+          1.53,
+          1.84
+        ],
+        [
+          3.75,
+          4.5
+        ],
+        [
+          6.06,
+          7.27
+        ],
+        [
+          9.69,
+          11.63
+        ],
+        [
+          14.82,
+          17.78
+        ],
+        [
+          20.83,
+          25.0
+        ]
+      ],
+      "23": [
+        [
+          1.53,
+          1.84
+        ],
+        [
+          3.75,
+          4.5
+        ],
+        [
+          6.06,
+          7.27
+        ],
+        [
+          9.69,
+          11.63
+        ],
+        [
+          14.82,
+          17.78
+        ],
+        [
+          20.83,
+          25.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2291,
+    "img_base": "m2291",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Earthen Jar",
+      "ru": "Сосуд земли"
+    },
+    "info": {
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "58": [
+        [
+          1.69,
+          2.03
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.25,
+          8.7
+        ],
+        [
+          11.59,
+          13.91
+        ],
+        [
+          17.72,
+          21.26
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "52": [
+        [
+          1.69,
+          2.03
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.25,
+          8.7
+        ],
+        [
+          11.59,
+          13.91
+        ],
+        [
+          17.72,
+          21.26
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "25": [
+        [
+          0.84,
+          1.01
+        ],
+        [
+          2.24,
+          2.69
+        ],
+        [
+          3.63,
+          4.36
+        ],
+        [
+          5.79,
+          6.95
+        ],
+        [
+          8.86,
+          10.63
+        ],
+        [
+          12.5,
+          15.0
+        ]
+      ],
+      "22": [
+        [
+          0.84,
+          1.01
+        ],
+        [
+          2.24,
+          2.69
+        ],
+        [
+          3.63,
+          4.36
+        ],
+        [
+          5.79,
+          6.95
+        ],
+        [
+          8.86,
+          10.63
+        ],
+        [
+          12.5,
+          15.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2292,
+    "img_base": "m2292",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Immortal Ivy",
+      "ru": "Бессмертный плющ"
+    },
+    "info": {
+      "event": {
+        "en": "Dire Deer 2015",
+        "ru": "Ужасный олень 2015"
+      },
+      "chests": {
+        "en": "Dire Deer",
+        "ru": "Ужасного оленя"
+      },
+      "monsters": {
+        "en": "Dire Deer",
+        "ru": "Ужасный олень"
+      }
+    },
+    "stats": {
+      "58": [
+        [
+          1.95,
+          2.34
+        ],
+        [
+          3.79,
+          4.55
+        ],
+        [
+          6.14,
+          7.37
+        ],
+        [
+          9.82,
+          11.78
+        ],
+        [
+          14.99,
+          17.99
+        ],
+        [
+          20.83,
+          25.0
+        ]
+      ],
+      "52": [
+        [
+          1.95,
+          2.34
+        ],
+        [
+          3.79,
+          4.55
+        ],
+        [
+          6.14,
+          7.37
+        ],
+        [
+          9.82,
+          11.78
+        ],
+        [
+          14.99,
+          17.99
+        ],
+        [
+          20.83,
+          25.0
+        ]
+      ],
+      "53": [
+        [
+          1.56,
+          1.87
+        ],
+        [
+          3.03,
+          3.64
+        ],
+        [
+          4.91,
+          5.89
+        ],
+        [
+          7.86,
+          9.43
+        ],
+        [
+          11.99,
+          14.39
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ],
+      "59": [
+        [
+          1.56,
+          1.87
+        ],
+        [
+          3.03,
+          3.64
+        ],
+        [
+          4.91,
+          5.89
+        ],
+        [
+          7.86,
+          9.43
+        ],
+        [
+          11.99,
+          14.39
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2247,
+    "img_base": "m2247",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Large Claws",
+      "ru": "Большие когти"
+    },
+    "info": {
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "59": [
+        [
+          2.65,
+          3.18
+        ],
+        [
+          7.46,
+          8.95
+        ],
+        [
+          12.05,
+          14.46
+        ],
+        [
+          19.27,
+          23.12
+        ],
+        [
+          29.47,
+          35.36
+        ],
+        [
+          41.67,
+          50.0
+        ]
+      ],
+      "53": [
+        [
+          2.65,
+          3.18
+        ],
+        [
+          7.46,
+          8.95
+        ],
+        [
+          12.05,
+          14.46
+        ],
+        [
+          19.27,
+          23.12
+        ],
+        [
+          29.47,
+          35.36
+        ],
+        [
+          41.67,
+          50.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2245,
+    "img_base": "m2245",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Ornate Hilt",
+      "ru": "Украшенная рукоять"
+    },
+    "info": {
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "30": [
+        [
+          1.58,
+          1.9
+        ],
+        [
+          4.48,
+          5.38
+        ],
+        [
+          7.22,
+          8.66
+        ],
+        [
+          11.55,
+          13.86
+        ],
+        [
+          17.68,
+          21.22
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "43": [
+        [
+          1.58,
+          1.9
+        ],
+        [
+          4.48,
+          5.38
+        ],
+        [
+          7.22,
+          8.66
+        ],
+        [
+          11.55,
+          13.86
+        ],
+        [
+          17.68,
+          21.22
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "26": [
+        [
+          1.06,
+          1.27
+        ],
+        [
+          2.98,
+          3.58
+        ],
+        [
+          4.81,
+          5.77
+        ],
+        [
+          7.71,
+          9.25
+        ],
+        [
+          11.79,
+          14.15
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ],
+      "23": [
+        [
+          1.06,
+          1.27
+        ],
+        [
+          2.98,
+          3.58
+        ],
+        [
+          4.81,
+          5.77
+        ],
+        [
+          7.71,
+          9.25
+        ],
+        [
+          11.79,
+          14.15
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2246,
+    "img_base": "m2246",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Rusted Arrowhead",
+      "ru": "Ржавый наконечник стрелы"
+    },
+    "info": {
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "3": [
+        [
+          1.74,
+          2.09
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.26,
+          8.71
+        ],
+        [
+          11.6,
+          13.92
+        ],
+        [
+          17.74,
+          21.29
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "6": [
+        [
+          1.74,
+          2.09
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.26,
+          8.71
+        ],
+        [
+          11.6,
+          13.92
+        ],
+        [
+          17.74,
+          21.29
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "13": [
+        [
+          1.74,
+          2.09
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.26,
+          8.71
+        ],
+        [
+          11.6,
+          13.92
+        ],
+        [
+          17.74,
+          21.29
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ],
+      "16": [
+        [
+          1.74,
+          2.09
+        ],
+        [
+          4.49,
+          5.39
+        ],
+        [
+          7.26,
+          8.71
+        ],
+        [
+          11.6,
+          13.92
+        ],
+        [
+          17.74,
+          21.29
+        ],
+        [
+          25.0,
+          30.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": 2248,
+    "img_base": "m2248",
+    "type": "Piece",
+    "slot": null,
+    "name": {
+      "en": "Were Polar Bear Teeth",
+      "ru": "Клыки белого медведя-оборотня"
+    },
+    "info": {
+      "event": {
+        "en": "Were Polar Bear 2015",
+        "ru": "Белый медведь-оборотень 2015"
+      },
+      "chests": {
+        "en": "Were Polar Bear",
+        "ru": "Белого медведя-оборотня"
+      },
+      "monsters": {
+        "en": "Were Polar Bear",
+        "ru": "Белый медведь-оборотень"
+      }
+    },
+    "stats": {
+      "51": [
+        [
+          1.42,
+          1.7
+        ],
+        [
+          3.02,
+          3.62
+        ],
+        [
+          4.89,
+          5.87
+        ],
+        [
+          7.82,
+          9.38
+        ],
+        [
+          11.94,
+          14.33
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ],
+      "57": [
+        [
+          1.42,
+          1.7
+        ],
+        [
+          3.02,
+          3.62
+        ],
+        [
+          4.89,
+          5.87
+        ],
+        [
+          7.82,
+          9.38
+        ],
+        [
+          11.94,
+          14.33
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ],
+      "1": [
+        [
+          1.42,
+          1.7
+        ],
+        [
+          3.02,
+          3.62
+        ],
+        [
+          4.89,
+          5.87
+        ],
+        [
+          7.82,
+          9.38
+        ],
+        [
+          11.94,
+          14.33
+        ],
+        [
+          16.67,
+          20.0
+        ]
+      ],
+      "41": [
+        [
+          1.42,
+          1.7
+        ],
+        [
+          3.02,
+          3.62
+        ],
+        [
+          4.89,
+          5.87
+        ],
+        [
+          7.82,
+          9.38
+        ],
+        [
+          11.94,
+          14.33
+        ],
+        [
+          16.67,
+          20.0
         ]
       ]
     }
