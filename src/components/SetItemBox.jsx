@@ -61,9 +61,20 @@ var SetItemBox = React.createClass({
     }, this);
   },
 
+  getSetItemState: function() {
+    return this.props.active ? ' active' : '';
+  },
+
+  setItemClicked: function(event) {
+    if (!this.props.active) {
+      this.props.onActivate(this.props.tmpKey);
+      event.stopPropagation();
+    }
+  },
+
   render: function() {
     return (
-      <Well className="set-item">
+      <Well className={"set-item" + this.getSetItemState()} onClickCapture={this.setItemClicked}>
         {this.getCoreNode()}
         {this.getPieceNodes()}
       </Well>

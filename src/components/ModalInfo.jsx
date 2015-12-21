@@ -56,11 +56,9 @@ var ModalInfo = React.createClass({
   render: function() {
     var item = this.state.item;
     if (item) {
-      var name = this.DataService.getItemName(item);
-      var spriteName = 'sprite ' + item.sprite;
       var head = (
         <Modal.Title>
-          {name}
+          {this.DataService.getItemName(item)}
         </Modal.Title>
       );
 
@@ -105,6 +103,7 @@ var ModalInfo = React.createClass({
         </tbody></table>
       )
 
+      var spriteName = 'sprite ' + item.sprite;
       var body = (
         <Modal.Body>
           <div className='modal-body-image'>

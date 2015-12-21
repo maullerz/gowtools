@@ -27,7 +27,8 @@ module.exports = {
       "title-minus": "Remove accessory from set",
       "title-transfer": "Replace accessory in set",
       "confirm-clear": "Do you really want to clear crafted item?",
-      "confirm-title": "Confirm"
+      "confirm-title": "Confirm",
+      "select-quality": "Change quality"
     },
     "button": {
       "collapse": "Collapse",
@@ -55,7 +56,9 @@ module.exports = {
       "debuffs": "Enemy Debuffs",
       "etc": "Other Boosts",
       "regular": "Regular",
-      "strategic": "Strategic"
+      "strategic": "Strategic",
+      "confirm-clear-all": "Clear all set?",
+      "confirm-remove": "Remove selected core from set?"
     },
     "settings": {
       "craft-luck": "Core Crafting Luck",
@@ -91,7 +94,8 @@ module.exports = {
       "title-minus":    "Убрать принадлежность из набора",
       "title-transfer": "Заменить принадлежность в наборе",
       "confirm-clear":  "Очистить ядро и фрагменты?",
-      "confirm-title":  "Подтверждение"
+      "confirm-title":  "Подтверждение",
+      "select-quality": "Сменить качество"
     },
     "button": {
       "collapse": "Свернуть",
@@ -119,7 +123,9 @@ module.exports = {
       "debuffs": "Дебаффы",
       "etc": "Разное",
       "regular": "Регулярные",
-      "strategic": "Стратеги"
+      "strategic": "Стратеги",
+      "confirm-clear-all":  "Очистить весь набор?",
+      "confirm-remove": "Удалить выбранное ядро из набора?"
     },
     "settings": {
       "craft-luck": "Везение при изготовлении сердцевин",

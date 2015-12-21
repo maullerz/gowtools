@@ -139,6 +139,7 @@ var CraftedItemBox = React.createClass({
       // remove piece from setItem
       if (ix >= 0) {
         currSetItem.pieces.splice(ix, 1);
+        currSetItem.piecesQualities.splice(ix, 1);
       } else // add piece to setItem
       if (currSetItem.pieces.length < 6) {
         currSetItem.pieces = currSetItem.pieces.concat(item);
@@ -168,7 +169,11 @@ var CraftedItemBox = React.createClass({
   },
 
   openQualitySelect: function(item) {
-    this.props.modalQualitySelect.open(item);
+    this.props.modalQualitySelect.open(item, this.removeFromSetItem);
+  },
+
+  removeFromSetItem: function(item) {
+    this.itemSelected(item);
   },
 
   render: function() {
@@ -194,7 +199,7 @@ var CraftedItemBox = React.createClass({
               <Glyphicon glyph="trash"/>
             </Button>
           </div>
-          <SetItemBox setItem={this.state.setItem} openInfo={this.openQualitySelect} />
+          <SetItemBox active={true} setItem={this.state.setItem} openInfo={this.openQualitySelect} />
         </div>
 
         <div className="summarize-info">

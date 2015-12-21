@@ -244,7 +244,11 @@ var Root = React.createClass({
   },
 
   qualitySelected: function(item, quality) {
-    this.refs.craftedItemBox.qualitySelected(item, quality);
+    if (this.state.activeTab === 1) {
+      this.refs.craftedItemBox.qualitySelected(item, quality);
+    } else if (this.state.activeTab === 2) {
+      this.refs.summaryInfoBox.qualitySelected(item, quality);
+    };
   },
 
   openItemInfo: function(id) {
@@ -344,8 +348,10 @@ var Root = React.createClass({
 
 
           <SummaryInfoBox className={this.getTabState(2)}
-            activeTab={this.state.activeTab}
             ref='summaryInfoBox'
+            platform={this.props.platform}
+            activeTab={this.state.activeTab}
+            tabSelect={this.handleTabSelect}
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}
           />

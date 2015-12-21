@@ -1,27 +1,32 @@
-import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Panel from 'react-bootstrap/lib/Panel';
-import Well from 'react-bootstrap/lib/Well';
-import LocalStorageMixin from 'react-localstorage';
-import i18n from 'i18n-js';
+import React from 'react'
+import Panel from 'react-bootstrap/lib/Panel'
+import Well from 'react-bootstrap/lib/Well'
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import LocalStorageMixin from 'react-localstorage'
+import i18n from 'i18n-js'
 
-import DataService from '../DataService.jsx';
-import CoresSetModel from '../models/CoresSet';
-import SetItemBox from './SetItemBox.jsx';
+import DataService from '../DataService.jsx'
+import CoresSetModel from '../models/CoresSet'
+import SetItemBox from './SetItemBox.jsx'
 
 var SummaryInfoBox = React.createClass({
 
   mixins: [LocalStorageMixin],
 
   getLocalStorageKey: function() {
-    return 'currentSet';
+    return 'coresSet';
+  },
+
+  getStateFilterKeys: function() {
+    return ['coresSet'];
   },
 
   getInitialState: function() {
     this.qualities = ['gray','white','green','blue','purple','gold'].reverse();
     var coresSet = new CoresSetModel();
     return {
-      itemsExpanded: true,
+      activeKey: null,
       coresSet: coresSet
     };
   },
@@ -42,17 +47,6 @@ var SummaryInfoBox = React.createClass({
     return items.filter(function(item) { return item });
   },
 
-  removeSetItemFromSet: function(setItemToRemove) {
-    if (setItemToRemove.core.slot !== 'Accessory') {
-      this.state.coresSet[setItemToRemove.core.slot] = null;
-    } else {
-      this.state.coresSet.Accessory = this.state.coresSet.Accessory.filter(function(item) {
-        return item !== setItemToRemove;
-      });
-    }
-    this.setState({ coresSet: this.state.coresSet });
-  },
-
   isEqualItems: function(first, second) {
     var result = false;
     if (Array.isArray(second)) {
@@ -60,13 +54,11 @@ var SummaryInfoBox = React.createClass({
         return this.isEqualItems(first, accessory);
       }, this);
     } else {
-      result = first.core.id === second.core.id;
-      // TODO: do we need to compare qualities?
-      // result = result && (first.coreQuality === second.coreQuality);
+      result = first.core && second.core && first.core.id === second.core.id;
+      result = result && (first.coreQuality === second.coreQuality);
       result = result && (first.pieces.length === second.pieces.length)
       result = result && first.pieces.every(function(piece, index) {
-        // && first.piecesQualities[index] === second.piecesQualities[index]
-        return piece.id === second.pieces[index].id;
+        return piece.id === second.pieces[index].id && first.piecesQualities[index] === second.piecesQualities[index];
       }, this);
     }
 
@@ -134,41 +126,145 @@ var SummaryInfoBox = React.createClass({
     this.setState({ coresSet: this.state.coresSet });
   },
 
+  qualitySelected: function(item, quality) {
+    var setItem = this.flattenCoresSet().filter(function(setItem, index) {
+      return this.state.activeKey === 'set-item-'+index
+    }, this)[0];
+
+    if (item.type === 'Core') {
+      setItem.coreQuality = quality;
+    } else if (item.type === 'Piece') {
+      var ix = setItem.pieces.findIndex(function(piece) {
+        return piece.id === item.id;
+      });
+      if (ix >= 0) {
+        setItem.piecesQualities[ix] = quality;
+      };
+    }
+
+    this.forceUpdate();
+  },
+
+  openQualitySelect: function(item) {
+    this.props.modalQualitySelect.open(item, null);
+  },
+
   renderCurrSet: function(flattenItems) {
     return flattenItems.map(function(setItem, index) {
-      var quality = this.qualities[setItem.coreQuality];
-      var spriteName = 'sprite ' + setItem.core.sprite;
-      var coreNode = (
-        <div className={'sel-item-core '+quality}>
-          <div id='img64' className={spriteName} />
-        </div>
-      );
-      var pieceNodes = setItem.pieces.map(function(piece, index) {
-        var quality = this.qualities[setItem.piecesQualities[index]];
+      if (setItem.core) {
+        var quality = this.qualities[setItem.coreQuality];
+        var spriteName = 'sprite ' + setItem.core.sprite;
+        var coreNode = (
+          <div className={'sel-item-core '+quality}>
+            <div id='img64' className={spriteName} />
+          </div>
+        );
+      };
+
+      var pieceNodes = setItem.pieces.map(function(piece, ix) {
+        var quality = this.qualities[setItem.piecesQualities[ix]];
         var spriteName = 'sprite ' + piece.sprite;
         return (
-          <div className={'sel-item '+quality} key={"piece-coreset-" + index}>
+          <div className={'sel-item '+quality} key={"piece-coreset-" + ix}>
             <div id='img32' className={spriteName} />
           </div>
         );
       }.bind(this));
 
-      var selectFunc = function() { this.props.selectSetItemForEdit(setItem); this.forceUpdate(); }.bind(this);
       var removeFunc = function() { this.removeSetItemFromSet(setItem); this.forceUpdate(); }.bind(this);
+      var key = "set-item-"+index;
+      var active = this.state.activeKey === key;
 
       return (
-        <SetItemBox key={"set-item-"+index} setItem={setItem} openInfo={true ? null : this.openQualitySelect} />
+        <SetItemBox key={key} tmpKey={key} active={active} onActivate={this.setItemActivated}
+          setItem={setItem} openInfo={this.openQualitySelect} />
       )
     }.bind(this));
   },
 
-  toggleExpand: function() {
-    this.setState({ itemsExpanded: !this.state.itemsExpanded });
+  setItemActivated: function(key) {
+    this.setState({ activeKey: key });
+  },
+
+  removeSetItemFromSet: function(setItemToRemove) {
+    if (setItemToRemove.core.slot !== 'Accessory') {
+      this.state.coresSet[setItemToRemove.core.slot] = null;
+    } else {
+      this.state.coresSet.Accessory = this.state.coresSet.Accessory.filter(function(item) {
+        return item !== setItemToRemove;
+      });
+    }
+    this.setState({
+      activeKey: null,
+      coresSet: this.state.coresSet
+    });
+  },
+
+  removeSetItem: function() {
+    if (this.state.activeKey) {
+      var setItem = this.flattenCoresSet().filter(function(setItem, index) {
+        return this.state.activeKey === 'set-item-'+index
+      }, this);
+
+      if (setItem[0]) {
+        var remove = function(buttonIndex) {
+          if (buttonIndex === 1) this.removeSetItemFromSet(setItem[0]);
+        }.bind(this);
+
+        if (this.props.platform === 'browser') {
+          if (window.confirm(i18n.t('summary.confirm-remove'))) remove(1);
+        } else {
+          navigator.notification.confirm(
+            i18n.t('summary.confirm-remove'),
+            remove,
+            i18n.t('craftedbox.confirm-title')
+          );
+        }
+
+      }
+    };
+  },
+
+  editSetItem: function() {
+    if (this.state.activeKey) {
+      var setItem = this.flattenCoresSet().filter(function(setItem, index) {
+        return this.state.activeKey === 'set-item-'+index
+      }, this);
+      if (setItem[0]) {
+        this.setState({ activeKey: null });
+        this.props.selectSetItemForEdit(setItem[0]);
+        this.props.tabSelect(1);
+      }
+    };
   },
 
   clearSet: function() {
-    // TODO: PROMT DIALOG
-    this.setState({ coresSet: new CoresSetModel() });
+    var clearAll = function(buttonIndex) {
+      if (buttonIndex === 1) {
+        this.setState({
+          coresSet: new CoresSetModel(),
+          activeKey: null
+        });
+      }
+    }.bind(this);
+
+    if (this.props.platform === 'browser') {
+      if (window.confirm(i18n.t('summary.confirm-clear-all'))) clearAll(1);
+    } else {
+      navigator.notification.confirm(
+        i18n.t('summary.confirm-clear-all'),
+        clearAll,
+        i18n.t('craftedbox.confirm-title')
+      );
+    }
+  },
+
+  getControlsState: function() {
+    return this.state.activeKey ? '' : ' hidden';
+  },
+
+  getClearBtnState: function() {
+    return this.flattenCoresSet().length > 0 ? '' : ' hidden';
   },
 
   // TODO
@@ -186,14 +282,40 @@ var SummaryInfoBox = React.createClass({
 
   render: function() {
     if (!this.DataService) return null;
+    if (this.props.activeTab !== 2 && this.state.activeKey) {
+      this.setState({ activeKey: null });
+    }
     var flattenItems = this.flattenCoresSet();
+
+    if (flattenItems.length === 0) return (
+      <div className={"tab-statistics"+this.props.className}>
+        <div className='loading'>NO CORES IN SET</div>
+      </div>
+    );
 
     return (
       <div className={"tab-statistics"+this.props.className}>
         <div className='statistics-set-items'>
           {this.renderCurrSet(flattenItems)}
         </div>
-        {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
+        <div className="statistics-right-group">
+          <div className="statistics-controls">
+            <Button className={'glyph-btn'+this.getControlsState()} onClick={this.editSetItem}>
+              <Glyphicon glyph="edit"/>
+            </Button>
+
+            <div className='gap'/>
+
+            <Button className={'glyph-btn'+this.getControlsState()} onClick={this.removeSetItem}>
+              <Glyphicon glyph="minus"/>
+            </Button>
+
+            <Button className={'glyph-btn clear-all'+this.getClearBtnState()} onClick={this.clearSet}>
+              <Glyphicon glyph="trash"/>
+            </Button>
+          </div>
+          {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
+        </div>
       </div>
     );
   }
