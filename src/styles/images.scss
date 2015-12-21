@@ -46,3 +46,10 @@ $small: "only screen and (max-device-width: 568px)";
     zoom: 0.24;
   }
 }
+
+.img32 {
+  zoom: 0.32;
+  @media #{$small} {
+    zoom: 0.24;
+  }
+}

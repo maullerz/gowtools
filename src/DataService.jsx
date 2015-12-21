@@ -115,9 +115,9 @@ var DataService = function(Environment) {
           console.log('cannot find boost: '+boostId);
           return '';
         };
-        if (bName.indexOf('Cavalry') >= 0) return 'warelephant.png';
-        if (bName.indexOf('Infantry') >= 0) return 'immortals.png';
-        if (bName.indexOf('Ranged') >= 0) return 'marksmen.png';
+        if (bName.indexOf('Cavalry') >= 0) return 'warelephant128.png';
+        if (bName.indexOf('Infantry') >= 0) return 'immortals128.png';
+        if (bName.indexOf('Ranged') >= 0) return 'marksmen128.png';
         if (bName.indexOf('Troop') >= 0) return 'gear_icon.png';
         return '';
       },
@@ -296,7 +296,7 @@ var DataService = function(Environment) {
             return (
               <tr className={'first-row'+rowColor} key={'b-'+index}>
                 <td className={'sel-icon'}>
-                  {iconName ? <img width="32px" src={'icons/'+iconName} /> : null}
+                  {iconName ? <img className="img32" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>
                   {this.getBoostName(regBoostId)}
