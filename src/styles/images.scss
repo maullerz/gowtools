@@ -7,6 +7,12 @@
           transform: translate3d(0, 0, 0);
 }
 
+.set-item.active .sprite {
+  &:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+  }
+}
+
 .sprite.empty {
   width: 100px;
   height: 100px;
@@ -14,8 +20,13 @@
   padding: 15px 10px;
 }
 
+$small: "only screen and (max-device-width: 568px)";
+
 #img71.sprite {
   zoom: 0.71;
+  @media #{$small} {
+    zoom: 0.55;
+  }
 }
 
 #img64.sprite {
@@ -24,8 +35,14 @@
 
 #img44.sprite {
   zoom: 0.44;
+  @media #{$small} {
+    zoom: 0.30;
+  }
 }
 
 #img32.sprite {
   zoom: 0.32;
+  @media #{$small} {
+    zoom: 0.24;
+  }
 }

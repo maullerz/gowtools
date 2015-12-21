@@ -5,7 +5,7 @@
 }
 
 .curr-set-statistics {
-  width: 60%;
+  /*width: 60%;*/
 }
 
 .item-statistics table.summarize tr td {
@@ -42,7 +42,6 @@ thead {
 
 thead tr th {
   text-align: center;
-  font-size: 11px;
 
   &.lvl-head {
     text-align: right;
@@ -53,7 +52,6 @@ thead tr th {
 table {
   @include main_styles;
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-  font-size: 16px;
   width: 100%;
   border-collapse: collapse;
   text-align: center;
@@ -69,8 +67,6 @@ tbody {
 }
 
 tr {
-  font-size: 12px;
-
   &.selected {
     background-color: #c0f0f9;
     color: black;
@@ -124,7 +120,6 @@ td {
 
   &.sel-lvl {
     width: 15%;
-    padding-right: 5px;
     text-align: right;
     font-weight: normal;
 
@@ -142,7 +137,6 @@ td {
   }
 
   &.item-name, &.piece-name, &.core-name {
-    font-size: 14px;
     font-weight: bold;
     padding-right: 3px;
   }

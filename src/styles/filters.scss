@@ -35,7 +35,6 @@
 
 #filter {
   overflow: hidden;
-  width: 44px;
   padding: 0;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -51,14 +50,6 @@
 
   &:active {
     opacity: 1;
-  }
-
-  @media only screen and (min-device-width: 320px) {
-    width: 32px;
-  }
-
-  @media only screen and (min-device-width: 375px) {
-    width: 32px;
   }
 }
 

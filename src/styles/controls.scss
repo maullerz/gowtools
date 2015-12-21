@@ -10,6 +10,18 @@
   /* iphone */
   padding: 4px 8px;
   font-size: 14px;
+
+  &.clear-all {
+    float: right;
+  }
+
+  &.remove {
+    /*font-size: 22px;*/
+    width: 32px;
+    height: 32px;
+    margin: 16px;
+    margin-right: 0;
+  }
 }
 
 .btn-default {

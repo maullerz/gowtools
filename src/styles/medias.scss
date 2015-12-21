@@ -12,20 +12,63 @@
 
 
 $header-height: 42px;
-$filter-panel-height: 43px; /*55px;*/
+$filter-panel-height: 43px; /*/ 55px;*/
 $crafted-item-box-height: 100px;
 
-@media screen and (min-device-width: 320px) {
-  $filter-panel-height: 43px;
+$small: "only screen and (max-device-width: 568px)";
+$large: "only screen and (min-device-width: 768px)";
+
+
+body, table {
+  font-size: 16px;
+  @media #{$small} {
+    font-size: 14px;
+  }
+  @media #{$large} {
+    /*font-size: 20px;*/
+  }
 }
-@media screen and (min-device-width: 375px) {
-  $filter-panel-height: 43px;
+
+tr {
+  font-size: 12px;
+  @media #{$small} {
+    font-size: 11px;
+  }
 }
-@media screen and (min-device-width: 750px) {
-  
+
+td {
+  &.item-name, &.piece-name, &.core-name {
+    font-size: 14px;
+    @media #{$small} {
+      font-size: 12px;
+    }
+  }
+  &.sel-lvl {
+    padding-right: 5px;
+    @media #{$small} {
+      padding: 0 3px;
+    }
+  }
 }
-@media screen and (min-device-width: 768px) {
-  
+
+thead tr th {
+  font-size: 11px;
+  @media #{$small} {
+    font-size: 10px;
+  }
+}
+
+#filter {
+  /*width: 44px;*/
+  width: 32px;
+
+  @media #{$small} {
+    width: 32px;
+  }
+
+  @media #{$large} {
+    /*width: 64px;*/
+  }
 }
 
 .snap-filter {
@@ -51,25 +94,61 @@ $crafted-item-box-height: 100px;
 }
 
 
+.set-item.well {
+  min-height: 95px;
+  min-width: 212px;
+  width: 212px;
+  padding: 10px;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+
+  @media #{$small} {
+    padding: 4px;
+    min-height: 68px;
+    width: 160px;
+    min-width: 160px;
+  }
+
+  &.active {
+    background-color: #c0f0f9;
+  }
+}
+
 .crafted-item-box {
   padding: 5px;
-  /* TODO iphone
-  padding: 0;
-  padding-top: 5px;
-*/
+  padding-bottom: 0;
 
   width: 44%;
   display: -webkit-flex;
   flex-direction: column;
 }
 
-  .crafted-item-box-head, .set-item-box-head {
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #aaa;
-    height: $crafted-item-box-height;
-    min-height: $crafted-item-box-height;
+.crafted-item-box-head, .set-item-box-head {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #aaa;
+  height: $crafted-item-box-height;
+  min-height: $crafted-item-box-height;
+
+  @media #{$small} {
+    height: 73px;
+    min-height: 73px;
   }
+}
+
+.crafted-item-btn-group {
+  height: 95px;
+  display: flex;
+  margin-right: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media #{$small} {
+    height: 68px;
+  }
+}
 
   .summarize-info {
     overflow-y: auto;
@@ -89,6 +168,15 @@ $crafted-item-box-height: 100px;
     border-bottom: 1px solid #aaa;
     height: $filter-panel-height;
     min-height: $filter-panel-height;
+
+    @media #{$small} {
+      /*height: $filter-panel-height;
+      min-height: $filter-panel-height;*/
+    }
+    @media #{$large} {
+      /*height: $filter-panel-height;
+      min-height: $filter-panel-height;*/
+    }
   }
 
   .scrollable-items-list {
