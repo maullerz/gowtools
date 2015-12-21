@@ -67,7 +67,8 @@ var Root = React.createClass({
       // hyperextensible: false,
       // flickThreshold: 50,
       // minDragDistance: 50,
-
+      maxPosition: 221,
+      minPosition: -221,
       resistance: 0.7,
       transitionSpeed: 0.5,
       easing: 'cubic-bezier(0.19, 1, 0.22, 1)' // easeOutExpo

@@ -13,7 +13,7 @@
 
 $header-height: 42px;
 $filter-panel-height: 43px; /*/ 55px;*/
-$crafted-item-box-height: 100px;
+$crafted-item-box-height: 105px;
 
 $small: "only screen and (max-device-width: 568px)";
 $large: "only screen and (min-device-width: 768px)";
@@ -49,14 +49,35 @@ td {
       padding: 0 3px;
     }
   }
+  &.sel-icon {
+    padding-left: 5px;
+    @media #{$small} {
+      padding-left: 2px;
+    }
+  }
+  &.boost-name {
+    padding-left: 5px;
+    @media #{$small} {
+      padding-left: 2px;
+    }
+  }
 }
 
 thead tr th {
   font-size: 11px;
   @media #{$small} {
-    font-size: 10px;
+    font-size: 8px;
   }
 }
+
+.item-statistics table.summarize tr td {
+  font-size: 10px;
+
+  &.sel-boost-name {
+    font-size: 12px;
+  }
+}
+
 
 #filter {
   /*width: 44px;*/
@@ -117,7 +138,8 @@ thead tr th {
 }
 
 .crafted-item-box {
-  padding: 5px;
+  /*padding: 5px;*/
+  padding: 0;
   padding-bottom: 0;
 
   width: 44%;
@@ -128,13 +150,14 @@ thead tr th {
 .crafted-item-box-head, .set-item-box-head {
   display: flex;
   justify-content: center;
+  padding: 5px;
   border-bottom: 1px solid #aaa;
   height: $crafted-item-box-height;
   min-height: $crafted-item-box-height;
 
   @media #{$small} {
-    height: 73px;
-    min-height: 73px;
+    height: 78px;
+    min-height: 78px;
   }
 }
 
@@ -160,6 +183,7 @@ thead tr th {
   width: 56%;
   display: -webkit-flex;
   flex-direction: column;
+  padding-left: 3px;
 }
 
   .filter-panel {

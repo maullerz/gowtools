@@ -107,7 +107,7 @@ var ItemsListBox = React.createClass({
         return (
           <div>
             <h4>{header}</h4>
-            <table className={"cores-list-"+slot}><tbody>
+            <table className='items-list'><tbody>
               {cores}
             </tbody></table>
           </div>
@@ -147,7 +147,7 @@ var ItemsListBox = React.createClass({
 
   itemsRenderer: function(items, ref) {
     return (
-      <table ref={ref} className="pieces-list"><tbody>
+      <table ref={ref} className='items-list'><tbody>
         {items}
       </tbody></table>
     )
