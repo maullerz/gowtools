@@ -110,8 +110,13 @@ var CraftedItemBox = React.createClass({
     }
   },
 
-  selectSetItemForEdit: function(setItemToSelect) {
-    this.updateSetItem(setItemToSelect);
+  selectSetItemForEdit: function(setItemToEdit) {
+    this.updateSetItem({
+      core: setItemToEdit.core,
+      coreQuality: setItemToEdit.coreQuality,
+      pieces: setItemToEdit.pieces.concat([]),
+      piecesQualities: setItemToEdit.piecesQualities.concat([])
+    });
   },
 
   itemSelected: function(item) {
