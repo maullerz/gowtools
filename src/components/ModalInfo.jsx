@@ -61,7 +61,7 @@ var ModalInfo = React.createClass({
       if (!item.info['event']) {
         rows.unshift(
           <tr className='param'>
-            <td className='name'>{i18n.t('info.event')+':'}</td>
+            <td className='param'>{i18n.t('info.event')+':'}</td>
             <td>{this.DataService.getEventName(item.eventId)}</td>
           </tr>
         )
@@ -71,7 +71,7 @@ var ModalInfo = React.createClass({
       if (debugUrl) {
         rows.unshift(
           <tr className='param'>
-            <td className='param-name'>{'DEBUG'}</td>
+            <td className='param'>{'DEBUG'}</td>
             <td><a href={debugUrl} target='_blank'>{'link to item.id: '+item.id}</a></td>
           </tr>
         )
