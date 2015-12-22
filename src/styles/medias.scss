@@ -4,15 +4,20 @@
 /* filterpanel height = 43 on iphones */
 
 /*
-  iPads 1024x768
+  small:
   iPhone 3-4x 480x320
   iPhone   5x 568x320 (1136x640)
+
+  default(medium):
   iPhone   6s 667x375 (1334x750)
+
+  large:
+  iPads 1024x768
 */
 
-
+/* defaults for medium-res devices: */
 $header-height: 42px;
-$filter-panel-height: 43px; /*/ 55px;*/
+$filter-panel-height: 43px;
 $crafted-item-box-height: 105px;
 
 $small: "only screen and (max-device-width: 568px)";
@@ -24,15 +29,15 @@ body, table {
   @media #{$small} {
     font-size: 14px;
   }
-  @media #{$large} {
-    /*font-size: 20px;*/
-  }
 }
 
 tr {
   font-size: 12px;
   @media #{$small} {
     font-size: 11px;
+  }
+  @media #{$large} {
+    font-size: 18px;
   }
 }
 
@@ -41,6 +46,9 @@ td {
     font-size: 14px;
     @media #{$small} {
       font-size: 12px;
+    }
+    @media #{$large} {
+      font-size: 18px;
     }
   }
   &.sel-lvl {
@@ -62,6 +70,11 @@ td {
       padding-left: 2px;
     }
   }
+  &.game-event {
+    @media #{$large} {
+      font-size: 16px;
+    }
+  }
 }
 
 thead tr th {
@@ -72,10 +85,21 @@ thead tr th {
 }
 
 .item-statistics table.summarize tr td {
-  font-size: 10px;
-
+  font-size: 12px;
   &.sel-boost-name {
-    font-size: 12px;
+    font-size: 14px;
+  }
+  @media #{$small} {
+    font-size: 10px;
+    &.sel-boost-name {
+      font-size: 12px;
+    }
+  }
+  @media #{$large} {
+    font-size: 16px;
+    &.sel-boost-name {
+      font-size: 18px;
+    }
   }
 }
 
@@ -93,12 +117,6 @@ table.modal-body-params td {
   }
 }
 
-/*table.modal-body-params td.param {
-  @media #{$small} {
-    padding-left: 0;
-  }
-}*/
-
 
 .nav {
   background-color: #222;
@@ -111,15 +129,19 @@ table.modal-body-params td {
 
 
 #filter {
-  /*width: 44px;*/
   width: 32px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
 
   @media #{$small} {
     width: 32px;
   }
 
   @media #{$large} {
-    /*width: 64px;*/
+    width: 64px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 
@@ -155,6 +177,7 @@ table.modal-body-params td {
   margin-bottom: 5px;
   border: 1px solid #aaa;
   border-radius: 4px;
+  text-align: left;
 
   @media #{$small} {
     padding: 4px;
@@ -176,6 +199,7 @@ table.modal-body-params td {
   width: 44%;
   display: -webkit-flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .crafted-item-box-head, .set-item-box-head {
@@ -189,6 +213,13 @@ table.modal-body-params td {
   @media #{$small} {
     height: 78px;
     min-height: 78px;
+  }
+
+  @media #{$large} {
+    padding: 10px;
+    height: 115px;
+    min-height: 115px;
+    margin-bottom: 10px;
   }
 }
 
@@ -218,6 +249,7 @@ table.modal-body-params td {
   display: -webkit-flex;
   flex-direction: column;
   padding-left: 3px;
+  text-align: center;
 }
 
   .filter-panel {
@@ -227,13 +259,9 @@ table.modal-body-params td {
     height: $filter-panel-height;
     min-height: $filter-panel-height;
 
-    @media #{$small} {
-      /*height: $filter-panel-height;
-      min-height: $filter-panel-height;*/
-    }
     @media #{$large} {
-      /*height: $filter-panel-height;
-      min-height: $filter-panel-height;*/
+      height: 85px;
+      min-height: 85px;
     }
   }
 
@@ -242,6 +270,20 @@ table.modal-body-params td {
     overflow-y: auto;
     min-height: 0px;
   }
+
+.statistics-controls {
+  padding: 5px;
+  min-height: 43px;
+  height: 43px;
+  border-bottom: 1px solid #aaa;
+
+  @media #{$large} {
+    min-height: 53px;
+    height: 53px;
+    margin-bottom: 7px;
+  }
+}
+
 
 Button#quality {
   width: 64px;
@@ -260,11 +302,32 @@ Button#quality {
   }
 }
 
+
+.glyph-btn {
+  padding: 4px 8px;
+  font-size: 14px;
+
+  &.clear-all {
+    float: right;
+  }
+
+  @media #{$large} {
+    font-size: 20px;
+    padding: 5px 10px;
+  }
+}
+
 .glyph-btn.remove {
+  /*width: 32px;*/
+  /*height: 32px;*/
   margin: 16px;
   margin-right: 0;
   @media #{$small} {
     margin: 6px;
+    margin-right: 0;
+  }
+  @media #{$large} {
+    margin: 10px;
     margin-right: 0;
   }
 }

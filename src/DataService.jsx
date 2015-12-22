@@ -208,7 +208,7 @@ var DataService = function(Environment) {
           return (
             <tr className={'first-row'+rowColor} key={'b-'+index}>
               <td className='sel-icon'>
-                {iconName ? <img className="img32" src={'icons/'+iconName} /> : null}
+                {iconName ? <img className="boost-icon" src={'icons/'+iconName} /> : null}
               </td>
               <td className='sel-boost-name'>
                 {this.getBoostName(boostId)}
@@ -300,7 +300,7 @@ var DataService = function(Environment) {
             return (
               <tr className={'first-row'+rowColor} key={'b-'+index}>
                 <td className={'sel-icon'}>
-                  {iconName ? <img className="img32" src={'icons/'+iconName} /> : null}
+                  {iconName ? <img className="boost-icon" src={'icons/'+iconName} /> : null}
                 </td>
                 <td className='sel-boost-name'>
                   {this.getBoostName(regBoostId)}

@@ -4,26 +4,6 @@
   line-height: 1.42857143;
 }
 
-.glyph-btn {
-  padding: 5px 10px;
-  font-size: 18px;
-  /* iphone */
-  padding: 4px 8px;
-  font-size: 14px;
-
-  &.clear-all {
-    float: right;
-  }
-
-  &.remove {
-    /*font-size: 22px;*/
-    width: 32px;
-    height: 32px;
-    margin: 16px;
-    margin-right: 0;
-  }
-}
-
 .btn-default {
   background-color: #eee;
   border: 1px solid #aaa;

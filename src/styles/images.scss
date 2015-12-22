@@ -13,6 +13,12 @@
   }
 }
 
+.icon-img.sprite {
+  &:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+  }
+}
+
 .sprite.empty {
   width: 100px;
   height: 100px;
@@ -50,9 +56,6 @@ $small: "only screen and (max-device-width: 568px)";
   }
 }
 
-.img32 {
-  zoom: 0.32;
-  @media #{$small} {
-    zoom: 0.24;
-  }
+.boost-icon {
+  zoom: 0.24;
 }
