@@ -31,6 +31,9 @@ $small: "only screen and (max-device-width: 568px)";
 
 #img64.sprite {
   zoom: 0.64;
+  @media #{$small} {
+    zoom: 0.44;
+  }
 }
 
 #img44.sprite {

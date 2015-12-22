@@ -10,22 +10,13 @@
   background-color: #ccc;
 }
 
-.modal-title {
-  font-size: 25px;
-}
-
 .modal-body {
   display: block;
-  padding-top: 5px;
+  padding-top: 10px;
 }
 
 .modal-dialog {
   width: auto;
-}
-
-#quality-select .modal-dialog {
-  margin: 60px auto;
-  width: 480px;
 }
 
 .modal-backdrop.in {
@@ -45,10 +36,6 @@
   /*padding-top: 15px;*/
 }
 
-.modal-body-params {
-  margin-left: 60px;
-}
-
 table.modal-body-params {
   background-color: #ddd;
   border: none !important;
@@ -62,20 +49,18 @@ table.modal-body-params tbody {
   border: none !important;
 }
 
-table.modal-body-params tr {
-  font-size: 14px;
-}
-
 table.modal-body-params td {
-  text-align: start;
-  padding-left: 15px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
   &.param {
     font-weight: bold;
   }
 }
 
 .modal-body-image {
-  position: absolute;
+  /*position: absolute;*/
+  float: left;
 }
 
 .close {

@@ -50,6 +50,7 @@ td {
     }
   }
   &.sel-icon {
+    padding: 2px 0;
     padding-left: 5px;
     @media #{$small} {
       padding-left: 2px;
@@ -76,6 +77,36 @@ thead tr th {
   &.sel-boost-name {
     font-size: 12px;
   }
+}
+
+table.modal-body-params tr {
+  font-size: 14px;
+  @media #{$small} {
+    font-size: 11px;
+  }
+}
+
+table.modal-body-params td {
+  padding-left: 15px;
+  @media #{$small} {
+    padding-left: 6px;
+  }
+}
+
+/*table.modal-body-params td.param {
+  @media #{$small} {
+    padding-left: 0;
+  }
+}*/
+
+
+.nav {
+  background-color: #222;
+  border-color: #080808;
+  display: flex;
+  justify-content: space-around;
+  height: $header-height;
+  min-height: $header-height;
 }
 
 
@@ -176,6 +207,9 @@ thead tr th {
   .summarize-info {
     overflow-y: auto;
     min-height: 0px;
+    @media #{$small} {
+      padding-right: 1px;
+    }
   }
 
 
@@ -209,14 +243,53 @@ thead tr th {
     min-height: 0px;
   }
 
-
-
-.nav {
-  background-color: #222;
-  border-color: #080808;
-  display: flex;
-  justify-content: space-around;
-  height: $header-height;
-  min-height: $header-height;
+Button#quality {
+  width: 64px;
+  height: 64px;
+  @media #{$small} {
+    width: 46px;
+    height: 46px;
+  }
 }
+
+#quality-select .modal-dialog {
+  margin: 60px auto;
+  width: 480px;
+  @media #{$small} {
+    width: 400px;
+  }
+}
+
+.glyph-btn.remove {
+  margin: 16px;
+  margin-right: 0;
+  @media #{$small} {
+    margin: 6px;
+    margin-right: 0;
+  }
+}
+
+.modal-body-params {
+  /*display: inline-block;*/
+  margin-left: 65px;
+  @media #{$small} {
+    margin-left: 44px;
+  }
+}
+
+.modal-header .close {
+  margin-top: -4px;
+  right: 0;
+  position: absolute;
+}
+
+.modal-title {
+  font-size: 25px;
+  @media #{$small} {
+    font-size: 20px;
+  }
+}
+
+
+
 

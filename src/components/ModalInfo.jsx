@@ -31,26 +31,6 @@ var ModalInfo = React.createClass({
 
   getBoostsRows: function() {
     return this.DataService.getSimpleSummaryTable(this.state.item.stats);
-
-    var boosts = this.state.item.stats;
-    var nodes = Object.keys(boosts).map(function(id, index) {
-      var lvls = boosts[id];
-      return (
-        <tr key={"boost"+index}>
-          <td className="boost-name">{this.DataService.getBoostName(id)}</td>
-          <td className="lvl6">
-              {this.DataService.simpleShow(lvls[5])}
-          </td>
-          <td>{this.DataService.simpleShow(lvls[4])}</td>
-          <td>{this.DataService.simpleShow(lvls[3])}</td>
-          <td>{this.DataService.simpleShow(lvls[2])}</td>
-          <td>{this.DataService.simpleShow(lvls[1])}</td>
-          <td>{this.DataService.simpleShow(lvls[0])}</td>
-        </tr>
-      );
-    }.bind(this));
-
-    return nodes;
   },
 
   render: function() {
