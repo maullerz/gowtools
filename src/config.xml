@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id = "com.maullerz.gowcraft.cores" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
-  version = "0.9.3" versionCode = "3">
+<widget id = "com.maullerz.gowcraft.calculator" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
+  version = "0.9.5" versionCode = "5">
 
-    <name>GowCraft Cores</name>
+    <name>Gow Craft Calculator</name>
     <description>
         Awesome core-crafting tool for GoW.
 This tool helps you to find the best cores and pieces for your needs and to calculate overall statistics.
@@ -21,7 +21,8 @@ This tool helps you to find the best cores and pieces for your needs and to calc
 
     <!-- <preference name="ShowSplashScreenSpinner" value="false" /> -->
     <!-- <preference name="AutoHideSplashScreen" value="false" /> -->
-    <!-- <preference name="DisallowOverscroll" value="true" /> -->
+
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarStyle" value="blackopaque" />
     <preference name="StatusBarOverlaysWebView" value="false" />
 
@@ -29,7 +30,7 @@ This tool helps you to find the best cores and pieces for your needs and to calc
     <plugin name="cordova-plugin-device" spec="~1.0.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.0" />
     <plugin name="cordova-plugin-globalization" spec="~1.0.0" />
-    <plugin name="cordova-plugin-splashscreen" spec="~2.1.0" />
+    <!-- <plugin name="cordova-plugin-splashscreen" spec="~2.1.0" /> -->
     <plugin name="cordova-plugin-dialogs" spec="~1.1.1" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.0" />
 
@@ -38,24 +39,30 @@ This tool helps you to find the best cores and pieces for your needs and to calc
     <platform name="ios">
         <preference name="detect-data-types" value="false" />
         <preference name="deployment-target" value="8.0" />
-        <preference name="UIWebViewDecelerationSpeed" value="fast" />
+        <!-- <preference name="UIWebViewDecelerationSpeed" value="fast" /> -->
+        <preference name="SuppressesIncrementalRendering" value="true"/>
+        <preference name="Orientation" value="landscape" />
 
-        <icon height="76" src="resources/icon/ios/icon-76.png" width="76" />
-        <icon height="152" src="resources/icon/ios/icon-76@2x.png" width="152" />
-        <icon height="72" src="resources/icon/ios/icon-72.png" width="72" />
-        <icon height="144" src="resources/icon/ios/icon-72@2x.png" width="144" />
-        <icon height="60" src="resources/icon/ios/icon-60.png" width="60" />
-        <icon height="120" src="resources/icon/ios/icon-60@2x.png" width="120" />
-        <icon height="180" src="resources/icon/ios/icon-60@3x.png" width="180" />
-        <icon height="50" src="resources/icon/ios/icon-50.png" width="50" />
-        <icon height="100" src="resources/icon/ios/icon-50@2x.png" width="100" />
-        <icon height="40" src="resources/icon/ios/icon-40.png" width="40" />
-        <icon height="80" src="resources/icon/ios/icon-40@2x.png" width="80" />
-        <icon height="57" src="resources/icon/ios/icon.png" width="57" />
-        <icon height="114" src="resources/icon/ios/icon@2x.png" width="114" />
-        <icon height="29" src="resources/icon/ios/icon-small.png" width="29" />
-        <icon height="58" src="resources/icon/ios/icon-small@2x.png" width="58" />
-        <splash height="480" src="resources/splash/ios/Default~iphone.png" width="320" />
+        <icon height="76" src="resources/icon/ios/Icon-76.png" width="76" />
+        <icon height="152" src="resources/icon/ios/Icon-76@2x.png" width="152" />
+        <icon height="72" src="resources/icon/ios/Icon-72.png" width="72" />
+        <icon height="144" src="resources/icon/ios/Icon-72@2x.png" width="144" />
+        <icon height="60" src="resources/icon/ios/Icon-60.png" width="60" />
+        <icon height="120" src="resources/icon/ios/Icon-60@2x.png" width="120" />
+        <icon height="50" src="resources/icon/ios/Icon-50.png" width="50" />
+        <icon height="100" src="resources/icon/ios/Icon-50@2x.png" width="100" />
+        <icon height="40" src="resources/icon/ios/Icon-40.png" width="40" />
+        <icon height="80" src="resources/icon/ios/Icon-40@2x.png" width="80" />
+        <icon height="57" src="resources/icon/ios/Icon.png" width="57" />
+        <icon height="114" src="resources/icon/ios/Icon@2x.png" width="114" />
+
+        <icon height="100" src="resources/icon/ios/Icon-Small-50@2x.png" width="100" />
+        <icon height="29" src="resources/icon/ios/Icon-Small.png" width="29" />
+        <icon height="58" src="resources/icon/ios/Icon-Small@2x.png" width="58" />
+        <icon height="87" src="resources/icon/ios/Icon-Small@3x.png" width="87" />
+        <icon height="180" src="resources/icon/ios/Icon-60@3x.png" width="180" />
+        <icon height="120" src="resources/icon/ios/Icon-Small-40@3x.png" width="120" />
+<!--         <splash height="480" src="resources/splash/ios/Default~iphone.png" width="320" />
         <splash height="960" src="resources/splash/ios/Default@2x~iphone.png" width="640" />
         <splash height="768" src="resources/splash/ios/Default-Landscape~ipad.png" width="1024" />
         <splash height="1024" src="resources/splash/ios/Default-Portrait~ipad.png" width="768" />
@@ -64,7 +71,7 @@ This tool helps you to find the best cores and pieces for your needs and to calc
         <splash height="1136" src="resources/splash/ios/Default-568h@2x~iphone.png" width="640" />
         <splash height="1334" src="resources/splash/ios/Default-667h.png" width="750" />
         <splash height="2208" src="resources/splash/ios/Default-736h.png" width="1242" />
-        <splash height="1242" src="resources/splash/ios/Default-Landscape-736h.png" width="2208" />
+        <splash height="1242" src="resources/splash/ios/Default-Landscape-736h.png" width="2208" /> -->
     </platform>
 
 
@@ -73,13 +80,16 @@ This tool helps you to find the best cores and pieces for your needs and to calc
         <preference name="KeepRunning" value="false"/>
         <preference name="splash-screen-duration" value="5000"/>
         <preference name="SplashScreenDelay" value="5000" />
-        <preference name="LoadingDialog" value="GowCraft,CoreTool loading..."/>
-        <preference name="LoadingPageDialog" value="GowCraft,CoreTool page loading..."/>
-        <preference name="LogLevel" value="VERBOSE"/>
+        <preference name="LoadingDialog" value="Gow Craft Calculator loading..."/>
+        <preference name="LoadingPageDialog" value="Gow Craft Calculator page loading..."/>
+        <!-- <preference name="LogLevel" value="VERBOSE"/> -->
+        <preference name="Orientation" value="landscape" />
 
-        <icon density="ldpi" src="resources/icon/android/icon-36.png" />
-        <icon density="mdpi" src="resources/icon/android/icon-48.png" />
-        <icon density="hdpi" src="resources/icon/android/icon-72.png" />
-        <icon density="xhdpi" src="resources/icon/android/icon-96.png" />
+        <icon density="ldpi" src="resources/icon/android/Icon-ldpi.png" />
+        <icon density="mdpi" src="resources/icon/android/Icon-mdpi.png" />
+        <icon density="hdpi" src="resources/icon/android/Icon-hdpi.png" />
+        <icon density="xhdpi" src="resources/icon/android/Icon-xhdpi.png" />
+        <icon density="xxhdpi" src="resources/icon/android/Icon-xxhdpi.png" />
+        <icon density="xxxhdpi" src="resources/icon/android/Icon-xxxhdpi.png" />
     </platform>
 </widget>

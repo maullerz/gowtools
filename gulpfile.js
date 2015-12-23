@@ -32,7 +32,7 @@ gulp.task('watch', function(){
     ], ['build-app-on-watch']);
 });
 
-// BUILD ONLY SRC WITHOUT ASSETS
+// PROCESS ONLY SRC WITHOUT ASSETS
 
 gulp.task('build-app-on-watch', function(callback){
   runSequence(
@@ -54,6 +54,7 @@ gulp.task('build-app', function(callback){
     'copy-index',
     'copy-backgrounds',
     'copy-bootstrap',
+    // 'copy-resources',
     'copy-icons',
     'copy-fonts',
     'copy-spritesheet',
@@ -146,6 +147,11 @@ gulp.task('copy-icons', function(callback) {
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/icons/'));
 });
 
+gulp.task('copy-resources', function(callback) {
+  return gulp.src('./assets-src/resources/**/*.png')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/resources/'));
+});
+
 gulp.task('copy-fonts', function(callback) {
   return gulp.src('./assets-src/fonts/**/*')
     .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/fonts/'));
@@ -204,8 +210,9 @@ function getPhonegapPluginCommands() {
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-globalization",
-    "cordova-plugin-splashscreen",
-    "cordova-plugin-dialogs"
+    // "cordova-plugin-splashscreen",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-statusbar"
   ];
   var commands = [];
   for (var i = 0; i < plugins.length; i++){

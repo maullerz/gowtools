@@ -6,3 +6,6 @@ assets-src/etc
 **/*.tmp
 _DISTR
 archieve
+assets-src/_appicongenerator/
+assets-src/_icon.angrymarmot.org/
+assets-src/_makeappicon/
