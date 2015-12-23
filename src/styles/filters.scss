@@ -93,15 +93,10 @@
   font-weight: bold;
 
   &:active {
-    background-color: #c0f0f9;
-    -webkit-transform: none;
+    -webkit-transform: scale3d(0.9, 0.9, 1);
   }
 
   &.active {
     background-color: #c0f0f9;
-
-    &:active {
-      background-color: #eee;
-    }
   }
 }

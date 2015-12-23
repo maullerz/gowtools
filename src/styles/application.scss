@@ -1,5 +1,8 @@
 @import "colors";
 
+html {
+  height: 100%;
+}
 body {
   /* remove focus outlines and default tap highlight color */
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;

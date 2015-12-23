@@ -64,6 +64,8 @@ var Root = React.createClass({
       element: content,
       tapToClose: true,
       touchToDrag: false,
+      slideIntent: 1,
+      minDragDistance: 500,
       // hyperextensible: false,
       // flickThreshold: 50,
       // minDragDistance: 50,
@@ -74,38 +76,16 @@ var Root = React.createClass({
       easing: 'cubic-bezier(0.19, 1, 0.22, 1)' // easeOutExpo
     });
 
-    this.snapper.on('close', function() {
+    this.snapper.on('animated', function() {
+      this.snapAnimating = false;
       this.forceUpdate();
     }.bind(this));
 
-    // this.handleTabSelect(this.state.activeTab);
-
-    // this.snapper.on('animated', function() {
-    //   this.snapper.disable();
-    //   setTimeout(function() {
-    //     this.snapper.enable()
-    //   }.bind(this), 1000)
-    //   this.forceUpdate();
-    // }.bind(this));
-
-    // this.snapper.on('expandRight', function() {
-    //   this.snapper.settings({ disable: 'left' });
-    // }.bind(this));
-    // this.snapper.on('expandLeft', function() {
-    //   this.snapper.settings({ disable: 'right' });
-    // }.bind(this));
-    // this.snapper.on('animated', function() {
-    //   if (this.snapper.state() === 'closed') {
-    //     this.snapper.settings({ disable: 'none' });
-    //   };
-    // }.bind(this));
+    this.snapper.disable();
   },
 
   componentWillUnmount: function() {
-    this.snapper.off('close');
-    // this.snapper.off('animated');
-    // this.snapper.off('expandRight');
-    // this.snapper.off('expandLeft');
+    this.snapper.off('animated');
   },
 
   loadBoosts: function() {
@@ -153,7 +133,7 @@ var Root = React.createClass({
     });
   },
   
-  itemSelected: function(item) {
+  itemSelected: function itemSelected(item) {
     if (!item.quality) item.quality = 0;
     return this.refs.craftedItemBox.itemSelected(item);
   },
@@ -162,7 +142,7 @@ var Root = React.createClass({
     this.refs.itemsList.unselectItem(item);
   },
 
-  isItemSelected: function(id) {
+  isItemSelected: function isItemSelected(id) {
     var currSetItem = this.refs.craftedItemBox.state.setItem;
     if (currSetItem.core && currSetItem.core.id === id) return true;
     for (var i = 0, len = currSetItem.pieces.length; i < len; i++) {
@@ -207,9 +187,9 @@ var Root = React.createClass({
 
   getEventsState: function() {
     if (!this.snapper) return '';
-    // var snapState = this.snapper.state();
-    // var className = (snapState.state === 'left' || snapState.info.opening === 'left') ? ' active' : '';
-    var className = document.body.className.indexOf('snapjs-left') >= 0 ? ' active' : '';
+    var snapState = this.snapper.state();
+    var className = (snapState.state === 'left') ? ' active' : '';
+    // var className = document.body.className.indexOf('snapjs-left') >= 0 ? ' active' : '';
 
     className += this.state.activeTab === 1 ? '' : ' hidden';
     return className;
@@ -227,9 +207,9 @@ var Root = React.createClass({
 
   getBoostsState: function() {
     if (!this.snapper) return '';
-    // var snapState = this.snapper.state();
-    // var className = (snapState.state === 'right' || snapState.info.opening === 'right') ? ' active' : '';
-    var className = document.body.className.indexOf('snapjs-right') >= 0 ? ' active' : '';
+    var snapState = this.snapper.state();
+    var className = (snapState.state === 'right') ? ' active' : '';
+    // var className = document.body.className.indexOf('snapjs-right') >= 0 ? ' active' : '';
 
     className += this.state.activeTab === 1 ? '' : ' hidden';
     return className;
@@ -286,6 +266,16 @@ var Root = React.createClass({
     console.log('checkbox clicked: '+event.target.checked);
   },
 
+  handleTouchStart: function(event) {
+    let snapState = this.snapper.state();
+    if (snapState.state === 'left' || snapState.state === 'right' || this.snapAnimating === true) {
+      this.snapper.close();
+      event.stopPropagation();
+      event.preventDefault();
+      this.snapAnimating = true;
+    }
+  },
+
   render: function() {
     if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
 
@@ -314,7 +304,9 @@ var Root = React.createClass({
           </div>
         </div>
 
-        <div ref='content' className='snap-content'>
+        <div ref='content' className='snap-content'
+          onTouchStartCapture={this.handleTouchStart}
+          onClickCapture={this.handleTouchStart}>
 
           <Button id='btn-navbar' className={'left'+this.getEventsState()} onClick={this.eventsClicked} >
             <img width='100%' src={'icons/events.png'} />
