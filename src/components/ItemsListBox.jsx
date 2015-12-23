@@ -50,19 +50,20 @@ var ItemsListBox = React.createClass({
     this.setState({ invalidateHack: !this.state.invalidateHack });
   },
 
-  getItemRow: function(item, index, boostId, matched, selected) {
+  getItemRow: function(item, index, boostId, matched, selected, locale) {
     return (
       <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
         boostId={boostId}
         matched={matched}
         selected={selected}
+        locale={locale}
         ref={'row-item-'+item.id+'-'+index}
         onItemSelected={this.props.onItemSelected}
         openItemInfo={this.props.openItemInfo} />
     );
   },
 
-  getItemNodes: function(item, onlyBoosts) {
+  getItemNodes: function(item, onlyBoosts, locale) {
     var boostsArr = Object.keys(item.stats);
     boostsArr.unshift(null); // for header row
     let selected = this.props.isItemSelected(item.id);
@@ -71,7 +72,7 @@ var ItemsListBox = React.createClass({
 
       if (index === 0) {
         // header row
-        return this.getItemRow(item, index, null, null, selected);
+        return this.getItemRow(item, index, null, null, selected, locale);
 
       } else {
         // boosts rows
@@ -79,10 +80,10 @@ var ItemsListBox = React.createClass({
 
         if (this.state.showAllBoosts) {
           var matched = matchedBoostId >= 0 ? true : false;
-          return this.getItemRow(item, index, boostId, matched, selected);
+          return this.getItemRow(item, index, boostId, matched, selected, locale);
         } else {
           if (matchedBoostId < 0) return null
-          else return this.getItemRow(item, index, boostId, null, selected);
+          else return this.getItemRow(item, index, boostId, null, selected, locale);
         }
       }
     }, this);
@@ -94,8 +95,9 @@ var ItemsListBox = React.createClass({
 
   getFilteredData: function(onlyTypes, onlySlots, onlyEvents, onlyBoosts) {
     var filteredData = this.DataService.getSortedAndFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
+    var locale = i18n.currentLocale();
     return filteredData.map(function(item) {
-      return this.getItemNodes(item, onlyBoosts);
+      return this.getItemNodes(item, onlyBoosts, locale);
     }, this);
   },
 

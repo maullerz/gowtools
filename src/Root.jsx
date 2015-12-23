@@ -174,6 +174,7 @@ var Root = React.createClass({
       this.setState({
         language: i18n.currentLocale()
       });
+      this.invalidateItemsListBox();
     }
   },
 

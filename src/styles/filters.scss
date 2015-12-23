@@ -86,14 +86,17 @@
 #snap-filter-btn {
   width: 100%;
   background-color: #eee;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  /*-webkit-box-shadow: none;*/
+  /*box-shadow: none;*/
   text-align: left;
   white-space: normal;
   font-weight: bold;
 
   &:active {
-    -webkit-transform: scale3d(0.9, 0.9, 1);
+    -webkit-transform: none;
+    /*-webkit-transform: scale3d(0.9, 0.9, 1);*/
+    /*-webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);*/
+    /*box-shadow: inset 0 3px 5px rgba(0,0,0,.125);*/
   }
 
   &.active {

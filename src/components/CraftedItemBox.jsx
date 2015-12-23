@@ -119,7 +119,7 @@ var CraftedItemBox = React.createClass({
     });
   },
 
-  itemSelected: function(item) {
+  itemSelected: function itemSelected(item) {
     var result = false;
     var currSetItem = this.state.setItem;
 
