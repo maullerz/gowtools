@@ -50,13 +50,13 @@ var ItemsListBox = React.createClass({
     this.setState({ invalidateHack: !this.state.invalidateHack });
   },
 
-  getItemRow: function(item, index, boostId, matched) {
+  getItemRow: function(item, index, boostId, matched, selected) {
     return (
       <ItemRow firstRow={index === 0} item={item} key={"item-"+index}
         boostId={boostId}
         matched={matched}
-        ref={'row-item-'+item.id}
-        isItemSelected={this.props.isItemSelected}
+        selected={selected}
+        ref={'row-item-'+item.id+'-'+index}
         onItemSelected={this.props.onItemSelected}
         openItemInfo={this.props.openItemInfo} />
     );
@@ -65,12 +65,13 @@ var ItemsListBox = React.createClass({
   getItemNodes: function(item, onlyBoosts) {
     var boostsArr = Object.keys(item.stats);
     boostsArr.unshift(null); // for header row
+    let selected = this.props.isItemSelected(item.id);
 
     var items = boostsArr.map(function(boostId, index) {
 
       if (index === 0) {
         // header row
-        return this.getItemRow(item, index, null, null);
+        return this.getItemRow(item, index, null, null, selected);
 
       } else {
         // boosts rows
@@ -78,10 +79,10 @@ var ItemsListBox = React.createClass({
 
         if (this.state.showAllBoosts) {
           var matched = matchedBoostId >= 0 ? true : false;
-          return this.getItemRow(item, index, boostId, matched);
+          return this.getItemRow(item, index, boostId, matched, selected);
         } else {
           if (matchedBoostId < 0) return null
-          else return this.getItemRow(item, index, boostId, null);
+          else return this.getItemRow(item, index, boostId, null, selected);
         }
       }
     }, this);
@@ -130,17 +131,6 @@ var ItemsListBox = React.createClass({
     } else return null;
   },
 
-  itemSizeGetter: function(index) {
-    var rows = this.pieces[index];
-    var size = 0;
-    rows.forEach(function(row, index) {
-      // TODO set this appropriate to different medias
-      if (index === 0) size += 51;
-      else if (row) size += 17;
-    });
-    return size;
-  },
-
   itemRenderer: function(index, key) {
     return this.pieces[index];
   },
@@ -158,6 +148,8 @@ var ItemsListBox = React.createClass({
       this.pieces = this.getFilteredData(['Piece'], [], this.props.onlyEvents, this.props.onlyBoosts);
       if (this.pieces.length > 0) {
         var header = i18n.t('items-list.pieces') + ': ' + this.pieces.length;
+
+              // itemSizeGetter={this.itemSizeGetter}
         return (
           <div>
             <h4>{header}</h4>
@@ -167,12 +159,11 @@ var ItemsListBox = React.createClass({
               invalidateHack={this.state.invalidateHack} /*small hack to force ReactList update*/
               itemRenderer={this.itemRenderer}
               itemsRenderer={this.itemsRenderer}
-              itemSizeGetter={this.itemSizeGetter}
               length={this.pieces.length}
               useTranslate3d={true}
               pageSize={20}
               threshold={800}
-              type='variable'
+              type='simple'
             />
           </div>
         );
@@ -182,22 +173,6 @@ var ItemsListBox = React.createClass({
       return null;
     }
   },
-
-  // TODO
-  // shouldComponentUpdate: function(nextProps, nextState) {
-  //   if (this.firstRender && this.DataService && this.DataService.isReady()) {
-  //     this.firstRender = false;
-  //     return true;
-  //   } else {
-  //     var result = !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
-  //                  !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
-  //                  !shallowEqual(this.state, nextState);
-  //     if (this.refs.reactList) this.refs.reactList.scrollAround(0);
-  //     // if (this.refs.reactList) this.refs.reactList.forceUpdate();
-  //     // if (this.refs.reactList) this.refs.reactList.refs.ref.forceUpdate();
-  //     return result;
-  //   }
-  // },
 
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return (

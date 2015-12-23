@@ -560,14 +560,14 @@ var DataService = function(Environment) {
         // TODO get approximate highRangeBoost value
         if (!highRangeBoost) highRangeBoost = 1;
 
-        var CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
+        let CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
 
-        var min = arr[0],
+        let min = arr[0],
             max = arr[1]*highRangeBoost;
 
-        var delta = (max-min)*(CRAFT_CORES_LUCK);
-        var new_min = min + delta;
-        var average = max - (max - new_min) / 2.0;
+        let delta = (max-min)*(CRAFT_CORES_LUCK);
+        let new_min = min + delta;
+        let average = max - (max - new_min) / 2.0;
 
         return this.round(average);
       },
