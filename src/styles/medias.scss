@@ -344,6 +344,9 @@ Button#quality {
   margin-top: -4px;
   right: 0;
   position: absolute;
+  @media #{$large} {
+    margin-top: 0px;
+  }
 }
 
 .modal-title {
