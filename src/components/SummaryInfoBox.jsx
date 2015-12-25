@@ -293,7 +293,7 @@ var SummaryInfoBox = React.createClass({
 
     if (flattenItems.length === 0) return (
       <div className={"tab-statistics"+this.props.className}>
-        <div className='loading'>NO CORES IN SET</div>
+        <div className='loading'>{i18n.t('summary.no-cores-in-set')}</div>
       </div>
     );
 

@@ -58,7 +58,8 @@ module.exports = {
       "regular": "Regular",
       "strategic": "Strategic",
       "confirm-clear-all": "Clear all set?",
-      "confirm-remove": "Remove selected core from set?"
+      "confirm-remove": "Remove selected core from set?",
+      "no-cores-in-set": "NO CORES IN SET"
     },
     "settings": {
       "colorize-stats": "Colorize Statistics",
@@ -126,7 +127,8 @@ module.exports = {
       "regular": "Регулярные",
       "strategic": "Стратеги",
       "confirm-clear-all":  "Очистить весь набор?",
-      "confirm-remove": "Удалить выбранное ядро из набора?"
+      "confirm-remove": "Удалить выбранное ядро из набора?",
+      "no-cores-in-set": "Нет сердцевин в наборе"
     },
     "settings": {
       "colorize-stats": "Выделять цветом статистику",

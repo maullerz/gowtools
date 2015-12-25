@@ -49,6 +49,7 @@ var FilterEvents = React.createClass({
     if (!this.sortedEvents[locale]) {
       var tmp = this.DataService.events[locale].concat([]);
       tmp.sort();
+
       this.sortedEvents[locale] = {};
       tmp.forEach(function(name) {
         var ix = this.DataService.events[locale].indexOf(name);

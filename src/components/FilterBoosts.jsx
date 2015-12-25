@@ -59,16 +59,8 @@ var FilterBoosts = React.createClass({
       // убираем из фильтров бусты не найденные ни в одном итеме
       tmp = this.DataService.sortBoosts(tmp);
       tmp.forEach(function(boostId, index) {
-        var exist = false;
-        for (var i = 0, len = this.coresPiecesData.length; i < len; ++i) {
-          var item = this.coresPiecesData[i];
-          if (this.isAnyBoostExist([boostId], item.stats)) {
-            exist = true;
-            break;
-          }
-        }
-        if (!exist) tmp[index] = null;
-      }, this.DataService);
+        if (!this.DataService.isBoostExist(boostId)) tmp[index] = null;
+      }, this);
       tmp = tmp.filter(function(boostId) { return boostId });
       //////////
 

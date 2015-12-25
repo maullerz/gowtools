@@ -481,6 +481,22 @@ var DataService = function(Environment) {
         return false;
       },
 
+      isBoostExist: function(boost) {
+        for (var i = 0, len = this.coresPiecesData.length; i < len; ++i) {
+          var item = this.coresPiecesData[i];
+          if (item.stats && item.stats[boost.toString()]) return true;
+        }
+        return false;
+      },
+
+      isEventExist: function(event) {
+        for (var i = 0, len = this.coresPiecesData.length; i < len; ++i) {
+          var item = this.coresPiecesData[i];
+          if (item.info.event && item.info.event[i18n.currentLocale()] === event) return true;
+        }
+        return false;
+      },
+
       getSortedAndFilteredData: function(onlyTypes, onlyEvents, onlyBoosts, onlySlots) {
         var filteredData = this.getFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
 
