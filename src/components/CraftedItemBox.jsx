@@ -20,7 +20,10 @@ var CraftedItemBox = React.createClass({
 
   getInitialState: function() {
     var setItem = new SetItemModel();
-    return { setItem: setItem };
+    return {
+      infoExpanded: true,
+      setItem: setItem
+    };
   },
 
   componentDidMount: function() {
@@ -40,6 +43,21 @@ var CraftedItemBox = React.createClass({
 
   getClearBtnState: function() {
     return (!this.state.setItem.core && this.state.setItem.pieces.length === 0) ? ' hidden' : '';
+  },
+
+  getExpandBtnState: function() {
+    return this.state.infoExpanded ? 'triangle-top' : 'triangle-bottom';
+  },
+
+  toggleSummarizeInfo: function() {
+    this.setState({ infoExpanded: !this.state.infoExpanded });
+  },
+
+  getSummarizeInfoState: function() {
+    var btn = this.refs.expandBtn && this.refs.expandBtn.getDOMNode();
+    if (btn) console.log(btn.classList)
+    else console.log(this.refs);
+    return this.state.infoExpanded ? '' : ' hidden';
   },
 
   addSetItemToSet: function(currSetItem, isAll) {
@@ -182,11 +200,12 @@ var CraftedItemBox = React.createClass({
   },
 
   render: function() {
-    if (!this.DataService || !this.DataService.isReady()) return (
-      <div className='crafted-item-box'>
-        <div className='loading'>LOADING...</div>
-      </div>
-    );
+    if (!this.DataService || !this.DataService.isReady()) return null;
+    // (
+    //   <div className='crafted-item-box'>
+    //     <div className='loading'>LOADING...</div>
+    //   </div>
+    // );
 
     var currSetItem = this.state.setItem;
 
@@ -196,6 +215,7 @@ var CraftedItemBox = React.createClass({
       <div className='crafted-item-box' ref='target'>
 
         <div className='crafted-item-box-head'>
+
           <div className='crafted-item-btn-group'>
             <Button className={'glyph-btn' + this.getAddBtnState()} onClick={this.addButtonClicked}>
               <Glyphicon glyph={this.getItemState()}/>
@@ -204,10 +224,15 @@ var CraftedItemBox = React.createClass({
               <Glyphicon glyph="trash"/>
             </Button>
           </div>
+
           <SetItemBox active={true} setItem={this.state.setItem} openInfo={this.openQualitySelect} />
+
+          <Button ref='expandBtn' className={'glyph-btn expand'} onClick={this.toggleSummarizeInfo}>
+            <Glyphicon glyph={this.getExpandBtnState()}/>
+          </Button>
         </div>
 
-        <div className="summarize-info">
+        <div className={'summarize-info' + this.getSummarizeInfoState()}>
           {summarizeInfoNodes}
         </div>
       </div>

@@ -34,13 +34,6 @@ Button#quality {
   }
 
 
-.tab-crafting {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  overflow-y: auto;
-}
-
 .tab-statistics {
   padding: 0 5px;
   display: flex;
@@ -53,6 +46,8 @@ Button#quality {
   outline: none!important;
   color: #9d9d9d;
   border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
 
   &:active {
     -webkit-transform: scale3d(0.9, 0.9, 1);

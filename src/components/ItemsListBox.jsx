@@ -2,7 +2,6 @@ import React from 'react'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 import ReactList from 'react-list'
-import shallowEqual from '../lib/shallowEqual'
 
 import DataService from '../DataService.jsx'
 import ItemRow from './ItemRow.jsx'

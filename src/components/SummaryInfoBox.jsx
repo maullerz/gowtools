@@ -273,19 +273,6 @@ var SummaryInfoBox = React.createClass({
     return this.flattenCoresSet().length > 0 ? '' : ' hidden';
   },
 
-  // TODO
-  // shouldComponentUpdate: function(nextProps, nextState) {
-  //   if (this.firstRender && this.DataService && this.DataService.isReady()) {
-  //     this.firstRender = false;
-  //     return true;
-  //   } else {
-  //     if (nextProps.activeTab === 2) { return true };
-  //     return !shallowEqual(this.props.onlyEvents, nextProps.onlyEvents) ||
-  //            !shallowEqual(this.props.onlyBoosts, nextProps.onlyBoosts) ||
-  //            !shallowEqual(this.state, nextState);
-  //   }
-  // },
-
   render: function() {
     if (!this.DataService) return null;
 

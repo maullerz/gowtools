@@ -27,6 +27,13 @@
 }
 
 $small: "only screen and (max-device-width: 568px)";
+$small-landscape: "only screen and (max-device-width: 568px) and (orientation: landscape)";
+$small-portrait: "only screen and (max-device-width: 568px) and (orientation: portrait)";
+
+$large: "only screen and (min-device-width: 768px)";
+$large-landscape: "only screen and (min-device-width: 768px) and (orientation: landscape)";
+$large-portrait: "only screen and (min-device-width: 768px) and (orientation: portrait)";
+
 
 #img71.sprite {
   zoom: 0.71;
@@ -58,4 +65,7 @@ $small: "only screen and (max-device-width: 568px)";
 
 .boost-icon {
   zoom: 0.24;
+  @media #{$small-portrait} {
+    display: none;
+  }
 }
