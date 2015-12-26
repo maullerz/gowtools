@@ -187,7 +187,7 @@ var SummaryInfoBox = React.createClass({
       var active = this.state.activeKey === key;
 
       return (
-        <SetItemBox key={key} tmpKey={key} active={active} onActivate={this.setItemActivated}
+        <SetItemBox key={key} statsKey={key} active={active} onActivate={this.setItemActivated}
           setItem={setItem} openInfo={this.openQualitySelect} />
       )
     }.bind(this));
@@ -287,31 +287,36 @@ var SummaryInfoBox = React.createClass({
     var activeSetItem = this.getActiveSetItem();
     var slotName = activeSetItem ? this.DataService.getSlotName(activeSetItem.core) : '';
 
+
+    // <div className='gap'>
+      // {slotName}
+    // </div>
+
     return (
       <div className={"tab-statistics"+this.props.className}>
-        <div className='statistics-set-items'>
-          {this.renderCurrSet(flattenItems)}
+
+        <div className="statistics-controls">
+          <Button className={'glyph-btn'+this.getControlsState()} onClick={this.editSetItem}>
+            <Glyphicon glyph="edit"/>
+          </Button>
+
+          <div className='gap'/>
+
+          <Button className={'glyph-btn'+this.getControlsState()} onClick={this.removeSetItem}>
+            <Glyphicon glyph="minus"/>
+          </Button>
+
+          <Button className={'glyph-btn clear-all'+this.getClearBtnState()} onClick={this.clearSet}>
+            <Glyphicon glyph="trash"/>
+          </Button>
         </div>
-        <div className="statistics-right-group">
-          <div className="statistics-controls">
-            <Button className={'glyph-btn'+this.getControlsState()} onClick={this.editSetItem}>
-              <Glyphicon glyph="edit"/>
-            </Button>
 
-            <div className='gap'/>
+        <div className='statistics-main-group'>
 
-            <Button className={'glyph-btn'+this.getControlsState()} onClick={this.removeSetItem}>
-              <Glyphicon glyph="minus"/>
-            </Button>
-
-            <div className='gap'>
-              {slotName}
-            </div>
-
-            <Button className={'glyph-btn clear-all'+this.getClearBtnState()} onClick={this.clearSet}>
-              <Glyphicon glyph="trash"/>
-            </Button>
+          <div className="statistics-set-items">
+            {this.renderCurrSet(flattenItems)}
           </div>
+
           {this.DataService ? this.DataService.getCurrSetSummaryTable(flattenItems) : null}
         </div>
       </div>

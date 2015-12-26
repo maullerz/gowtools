@@ -25,16 +25,16 @@ var SetItemBox = React.createClass({
       var openInfoFn = function() { this.itemClicked(core) }.bind(this);
 
       return (
-        <div className={'sel-item-core '+quality} key={"sel-item-core"}>
-          <div id='img71' className={spriteName} onClick={openInfoFn} />
+        <div className={'sel-item core '+quality} key={"sel-item-core"}>
+          <div id='core' className={spriteName} onClick={openInfoFn} />
         </div>
       );
 
     } else {
 
       return (
-        <div className={'sel-item-core empty'} key={"sel-item-core"}>
-          <div id='img71' className='sprite empty'>
+        <div className={'sel-item core empty'} key={"sel-item-core"}>
+          <div id='core' className='sprite empty'>
             {i18n.t('craftedbox.choose-core')}
           </div>
         </div>
@@ -53,8 +53,8 @@ var SetItemBox = React.createClass({
       var openInfoFn = function() { this.itemClicked(piece) }.bind(this);
 
       return (
-        <div className={'sel-item '+quality} key={"sel-item-" + index}>
-          <div id='img32' className={spriteName} onClick={openInfoFn} />
+        <div className={'sel-item piece '+quality} key={"sel-item-" + index}>
+          <div id='piece' className={spriteName} onClick={openInfoFn} />
         </div>
       );
 
@@ -62,12 +62,14 @@ var SetItemBox = React.createClass({
   },
 
   getSetItemState: function() {
-    return this.props.active ? ' active' : '';
+    var state = this.props.active ? ' active' : '';
+    if (this.props.statsKey) state += ' stats';
+    return state;
   },
 
   setItemClicked: function(event) {
     if (!this.props.active) {
-      this.props.onActivate(this.props.tmpKey);
+      this.props.onActivate(this.props.statsKey);
       event.stopPropagation();
     }
   },

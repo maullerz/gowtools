@@ -54,10 +54,8 @@ var CraftedItemBox = React.createClass({
   },
 
   getSummarizeInfoState: function() {
-    var btn = this.refs.expandBtn && this.refs.expandBtn.getDOMNode();
-    if (btn) console.log(btn.classList)
-    else console.log(this.refs);
     return this.state.infoExpanded ? '' : ' hidden';
+    // return this.state.infoExpanded ? '' : ' hidden-ext';
   },
 
   addSetItemToSet: function(currSetItem, isAll) {

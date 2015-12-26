@@ -149,7 +149,7 @@ var DataService = function(Environment) {
 
       getCurrSetSummaryTable: function(flattenCurrSet) {
         var calculatedBoosts = this.calculateCurrSetByQuality(flattenCurrSet);
-        return this.getSummaryTable(calculatedBoosts, 'curr-set-statistics');
+        return this.getSummaryTable(calculatedBoosts, 'statistics-right-group');
       },
 
       isEtcBoost: function(boostName) {
