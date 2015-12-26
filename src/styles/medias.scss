@@ -395,20 +395,15 @@ table.modal-body-params td {
 Button#quality {
   width: 64px;
   height: 64px;
-  @media #{$small} {
+  @media #{$small-landscape} {
     width: 46px;
     height: 46px;
   }
-}
-
-#quality-select .modal-dialog {
-  margin: 60px auto;
-  width: 480px;
-  @media #{$small} {
-    width: 400px;
+  @media #{$small-portrait} {
+    width: 34px;
+    height: 34px;
   }
 }
-
 
 .glyph-btn {
   padding: 4px 8px;
@@ -439,9 +434,12 @@ Button#quality {
   /*height: 32px;*/
   margin: 16px;
   margin-right: 0;
-  @media #{$small} {
+  @media #{$small-landscape} {
     margin: 6px;
     margin-right: 0;
+  }
+  @media #{$small-portrait} {
+    margin: 0;
   }
   @media #{$large} {
     margin: 10px;
@@ -449,27 +447,74 @@ Button#quality {
   }
 }
 
+
+
+#quality-select .modal-dialog {
+  margin: 60px auto;
+  width: 480px;
+  @media #{$small-landscape} {
+    width: 400px;
+  }
+  @media #{$small-portrait} {
+    width: 320px;
+  }
+}
+
+#quality-select .modal-body {
+  padding: 15px;
+  @media #{$small-portrait} {
+    padding: 15px 10px;
+  }
+}
+
+.modal-body {
+  display: block;
+  padding-top: 10px;
+  @media #{$small-landscape} {
+    padding: 3px;
+  }
+  @media #{$small-portrait} {
+    padding: 3px;
+  }
+}
+
+.modal-body-image {
+  /*position: absolute;*/
+  float: left;
+  margin-left: 0;
+  @media #{$small} {
+    margin-left: 10px;
+  }
+}
+
 .modal-body-params {
   /*display: inline-block;*/
   margin-left: 65px;
   @media #{$small} {
-    margin-left: 44px;
+    margin-left: 60px;
   }
 }
 
 .modal-header .close {
-  margin-top: -4px;
+  margin-top: -2px;
   right: 0;
   position: absolute;
   @media #{$large} {
     margin-top: 0px;
   }
+  @media #{$small-portrait} {
+    /*margin-top: 0;*/
+    font-size: 20px;
+  }
 }
 
 .modal-title {
   font-size: 25px;
-  @media #{$small} {
+  @media #{$small-landscape} {
     font-size: 20px;
+  }
+  @media #{$small-portrait} {
+    font-size: 14px;
   }
 }
 

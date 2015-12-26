@@ -199,8 +199,11 @@ $large-portrait: "only screen and (min-device-width: 768px) and (orientation: po
 
 #img64.sprite {
   zoom: 0.64;
-  @media #{$small} {
+  @media #{$small-landscape} {
     zoom: 0.44;
+  }
+  @media #{$small-portrait} {
+    zoom: 0.32;
   }
 }
 

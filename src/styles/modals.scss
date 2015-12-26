@@ -23,10 +23,6 @@
   opacity: .8;
 }
 
-#quality-select .modal-body {
-  padding: 15px;
-}
-
 .qualities-group {
   display: flex;
   justify-content: space-around;
@@ -56,11 +52,6 @@ table.modal-body-params td {
   &.param {
     font-weight: bold;
   }
-}
-
-.modal-body-image {
-  /*position: absolute;*/
-  float: left;
 }
 
 .close {
