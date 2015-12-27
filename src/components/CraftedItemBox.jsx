@@ -59,6 +59,11 @@ var CraftedItemBox = React.createClass({
   },
 
   addSetItemToSet: function(currSetItem, isAll) {
+    // or if (isAll) {
+    //   this.props.addSetItemToSet({
+    //   this.props.addSetItemToSet({
+    //   this.props.addSetItemToSet({  
+    // }
     this.props.addSetItemToSet({
       core: currSetItem.core,
       coreQuality: currSetItem.coreQuality,

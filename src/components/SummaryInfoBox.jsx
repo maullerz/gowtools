@@ -102,7 +102,28 @@ var SummaryInfoBox = React.createClass({
     } else {
       if (state === 'plus') {
         if (isAll) {
-          this.state.coresSet.Accessory = [setItem, setItem, setItem];
+          // FIXME need to clone
+          // this.state.coresSet.Accessory = [setItem, setItem, setItem];
+          this.state.coresSet.Accessory = [];
+          this.state.coresSet.Accessory.push({
+            core: setItem.core,
+            coreQuality: setItem.coreQuality,
+            pieces: setItem.pieces.concat([]),
+            piecesQualities: setItem.piecesQualities.concat([])
+          })
+          this.state.coresSet.Accessory.push({
+            core: setItem.core,
+            coreQuality: setItem.coreQuality,
+            pieces: setItem.pieces.concat([]),
+            piecesQualities: setItem.piecesQualities.concat([])
+          })
+          this.state.coresSet.Accessory.push({
+            core: setItem.core,
+            coreQuality: setItem.coreQuality,
+            pieces: setItem.pieces.concat([]),
+            piecesQualities: setItem.piecesQualities.concat([])
+          })
+
         } else {
           this.state.coresSet.Accessory.push(setItem);
         }
