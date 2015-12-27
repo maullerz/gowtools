@@ -1,8 +1,3 @@
-/* statusbar height = 25 */
-/* header height = 42 */
-/* filterpanel height = 55 */
-/* filterpanel height = 43 on iphones */
-
 /*
   small:
   iPhone 3-4x 480x320
@@ -102,6 +97,7 @@ td {
 }
 
 thead tr th {
+  font-weight: normal;
   font-size: 11px;
   @media #{$small} {
     font-size: 8px;
@@ -181,6 +177,11 @@ table.modal-body-params td {
   height: $header-height;
   min-height: $header-height;
   padding: 10px;
+  @media #{$small-portrait} {
+    font-size: 10px;
+    height: 34px;
+    min-height: 34px;
+  }
 }
 
 .snap-filter-container {
@@ -189,11 +190,27 @@ table.modal-body-params td {
   min-height: 0px;
 }
 
+.statistics-set-items .set-item.well {
+  @media #{$large-landscape} {
+    min-height: 84px;
+    min-width: 202px;
+    width: 202px;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+  }
+
+  @media #{$large-portrait} {
+    padding-bottom: 0;
+    margin-bottom: 10px;
+  }
+}
 
 .set-item.well {
   min-height: 95px;
   min-width: 212px;
   width: 212px;
+  min-width: 223px;
+  width: 223px;
   padding: 5px;
   padding-bottom: 4px;
   margin-bottom: 5px;
@@ -201,17 +218,17 @@ table.modal-body-params td {
   border-radius: 4px;
   text-align: left;
 
-  @media #{$large-landscape} {
-    min-height: 84px;
-    min-width: 202px;
-    width: 202px;
-  }
-
   @media #{$small} {
     padding: 4px;
     min-height: 68px;
     width: 160px;
     min-width: 160px;
+  }
+
+  @media #{$large-portrait} {
+    min-height: 95px;
+    min-width: 223px;
+    width: 223px;
   }
 
   &.active {
@@ -224,6 +241,13 @@ table.modal-body-params td {
       min-height: 50px;
       width: 128px;
       min-width: 128px;
+      &.active {
+        /*background-color: #11CAEC;*/
+        /*border: 1px solid #076879;*/
+        border: 1px solid #969696;
+        -webkit-transform: scale3d(0.95, 0.95, 1);
+        transform: scale3d(0.95, 0.95, 1);
+      }
     }
   }
 }
@@ -402,6 +426,8 @@ Button#quality {
   @media #{$small-portrait} {
     width: 34px;
     height: 34px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -439,7 +465,8 @@ Button#quality {
     margin-right: 0;
   }
   @media #{$small-portrait} {
-    margin: 0;
+    /*margin: 0;*/
+    margin: 4px 0;
   }
   @media #{$large} {
     margin: 10px;
@@ -463,7 +490,7 @@ Button#quality {
 #quality-select .modal-body {
   padding: 15px;
   @media #{$small-portrait} {
-    padding: 15px 10px;
+    padding: 15px 3px;
   }
 }
 
@@ -502,9 +529,12 @@ Button#quality {
   @media #{$large} {
     margin-top: 0px;
   }
+  @media #{$small-landscape} {
+    margin-top: -4px;
+  }
   @media #{$small-portrait} {
-    /*margin-top: 0;*/
-    font-size: 20px;
+    margin-top: -5px;
+    font-size: 25px;
   }
 }
 

@@ -72,7 +72,7 @@ var Root = React.createClass({
       maxPosition: 221,
       minPosition: -221,
       resistance: 0.7,
-      transitionSpeed: 0.5,
+      transitionSpeed: 0.4,
       easing: 'cubic-bezier(0.19, 1, 0.22, 1)' // easeOutExpo
     });
 
@@ -239,7 +239,6 @@ var Root = React.createClass({
   },
 
   isIOS: function() {
-    console.log('document.body.className: '+document.body.className);
     return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
   },
 
@@ -264,16 +263,26 @@ var Root = React.createClass({
 
   onHighRangeBoostChange: function() {
     // TODO - HighRangeBoost
-    console.log('checkbox clicked: '+event.target.checked);
+    // console.log('checkbox clicked: '+event.target.checked);
   },
 
   handleTouchStart: function(event) {
     let snapState = this.snapper.state();
-    if (snapState.state === 'left' || snapState.state === 'right' || this.snapAnimating === true) {
+
+    if (this.snapAnimating === true) {
+      if (snapState.state === 'closed') {
+        // snapjs 'animated' event didnt fired
+        this.snapAnimating = false;
+        this.forceUpdate();
+      } else {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    } else if (snapState.state === 'left' || snapState.state === 'right') {
+      this.snapAnimating = true;
       this.snapper.close();
       event.stopPropagation();
       event.preventDefault();
-      this.snapAnimating = true;
     }
   },
 

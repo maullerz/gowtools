@@ -1,15 +1,17 @@
+// TODO - remove this or replace with working version
+
 module.exports = {
   targetDirectory: 'phonegap-app',
   phonegapServePort: 3000,
   app: {
-    namespace: 'com.maullerz.gowtoolz',
+    namespace: 'com.maullerz.gowcraft.calculator',
     version: '0.9.1',
-    name: 'GoW Craft Tool',
-    description: 'Crafting tool for Game of War',
+    name: 'Craft Calculator for GoW',
+    description: 'Craft Calculator for GoW',
     author: {
-      name: 'Roman Loginov',
-      website: 'https://github.com/maullerz/',
-      email: 'maullerz@gmail.com'
+      name: 'Maullerz',
+      website: 'https://vk.com/gowtools',
+      email: 'gowtools@gmail.com'
     },
     accessOrigin: '*',
     orientation: 'default', //all: default means both landscape and portrait are enabled

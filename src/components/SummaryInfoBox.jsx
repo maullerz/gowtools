@@ -288,9 +288,7 @@ var SummaryInfoBox = React.createClass({
     var slotName = activeSetItem ? this.DataService.getSlotName(activeSetItem.core) : '';
 
 
-    // <div className='gap'>
-      // {slotName}
-    // </div>
+
 
     return (
       <div className={"tab-statistics"+this.props.className}>
@@ -305,6 +303,10 @@ var SummaryInfoBox = React.createClass({
           <Button className={'glyph-btn'+this.getControlsState()} onClick={this.removeSetItem}>
             <Glyphicon glyph="minus"/>
           </Button>
+
+          <div className='gap'>
+            {slotName}
+          </div>
 
           <Button className={'glyph-btn clear-all'+this.getClearBtnState()} onClick={this.clearSet}>
             <Glyphicon glyph="trash"/>

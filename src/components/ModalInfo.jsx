@@ -43,14 +43,14 @@ var ModalInfo = React.createClass({
       );
 
       // for debug issues
-      if (process.env.NODE_ENV !== 'production') {
-        var debugUrl = 'http://gow.y96.ru/en/resources/corespieces/'+item.id;
-      }
+      // if (process.env.NODE_ENV !== 'production') {
+      //   var debugUrl = 'http://gow.y96.ru/en/resources/corespieces/'+item.id;
+      // }
 
       var locale = i18n.currentLocale();
       var rows = Object.keys(item.info).map(function(param, index) {
         return (
-          <tr className='param'>
+          <tr className='param' key={'param-'+index}>
             <td className='param'>{i18n.t('info.'+param)+':'}</td>
             <td>{item.info[param][locale]}</td>
           </tr>
@@ -60,7 +60,7 @@ var ModalInfo = React.createClass({
       // Для undefined cобытий
       if (!item.info['event']) {
         rows.unshift(
-          <tr className='param'>
+          <tr className='param' key='param-event'>
             <td className='param'>{i18n.t('info.event')+':'}</td>
             <td>{this.DataService.getEventName(item.eventId)}</td>
           </tr>
@@ -68,14 +68,14 @@ var ModalInfo = React.createClass({
       }
 
       // Линк для дебага
-      if (debugUrl) {
-        rows.unshift(
-          <tr className='param'>
-            <td className='param'>{'DEBUG'}</td>
-            <td><a href={debugUrl} target='_blank'>{'link to item.id: '+item.id}</a></td>
-          </tr>
-        )
-      }
+      // if (debugUrl) {
+      //   rows.unshift(
+      //     <tr className='param' key='param-debug'>
+      //       <td className='param'>{'DEBUG'}</td>
+      //       <td><a href={debugUrl} target='_blank'>{'link to item.id: '+item.id}</a></td>
+      //     </tr>
+      //   )
+      // }
 
       var firstInfoBlock = (
         <table className='modal-body-params'><tbody>
@@ -88,7 +88,7 @@ var ModalInfo = React.createClass({
         <Modal.Body>
           <div className='modal-body-image'>
             <div className='modal-image-background'>
-              <div id='img64' className={spriteName} />
+              <div id='info-img' className={spriteName} />
             </div>
           </div>
           <div className='modal-body-params'>

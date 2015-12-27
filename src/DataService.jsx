@@ -561,13 +561,11 @@ var DataService = function(Environment) {
         return (Math.round(original*100)/100).toFixed(2);
       },
 
-      simpleShow: function(arr, highRangeBoost) {
-        if (!highRangeBoost) highRangeBoost = 1;
-        if (arr === null) {
-          return null;
-        } else {
-          return arr[0] + " - " + (arr[1] || 0)*highRangeBoost;
+      simpleShow: function(arr) {
+        if (arr) {
+          return arr[0] + " - " + (arr[1] || 0);
         }
+        return null;
       },
 
       calculateLuck: function(arr, highRangeBoost) {

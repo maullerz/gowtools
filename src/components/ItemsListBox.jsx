@@ -178,7 +178,7 @@ var ItemsListBox = React.createClass({
   render: function() {
     if (!this.DataService || !this.DataService.isReady()) return (
       <div className='cores-list-box'>
-        <div className='loading'>LOADING...</div>
+        <div className='loading'>{i18n.t('items-list.loading')}</div>
       </div>
     );
 

@@ -49,7 +49,8 @@ module.exports = {
       "Armor": "Armor",
       "Feet": "Feet",
       "Weapon": "Weapon",
-      "Accessory": "Accessory"
+      "Accessory": "Accessory",
+      "loading": "LOADING..."
     },
     "summary": {
       "boosts": "Troop Boosts",
@@ -118,7 +119,8 @@ module.exports = {
       "Armor": "Доспехи",
       "Feet": "Обувь",
       "Weapon": "Оружие",
-      "Accessory": "Принадлежность"
+      "Accessory": "Принадлежность",
+      "loading": "ЗАГРУЗКА..."
     },
     "summary": {
       "boosts": "Бусты",
