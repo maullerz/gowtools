@@ -179,8 +179,21 @@ table.modal-body-params td {
   padding: 10px;
   @media #{$small-portrait} {
     font-size: 10px;
+    font-weight: bold;
     height: 34px;
     min-height: 34px;
+  }
+}
+
+.snap-filter-clear-btn {
+  font-size: 18px;
+
+  @media #{$small-landscape} {
+    font-size: 16px;
+  }
+
+  @media #{$small-portrait} {
+    font-size: 12px;
   }
 }
 
@@ -294,6 +307,7 @@ table.modal-body-params td {
   @media #{$small} {
     height: 78px;
     min-height: 78px;
+    justify-content: space-between;
   }
 
   @media #{$large} {
@@ -308,15 +322,16 @@ table.modal-body-params td {
   height: 95px;
   display: flex;
   margin-right: 5px;
+  margin-left: 5px;
   flex-direction: column;
   justify-content: space-between;
 
+  &.expand {
+    justify-content: center;
+  }
+
   @media #{$small} {
     height: 68px;
-  }
-  @media #{$small-portrait} {
-    position: absolute;
-    left: 10px;
   }
 }
 
@@ -447,17 +462,12 @@ Button#quality {
 
 .glyph-btn.expand {
   display: none;
-  position: absolute;
-  right: 10px;
-  top: 75px;
   @media #{$small-portrait} {
     display: block;
   }
 }
 
 .glyph-btn.remove {
-  /*width: 32px;*/
-  /*height: 32px;*/
   margin: 16px;
   margin-right: 0;
   @media #{$small-landscape} {
@@ -465,7 +475,6 @@ Button#quality {
     margin-right: 0;
   }
   @media #{$small-portrait} {
-    /*margin: 0;*/
     margin: 4px 0;
   }
   @media #{$large} {

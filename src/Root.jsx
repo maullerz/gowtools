@@ -274,10 +274,9 @@ var Root = React.createClass({
         // snapjs 'animated' event didnt fired
         this.snapAnimating = false;
         this.forceUpdate();
-      } else {
-        event.stopPropagation();
-        event.preventDefault();
       }
+      event.stopPropagation();
+      event.preventDefault();
     } else if (snapState.state === 'left' || snapState.state === 'right') {
       this.snapAnimating = true;
       this.snapper.close();

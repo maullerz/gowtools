@@ -21,7 +21,7 @@ var CraftedItemBox = React.createClass({
   getInitialState: function() {
     var setItem = new SetItemModel();
     return {
-      infoExpanded: true,
+      infoExpanded: false,
       setItem: setItem
     };
   },
@@ -225,9 +225,11 @@ var CraftedItemBox = React.createClass({
 
           <SetItemBox active={true} setItem={this.state.setItem} openInfo={this.openQualitySelect} />
 
-          <Button ref='expandBtn' className={'glyph-btn expand'} onClick={this.toggleSummarizeInfo}>
-            <Glyphicon glyph={this.getExpandBtnState()}/>
-          </Button>
+          <div className='crafted-item-btn-group expand'>
+            <Button ref='expandBtn' className={'glyph-btn expand'} onClick={this.toggleSummarizeInfo}>
+              <Glyphicon glyph={this.getExpandBtnState()}/>
+            </Button>
+          </div>
         </div>
 
         <div className={'summarize-info' + this.getSummarizeInfoState()}>
