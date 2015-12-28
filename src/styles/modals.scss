@@ -1,3 +1,4 @@
+@import "_mixins";
 
 .modal-content {
   overflow: hidden;
@@ -24,8 +25,9 @@
 }
 
 .qualities-group {
-  display: flex;
-  justify-content: space-around;
+  @include flexbox();
+  @include justify(space-around);
+  /*@include justify_justify(space-around);*/
 }
 
 .qualities-controls {

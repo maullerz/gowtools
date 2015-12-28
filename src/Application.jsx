@@ -45,24 +45,40 @@ if (!Array.prototype.findIndex) {
 
 module.exports = React.createClass({
   
-  componentDidMount: function(){
+  componentWillMount: function(){
     this.initApp();
+  },
+
+  logSizes: function() {
+    var width = window.screen && window.screen.width;
+    var height = window.screen && window.screen.height;
+    var devicePixelRatio = window.devicePixelRatio;
+    console.log('==================');
+    console.log('Screen: '+width+'x'+height+', dPR:'+devicePixelRatio);
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    console.log('==================');
+    console.log('Inner: '+width+'x'+height);
+    console.log('==================');
+    console.log(window.device);
+    console.log('==================');
+    console.log(document.documentElement.clientWidth);
+    console.log(document.documentElement.clientHeight);
+    console.log('==================');
   },
 
   initApp: function(){
     if (process.env.NODE_ENV !== 'production') {
       console.log('NODE_ENV: '+process.env.NODE_ENV);
-      var width = window.screen && window.screen.width;
-      var height = window.screen && window.screen.height;
-      console.log('==================');
-      console.log(width+'x'+height);
-      console.log('==================');
-      console.log(window.device);
-      console.log('==================');
+      this.logSizes();
+
+      // setTimeout(function() {
+      //   this.logSizes();
+      // }.bind(this), 5000);
     };
 
-    if (FastClick) FastClick.attach(document.body, {});
     if (typeof StatusBar !== 'undefined') StatusBar.hide();
+    if (FastClick) FastClick.attach(document.body, {});
   },
 
   getPlatform: function(){
@@ -88,6 +104,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    // corespiecesUrl = 'data/items.json'
     return (
       <Root
         platform={this.getPlatform()}

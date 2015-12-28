@@ -1,3 +1,5 @@
+@import "_mixins";
+
 .snap-content {
   background-color: #ddd;
   color: #333;
@@ -8,10 +10,10 @@
   bottom: 0;
   left: 0;
   width: auto;
-  height: auto;
-  display: -webkit-flex;
-  flex-direction: column;
+  /*height: auto;*/
   height: 100%;
+  @include flexbox();
+  @include flex_direction_column();
   -webkit-overflow-scrolling: touch;
   -webkit-transform: translate3d(0, 0, 0);
      -moz-transform: translate3d(0, 0, 0);
