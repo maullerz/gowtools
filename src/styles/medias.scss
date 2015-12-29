@@ -403,6 +403,10 @@ table.modal-body-params td {
 
     &.expand {
       @include justify(center);
+      display: none;
+      @media #{$small-portrait} {
+        display: block;
+      }
     }
 
     @media #{$small} {
