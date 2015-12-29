@@ -56,6 +56,7 @@ body, table {
   @include flex_direction_column();
   @include justify(center);
 
+/* for DEBUG
   background-color: black;
   @media #{$small-landscape} {
     background-color: red;
@@ -68,7 +69,7 @@ body, table {
   }
   @media #{$large-portrait} {
     background-color: yellow;
-  }
+  }*/
 }
 
 tr {
@@ -189,6 +190,23 @@ table.modal-body-params td {
   }
 }
 
+.tab-statistics {
+  @include flexbox();
+  @include flex_direction_column();
+  position: absolute;
+  overflow-y: scroll;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: $header-height;
+  padding: 0 5px;
+
+  @media #{$small-portrait} {
+    top: 34px;
+    padding: 0 0;
+  }
+}
+
 #btn-navbar {
   width: 40px;
   @media #{$small-portrait} {
@@ -197,8 +215,8 @@ table.modal-body-params td {
 }
 
 .snap-filter {
-  @include flexbox();
-  @include flex_direction_column();
+  /*@include flexbox();
+  @include flex_direction_column();*/
   height: 100%;
 }
 
@@ -231,9 +249,16 @@ table.modal-body-params td {
 }
 
 .snap-filter-container {
-  @include flex(1 1 auto);
+  /*@include flex(1 1 auto);
+  min-height: 0px;*/
+  position: absolute;
   overflow-y: auto;
-  min-height: 0px;
+  bottom: 0;
+  top: $header-height;
+
+  @media #{$small-portrait} {
+    top: 34px;
+  }
 }
 
 .statistics-set-items .set-item.well {
@@ -303,84 +328,100 @@ table.modal-body-params td {
   }
 }
 
+
+
+
+
 .tab-crafting {
   @include flexbox();
   @include justify(center);
-  height: 100%;
-  overflow-y: auto;
+  position: absolute;
+  overflow-y: scroll;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: $header-height;
+  border: 1px solid;
 
   @media #{$small-portrait} {
-    /*display: block;*/
     @include flex_direction_column();
+    @include justify(flex-start);
+    top: 34px;
   }
 }
 
 .crafted-item-box {
-  /*padding: 5px;*/
-  padding: 0;
-  padding-bottom: 0;
-
-  width: 44%;
   @include flexbox();
   @include flex_direction_column();
+  position: relative;
+  width: 44%;
+  padding: 0;
+  padding-bottom: 0;
   text-align: center;
 
   @media #{$small-portrait} {
     width: 100%;
-    /*min-height: auto;*/
+    /*height: auto;*/
     display: inline-table;
     min-height: 78px;
-    height: auto;
+
+    /*position: absolute;
+    top: 0;*/
   }
 }
 
-.crafted-item-box-head, .set-item-box-head {
-  @include flexbox();
-  @include justify(center);
-  padding: 5px;
-  border-bottom: 1px solid #aaa;
-  height: $crafted-item-box-height;
-  min-height: $crafted-item-box-height;
-
-  @media #{$small} {
-    height: 78px;
-    min-height: 78px;
-    @include justify_justify(space-between);
-  }
-
-  @media #{$large} {
-    padding: 10px;
-    height: 115px;
-    min-height: 115px;
-    margin-bottom: 10px;
-  }
-}
-
-.crafted-item-btn-group {
-  @include flexbox();
-  @include flex_direction_column();
-  @include justify_justify(space-between);
-  height: 95px;
-  margin-right: 5px;
-  margin-left: 5px;
-  width: 32px;
-
-  &.expand {
+  .crafted-item-box-head, .set-item-box-head {
+    @include flexbox();
     @include justify(center);
+    padding: 5px;
+    border-bottom: 1px solid #aaa;
+    height: $crafted-item-box-height;
+    min-height: $crafted-item-box-height;
+
+    @media #{$small} {
+      height: 78px;
+      min-height: 78px;
+      @include justify_justify(space-between);
+    }
+
+    @media #{$large} {
+      padding: 10px;
+      height: 115px;
+      min-height: 115px;
+      margin-bottom: 10px;
+    }
   }
 
-  @media #{$small} {
-    height: 68px;
+  .crafted-item-btn-group {
+    @include flexbox();
+    @include flex_direction_column();
+    @include justify_justify(space-between);
+    height: 95px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 32px;
+
+    &.expand {
+      @include justify(center);
+    }
+
+    @media #{$small} {
+      height: 68px;
+    }
+    @media #{$large} {
+      width: 42px;
+    }
   }
-  @media #{$large} {
-    width: 42px;
-  }
-}
 
   .summarize-info {
     overflow-y: auto;
     /*min-height: 0px;*/
-    @include flexbox();
+    /*@include flexbox();*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: $crafted-item-box-height;
 
     .collapsed {
       display: none;
@@ -390,46 +431,51 @@ table.modal-body-params td {
       padding-right: 1px;
       padding-bottom: 0;
       border-bottom: none;
+      top: 78px;
     }
     @media #{$small-portrait} {
       padding-bottom: 10px;
       border-bottom: 1px solid #aaa;
+      position: relative;
+      top: 0;
     }
     @media #{$landscape} {
-      @include flexbox_important();
+      display: block!important;
     }
     @media #{$large} {
-      @include flexbox_important();
+      display: block!important;
     }
   }
 
 
 .cores-list-box {
-  width: 56%;
   @include flexbox();
   @include flex_direction_column();
+  position: relative;
+  width: 56%;
   padding-left: 3px;
   text-align: center;
 
   @media #{$small-portrait} {
     width: 100%;
-    height: 100%;
-    /*overflow: auto;*/
+    /*height: 100%;*/
     overflow-y: scroll;
     padding-left: 0;
+    bottom: 0;
+
+    /*position: absolute;
+    top: 78px;*/
   }
 }
 
   .filter-panel {
     @include flexbox();
-    /*@include justify(flex-start);*/
     @include justify(space-around);
     border-bottom: 1px solid #aaa;
     height: $filter-panel-height;
     min-height: $filter-panel-height;
 
     @media #{$small-portrait} {
-      /*padding-left: 30px;*/
       height: $filter-panel-height;
       min-height: $filter-panel-height;
     }
@@ -467,9 +513,22 @@ table.modal-body-params td {
     }
 
   .scrollable-items-list {
-    -webkit-flex: 1 1 auto;
-    overflow-y: auto;
-    min-height: 0px;
+    /*-webkit-flex: 1 1 auto;
+    min-height: 0px;*/
+    overflow-y: scroll;
+    position: absolute;
+    bottom: 0;
+    top: $filter-panel-height;
+
+    @media #{$large-landscape} {
+      top: 85px;
+    }
+    @media #{$large-portrait} {
+      top: 69px;
+    }
+    @media #{$small-portrait} {
+      position: static;
+    }
   }
 
 
@@ -590,6 +649,7 @@ Button#quality {
 }
 
 .modal-title {
+  padding: 0 40px;
   font-size: 25px;
   @media #{$small-landscape} {
     font-size: 20px;

@@ -1,32 +1,39 @@
 @mixin flexbox() {
   display: -webkit-box;
-/*  display: -moz-box;
+  display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;*/
+  display: flex;
 }
 
 @mixin flexbox_important() {
   display: -webkit-box!important;
-/*  display: -moz-box!important;
+  display: -moz-box!important;
   display: -ms-flexbox!important;
   display: -webkit-flex!important;
-  display: flex!important;*/
+  display: flex!important;
 }
 
 @mixin flex_direction_column() {
   -webkit-box-orient: vertical;
-/*  -webkit-flex-direction: column;
-  flex-direction: column;*/
+  -webkit-flex-direction: column;
+  flex-direction: column;
 }
 
 @mixin flex($values) {
   -webkit-box-flex: $values;
-/*  -moz-box-flex:  $values;
+  -moz-box-flex:  $values;
   -webkit-flex:  $values;
   -ms-flex:  $values;
-  flex:  $values;*/
+  flex:  $values;
 }
+
+/* testing old android 4.0 < 4.4 and ios8 */
+/*@mixin flexbox() {display: -webkit-box;}
+@mixin flexbox_important() {display: -webkit-box!important;}
+@mixin flex_direction_column() {-webkit-box-orient: vertical;}
+@mixin flex($values) {-webkit-box-flex: $values;}*/
+
 
 @mixin order($val) {
   -webkit-box-ordinal-group: $val;

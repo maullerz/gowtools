@@ -117,18 +117,6 @@ $large-portrait: "only screen and (min-device-width: 768px) and (orientation: po
 
 
 
-.tab-statistics {
-  padding: 0 5px;
-  @include flexbox();
-  @include flex_direction_column();
-  height: 100%;
-  overflow-y: auto;
-
-  @media #{$small-portrait} {
-    padding: 0 0;
-  }
-}
-
 .statistics-controls {
   padding: 5px 10px;
   min-height: 43px;
@@ -151,7 +139,18 @@ $large-portrait: "only screen and (min-device-width: 768px) and (orientation: po
 .statistics-main-group {
   @include flexbox();
   @include justify(center);
+  position: absolute;
   overflow-y: scroll;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 43px;
+  @media #{$min-portrait} {
+    top: 37px;
+  }
+  @media #{$large} {
+    top: 53px;
+  }
 }
 
 .statistics-set-items {
