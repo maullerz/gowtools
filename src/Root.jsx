@@ -285,6 +285,13 @@ var Root = React.createClass({
     }
   },
 
+  onExpand: function(craftedItemBoxHeight) {
+    // var itemsList = ReactDOM.findDOMNode(this.refs.itemsList);
+    // console.log(itemsList.clientTop);
+    // TODO use state
+    // itemsList.clientTop = craftedItemBoxHeight;
+  },
+
   render: function() {
     if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
 
@@ -340,9 +347,11 @@ var Root = React.createClass({
               invalidateItemsListBox={this.invalidateItemsListBox}
               addSetItemToSet={this.addSetItemToSet}
               getItemState={this.getItemState}
+              onExpand={this.onExpand}
             />
             <ItemsListBox
               ref='itemsList'
+              styleTop={null}
               onlyEvents={this.state.filterEvents}
               onlyBoosts={this.state.filterBoosts}
               openItemInfo={this.openItemInfo}

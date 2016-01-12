@@ -110,6 +110,7 @@ var DataService = function(Environment) {
       },
 
       getIconNameForBoost: function(boostId) {
+        return '';
         var bName = this.allBoosts[boostId];
         if (!bName) {
           console.log('cannot find boost: '+boostId);

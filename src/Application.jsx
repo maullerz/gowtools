@@ -104,11 +104,11 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    // corespiecesUrl = 'data/items.json'
+        // corespiecesUrl = 'data/limited_items.json'
     return (
       <Root
         platform={this.getPlatform()}
-        corespiecesUrl = 'data/limited_items.json'
+        corespiecesUrl = 'data/items.json'
         boostsUrlRu = 'data/boosts_ru.json'
         boostsUrl = 'data/boosts.json'
       />

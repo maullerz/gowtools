@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Well from 'react-bootstrap/lib/Well'
 import Button from 'react-bootstrap/lib/Button'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
@@ -51,6 +52,10 @@ var CraftedItemBox = React.createClass({
 
   toggleSummarizeInfo: function() {
     this.setState({ infoExpanded: !this.state.infoExpanded });
+    // var tmp = ReactDOM.findDOMNode(this);
+    // console.log(tmp.clientHeight);
+    // console.log(tmp.attributes);
+    // this.props.onExpand(tmp.height);
   },
 
   getSummarizeInfoState: function() {

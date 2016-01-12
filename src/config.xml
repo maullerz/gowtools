@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id = "com.maullerz.gowcraft.calculator-light" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
-  version = "0.9.9" versionCode = "9">
+  version = "0.9.11" versionCode = "11">
 
-    <name>Craft Calculator for GoW</name>
+    <name>Craft Calculator for GoW Light</name>
     <description>Useful and handy tool for calculating custom core-set stats.
 This tool helps you to find the best cores and pieces for your needs and to calculate overall statistics.
     </description>

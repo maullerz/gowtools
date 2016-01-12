@@ -45,6 +45,11 @@ var ItemsListBox = React.createClass({
     this.DataService = DataService();
   },
 
+  // TODO
+  // componentDidUpdate() {
+  //   this.getDOMNode().scrollTop = 0;
+  // },
+
   invalidate: function() {
     this.setState({ invalidateHack: !this.state.invalidateHack });
   },
@@ -181,6 +186,9 @@ var ItemsListBox = React.createClass({
         <div className='loading'>{i18n.t('items-list.loading')}</div>
       </div>
     );
+
+    // style={style}
+    // var style = this.props.styleTop ? { top: this.props.styleTop } : null;
 
     return (
       <div className='cores-list-box'>
