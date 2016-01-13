@@ -21,32 +21,59 @@ var DataService = function(Environment) {
       }
 
       this.stratPairs = {
-        "13": "3",
-        "14": "4",
-        "15": "5",
-        "16": "6",
-        "17": "7",
-        "18": "8",
-        "19": "9",
-        "20": "10",
-        "21": "11",
-        "22": "25",
-        "23": "26",
-        "24": "27",
-        "40": "0",
-        "41": "1",
-        "42": "2",
-        "43": "30",
-        "44": "31",
-        "45": "32",
-        "46": "35",
-        "47": "36",
-        "48": "37",
-        "49": "55",
-        "50": "56",
-        "51": "57",
-        "52": "58",
-        "53": "59"
+        "13": "3", // Debuff Strategic Cavalry Attack
+        "14": "4", // Debuff Strategic Cavalry Defense
+        "15": "5", // Debuff Strategic Cavalry Health
+        "16": "6", // Debuff Strategic Infantry Attack
+        "17": "7", // Debuff Strategic Infantry Defense
+        "18": "8", // Debuff Strategic Infantry Health
+        "19": "9", // Debuff Strategic Ranged Attack
+        "20": "10", // Debuff Strategic Ranged Defense
+        "21": "11", // Debuff Strategic Ranged Health
+        "22": "25", // Debuff Strategic Troop Attack
+        "23": "26", // Debuff Strategic Troop Defense
+        "24": "27", // Debuff Strategic Troop Health
+        "52": "0", // Strategic Cavalry Attack
+        "53": "1", // Strategic Cavalry Defense
+        "54": "2", // Strategic Cavalry Health
+        "55": "42", // Strategic Infantry Attack
+        "56": "43", // Strategic Infantry Defense
+        "57": "44", // Strategic Infantry Health
+        "58": "47", // Strategic Ranged Attack
+        "59": "48", // Strategic Ranged Defense
+        "60": "49", // Strategic Ranged Health
+        "61": "67", // Strategic Trap Attack
+        "62": "68", // Strategic Trap Defense
+        "63": "69", // Strategic Troop Attack Bonus
+        "64": "70", // Strategic Troop Defense Bonus
+        "65": "71", // Strategic Troop Health Bonus
+      }
+
+      this.wildPairs = {
+        "28": "3", // Debuff Wild Cavalry Attack
+        "29": "4", // Debuff Wild Cavalry Defense
+        "30": "5", // Debuff Wild Cavalry Health
+        "31": "6", // Debuff Wild Infantry Attack
+        "32": "7", // Debuff Wild Infantry Defense
+        "33": "8", // Debuff Wild Infantry Health
+        "34": "9", // Debuff Wild Ranged Attack
+        "35": "10", // Debuff Wild Ranged Defense
+        "36": "11", // Debuff Wild Ranged Health
+        "37": "25", // Debuff Wild Troop Attack
+        "38": "26", // Debuff Wild Troop Defense
+        "39": "27", // Debuff Wild Troop Health
+        "72": "0", // Wild Cavalry Attack
+        "73": "1", // Wild Cavalry Defense
+        "74": "2", // Wild Cavalry Health
+        "75": "42", // Wild Infantry Attack
+        "76": "43", // Wild Infantry Defense
+        "77": "44", // Wild Infantry Health
+        "78": "47", // Wild Ranged Attack
+        "79": "48", // Wild Ranged Defense
+        "80": "49", // Wild Ranged Health
+        "81": "69", // Wild Troop Attack Bonus
+        "82": "70", // Wild Troop Defense Bonus
+        "83": "71", // Wild Troop Health Bonus
       }
 
       this.regularPairs = {};
@@ -180,12 +207,6 @@ var DataService = function(Environment) {
           } else if (this.isEtcBoost(bName)) {
             etcBoosts.push(boostId);
           } else {
-            // var isStrat = bName.indexOf('Strat') >= 0;
-            // if (allDebuffs.indexOf(bName) >= 0) {
-            //   isStrat ? debuffsStrat.push(boostId) : debuffs.push(boostId);
-            // } else {
-            //   isStrat ?  boostsStrat.push(boostId) : boosts.push(boostId);
-            // }
             if (allDebuffs.indexOf(bName) >= 0) {
               debuffs.push(boostId);
             } else {
@@ -256,6 +277,8 @@ var DataService = function(Environment) {
             var bName = this.allBoosts[boostId];
             if (!bName) {
               console.error('Didnt find bName, boostId:'+boostId);
+            } else if (bName.indexOf('Wild') >= 0) {
+              // FIXME - nothing to do yet
             } else if (this.isEtcBoost(bName)) {
               etcBoosts.push(boostId);
             } else {
@@ -291,6 +314,8 @@ var DataService = function(Environment) {
           var mapFunc = function(boostId, index) {
             var strategicData = calculatedBoosts[boostId];
             var regBoostId = this.stratPairs[boostId];
+            if (!regBoostId) regBoostId = this.wildPairs[boostId];
+            if (!regBoostId) console.log('wtf:'+boostId);
             var regData = calculatedBoosts[regBoostId];
             var rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
             var iconName = this.getIconNameForBoost(boostId);
@@ -569,19 +594,18 @@ var DataService = function(Environment) {
         return null;
       },
 
-      calculateLuck: function(arr, highRangeBoost) {
+      calculateLuck: function(arr) {
         if (!arr || !arr[0] || !arr[1]) return null;
 
-        // TODO get approximate highRangeBoost value
-        if (!highRangeBoost) highRangeBoost = 1;
-
         let CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
+        let HIGH_RANGE_BOOST = this.highRangeBoost ? 0.25 : 0;
 
         let min = arr[0],
-            max = arr[1]*highRangeBoost;
+            max = arr[1];
 
-        let delta = (max-min)*(CRAFT_CORES_LUCK);
-        let new_min = min + delta;
+        let craftLuckDelta = (max-min)*(CRAFT_CORES_LUCK);
+        let highRangeDelta = (max-min)*(HIGH_RANGE_BOOST);
+        let new_min = min + craftLuckDelta;
         let average = max - (max - new_min) / 2.0;
 
         return this.round(average);
@@ -616,10 +640,16 @@ var DataService = function(Environment) {
       },
 
       loadData: function(data) {
+        // satyr
+        // 2374, 2373, 2372, 2371, 2370, 2369
+        // TODO if stats[84]
         // various data preparing
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i].type === "Crafting Recipes") {
             data[i] = null;
+          // } else if (data[i].stats[84]) {
+          //   console.log(data[i].name.ru);
+          //   console.log(data[i].info.event.en);
           } else {
             data[i].sprite = data[i].img_base.replace('.png', '');
             if (data[i].info.event) {

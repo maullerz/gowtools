@@ -262,8 +262,7 @@ var Root = React.createClass({
   },
 
   onHighRangeBoostChange: function() {
-    // TODO - HighRangeBoost
-    // console.log('checkbox clicked: '+event.target.checked);
+    this.setState({ highRangeBoost: event.target.checked });
   },
 
   handleTouchStart: function(event) {
@@ -301,6 +300,7 @@ var Root = React.createClass({
 
     if (this.DataService) {
       this.DataService.coreCraftLuck = this.state.craftLuck;
+      this.DataService.highRangeBoost = this.state.highRangeBoost;
       this.DataService.colorizeStats = this.state.colorizeStats;
     }
 
@@ -390,10 +390,12 @@ var Root = React.createClass({
                   checked={this.state.craftLuck}
                   label={i18n.t('settings.craft-luck')}
                   onChange={this.onCraftLuckChange} />
-              {process.env.NODE_ENV !== 'production' ? <Input type="checkbox"
-                  disabled
+
+              {/* 25% from diff between low and high ranges */}
+              <Input type="checkbox"
+                  checked={this.state.highRangeBoost}
                   label={i18n.t('settings.highrange-boost')}
-                  onChange={this.onHighRangeBoostChange} /> : null}
+                  onChange={this.onHighRangeBoostChange} />
             </div>
           </div>
 

@@ -57,7 +57,8 @@ module.exports = {
       "debuffs": "Enemy Debuffs",
       "etc": "Other Boosts",
       "regular": "Regular",
-      "strategic": "Strategic",
+      // "strategic": "Strategic",
+      "strategic": "Strat/Wild",
       "confirm-clear-all": "Clear all set?",
       "confirm-remove": "Remove selected core from set?",
       "no-cores-in-set": "NO CORES IN SET"
@@ -127,7 +128,8 @@ module.exports = {
       "debuffs": "Дебаффы",
       "etc": "Разное",
       "regular": "Регулярные",
-      "strategic": "Стратеги",
+      // "strategic": "Стратеги",
+      "strategic": "Стратеги/Дикие",
       "confirm-clear-all":  "Очистить весь набор?",
       "confirm-remove": "Удалить выбранное ядро из набора?",
       "no-cores-in-set": "Нет сердцевин в наборе"
