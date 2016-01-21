@@ -1,3 +1,37 @@
+@mixin main_styles {
+  background-color: #eee;
+  color: #333;
+}
+
+@mixin qualities {
+  background-size: cover;
+  background-position: center;
+  &.gray {
+    /*background-color: #a19f95;*/
+    background-image: url(../background/cm_bg_0.png);
+  }
+  &.white {
+    /*background-color: #e0d9cc;*/
+    background-image: url(../background/cm_bg_1.png);
+  }
+  &.green {
+    /*background-color: #41ae2f;*/
+    background-image: url(../background/cm_bg_2.png);
+  }
+  &.blue {
+    /*background-color: #5b8ed9;*/
+    background-image: url(../background/cm_bg_3.png);
+  }
+  &.purple {
+    /*background-color: #c07fef;*/
+    background-image: url(../background/cm_bg_4.png);
+  }
+  &.gold {
+    /*background-color: #f7ad00;*/
+    background-image: url(../background/cm_bg_5.png);
+  }
+}
+
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;

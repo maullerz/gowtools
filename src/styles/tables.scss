@@ -1,4 +1,4 @@
-@import "colors";
+@import "_mixins";
 
 .set-item-statistics {
   /*background: red;*/
@@ -36,6 +36,7 @@
 
 thead {
   background-color: #ddd;
+  border-right: 1px solid #ddd;
 }
 
 thead tr th {
