@@ -33,20 +33,20 @@ var DataService = function(Environment) {
         "22": "25", // Debuff Strategic Troop Attack
         "23": "26", // Debuff Strategic Troop Defense
         "24": "27", // Debuff Strategic Troop Health
-        "52": "0", // Strategic Cavalry Attack
-        "53": "1", // Strategic Cavalry Defense
-        "54": "2", // Strategic Cavalry Health
-        "55": "42", // Strategic Infantry Attack
-        "56": "43", // Strategic Infantry Defense
-        "57": "44", // Strategic Infantry Health
-        "58": "47", // Strategic Ranged Attack
-        "59": "48", // Strategic Ranged Defense
-        "60": "49", // Strategic Ranged Health
-        "61": "67", // Strategic Trap Attack
-        "62": "68", // Strategic Trap Defense
-        "63": "69", // Strategic Troop Attack Bonus
-        "64": "70", // Strategic Troop Defense Bonus
-        "65": "71", // Strategic Troop Health Bonus
+        "48": "0", // Strategic Cavalry Attack
+        "49": "1", // Strategic Cavalry Defense
+        "50": "2", // Strategic Cavalry Health
+        "51": "40", // Strategic Infantry Attack
+        "52": "41", // Strategic Infantry Defense
+        "53": "42", // Strategic Infantry Health
+        "54": "43", // Strategic Ranged Attack
+        "55": "44", // Strategic Ranged Defense
+        "56": "45", // Strategic Ranged Health
+        "57": "62", // Strategic Trap Attack
+        "58": "63", // Strategic Trap Defense
+        "59": "64", // Strategic Troop Attack Bonus
+        "60": "65", // Strategic Troop Defense Bonus
+        "61": "66", // Strategic Troop Health Bonus
       }
 
       this.wildPairs = {
@@ -62,18 +62,18 @@ var DataService = function(Environment) {
         "37": "25", // Debuff Wild Troop Attack
         "38": "26", // Debuff Wild Troop Defense
         "39": "27", // Debuff Wild Troop Health
-        "72": "0", // Wild Cavalry Attack
-        "73": "1", // Wild Cavalry Defense
-        "74": "2", // Wild Cavalry Health
-        "75": "42", // Wild Infantry Attack
-        "76": "43", // Wild Infantry Defense
-        "77": "44", // Wild Infantry Health
-        "78": "47", // Wild Ranged Attack
-        "79": "48", // Wild Ranged Defense
-        "80": "49", // Wild Ranged Health
-        "81": "69", // Wild Troop Attack Bonus
-        "82": "70", // Wild Troop Defense Bonus
-        "83": "71", // Wild Troop Health Bonus
+        "67": "0", // Wild Cavalry Attack
+        "68": "1", // Wild Cavalry Defense
+        "69": "2", // Wild Cavalry Health
+        "70": "40", // Wild Infantry Attack
+        "71": "41", // Wild Infantry Defense
+        "72": "42", // Wild Infantry Health
+        "73": "43", // Wild Ranged Attack
+        "74": "44", // Wild Ranged Defense
+        "75": "45", // Wild Ranged Health
+        "76": "64", // Wild Troop Attack Bonus
+        "77": "65", // Wild Troop Defense Bonus
+        "78": "66", // Wild Troop Health Bonus
       }
 
       this.regularPairs = {};
@@ -605,8 +605,10 @@ var DataService = function(Environment) {
 
         let craftLuckDelta = (max-min)*(CRAFT_CORES_LUCK);
         let highRangeDelta = (max-min)*(HIGH_RANGE_BOOST);
+
         let new_min = min + craftLuckDelta;
-        let average = max - (max - new_min) / 2.0;
+        let new_max = max + highRangeDelta;
+        let average = new_max - (new_max - new_min) / 2.0;
 
         return this.round(average);
       },

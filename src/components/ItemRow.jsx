@@ -41,7 +41,9 @@ var ItemRow = React.createClass({
            this.props.matched !== nextProps.matched ||
            this.props.boostId !== nextProps.boostId ||
            this.props.firstRow !== nextProps.firstRow ||
-           this.props.locale !== nextProps.locale
+           this.props.locale !== nextProps.locale ||
+           this.props.craftLuck !== nextProps.craftLuck ||
+           this.props.highRangeBoost !== nextProps.highRangeBoost
   },
 
   openInfoFn: function() {

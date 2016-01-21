@@ -63,7 +63,11 @@ var SetItemBox = React.createClass({
 
   getSetItemState: function() {
     var state = this.props.active ? ' active' : '';
-    if (this.props.statsKey) state += ' stats';
+    if (this.props.statsKey) {
+      state += ' stats';
+    } else {
+      state += ' craft';
+    }
     return state;
   },
 

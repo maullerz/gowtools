@@ -47,6 +47,7 @@ var Root = React.createClass({
       activeTab: 1,
       language: i18n.currentLocale() || i18n.defaultLocale,
       craftLuck: true,
+      highRangeBoost: true,
       colorizeStats: true,
       filterEvents: [],
       filterBoosts: []
@@ -253,16 +254,27 @@ var Root = React.createClass({
     return this.state.activeTab === tabIndex ? '' : ' hidden';
   },
 
-  onCraftLuckChange: function(event) {
-    this.setState({ craftLuck: event.target.checked });
-  },
-
   onColorizeStatsChange: function(event) {
+    if (this.DataService) {
+      this.DataService.colorizeStats = event.target.checked;
+    }
     this.setState({ colorizeStats: event.target.checked });
   },
 
-  onHighRangeBoostChange: function() {
+  onCraftLuckChange: function(event) {
+    if (this.DataService) {
+      this.DataService.coreCraftLuck = event.target.checked;
+    }
+    this.setState({ craftLuck: event.target.checked });
+    this.invalidateItemsListBox();
+  },
+
+  onHighRangeBoostChange: function(event) {
+    if (this.DataService) {
+      this.DataService.highRangeBoost = event.target.checked;
+    }
     this.setState({ highRangeBoost: event.target.checked });
+    this.invalidateItemsListBox();
   },
 
   handleTouchStart: function(event) {
@@ -299,10 +311,11 @@ var Root = React.createClass({
     };
 
     if (this.DataService) {
+      this.DataService.colorizeStats = this.state.colorizeStats;
       this.DataService.coreCraftLuck = this.state.craftLuck;
       this.DataService.highRangeBoost = this.state.highRangeBoost;
-      this.DataService.colorizeStats = this.state.colorizeStats;
     }
+
 
     return (
       <div className='root'>
