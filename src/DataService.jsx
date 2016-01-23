@@ -504,9 +504,11 @@ var DataService = function(Environment) {
       },
 
       isAnyBoostExist: function(onlyBoosts, statsInfo) {
+        var boost;
         for (var i = 0, len = onlyBoosts.length; i < len; ++i) {
-          if (statsInfo && statsInfo[onlyBoosts[i].toString()]) {
-            return true;
+          boost = statsInfo[onlyBoosts[i].toString()];
+          if (statsInfo && boost) {
+            if (boost[5][0] > 0) return true;
           }
         }
         return false;
@@ -561,8 +563,8 @@ var DataService = function(Environment) {
 
       sortByBoost: function(data, boost) {
         data.sort(function(a, b) {
-          var value1 = this.calculateLuck(a.stats[boost.toString()][5]);
-          var value2 = this.calculateLuck(b.stats[boost.toString()][5]);
+          var value1 = this.calculateLuckRaw(a.stats[boost.toString()][5]);
+          var value2 = this.calculateLuckRaw(b.stats[boost.toString()][5]);
           return value2 - value1;
         }.bind(this));
 
@@ -578,10 +580,16 @@ var DataService = function(Environment) {
             var boostA = a.stats[boostId];
             var boostB = b.stats[boostId];
             if (boostA !== undefined && boostA[5] !== undefined)
-              value1 += this.calculateLuck(boostA[5]);
+              value1 += this.calculateLuckRaw(boostA[5]);
             if (boostB !== undefined && boostB[5] !== undefined)
-              value2 += this.calculateLuck(boostB[5]);
+              value2 += this.calculateLuckRaw(boostB[5]);
           };
+          // TODO: Primer Paint - 6lvl negative value issue - need additional check
+          // TODO: advanced sorting of multiple Strat+Wild+Regular boosts
+          // if (a.id === 1063 || b.id === 1063) {
+          //   console.log(a.id+':a: '+value1);
+          //   console.log(b.id+':b: '+value2);
+          // }
           return value2 - value1;
         }.bind(this));
 
@@ -599,22 +607,26 @@ var DataService = function(Environment) {
         return null;
       },
 
-      calculateLuck: function(arr) {
+      calculateLuckRaw: function(arr) {
         if (!arr || !arr[0] || !arr[1]) return null;
 
         let CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
         let HIGH_RANGE_BOOST = this.highRangeBoost ? 0.25 : 0;
 
-        let min = arr[0],
-            max = arr[1];
+        let min = parseInt(arr[0]),
+            max = parseInt(arr[1]);
 
         let craftLuckDelta = (max-min)*(CRAFT_CORES_LUCK);
         let highRangeDelta = (max-min)*(HIGH_RANGE_BOOST);
 
         let new_min = min + craftLuckDelta;
         let new_max = max + highRangeDelta;
-        let average = new_max - (new_max - new_min) / 2.0;
 
+        return new_max - (new_max - new_min) / 2.0;
+      },
+
+      calculateLuck: function(arr) {
+        var average = this.calculateLuckRaw(arr);
         return this.round(average);
       },
 
