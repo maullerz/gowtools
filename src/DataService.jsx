@@ -218,12 +218,17 @@ var DataService = function(Environment) {
         return boosts.concat(debuffs).concat(etcBoosts);
       },
 
-      getSimpleSummaryTable: function(itemBoosts) {
-        var boostsArr = Object.keys(itemBoosts);
-        boostsArr = this.sortBoosts(boostsArr);
+      getSimpleSummaryTable: function(item) {
+        // var boostsArr = Object.keys(item.stats);
+        var boostsArr = item.bsort;
 
-        var rows = boostsArr.map(function(boostId, index) {
-          var boost = itemBoosts[boostId];
+        var rows = boostsArr.map(function(boostIdStr, index) {
+          var boostId = parseInt(boostIdStr);
+          var boost = item.stats[boostId];
+          if (!boost) {
+            console.error(boostId);
+            console.error(boostIdStr);
+          };
           var rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
           var iconName = this.getIconNameForBoost(boostId);
 
@@ -642,9 +647,6 @@ var DataService = function(Environment) {
       },
 
       loadData: function(data) {
-        // satyr
-        // 2374, 2373, 2372, 2371, 2370, 2369
-        // TODO if stats[84]
         // various data preparing
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i].type === "Crafting Recipes") {

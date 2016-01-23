@@ -30,7 +30,7 @@ var ModalInfo = React.createClass({
   },
 
   getBoostsRows: function() {
-    return this.DataService.getSimpleSummaryTable(this.state.item.stats);
+    return this.DataService.getSimpleSummaryTable(this.state.item);
   },
 
   render: function() {

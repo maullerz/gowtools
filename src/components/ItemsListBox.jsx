@@ -70,7 +70,9 @@ var ItemsListBox = React.createClass({
   },
 
   getItemNodes: function(item, onlyBoosts, locale) {
-    var boostsArr = Object.keys(item.stats);
+    // var boostsArr = Object.keys(item.stats);
+    var boostsArr = item.bsort.concat([]);
+
     boostsArr.unshift(null); // for header row
     let selected = this.props.isItemSelected(item.id);
 
