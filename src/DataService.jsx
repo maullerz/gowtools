@@ -676,6 +676,7 @@ var DataService = function(Environment) {
 
         data = data.filter(function(item){ return item });
         this.coresPiecesData = data;
+        this.sortItemsByAlphabet();
 
         // отсортированный массив Событий с айдишниками для фильтра
         this.events = {};
@@ -685,6 +686,17 @@ var DataService = function(Environment) {
         for (var i = data.length - 1; i >= 0; i--) {
           data[i].eventId = this.events.en.indexOf(data[i].event);
         };
+      },
+
+      sortItemsByAlphabet: function() {
+        var lang = i18n.currentLocale();
+        this.coresPiecesData.sort(function(a, b) {
+          var value1 = a.name[lang];
+          var value2 = b.name[lang];
+          if (value1 > value2) return 1;
+          if (value1 < value2) return -1;
+          return 0;
+        }.bind(this));
       },
 
       isReady: function() {
