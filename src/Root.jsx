@@ -172,6 +172,7 @@ var Root = React.createClass({
     var language = this.refs.languageSelect.getValue();
     if (i18n.currentLocale() !== language) {
       i18n.locale = language;
+      this.DataService.sortItemsByAlphabet();
       this.setState({
         language: i18n.currentLocale()
       });
