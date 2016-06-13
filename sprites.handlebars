@@ -1,0 +1,27 @@
+{{#block "sprites-comment"}}
+/*
+.sprite {
+  background: url( '../img/spr.png' ) no-repeat;
+  background-size: 3000px 2900px;
+  width: 100px;
+  height: 100px;
+}
+
+.sprite.m1060 {background-position: -100px 0px;}
+...
+*/
+
+{{/block}}
+
+.sprite {
+  background: url( '../img/spr.png' ) no-repeat;
+  background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
+  width: 100px;
+  height: 100px;
+}
+
+{{#block "sprites"}}
+{{#each sprites}}
+.sprite.{{name}} {background-position: {{px.offset_x}} {{px.offset_y}};}
+{{/each}}
+{{/block}}

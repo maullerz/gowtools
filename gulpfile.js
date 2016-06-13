@@ -9,6 +9,7 @@ var clean = require('gulp-clean');
 var replace = require('gulp-replace');
 var sass = require('gulp-sass');
 var sprite = require('gulp-node-spritesheet');
+var spritesmith = require('gulp.spritesmith');
 var concatCss = require('gulp-concat-css');
 
 
@@ -17,7 +18,6 @@ var webpackConfig = require('./webpack.config.js');
 
 var PHONEGAP_APP_DIR = configs.targetDirectory;
 var PHONEGAP_DEVELOPER_APP_PORT = configs.phonegapServePort;
-
 
 
 gulp.task('default', function(callback) {
@@ -78,17 +78,35 @@ gulp.task('serve',
 
 // PREPARE SPRITESHEET
 
-gulp.task('spritesheet', function() {
-  gulp.src('./assets-src/images/**/*.png')
-    .pipe(
-      sprite({
-        outputCss: './src/styles/sprites.scss',
-        selector: '.sprite',
-        outputImage: 'spr.png'
-      })
-    )
+gulp.task('sprite', function () {
+  gulp.src('./assets-src/images/*.png')
+    .pipe(spritesmith({
+      imgName: 'spr.png',
+      cssName: 'sprites.css',
+      cssOpts: {
+        cssSelector: function(sprite) {
+          return '.sprite.'+sprite.name;
+        }
+      },
+      cssTemplate: 'sprites.handlebars'
+    }))
     .pipe(gulp.dest('./assets-src/spritesheet/'));
 });
+
+// legacy - too slow processing
+// gulp.task('spritesheet', function() {
+//   gulp.src('./assets-src/images/**/*.png')
+//     .pipe(
+//       sprite({
+//         outputCss: './src/styles/sprites.scss',
+//         selector: '.sprite',
+//         outputImage: 'spr.png'
+//       })
+//     )
+//     .pipe(gulp.dest('./assets-src/spritesheet/'));
+// });
+
+
 
 // CREATE PHONEGAP APP
 
