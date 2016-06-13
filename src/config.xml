@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id = "com.maullerz.gowcraft.calculator" xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0"
-  version = "0.9.14" versionCode = "14">
+  version = "0.9.3" versionCode = "15">
 
     <name>Craft Calculator for GoW</name>
     <description>Useful and handy tool for calculating custom core-set stats.
