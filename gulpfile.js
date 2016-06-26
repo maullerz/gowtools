@@ -8,7 +8,7 @@ var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 var replace = require('gulp-replace');
 var sass = require('gulp-sass');
-var sprite = require('gulp-node-spritesheet');
+// var sprite = require('gulp-node-spritesheet');
 var spritesmith = require('gulp.spritesmith');
 var concatCss = require('gulp-concat-css');
 

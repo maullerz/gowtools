@@ -658,7 +658,8 @@ var DataService = function(Environment) {
         }, this);
       },
 
-      loadData: function(data) {
+      loadData: function(json_data) {
+        var data = json_data.data;
         // various data preparing
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i].type === "Crafting Recipes") {

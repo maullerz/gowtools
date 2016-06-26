@@ -71,6 +71,12 @@ var ItemsListBox = React.createClass({
 
   getItemNodes: function(item, onlyBoosts, locale) {
     // var boostsArr = Object.keys(item.stats);
+    if (!item.bsort) {
+      // ! for new items without boosts data !
+      // console.log('no bsort:'+item.name.ru);
+      // console.log(item);
+      return [];
+    }
     var boostsArr = item.bsort.concat([]);
 
     boostsArr.unshift(null); // for header row
