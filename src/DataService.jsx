@@ -664,9 +664,11 @@ var DataService = function(Environment) {
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i].type === "Crafting Recipes") {
             data[i] = null;
-          // } else if (data[i].stats[84]) {
-          //   console.log(data[i].name.ru);
-          //   console.log(data[i].info.event.en);
+          } else if (!data[i].bsort) {
+            // skipping unfilled data
+            // console.log('skipping item:');
+            // console.log(data[i]);
+            data[i] = null;
           } else {
             data[i].sprite = data[i].img_base.replace('.png', '');
             if (data[i].info.event) {
