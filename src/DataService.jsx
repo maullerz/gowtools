@@ -658,6 +658,11 @@ var DataService = function(Environment) {
         }, this);
       },
 
+      loadRecipes: function(json_data) {
+        var data = json_data.data;
+        this.recipes = data;
+      },
+
       loadData: function(json_data) {
         var data = json_data.data;
         // various data preparing

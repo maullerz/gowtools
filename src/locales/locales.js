@@ -6,6 +6,7 @@ module.exports = {
     "tabs": {
       "crafting": "CRAFTING",
       "summary": "STATISTICS",
+      "recipes": "RECIPES",
       "settings": "SETTINGS"
     },
     "filter": {
@@ -77,6 +78,7 @@ module.exports = {
     "tabs": {
       "crafting": "КРАФТ",
       "summary": "СТАТИСТИКА",
+      "recipes": "РЕЦЕПТЫ",
       "settings": "НАСТРОЙКИ"
     },
     "filter": {

@@ -13,6 +13,7 @@ import ModalInfo from './components/ModalInfo.jsx';
 import ModalQualitySelect from './components/ModalQualitySelect.jsx';
 import CraftedItemBox from './components/CraftedItemBox.jsx'
 import ItemsListBox from './components/ItemsListBox.jsx'
+import RecipesListBox from './components/RecipesListBox.jsx'
 import SummaryInfoBox from './components/SummaryInfoBox.jsx'
 import FilterEvents from './components/FilterEvents.jsx'
 import FilterBoosts from './components/FilterBoosts.jsx'
@@ -56,6 +57,7 @@ var Root = React.createClass({
 
   componentDidMount: function() {
     this.DataService = DataService();
+    this.loadRecipes();
     this.loadBoosts();
     this.loadBoostsRu();
     this.loadCoresPiecesData();
@@ -87,6 +89,21 @@ var Root = React.createClass({
 
   componentWillUnmount: function() {
     this.snapper.off('animated');
+  },
+
+  loadRecipes: function() {
+    ajax({
+      url: this.props.recipesUrl,
+      dataType: 'json',
+      cache: true,
+      success: function(data) {
+        this.DataService.loadRecipes(data);
+        if (this.DataService.isReady()) this.forceUpdate();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        log(this.props.boostsUrl, status, err.toString());
+      }.bind(this)
+    });
   },
 
   loadBoosts: function() {
@@ -350,7 +367,8 @@ var Root = React.createClass({
           <Nav bsStyle="pills" activeKey={this.state.activeTab} onSelect={this.handleTabSelect}>
             <NavItem eventKey={1} title="Crafting"> {i18n.t('tabs.crafting')} </NavItem>
             <NavItem eventKey={2} title="Statistics"> {i18n.t('tabs.summary')}  </NavItem>
-            <NavItem eventKey={3} title="Settings"> {i18n.t('tabs.settings')} </NavItem>
+            <NavItem eventKey={3} title="Recipes"> {i18n.t('tabs.recipes')}  </NavItem>
+            <NavItem eventKey={4} title="Settings"> {i18n.t('tabs.settings')} </NavItem>
           </Nav>
 
           <div className={'tab-crafting'+this.getTabState(1)}>
@@ -385,7 +403,17 @@ var Root = React.createClass({
           />
 
 
-          <div className={'tab-settings'+this.getTabState(3)}>
+          <RecipesListBox className={this.getTabState(3)}
+            ref='recipesListBox'
+            platform={this.props.platform}
+            activeTab={this.state.activeTab}
+            tabSelect={this.handleTabSelect}
+            modalQualitySelect={this.refs.modalQualitySelect}
+            selectSetItemForEdit={this.selectSetItemForEdit}
+          />
+
+
+          <div className={'tab-settings'+this.getTabState(4)}>
             <Input groupClassName='select-language'
                    type='select'
                    ref='languageSelect'

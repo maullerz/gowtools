@@ -29,7 +29,11 @@ gulp.task('watch', function(){
     './src/**/*.jsx',
     './src/**/*.js',
     './src/styles/*.scss'
-    ], ['build-app-on-watch']);
+    ], {
+      interval: 1000, // default 100
+      debounceDelay: 1000, // default 500
+      mode: 'poll'
+    }, ['build-app-on-watch']);
 });
 
 // PROCESS ONLY SRC WITHOUT ASSETS

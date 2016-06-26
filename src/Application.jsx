@@ -111,6 +111,7 @@ module.exports = React.createClass({
         corespiecesUrl = 'data/items.json'
         boostsUrlRu = 'data/boosts_ru.json'
         boostsUrl = 'data/boosts.json'
+        recipesUrl = 'data/recipes.json'
       />
     )
   }

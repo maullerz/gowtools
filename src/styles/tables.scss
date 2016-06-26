@@ -34,6 +34,20 @@
   margin-top: 10px;
 }
 
+
+li {
+  border-bottom: 1px solid #aaa;
+}
+
+li.recipe {
+  display: flex;
+}
+
+.recipe-name {
+  min-width: 130px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
 thead {
   background-color: #ddd;
   border-right: 1px solid #ddd;
