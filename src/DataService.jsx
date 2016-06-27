@@ -660,6 +660,16 @@ var DataService = function(Environment) {
 
       loadRecipes: function(json_data) {
         var data = json_data.data;
+        // various data preparing
+        for (var i = data.length - 1; i >= 0; i--) {
+          if (!data[i].stats_info) {
+            // skipping unfilled data
+            // console.log('skipping recipe item:');
+            // console.log(data[i]);
+            data[i] = null;
+          }
+        }
+        data = data.filter(function(item){ return item });
         this.recipes = data;
       },
 
