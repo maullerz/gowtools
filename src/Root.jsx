@@ -408,6 +408,7 @@ var Root = React.createClass({
             platform={this.props.platform}
             activeTab={this.state.activeTab}
             tabSelect={this.handleTabSelect}
+            openItemInfo={this.openItemInfo}
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}
           />

@@ -1,5 +1,40 @@
 @import "_mixins";
 
+
+
+li {
+  border-bottom: 1px solid #aaa;
+}
+
+.recipes-list-box {
+  display: table;
+}
+
+.recipe {
+  display: flex;
+  display: table-row;
+  width: 100%;
+
+  .rcell {
+    display: table-cell;
+    cursor: pointer;
+    line-height: 50px;
+    vertical-align: middle;
+    border-bottom: 1px solid #aaa;
+    padding: 0 2px;
+
+    &.id {
+      cursor: default;
+    }
+  }
+}
+
+.recipe-name {
+  min-width: 130px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
+
 .set-item-statistics {
   /*background: red;*/
 }
@@ -34,19 +69,6 @@
   margin-top: 10px;
 }
 
-
-li {
-  border-bottom: 1px solid #aaa;
-}
-
-li.recipe {
-  display: flex;
-}
-
-.recipe-name {
-  min-width: 130px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-}
 
 thead {
   background-color: #ddd;

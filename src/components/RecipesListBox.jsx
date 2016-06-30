@@ -192,27 +192,24 @@ var ItemsListBox = React.createClass({
     );
 
     return (
-      <div className={"cores-list-box"+this.props.className}>
+      <div className={"recipes-list-box"+this.props.className}>
         <ul>
           {this.DataService.recipes.map((r) => {
-            var spriteName = "icon-img sprite m" + r.id;
+            var spriteName = "sprite m" + r.id;
             return (
-              <li className="recipe">
-                <div className="icon">
+              <div className="recipe">
+                <div className="rcell id">
                   <div id='img44' className={spriteName}/>
                 </div>
-                <div className='recipe-name'>{r.name_en}</div>
-                <div className="icon">
-                  <div id='img44' className={"icon-img sprite m" + r.recipe_info.core}/>
-                </div>
+
+                <div className='rcell'>{r.name_en}</div>
+
+                <RecipePart itemId={r.recipe_info.core} openItemInfo={this.props.openItemInfo} />
+
                 {r.recipe_info.pieces.map((pieceId) => {
-                  return (
-                    <div className="icon">
-                      <div id='img44' className={"icon-img sprite m" + pieceId}/>
-                    </div>
-                  )
+                  return <RecipePart itemId={pieceId} openItemInfo={this.props.openItemInfo} />
                 })}
-              </li>
+              </div>
             )
           })}
         </ul>
@@ -220,5 +217,14 @@ var ItemsListBox = React.createClass({
     );
   }
 });
+
+function RecipePart(props) {
+  const openInfoFn = () => props.openItemInfo(props.itemId);
+  return (
+    <div className="rcell" onClick={openInfoFn}>
+      <div id='img44' className={"icon-img sprite m" + props.itemId} />
+    </div>
+  );
+}
 
 module.exports = ItemsListBox;
