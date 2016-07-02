@@ -7,6 +7,8 @@ import Input from 'react-bootstrap/lib/Input'
 import Button from 'react-bootstrap/lib/Button'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
+import classnames from 'classnames'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
 import DataService from './DataService.jsx'
 import ModalInfo from './components/ModalInfo.jsx';
@@ -185,8 +187,7 @@ var Root = React.createClass({
     this.refs.craftedItemBox.selectSetItemForEdit(setItem);
   },
 
-  handleLanguageSelect: function() {
-    var language = this.refs.languageSelect.getValue();
+  handleLanguageSelect: function(language) {
     if (i18n.currentLocale() !== language) {
       i18n.locale = language;
       this.DataService.sortItemsByAlphabet();
@@ -194,6 +195,18 @@ var Root = React.createClass({
         language: i18n.currentLocale()
       });
       this.invalidateItemsListBox();
+    }
+  },
+
+  selectRu: function() {
+    if (i18n.currentLocale() !== 'ru') {
+      this.handleLanguageSelect('ru');
+    }
+  },
+
+  selectEn: function() {
+    if (i18n.currentLocale() !== 'en') {
+      this.handleLanguageSelect('en');
     }
   },
 
@@ -322,7 +335,8 @@ var Root = React.createClass({
   },
 
   render: function() {
-    if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
+    const { language } = this.state;
+    if (i18n.currentLocale() !== language) i18n.locale = language;
 
     if (this.snapper) {
       this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
@@ -365,10 +379,22 @@ var Root = React.createClass({
 
 
           <Nav bsStyle="pills" activeKey={this.state.activeTab} onSelect={this.handleTabSelect}>
-            <NavItem eventKey={1} title="Crafting"> {i18n.t('tabs.crafting')} </NavItem>
-            <NavItem eventKey={2} title="Statistics"> {i18n.t('tabs.summary')}  </NavItem>
-            <NavItem eventKey={3} title="Recipes"> {i18n.t('tabs.recipes')}  </NavItem>
-            <NavItem eventKey={4} title="Settings"> {i18n.t('tabs.settings')} </NavItem>
+            <NavItem eventKey={1} title="Crafting">
+              {i18n.t('tabs.crafting')}
+            </NavItem>
+            <NavItem eventKey={2} title="Statistics">
+              {i18n.t('tabs.summary')}
+            </NavItem>
+            <NavItem eventKey={3} title="Recipes">
+              {i18n.t('tabs.recipes')}
+            </NavItem>
+            <NavItem eventKey={4} title="Settings">
+              <Glyphicon style={{
+                lineHeight: 'normal',
+                width: 40,
+                textAlign: 'center',
+              }} glyph="cog"/>
+            </NavItem>
           </Nav>
 
           <div className={'tab-crafting'+this.getTabState(1)}>
@@ -415,16 +441,15 @@ var Root = React.createClass({
 
 
           <div className={'tab-settings'+this.getTabState(4)}>
-            <Input groupClassName='select-language'
-                   type='select'
-                   ref='languageSelect'
-                   value={this.state.language}
-                   onChange={this.handleLanguageSelect}
-                   label={i18n.t('language')} >
-              <option value='ru'>{i18n.t('russian')}</option>
-              <option value='en'>{i18n.t('english')}</option>
-            </Input>
             <div className='settings-group'>
+              <div className='select-language'>
+                <div className={classnames('lang-btn', language === 'ru' && 'active')} onClick={this.selectRu}>
+                  {i18n.t('russian')}
+                </div>
+                <div className={classnames('lang-btn', language === 'en' && 'active')} onClick={this.selectEn}>
+                  {i18n.t('english')}
+                </div>
+              </div>
               <Input type="checkbox"
                   checked={this.state.colorizeStats}
                   label={i18n.t('settings.colorize-stats')}

@@ -25,8 +25,34 @@ Button#quality {
   padding: 15px;
 }
   .select-language {
-    max-width: 200px;
-    padding: 0 15px;
+    @include flexbox();
+    @include justify_justify(space-between);
+    width: 210px;
+    margin: 15px 0 30px;
+
+    .lang-btn {
+      opacity: 0.5;
+      height: 33px;
+      min-width: 90px;
+      padding: 5px 10px;
+      background: #37C1CF;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+      border-radius: 3px;
+      text-align: center;
+      cursor: pointer;
+
+      &.active {
+        opacity: 1;
+      }
+
+      &:active:not(.disabled) {
+        background: #24A6B3;
+      }
+
+      &:hover:not(:active) {
+        background: #2BB1BF;
+      }
+    }
   }
 
   .settings-group {
