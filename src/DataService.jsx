@@ -670,6 +670,11 @@ var DataService = function(Environment) {
           }
         }
         data = data.filter(function(item){ return item });
+        data.forEach((item) => {
+          while (item.recipe_info.pieces.length < 6) {
+            item.recipe_info.pieces.push(null);
+          }
+        });
         this.recipes = data;
       },
 

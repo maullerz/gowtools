@@ -87,19 +87,19 @@ var ItemsListBox = React.createClass({
 
         <div className='recipes-items-list'>
 
-          <div className="thead">
+          {false && <div className="thead">
             <div className="recipe">
-              <div className="th">1</div>
-              <div className="th">2</div>
-              <div className="th">3</div>
-              <div className="th">4</div>
-              <div className="th">5</div>
-              <div className="th">6</div>
-              <div className="th">7</div>
-              <div className="th">8</div>
-              <div className="th">9</div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
+              <div className="th"></div>
             </div>
-          </div>
+          </div>}
 
           {false && <h4>{header}</h4>}
           <ReactList
@@ -144,8 +144,8 @@ function Recipe(props) {
 function RecipePart(props) {
   const openInfoFn = () => props.openItemInfo(props.itemId);
   return (
-    <div className={`rcell ${props.core ? 'core' : ''}`} onClick={openInfoFn}>
-      <div id='img44' style={{ margin: 'auto' }} className={"icon-img sprite m" + props.itemId} />
+    <div className={`rcell ${props.core ? 'core' : ''}`} onClick={props.itemId ? openInfoFn : null}>
+      {props.itemId && <div id='img44' style={{ margin: 'auto' }} className={"icon-img sprite m" + props.itemId} />}
     </div>
   );
 }
