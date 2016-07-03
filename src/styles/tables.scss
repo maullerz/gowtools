@@ -1,41 +1,6 @@
 @import "_mixins";
 
 
-
-
-.recipes-list-box {
-  display: table;
-
-  li {
-    border-bottom: 1px solid #aaa;
-  }
-}
-
-.recipe {
-  display: flex;
-  display: table-row;
-  width: 100%;
-
-  .rcell {
-    display: table-cell;
-    cursor: pointer;
-    line-height: 50px;
-    vertical-align: middle;
-    border-bottom: 1px solid #aaa;
-    padding: 0 2px;
-
-    &.id {
-      cursor: default;
-    }
-  }
-}
-
-.recipe-name {
-  min-width: 130px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-}
-
-
 .set-item-statistics {
   /*background: red;*/
 }

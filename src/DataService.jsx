@@ -718,7 +718,7 @@ var DataService = function(Environment) {
       },
 
       isReady: function() {
-        return this.events && this.coresPiecesData && this.allBoosts && this.allBoostsRu;
+        return this.events && this.coresPiecesData && this.recipes && this.allBoosts && this.allBoostsRu;
       },
 
       getUniqEvents: function(data) {
