@@ -21,6 +21,12 @@ import FilterEvents from './components/FilterEvents.jsx'
 import FilterBoosts from './components/FilterBoosts.jsx'
 
 
+var admobid = { // for Android
+  banner: 'ca-app-pub-4879539644502553/2923487221',
+  interstitial: 'ca-app-pub-4879539644502553/6655682820'
+};
+
+
 function ajax(opts){
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
@@ -58,6 +64,31 @@ var Root = React.createClass({
   },
 
   componentDidMount: function() {
+    // if(AdMob) AdMob.createBanner({
+    //   adId: admobid.banner,
+    //   position: AdMob.AD_POSITION.TOP_CENTER,
+    //   autoShow: true
+    // });
+
+    // this will create a banner on startup
+    if (AdMob) {
+      AdMob.createBanner({
+        adId: admobid.banner,
+        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        // position: AdMob.AD_POSITION.BOTTOM_LEFT,
+        // isTesting: true, // TODO: remove this line when release
+        overlap: true,
+        offsetTopBar: false,
+        bgColor: 'black'
+      });
+
+      AdMob.prepareInterstitial({
+        adId: admobid.interstitial,
+        // isTesting: true, // TODO: remove this line when release
+        autoShow: true
+      });
+    }
+
     this.DataService = DataService();
     this.loadRecipes();
     this.loadBoosts();
@@ -279,6 +310,15 @@ var Root = React.createClass({
     //   tabKey === 1 ? this.snapper.enable() : this.snapper.disable();
     // };
     this.setState({ activeTab: tabKey });
+    if (AdMob) {
+      const show = Math.floor((Math.random() * 5));
+
+      if (show <= 1) AdMob.prepareInterstitial({
+        adId: admobid.interstitial,
+        // isTesting: true, // TODO: remove this line when release
+        autoShow: true,
+      });
+    }
   },
 
   getTabState: function(tabIndex) {
@@ -335,11 +375,11 @@ var Root = React.createClass({
   },
 
   render: function() {
-    const { language } = this.state;
+    const { language, activeTab } = this.state;
     if (i18n.currentLocale() !== language) i18n.locale = language;
 
     if (this.snapper) {
-      this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
+      activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
     };
 
     if (this.DataService) {
@@ -378,7 +418,7 @@ var Root = React.createClass({
           </Button>
 
 
-          <Nav bsStyle="pills" activeKey={this.state.activeTab} onSelect={this.handleTabSelect}>
+          <Nav bsStyle="pills" activeKey={activeTab} onSelect={this.handleTabSelect}>
             <NavItem eventKey={1} title="Crafting">
               {i18n.t('tabs.crafting')}
             </NavItem>
@@ -422,7 +462,7 @@ var Root = React.createClass({
           <SummaryInfoBox className={this.getTabState(2)}
             ref='summaryInfoBox'
             platform={this.props.platform}
-            activeTab={this.state.activeTab}
+            activeTab={activeTab}
             tabSelect={this.handleTabSelect}
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}
@@ -432,7 +472,7 @@ var Root = React.createClass({
           <RecipesListBox className={this.getTabState(3)}
             ref='recipesListBox'
             platform={this.props.platform}
-            activeTab={this.state.activeTab}
+            activeTab={activeTab}
             tabSelect={this.handleTabSelect}
             openItemInfo={this.openItemInfo}
             modalQualitySelect={this.refs.modalQualitySelect}
@@ -443,13 +483,14 @@ var Root = React.createClass({
           <div className={'tab-settings'+this.getTabState(4)}>
             <div className='settings-group'>
               <div className='select-language'>
-                <div className={classnames('lang-btn', language === 'ru' && 'active')} onClick={this.selectRu}>
-                  {i18n.t('russian')}
-                </div>
                 <div className={classnames('lang-btn', language === 'en' && 'active')} onClick={this.selectEn}>
                   {i18n.t('english')}
                 </div>
+                <div className={classnames('lang-btn', language === 'ru' && 'active')} onClick={this.selectRu}>
+                  {i18n.t('russian')}
+                </div>
               </div>
+              {false && activeTab === 4 && <div className='settings-panel'>BLABLABLA</div>}
               <Input type="checkbox"
                   checked={this.state.colorizeStats}
                   label={i18n.t('settings.colorize-stats')}
