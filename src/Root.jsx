@@ -64,18 +64,11 @@ var Root = React.createClass({
   },
 
   componentDidMount: function() {
-    // if(typeof AdMob !== 'undefined') AdMob.createBanner({
-    //   adId: admobid.banner,
-    //   position: AdMob.AD_POSITION.TOP_CENTER,
-    //   autoShow: true
-    // });
-
     // this will create a banner on startup
     if (typeof AdMob !== 'undefined') {
       AdMob.createBanner({
         adId: admobid.banner,
         position: AdMob.AD_POSITION.BOTTOM_CENTER,
-        // position: AdMob.AD_POSITION.BOTTOM_LEFT,
         // isTesting: true, // TODO: remove this line when release
         overlap: true,
         offsetTopBar: false,
@@ -305,6 +298,10 @@ var Root = React.createClass({
     return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
   },
 
+  isAdMob() {
+    return typeof AdMob !== 'undefined' ? 'admob' : '';
+  },
+
   handleTabSelect: function(tabKey) {
     // if (this.snapper) {
     //   tabKey === 1 ? this.snapper.enable() : this.snapper.disable();
@@ -396,7 +393,7 @@ var Root = React.createClass({
         <ModalQualitySelect ref='modalQualitySelect' qualitySelected={this.qualitySelected}/>
 
 
-        <div className={'snap-drawers '+this.props.platform}>
+        <div className={`snap-drawers ${this.props.platform} ${this.isAdMob()}`}>
           <div className='snap-drawer snap-drawer-left'>
             <FilterEvents onEventSelected={this.eventSelected} />
           </div>
@@ -405,7 +402,7 @@ var Root = React.createClass({
           </div>
         </div>
 
-        <div ref='content' className='snap-content'
+        <div ref='content' className={`snap-content ${this.isAdMob()}`}
           onTouchStartCapture={this.handleTouchStart}
           onClickCapture={this.handleTouchStart}>
 
