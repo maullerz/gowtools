@@ -71,18 +71,6 @@ Button#quality {
 }
 
 
-.nav>li>a {
-  outline: none!important;
-  color: #9d9d9d;
-  border-radius: 0;
-  padding-left: 0;
-  padding-right: 0;
-
-  &:active {
-    -webkit-transform: scale3d(0.9, 0.9, 1);
-  }
-}
-
 .nav>li.active>a, .nav>li.active>a:focus, .nav>li.active>a:hover {
   background-color: #222;
 }

@@ -187,6 +187,37 @@ table.modal-body-params td {
     font-size: 10px;
     height: 34px;
     min-height: 34px;
+    padding: 0 30px;
+  }
+}
+
+.nav>li>a {
+  outline: none!important;
+  color: #9d9d9d;
+  border-radius: 0;
+  padding: 0;
+  vertical-align: middle;
+  line-height: 40px;
+
+  &:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+  }
+
+  @media #{$small-portrait} {
+    line-height: 32px;
+  }
+}
+
+.settings-icon > span {
+  vertical-align: middle;
+  text-align: center;
+  top: 0;
+  line-height: 40px;
+  font-size: 17px;
+
+  @media #{$small-portrait} {
+    line-height: 32px;
+    font-size: 13px;
   }
 }
 

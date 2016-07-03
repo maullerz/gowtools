@@ -64,14 +64,14 @@ var Root = React.createClass({
   },
 
   componentDidMount: function() {
-    // if(AdMob) AdMob.createBanner({
+    // if(typeof AdMob !== 'undefined') AdMob.createBanner({
     //   adId: admobid.banner,
     //   position: AdMob.AD_POSITION.TOP_CENTER,
     //   autoShow: true
     // });
 
     // this will create a banner on startup
-    if (AdMob) {
+    if (typeof AdMob !== 'undefined') {
       AdMob.createBanner({
         adId: admobid.banner,
         position: AdMob.AD_POSITION.BOTTOM_CENTER,
@@ -183,7 +183,7 @@ var Root = React.createClass({
       }.bind(this)
     });
   },
-  
+
   itemSelected: function itemSelected(item) {
     if (!item.quality) item.quality = 0;
     return this.refs.craftedItemBox.itemSelected(item);
@@ -310,7 +310,7 @@ var Root = React.createClass({
     //   tabKey === 1 ? this.snapper.enable() : this.snapper.disable();
     // };
     this.setState({ activeTab: tabKey });
-    if (AdMob) {
+    if (typeof AdMob !== 'undefined') {
       const show = Math.floor((Math.random() * 5));
 
       if (show <= 1) AdMob.prepareInterstitial({
@@ -429,11 +429,9 @@ var Root = React.createClass({
               {i18n.t('tabs.recipes')}
             </NavItem>
             <NavItem eventKey={4} title="Settings">
-              <Glyphicon style={{
-                lineHeight: 'normal',
-                width: 40,
-                textAlign: 'center',
-              }} glyph="cog"/>
+              <div className='settings-icon'>
+                <Glyphicon glyph="cog"/>
+              </div>
             </NavItem>
           </Nav>
 

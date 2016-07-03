@@ -2,12 +2,13 @@
 
 
 
-li {
-  border-bottom: 1px solid #aaa;
-}
 
 .recipes-list-box {
   display: table;
+
+  li {
+    border-bottom: 1px solid #aaa;
+  }
 }
 
 .recipe {
