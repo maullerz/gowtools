@@ -202,7 +202,7 @@ var ItemsListBox = React.createClass({
                   <div id='img44' className={spriteName}/>
                 </div>
 
-                <div className='rcell'>{r.name_en}</div>
+                <div className='rcell'>{r[`name_${i18n.currentLocale()}`]}</div>
 
                 <RecipePart itemId={r.recipe_info.core} openItemInfo={this.props.openItemInfo} />
 
