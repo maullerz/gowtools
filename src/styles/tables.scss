@@ -26,6 +26,11 @@
     width: 0.1%;
   }
 
+  &.bonus {
+    width: 6%;
+    color: darkgreen;
+  }
+
   &.lvl {
     border-left: 1px solid #aaa;
     padding: 0 3px;
@@ -54,6 +59,10 @@
     width: 0.1%;
     height: 9px;
     background-color: #ccc;
+
+    &.bonus {
+      background-color: darkgreen;
+    }
     @include qualities;
   }
 }

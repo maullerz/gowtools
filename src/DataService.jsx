@@ -225,7 +225,89 @@ var DataService = function(Environment) {
         return boosts.concat(debuffs).concat(etcBoosts);
       },
 
-      getRecipeSummaryTable: function(item) {
+      getRecipeSummaryTable: function(item, showAllBoosts) {
+        const boostsArr = item.bsort;
+
+        const emptyBoosts = [];
+        const otherBoosts = [];
+        // пустые бусты идут отдельно (например первыми сверху)
+        boostsArr.forEach((b) => {
+          const boost = item.stats[parseInt(b)][5]; // gold quality
+          if (!boost)
+            emptyBoosts.push(b)
+          else
+            otherBoosts.push(b);
+        });
+
+        // сортируем бусты по возрастанию
+        const sortedArr = otherBoosts.sort((x, y) => {
+          const boost1 = item.stats[parseInt(x)][5]; // gold quality
+          const boost2 = item.stats[parseInt(y)][5]; // gold quality
+          return boost2[0] - boost1[0];
+        });
+
+        const rows = emptyBoosts.concat(sortedArr).map(function(boostIdStr, index) {
+          const boostId = parseInt(boostIdStr);
+          const boost = item.stats[boostId];
+          if (!boost) {
+            console.error(boostId);
+            console.error(boostIdStr);
+          };
+
+          const bonus = item.bonuses[boostIdStr];
+
+          const rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
+          // ! Now we are not showing icons
+          const iconName = this.getIconNameForBoost(boostId);
+
+          return (
+            <tr className={'first-row'+rowColor} key={'b-'+index}>
+              <td className='sel-icon'>
+                {iconName ? <img className="boost-icon" src={'icons/'+iconName} /> : null}
+              </td>
+              <td className='sel-boost-name'>
+                {this.getBoostName(boostId)}
+              </td>
+              <td className='lvl lvl6 bonus'>
+                {bonus && `+ ${bonus}`}
+              </td>
+              <td className='lvl lvl6'>
+                {this.simpleShow(boost[5])}
+              </td>
+              <td className='lvl'>{this.simpleShow(boost[4])}</td>
+              <td className='lvl'>{this.simpleShow(boost[3])}</td>
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[2])}</td>}
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[1])}</td>}
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[0])}</td>}
+            </tr>
+          )
+        }, this);
+
+        return (
+          <div className='item-statistics'>
+            <table className='summarize'>
+              <tbody>
+                <tr className='head'>
+                  <td className='head sel-icon'></td>
+                  <td className='head sel-boost-name'></td>
+                  <td className='head lvl lvl6 bonus'></td>
+                  <td className='head lvl lvl6 gold'></td>
+                  <td className='head lvl purple'></td>
+                  <td className='head lvl blue'></td>
+                  {showAllBoosts && <td className='head lvl green'></td>}
+                  {showAllBoosts && <td className='head lvl white'></td>}
+                  {showAllBoosts && <td className='head lvl gray'></td>}
+                </tr>
+                {rows}
+              </tbody>
+            </table>
+          </div>
+        );
+
+
+
+
+        // ------------------------------------------------------------------
         return (
           <div className='item-statistics'>
             <table className='summarize'>
@@ -638,7 +720,8 @@ var DataService = function(Environment) {
 
       simpleShow: function(arr) {
         if (arr) {
-          return arr[0] + " - " + (arr[1] || 0);
+          const value = arr[0] + ' - ' + (arr[1] || 0);
+          return value === '0 - 0' ? null : value;
         }
         return null;
       },
@@ -649,8 +732,8 @@ var DataService = function(Environment) {
         let CRAFT_CORES_LUCK = this.coreCraftLuck ? 0.8 : 0;
         let HIGH_RANGE_BOOST = this.highRangeBoost ? 0.25 : 0;
 
-        let min = parseInt(arr[0]),
-            max = parseInt(arr[1]);
+        let min = parseFloat(arr[0]),
+            max = parseFloat(arr[1]);
 
         let craftLuckDelta = (max-min)*(CRAFT_CORES_LUCK);
         let highRangeDelta = (max-min)*(HIGH_RANGE_BOOST);
@@ -698,11 +781,13 @@ var DataService = function(Environment) {
         var data = json_data.data;
         // various data preparing
         for (var i = data.length - 1; i >= 0; i--) {
-          if (!data[i].stats_info) {
+          if (!data[i].stats) {
             // skipping unfilled data
             // console.log('skipping recipe item:');
             // console.log(data[i]);
             data[i] = null;
+          } else {
+            data[i].sprite = data[i].img_base.replace('.png', '');
           }
         }
         data = data.filter(function(item){ return item });

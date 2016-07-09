@@ -73,7 +73,7 @@ var ItemsListBox = React.createClass({
     return (
       <div className={"tab-statistics"+this.props.className}>
 
-        <div className="statistics-controls">
+        {false && <div className="statistics-controls">
           <Button className='glyph-btn'>
             <Glyphicon glyph="edit"/>
           </Button>
@@ -83,7 +83,7 @@ var ItemsListBox = React.createClass({
           <div className='gap'>
             {'RECIPE PANEL'}
           </div>
-        </div>
+        </div>}
 
         <div className='recipes-items-list'>
 
@@ -123,14 +123,21 @@ var ItemsListBox = React.createClass({
 
 function Recipe(props) {
   const r = props.data;
-  const spriteName = "sprite m" + r.id;
+  const spriteName = 'sprite m' + r.id;
   const openRecipeFn = () => props.openRecipeInfo(r.id);
 
   return (
-    <div className="recipe" key={props.key}>
-      <div className="rcell id" onClick={openRecipeFn}>
+    <div className='recipe' key={props.key}>
+      <div className='rcell id name' onClick={openRecipeFn}>
         <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
       </div>
+      {false && <div className='rcell id' onClick={openRecipeFn}>
+        <div className="img-group">
+          <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
+          <div id='img44' style={{ margin: 'auto' }} className={'sprite m'+r.recipe_info.core}/>
+        </div>
+        <div>{r[`name_${i18n.currentLocale()}`]}</div>
+      </div>}
 
       <div className='rcell name'>{r[`name_${i18n.currentLocale()}`]}</div>
 
@@ -147,7 +154,7 @@ function RecipePart(props) {
   const openInfoFn = () => props.openItemInfo(props.itemId);
   return (
     <div className={`rcell ${props.core ? 'core' : ''}`} onClick={props.itemId ? openInfoFn : null}>
-      {props.itemId && <div id='img44' style={{ margin: 'auto' }} className={"icon-img sprite m" + props.itemId} />}
+      {props.itemId && <div id='img44' style={{ margin: 'auto' }} className={'icon-img sprite m' + props.itemId} />}
     </div>
   );
 }

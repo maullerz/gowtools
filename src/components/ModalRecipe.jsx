@@ -58,9 +58,9 @@ var ModalRecipe = React.createClass({
             <div id='info-img' className={spriteName} />
           </div>
         </div>
-        {false && <div className='modal-body-params'>
-          {firstInfoBlock}
-        </div>}
+        <div className='modal-body-params'>
+          <div className="param">{item.id}</div>
+        </div>
         {this.getBoostsRows()}
       </Modal.Body>
     );
@@ -70,7 +70,7 @@ var ModalRecipe = React.createClass({
 
         <Modal.Header closeButton>
           {head}
-          <Button className='glyph-btn modal'>
+          <Button className='glyph-btn showBoosts' onClick={this.toggleShowAllBoosts}>
             <Glyphicon glyph={showAllBoosts ? 'eye-close' : 'eye-open'}/>
           </Button>
         </Modal.Header>
