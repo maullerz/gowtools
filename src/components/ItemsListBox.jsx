@@ -37,7 +37,7 @@ var ItemsListBox = React.createClass({
       invalidateHack: false,
       showAllBoosts: false,
       onlyTypes: ['Pieces'],
-      onlySlots: []
+      onlySlots: ['Helm']
     };
   },
 

@@ -53,7 +53,7 @@ var ItemsListBox = React.createClass({
 
   itemRenderer: function(index, key) {
     const recipe = this.DataService.recipes[index];
-    return <Recipe data={recipe} key={key} openItemInfo={this.props.openItemInfo} />;
+    return <Recipe data={recipe} key={key} openItemInfo={this.props.openItemInfo} openRecipeInfo={this.props.openRecipeInfo} />;
   },
 
   tableItemsRenderer: function(items, ref) {
@@ -124,9 +124,11 @@ var ItemsListBox = React.createClass({
 function Recipe(props) {
   const r = props.data;
   const spriteName = "sprite m" + r.id;
+  const openRecipeFn = () => props.openRecipeInfo(r.id);
+
   return (
     <div className="recipe" key={props.key}>
-      <div className="rcell id">
+      <div className="rcell id" onClick={openRecipeFn}>
         <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
       </div>
 

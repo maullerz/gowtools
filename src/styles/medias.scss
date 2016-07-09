@@ -271,6 +271,7 @@ table.modal-body-params tr {
 }
 
 table.modal-body-params td {
+  cursor: default;
   padding-left: 15px;
   @media #{$small} {
     padding-left: 6px;
@@ -692,6 +693,23 @@ Button#quality {
 .glyph-btn {
   padding: 4px 8px;
   font-size: 14px;
+
+  &.showBoosts {
+    position: absolute;
+    top: 6px;
+    left: 15px;
+
+    @media #{$small-landscape} {
+      top: 3px;
+      left: 3px;
+    }
+
+    @media #{$small-portrait} {
+      top: 3px;
+      left: 3px;
+      font-size: 10px;
+    }
+  }
 
   &.clear-all {
     float: right;

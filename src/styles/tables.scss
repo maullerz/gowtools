@@ -9,8 +9,13 @@
   /*width: 60%;*/
 }
 
+.item-statistics table.summarize tr.head {
+  border-top: 1px solid #aaa;
+}
+
 .item-statistics table.summarize tr td {
   width: 12%;
+  position: relative;
 
   &.sel-boost-name {
     width: 27%;
@@ -24,10 +29,32 @@
   &.lvl {
     border-left: 1px solid #aaa;
     padding: 0 3px;
+
+    .back {
+      opacity: 0.6;
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      @include qualities;
+    }
+
+    .front {
+      z-index: 10;
+      position: relative;
+    }
   }
 
   &.lvl6 {
     font-weight: bold;
+  }
+
+  &.head {
+    width: 0.1%;
+    height: 9px;
+    background-color: #ccc;
+    @include qualities;
   }
 }
 

@@ -12,6 +12,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
 import DataService from './DataService.jsx'
 import ModalInfo from './components/ModalInfo.jsx';
+import ModalRecipe from './components/ModalRecipe.jsx';
 import ModalQualitySelect from './components/ModalQualitySelect.jsx';
 import CraftedItemBox from './components/CraftedItemBox.jsx'
 import ItemsListBox from './components/ItemsListBox.jsx'
@@ -294,6 +295,10 @@ var Root = React.createClass({
     this.refs.modal.open(id);
   },
 
+  openRecipeInfo: function(id) {
+    this.refs.modalRecipe.open(id);
+  },
+
   isIOS: function() {
     return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
   },
@@ -390,6 +395,7 @@ var Root = React.createClass({
       <div className='root'>
 
         <ModalInfo ref="modal"/>
+        <ModalRecipe ref="modalRecipe"/>
         <ModalQualitySelect ref='modalQualitySelect' qualitySelected={this.qualitySelected}/>
 
 
@@ -470,6 +476,7 @@ var Root = React.createClass({
             activeTab={activeTab}
             tabSelect={this.handleTabSelect}
             openItemInfo={this.openItemInfo}
+            openRecipeInfo={this.openRecipeInfo}
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}
           />

@@ -92,6 +92,13 @@ var DataService = function(Environment) {
         return null;
       },
 
+      getRecipeById: function(id) {
+        for (var i = 0, len = this.recipes.length; i < len; i++) {
+          if (this.recipes[i].id === id) return this.recipes[i];
+        }
+        return null;
+      },
+
       flattenCurrSet: function() {
         var items = [
           this.currSet.Helm,
@@ -218,7 +225,25 @@ var DataService = function(Environment) {
         return boosts.concat(debuffs).concat(etcBoosts);
       },
 
-      getSimpleSummaryTable: function(item) {
+      getRecipeSummaryTable: function(item) {
+        return (
+          <div className='item-statistics'>
+            <table className='summarize'>
+              <tbody>
+                <tr className={'first-row'}>
+                  <td className='lvl'>{1}</td>
+                  <td className='lvl'>{1}</td>
+                  <td className='lvl'>{1}</td>
+                  <td className='lvl'>{1}</td>
+                  <td className='lvl'>{1}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      },
+
+      getSimpleSummaryTable: function(item, showAllBoosts) {
         // var boostsArr = Object.keys(item.stats);
         var boostsArr = item.bsort;
 
@@ -230,6 +255,7 @@ var DataService = function(Environment) {
             console.error(boostIdStr);
           };
           var rowColor = this.colorizeStats ? this.getColorForBoost(boostId) : '';
+          // ! Now we are not showing icons
           var iconName = this.getIconNameForBoost(boostId);
 
           return (
@@ -240,14 +266,14 @@ var DataService = function(Environment) {
               <td className='sel-boost-name'>
                 {this.getBoostName(boostId)}
               </td>
-              <td className={'lvl lvl6'}>
-                  {this.simpleShow(boost[5])}
+              <td className='lvl lvl6'>
+                {this.simpleShow(boost[5])}
               </td>
               <td className='lvl'>{this.simpleShow(boost[4])}</td>
               <td className='lvl'>{this.simpleShow(boost[3])}</td>
-              <td className='lvl'>{this.simpleShow(boost[2])}</td>
-              <td className='lvl'>{this.simpleShow(boost[1])}</td>
-              <td className='lvl'>{this.simpleShow(boost[0])}</td>
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[2])}</td>}
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[1])}</td>}
+              {showAllBoosts && <td className='lvl'>{this.simpleShow(boost[0])}</td>}
             </tr>
           )
         }, this);
@@ -256,6 +282,16 @@ var DataService = function(Environment) {
           <div className='item-statistics'>
             <table className='summarize'>
               <tbody>
+                <tr className='head'>
+                  <td className='head sel-icon'></td>
+                  <td className='head sel-boost-name'></td>
+                  <td className='lvl lvl6 head gold'></td>
+                  <td className='lvl head purple'></td>
+                  <td className='lvl head blue'></td>
+                  {showAllBoosts && <td className='lvl head green'></td>}
+                  {showAllBoosts && <td className='lvl head white'></td>}
+                  {showAllBoosts && <td className='lvl head gray'></td>}
+                </tr>
                 {rows}
               </tbody>
             </table>
