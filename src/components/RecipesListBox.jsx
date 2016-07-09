@@ -128,10 +128,10 @@ function Recipe(props) {
 
   return (
     <div className='recipe' key={props.key}>
-      <div className='rcell id name' onClick={openRecipeFn}>
+      <div className='rcell id' onClick={openRecipeFn}>
         <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
       </div>
-      {false && <div className='rcell id' onClick={openRecipeFn}>
+      {false && <div className='rcell id name' onClick={openRecipeFn}>
         <div className="img-group">
           <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
           <div id='img44' style={{ margin: 'auto' }} className={'sprite m'+r.recipe_info.core}/>

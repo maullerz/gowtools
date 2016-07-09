@@ -161,6 +161,11 @@ var DataService = function(Environment) {
         return item.name[i18n.currentLocale()];
       },
 
+      getItemNameById: function(itemId) {
+        const item = this.getItemById(itemId);
+        return item ? item.name[i18n.currentLocale()] : '';
+      },
+
       getSlotName: function(item) {
         return i18n.t('items-list.'+item.slot);
       },

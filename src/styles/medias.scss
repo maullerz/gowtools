@@ -70,11 +70,13 @@ body, table {
   table-layout: fixed;*/
 
   @media #{$large} {
-    top: 53px;
+    /*top: 53px; for recipes panel*/
+    top: 0;
   }
 
   @media #{$min-portrait} {
-    top: 37px;
+    /*top: 37px; for recipes panel*/
+    top: 0;
   }
 }
 
@@ -115,6 +117,14 @@ body, table {
       min-width: 125px;
       max-width: 125px;
       text-align: left;
+
+      @media #{$small-portrait} {
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+        padding-left: 10px;
+        font-size: 10px;
+      }
     }
     > div:nth-child(3) { width: 10%; }
     > div:nth-child(4) { width: 10%; }
@@ -702,6 +712,7 @@ Button#quality {
     position: absolute;
     top: 6px;
     left: 15px;
+    font-size: 14px;
 
     @media #{$small-landscape} {
       top: 3px;
@@ -793,6 +804,39 @@ Button#quality {
   margin-left: 65px;
   @media #{$small} {
     margin-left: 60px;
+  }
+}
+
+.modal-image-pieces {
+  @include flexbox();
+}
+
+.modal-body-pieces {
+  @include flexbox();
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  @include justify(space-around);
+
+  .param {
+    display: inline-block;
+    max-width: 80px;
+    text-align: center;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px 10px;
+
+    @media #{$small} {
+      margin: 5px 5px;
+    }
+  }
+
+  #img {
+    zoom: 0.64;
+    margin: auto;
+
+    @media #{$small} {
+      zoom: 0.44;
+    }
   }
 }
 

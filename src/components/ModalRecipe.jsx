@@ -51,19 +51,30 @@ var ModalRecipe = React.createClass({
     );
 
     var spriteName = 'sprite ' + item.sprite;
-    var body = (
-      <Modal.Body>
-        <div className='modal-body-image'>
-          <div className='modal-image-background'>
-            <div id='info-img' className={spriteName} />
+    var body = <Modal.Body>
+
+      {/* ЯДРО и результат крафта */}
+      {false && <div className='modal-image-pieces'>
+        <div id='info-img' className={spriteName} />
+        <div id='info-img' className={'sprite m'+item.recipe_info.core}/>
+        <div className="title">{this.DataService.getItemNameById(item.recipe_info.core)}</div>
+      </div>}
+
+      {/* ФРАГМЕНТЫ */}
+      <div className='modal-body-pieces'>
+        {false && <div className="param">{item.id}</div>}
+        {item.recipe_info.pieces.map((pieceId, i) =>
+          <div className="param" key={i}>
+            <div id='img' className={'sprite m'+pieceId} />
+            <div className="title">{this.DataService.getItemNameById(pieceId)}</div>
           </div>
-        </div>
-        <div className='modal-body-params'>
-          <div className="param">{item.id}</div>
-        </div>
-        {this.getBoostsRows()}
-      </Modal.Body>
-    );
+        )}
+      </div>
+
+      {/* БУСТЫ */}
+      {this.getBoostsRows()}
+    </Modal.Body>;
+
 
     return (
       <Modal id='item-info' show={this.state.showModal} onHide={this.close}>
