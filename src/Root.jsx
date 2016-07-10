@@ -220,6 +220,7 @@ var Root = React.createClass({
         language: i18n.currentLocale()
       });
       this.invalidateItemsListBox();
+      this.refs.recipesListBox.invalidate();
     }
   },
 

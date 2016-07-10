@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
 import ReactList from 'react-list'
@@ -16,22 +16,14 @@ const isEqualSubset = (a, b) => {
 const isEqual = (a, b) => isEqualSubset(a, b) && isEqualSubset(b, a);
 
 
-var ItemsListBox = React.createClass({
+var RecipesListBox = React.createClass({
 
-  mixins: [LocalStorageMixin],
-
-  showAllBoostsClicked: function() {
-    this.setState({
-      showAllBoosts: !this.state.showAllBoosts,
-      invalidateHack: !this.state.invalidateHack
-    });
-  },
+  // mixins: [LocalStorageMixin],
 
   getInitialState: function() {
     this.firstRender = true;
     return {
       invalidateHack: false,
-      showAllBoosts: true,
     };
   },
 
@@ -43,17 +35,16 @@ var ItemsListBox = React.createClass({
     this.setState({ invalidateHack: !this.state.invalidateHack });
   },
 
-  getFilteredData: function(onlyTypes, onlySlots, onlyEvents, onlyBoosts) {
-    var filteredData = this.DataService.getSortedAndFilteredData(onlyTypes, onlyEvents, onlyBoosts, onlySlots);
-    var locale = i18n.currentLocale();
-    return filteredData.map(function(item) {
-      return this.getItemNodes(item, onlyBoosts, locale);
-    }, this);
-  },
-
   itemRenderer: function(index, key) {
     const recipe = this.DataService.recipes[index];
-    return <Recipe data={recipe} key={key} openItemInfo={this.props.openItemInfo} openRecipeInfo={this.props.openRecipeInfo} />;
+    const locale = i18n.currentLocale();
+    return <Recipe
+      data={recipe}
+      locale={locale}
+      key={key}
+      openItemInfo={this.props.openItemInfo}
+      openRecipeInfo={this.props.openRecipeInfo}
+    />;
   },
 
   tableItemsRenderer: function(items, ref) {
@@ -110,9 +101,9 @@ var ItemsListBox = React.createClass({
             itemsRenderer={this.tableItemsRenderer}
             length={this.DataService.recipes.length}
             useTranslate3d={true}
-            pageSize={10}
+            pageSize={20}
             threshold={800}
-            type='uniform'
+            type='simple'
           />
 
         </div>
@@ -121,42 +112,61 @@ var ItemsListBox = React.createClass({
   }
 });
 
-function Recipe(props) {
-  const r = props.data;
-  const spriteName = 'sprite m' + r.id;
-  const openRecipeFn = () => props.openRecipeInfo(r.id);
 
-  return (
-    <div className='recipe' key={props.key}>
-      <div className='rcell id' onClick={openRecipeFn}>
-        <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
-      </div>
-      {false && <div className='rcell id name' onClick={openRecipeFn}>
-        <div className="img-group">
+class Recipe extends Component {
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.data.id !== this.props.data.id ||
+           nextProps.locale !== this.props.locale;
+  }
+
+  render() {
+    const props = this.props;
+    const r = props.data;
+    const spriteName = 'sprite m' + r.id;
+    const openRecipeFn = () => props.openRecipeInfo(r.id);
+
+    return (
+      <div className='recipe' key={props.key}>
+        <div className='rcell id' onClick={openRecipeFn}>
           <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
-          <div id='img44' style={{ margin: 'auto' }} className={'sprite m'+r.recipe_info.core}/>
         </div>
-        <div>{r[`name_${i18n.currentLocale()}`]}</div>
-      </div>}
+        {false && <div className='rcell id name' onClick={openRecipeFn}>
+          <div className="img-group">
+            <div id='img44' style={{ margin: 'auto' }} className={spriteName}/>
+            <div id='img44' style={{ margin: 'auto' }} className={'sprite m'+r.recipe_info.core}/>
+          </div>
+          <div>{r[`name_${i18n.currentLocale()}`]}</div>
+        </div>}
 
-      <div className='rcell name'>{r[`name_${i18n.currentLocale()}`]}</div>
+        <div className='rcell name'>{r[`name_${i18n.currentLocale()}`]}</div>
 
-      <RecipePart core itemId={r.recipe_info.core} openItemInfo={props.openItemInfo} />
+        <RecipePart core itemId={r.recipe_info.core} openItemInfo={props.openItemInfo} />
 
-      {r.recipe_info.pieces.map((pieceId) => {
-        return <RecipePart itemId={pieceId} openItemInfo={props.openItemInfo} />
-      })}
-    </div>
-  )
+        {r.recipe_info.pieces.map((pieceId) => {
+          return <RecipePart itemId={pieceId} openItemInfo={props.openItemInfo} />
+        })}
+      </div>
+    )
+  }
 }
 
-function RecipePart(props) {
-  const openInfoFn = () => props.openItemInfo(props.itemId);
-  return (
-    <div className={`rcell ${props.core ? 'core' : ''}`} onClick={props.itemId ? openInfoFn : null}>
-      {props.itemId && <div id='img44' style={{ margin: 'auto' }} className={'icon-img sprite m' + props.itemId} />}
-    </div>
-  );
+
+class RecipePart extends Component {
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.itemId !== this.props.itemId;
+  }
+
+  render() {
+    const props = this.props;
+    const openInfoFn = () => props.openItemInfo(props.itemId);
+    return (
+      <div className={`rcell ${props.core ? 'core' : ''}`} onClick={props.itemId ? openInfoFn : null}>
+        {props.itemId && <div id='img44' style={{ margin: 'auto' }} className={'icon-img sprite m' + props.itemId} />}
+      </div>
+    );
+  }
 }
 
-module.exports = ItemsListBox;
+module.exports = RecipesListBox;
