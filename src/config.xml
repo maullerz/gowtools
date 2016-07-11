@@ -3,7 +3,7 @@
     id = "com.maullerz.gowcraft.calculator"
     xmlns = "http://www.w3.org/ns/widgets"
     xmlns:gap = "http://phonegap.com/ns/1.0"
-    version = "0.9.6" versionCode = "18"
+    version = "0.9.7" versionCode = "19"
 >
 
     <name>Craft Calculator for GoW</name>
