@@ -7,15 +7,25 @@ import Input from 'react-bootstrap/lib/Input'
 import Button from 'react-bootstrap/lib/Button'
 import LocalStorageMixin from 'react-localstorage'
 import i18n from 'i18n-js'
+import classnames from 'classnames'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
 import DataService from './DataService.jsx'
 import ModalInfo from './components/ModalInfo.jsx';
+import ModalRecipe from './components/ModalRecipe.jsx';
 import ModalQualitySelect from './components/ModalQualitySelect.jsx';
 import CraftedItemBox from './components/CraftedItemBox.jsx'
 import ItemsListBox from './components/ItemsListBox.jsx'
+import RecipesListBox from './components/RecipesListBox.jsx'
 import SummaryInfoBox from './components/SummaryInfoBox.jsx'
 import FilterEvents from './components/FilterEvents.jsx'
 import FilterBoosts from './components/FilterBoosts.jsx'
+
+
+var admobid = { // for Android
+  banner: 'ca-app-pub-4879539644502553/2923487221',
+  interstitial: 'ca-app-pub-4879539644502553/6655682820'
+};
 
 
 function ajax(opts){
@@ -55,7 +65,26 @@ var Root = React.createClass({
   },
 
   componentDidMount: function() {
+    // this will create a banner on startup
+    if (typeof AdMob !== 'undefined') {
+      AdMob.createBanner({
+        adId: admobid.banner,
+        position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        // isTesting: true, // TODO: remove this line when release
+        overlap: true,
+        offsetTopBar: false,
+        bgColor: 'black'
+      });
+
+      AdMob.prepareInterstitial({
+        adId: admobid.interstitial,
+        // isTesting: true, // TODO: remove this line when release
+        autoShow: true
+      });
+    }
+
     this.DataService = DataService();
+    this.loadRecipes();
     this.loadBoosts();
     this.loadBoostsRu();
     this.loadCoresPiecesData();
@@ -87,6 +116,21 @@ var Root = React.createClass({
 
   componentWillUnmount: function() {
     this.snapper.off('animated');
+  },
+
+  loadRecipes: function() {
+    ajax({
+      url: this.props.recipesUrl,
+      dataType: 'json',
+      cache: true,
+      success: function(data) {
+        this.DataService.loadRecipes(data);
+        if (this.DataService.isReady()) this.forceUpdate();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        log(this.props.boostsUrl, status, err.toString());
+      }.bind(this)
+    });
   },
 
   loadBoosts: function() {
@@ -133,7 +177,7 @@ var Root = React.createClass({
       }.bind(this)
     });
   },
-  
+
   itemSelected: function itemSelected(item) {
     if (!item.quality) item.quality = 0;
     return this.refs.craftedItemBox.itemSelected(item);
@@ -168,8 +212,7 @@ var Root = React.createClass({
     this.refs.craftedItemBox.selectSetItemForEdit(setItem);
   },
 
-  handleLanguageSelect: function() {
-    var language = this.refs.languageSelect.getValue();
+  handleLanguageSelect: function(language) {
     if (i18n.currentLocale() !== language) {
       i18n.locale = language;
       this.DataService.sortItemsByAlphabet();
@@ -177,6 +220,19 @@ var Root = React.createClass({
         language: i18n.currentLocale()
       });
       this.invalidateItemsListBox();
+      this.refs.recipesListBox.invalidate();
+    }
+  },
+
+  selectRu: function() {
+    if (i18n.currentLocale() !== 'ru') {
+      this.handleLanguageSelect('ru');
+    }
+  },
+
+  selectEn: function() {
+    if (i18n.currentLocale() !== 'en') {
+      this.handleLanguageSelect('en');
     }
   },
 
@@ -240,8 +296,16 @@ var Root = React.createClass({
     this.refs.modal.open(id);
   },
 
+  openRecipeInfo: function(id) {
+    this.refs.modalRecipe.open(id);
+  },
+
   isIOS: function() {
     return document.body.className.indexOf('ios') >= 0 ? ' ios' : '';
+  },
+
+  isAdMob() {
+    return typeof AdMob !== 'undefined' ? 'admob' : '';
   },
 
   handleTabSelect: function(tabKey) {
@@ -249,6 +313,15 @@ var Root = React.createClass({
     //   tabKey === 1 ? this.snapper.enable() : this.snapper.disable();
     // };
     this.setState({ activeTab: tabKey });
+    if (typeof AdMob !== 'undefined') {
+      const show = Math.floor((Math.random() * 5));
+
+      if (show <= 1) AdMob.prepareInterstitial({
+        adId: admobid.interstitial,
+        // isTesting: true, // TODO: remove this line when release
+        autoShow: true,
+      });
+    }
   },
 
   getTabState: function(tabIndex) {
@@ -305,10 +378,11 @@ var Root = React.createClass({
   },
 
   render: function() {
-    if (i18n.currentLocale() !== this.state.language) i18n.locale = this.state.language;
+    const { language, activeTab } = this.state;
+    if (i18n.currentLocale() !== language) i18n.locale = language;
 
     if (this.snapper) {
-      this.state.activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
+      activeTab === 1 ? this.snapper.enable() : this.snapper.disable();
     };
 
     if (this.DataService) {
@@ -322,10 +396,11 @@ var Root = React.createClass({
       <div className='root'>
 
         <ModalInfo ref="modal"/>
+        <ModalRecipe ref="modalRecipe"/>
         <ModalQualitySelect ref='modalQualitySelect' qualitySelected={this.qualitySelected}/>
 
 
-        <div className={'snap-drawers '+this.props.platform}>
+        <div className={`snap-drawers ${this.props.platform} ${this.isAdMob()}`}>
           <div className='snap-drawer snap-drawer-left'>
             <FilterEvents onEventSelected={this.eventSelected} />
           </div>
@@ -334,7 +409,7 @@ var Root = React.createClass({
           </div>
         </div>
 
-        <div ref='content' className='snap-content'
+        <div ref='content' className={`snap-content ${this.isAdMob()}`}
           onTouchStartCapture={this.handleTouchStart}
           onClickCapture={this.handleTouchStart}>
 
@@ -347,10 +422,21 @@ var Root = React.createClass({
           </Button>
 
 
-          <Nav bsStyle="pills" activeKey={this.state.activeTab} onSelect={this.handleTabSelect}>
-            <NavItem eventKey={1} title="Crafting"> {i18n.t('tabs.crafting')} </NavItem>
-            <NavItem eventKey={2} title="Statistics"> {i18n.t('tabs.summary')}  </NavItem>
-            <NavItem eventKey={3} title="Settings"> {i18n.t('tabs.settings')} </NavItem>
+          <Nav bsStyle="pills" activeKey={activeTab} onSelect={this.handleTabSelect}>
+            <NavItem eventKey={1} title="Crafting">
+              {i18n.t('tabs.crafting')}
+            </NavItem>
+            <NavItem eventKey={2} title="Statistics">
+              {i18n.t('tabs.summary')}
+            </NavItem>
+            <NavItem eventKey={3} title="Recipes">
+              {i18n.t('tabs.recipes')}
+            </NavItem>
+            <NavItem eventKey={4} title="Settings">
+              <div className='settings-icon'>
+                <Glyphicon glyph="cog"/>
+              </div>
+            </NavItem>
           </Nav>
 
           <div className={'tab-crafting'+this.getTabState(1)}>
@@ -378,24 +464,36 @@ var Root = React.createClass({
           <SummaryInfoBox className={this.getTabState(2)}
             ref='summaryInfoBox'
             platform={this.props.platform}
-            activeTab={this.state.activeTab}
+            activeTab={activeTab}
             tabSelect={this.handleTabSelect}
             modalQualitySelect={this.refs.modalQualitySelect}
             selectSetItemForEdit={this.selectSetItemForEdit}
           />
 
 
-          <div className={'tab-settings'+this.getTabState(3)}>
-            <Input groupClassName='select-language'
-                   type='select'
-                   ref='languageSelect'
-                   value={this.state.language}
-                   onChange={this.handleLanguageSelect}
-                   label={i18n.t('language')} >
-              <option value='ru'>{i18n.t('russian')}</option>
-              <option value='en'>{i18n.t('english')}</option>
-            </Input>
+          <RecipesListBox className={this.getTabState(3)}
+            ref='recipesListBox'
+            platform={this.props.platform}
+            activeTab={activeTab}
+            tabSelect={this.handleTabSelect}
+            openItemInfo={this.openItemInfo}
+            openRecipeInfo={this.openRecipeInfo}
+            modalQualitySelect={this.refs.modalQualitySelect}
+            selectSetItemForEdit={this.selectSetItemForEdit}
+          />
+
+
+          <div className={'tab-settings'+this.getTabState(4)}>
             <div className='settings-group'>
+              <div className='select-language'>
+                <div className={classnames('lang-btn', language === 'en' && 'active')} onClick={this.selectEn}>
+                  {i18n.t('english')}
+                </div>
+                <div className={classnames('lang-btn', language === 'ru' && 'active')} onClick={this.selectRu}>
+                  {i18n.t('russian')}
+                </div>
+              </div>
+              {false && activeTab === 4 && <div className='settings-panel'>BLABLABLA</div>}
               <Input type="checkbox"
                   checked={this.state.colorizeStats}
                   label={i18n.t('settings.colorize-stats')}

@@ -1,7 +1,8 @@
 import React from 'react'
 import DataService from '../DataService.jsx'
 import Modal from 'react-bootstrap/lib/Modal'
-import Table from 'react-bootstrap/lib/Table'
+import Button from 'react-bootstrap/lib/Button'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import i18n from 'i18n-js'
 
 var ModalInfo = React.createClass({
@@ -9,12 +10,17 @@ var ModalInfo = React.createClass({
   getInitialState: function() {
     return {
       item: null,
-      showModal: false
+      showModal: false,
+      showAllBoosts: false
     };
   },
 
   componentDidMount: function() {
     this.DataService = DataService();
+  },
+
+  toggleShowAllBoosts: function() {
+    this.setState({ showAllBoosts: !this.state.showAllBoosts });
   },
 
   close: function() {
@@ -30,11 +36,11 @@ var ModalInfo = React.createClass({
   },
 
   getBoostsRows: function() {
-    return this.DataService.getSimpleSummaryTable(this.state.item);
+    return this.DataService.getSimpleSummaryTable(this.state.item, this.state.showAllBoosts);
   },
 
   render: function() {
-    var item = this.state.item;
+    const { item, showAllBoosts } = this.state;
     if (item) {
       var head = (
         <Modal.Title>
@@ -89,6 +95,7 @@ var ModalInfo = React.createClass({
           <div className='modal-body-image'>
             <div className='modal-image-background'>
               <div id='info-img' className={spriteName} />
+              {item.img_ext && <div id='info-img' className={`sprite ${item.img_ext}`} />}
             </div>
           </div>
           <div className='modal-body-params'>
@@ -104,11 +111,14 @@ var ModalInfo = React.createClass({
 
     return (
       <Modal id='item-info' show={this.state.showModal} onHide={this.close}>
-        
+
         <Modal.Header closeButton>
           {head}
+          <Button className='glyph-btn showBoosts' onClick={this.toggleShowAllBoosts}>
+            <Glyphicon glyph={showAllBoosts ? 'eye-close' : 'eye-open'}/>
+          </Button>
         </Modal.Header>
-        
+
         {body}
 
       </Modal>

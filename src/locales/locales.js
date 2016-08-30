@@ -6,6 +6,7 @@ module.exports = {
     "tabs": {
       "crafting": "CRAFTING",
       "summary": "STATISTICS",
+      "recipes": "RECIPES",
       "settings": "SETTINGS"
     },
     "filter": {
@@ -45,6 +46,7 @@ module.exports = {
     "items-list": {
       "items": " items",
       "pieces": "Pieces",
+      "recipes": "Recipes",
       "Helm": "Helm",
       "Armor": "Armor",
       "Feet": "Feet",
@@ -77,6 +79,7 @@ module.exports = {
     "tabs": {
       "crafting": "КРАФТ",
       "summary": "СТАТИСТИКА",
+      "recipes": "РЕЦЕПТЫ",
       "settings": "НАСТРОЙКИ"
     },
     "filter": {
@@ -116,6 +119,7 @@ module.exports = {
     "items-list": {
       "items": "",
       "pieces": "Фрагменты",
+      "recipes": "Рецепты",
       "Helm": "Шлем",
       "Armor": "Доспехи",
       "Feet": "Обувь",

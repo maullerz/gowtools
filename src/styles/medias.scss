@@ -19,6 +19,7 @@ $crafted-item-box-height: 105px;
 
 $landscape: "only screen and (orientation: landscape)";
 $portrait: "only screen and (orientation: portrait)";
+$min-portrait: "only screen and (width: 320px) and (height: 480px) and (orientation: portrait)";
 
 $small: "only screen and (max-width: 568px)";
 $small-landscape: "only screen and (max-width: 568px) and (orientation: landscape)";
@@ -43,6 +44,125 @@ body, table {
     font-size: 14px;
   }
 }
+
+.snap-content.admob,
+.snap-drawers.admob {
+  bottom: 90px;
+
+  @media #{$small-landscape} {
+    bottom: 32px;
+  }
+  @media #{$small-portrait} {
+    bottom: 50px;
+  }
+}
+
+
+.recipes-items-list {
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+  /*top: 43px; for recipes panel */
+  top: 0;
+  left: 0;
+  right: 0;
+/*  display: table;
+  table-layout: fixed;*/
+
+  @media #{$large} {
+    /*top: 53px; for recipes panel*/
+    top: 0;
+  }
+
+  @media #{$min-portrait} {
+    /*top: 37px; for recipes panel*/
+    top: 0;
+  }
+}
+
+.thead {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  box-shadow: inset 0px -1px 0px 0px #F3F3F3;
+}
+.headrow {
+  display: table-row;
+  position: relative;
+}
+.th {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+}
+.recipes-table {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+.recipe {
+  display: table-row;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  text-align: center;
+
+    > div:nth-child(1) { width: 10%; }
+    > div:nth-child(2) {
+      width: 125px;
+      min-width: 125px;
+      max-width: 125px;
+      text-align: left;
+
+      @media #{$small-portrait} {
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+        padding-left: 10px;
+        font-size: 10px;
+      }
+    }
+    > div:nth-child(3) { width: 10%; }
+    > div:nth-child(4) { width: 10%; }
+    > div:nth-child(5) { width: 10%; }
+    > div:nth-child(6) { width: 10%; }
+    > div:nth-child(7) { width: 10%; }
+    > div:nth-child(8) { width: 10%; }
+    > div:nth-child(9) { width: 10%; }
+
+  .rcell {
+    display: table-cell;
+    cursor: pointer;
+    line-height: 50px;
+    vertical-align: middle;
+    border-bottom: 1px solid #aaa;
+    padding: 0 2px;
+
+    .img-group {
+      @include flexbox();
+    }
+
+    &.id {
+      /*cursor: default;*/
+    }
+
+    &.name {
+      /*white-space: nowrap;*/
+      line-height: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.core {
+
+    }
+  }
+}
+
 
 .loading {
   color: #9d9d9d;
@@ -165,6 +285,7 @@ table.modal-body-params tr {
 }
 
 table.modal-body-params td {
+  cursor: default;
   padding-left: 15px;
   @media #{$small} {
     padding-left: 6px;
@@ -187,6 +308,37 @@ table.modal-body-params td {
     font-size: 10px;
     height: 34px;
     min-height: 34px;
+    padding: 0 30px;
+  }
+}
+
+.nav>li>a {
+  outline: none!important;
+  color: #9d9d9d;
+  border-radius: 0;
+  padding: 0;
+  vertical-align: middle;
+  line-height: 40px;
+
+  &:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+  }
+
+  @media #{$small-portrait} {
+    line-height: 32px;
+  }
+}
+
+.settings-icon > span {
+  vertical-align: middle;
+  text-align: center;
+  top: 0;
+  line-height: 40px;
+  font-size: 17px;
+
+  @media #{$small-portrait} {
+    line-height: 32px;
+    font-size: 13px;
   }
 }
 
@@ -556,6 +708,24 @@ Button#quality {
   padding: 4px 8px;
   font-size: 14px;
 
+  &.showBoosts {
+    position: absolute;
+    top: 6px;
+    left: 15px;
+    font-size: 14px;
+
+    @media #{$small-landscape} {
+      top: 3px;
+      left: 3px;
+    }
+
+    @media #{$small-portrait} {
+      top: 3px;
+      left: 3px;
+      font-size: 10px;
+    }
+  }
+
   &.clear-all {
     float: right;
   }
@@ -634,6 +804,39 @@ Button#quality {
   margin-left: 65px;
   @media #{$small} {
     margin-left: 60px;
+  }
+}
+
+.modal-image-pieces {
+  @include flexbox();
+}
+
+.modal-body-pieces {
+  @include flexbox();
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  @include justify(space-around);
+
+  .param {
+    display: inline-block;
+    max-width: 80px;
+    text-align: center;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px 10px;
+
+    @media #{$small} {
+      margin: 5px 5px;
+    }
+  }
+
+  #img {
+    zoom: 0.64;
+    margin: auto;
+
+    @media #{$small} {
+      zoom: 0.44;
+    }
   }
 }
 

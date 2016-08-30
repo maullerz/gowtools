@@ -29,7 +29,11 @@ gulp.task('watch', function(){
     './src/**/*.jsx',
     './src/**/*.js',
     './src/styles/*.scss'
-    ], ['build-app-on-watch']);
+    ], {
+      interval: 1000, // default 100
+      debounceDelay: 1000, // default 500
+      mode: 'poll'
+    }, ['build-app-on-watch']);
 });
 
 // PROCESS ONLY SRC WITHOUT ASSETS
@@ -54,7 +58,7 @@ gulp.task('build-app', function(callback){
     'copy-index',
     'copy-backgrounds',
     'copy-bootstrap',
-    // 'copy-resources',
+    'copy-resources',
     'copy-icons',
     'copy-fonts',
     'copy-spritesheet',
@@ -111,7 +115,15 @@ gulp.task('sprite', function () {
 // CREATE PHONEGAP APP
 
 gulp.task('create', function(callback) {
-  runSequence('clean-app', 'create-app', 'install-plugins', callback);
+  runSequence(
+    'clean-app',
+    'create-app',
+    'copy-config-xml',
+    'clean-template-res',
+    'copy-res-cordova',
+    'add-platforms',
+    'install-plugins',
+    callback);
 });
 
 gulp.task('clean-app', function() {
@@ -120,10 +132,19 @@ gulp.task('clean-app', function() {
 })
 
 gulp.task('create-app', shell.task([
-  'phonegap create ' + PHONEGAP_APP_DIR
+  'phonegap create ' + PHONEGAP_APP_DIR,
 ]));
 
 gulp.task('install-plugins', shell.task(getPhonegapPluginCommands(), {
+  cwd: PHONEGAP_APP_DIR
+}));
+
+gulp.task('add-platforms', shell.task([
+    'phonegap platform add android',
+    'phonegap platform add ios',
+    'phonegap platform add browser',
+    'phonegap prepare',
+  ], {
   cwd: PHONEGAP_APP_DIR
 }));
 
@@ -131,6 +152,11 @@ gulp.task('install-plugins', shell.task(getPhonegapPluginCommands(), {
 
 gulp.task('clean-build', function() {
   return gulp.src('./build', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean-template-res', function() {
+  return gulp.src('./' + PHONEGAP_APP_DIR + '/www/res/', {read: false})
     .pipe(clean());
 });
 
@@ -167,7 +193,12 @@ gulp.task('copy-icons', function(callback) {
 
 gulp.task('copy-resources', function(callback) {
   return gulp.src('./assets-src/resources/**/*.png')
-    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/resources/'));
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/www/res/'));
+});
+
+gulp.task('copy-res-cordova', function(callback) {
+  return gulp.src('./assets-src/resources/**/*.png')
+    .pipe(gulp.dest('./' + PHONEGAP_APP_DIR + '/res/'));
 });
 
 gulp.task('copy-fonts', function(callback) {
@@ -230,7 +261,8 @@ function getPhonegapPluginCommands() {
     "cordova-plugin-globalization",
     // "cordova-plugin-splashscreen",
     "cordova-plugin-dialogs",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "cordova-plugin-admobpro",
   ];
   var commands = [];
   for (var i = 0; i < plugins.length; i++){

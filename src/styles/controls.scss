@@ -24,27 +24,52 @@ Button#quality {
 .tab-settings {
   padding: 15px;
 }
-  .select-language {
-    max-width: 200px;
-    padding: 0 15px;
-  }
 
-  .settings-group {
-    padding: 0 15px;
-  }
+.settings-panel {
+  position: absolute;
+  background: blue;
+  opacity: 0.5;
+  width: 200px;
+  height: 200px;
+  right: 20px;
+  top: 42px;
+}
 
+.select-language {
+  @include flexbox();
+  @include justify_justify(space-between);
+  width: 210px;
+  margin: 15px 0 30px;
 
-.nav>li>a {
-  outline: none!important;
-  color: #9d9d9d;
-  border-radius: 0;
-  padding-left: 0;
-  padding-right: 0;
+  .lang-btn {
+    opacity: 0.5;
+    height: 33px;
+    min-width: 90px;
+    padding: 5px 10px;
+    background: #37C1CF;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
 
-  &:active {
-    -webkit-transform: scale3d(0.9, 0.9, 1);
+    &.active {
+      opacity: 1;
+    }
+
+    &:active:not(.disabled) {
+      background: #24A6B3;
+    }
+
+    &:hover:not(:active) {
+      background: #2BB1BF;
+    }
   }
 }
+
+.settings-group {
+  padding: 0 15px;
+}
+
 
 .nav>li.active>a, .nav>li.active>a:focus, .nav>li.active>a:hover {
   background-color: #222;
