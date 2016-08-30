@@ -1,6 +1,6 @@
 #Phonegap + React mobile application
 
-old home pet-project
+Old home pet-project. React/Phonegap/React-Bootstrap/Gulp/Webpack
 
 released in [Google Play](https://play.google.com/store/apps/details?id=com.maullerz.gowcraft.calculator_light)
 
@@ -9,7 +9,7 @@ on web - [gowtools.club](http://gowtools.club)
 How to
 ===========
 
-* Install Phonegap 
+* Install Phonegap
 ```
 $ sudo npm install phonegap -g
 ```
