@@ -2,9 +2,9 @@
 
 Old home pet-project. React/Phonegap/React-Bootstrap/Gulp/Webpack
 
-released in [Google Play](https://play.google.com/store/apps/details?id=com.maullerz.gowcraft.calculator_light)
+[on Google Play](https://play.google.com/store/apps/details?id=com.maullerz.gowcraft.calculator_light)
 
-on web - [gowtools.club](http://gowtools.club)
+[on App Store](https://itunes.apple.com/us/app/craft-calculator-for-gow-light/id1070978843?ls=1&mt=8)
 
 How to
 ===========
